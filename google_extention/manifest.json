@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "ScombZ Utilities",
+    "version": "1.5.0",
+    "description": "使いにくいScombZのサイドメニューやテストを修正したり、ADFSボタンの自動スキップができます。よりユーザビリティに優れたScombZを提供します。",
+    "icons": { 
+        "48": "icon48.png",
+        "128": "icon128.png" },
+    "author": "yudai1204",
+    "content_scripts": [
+        {
+        "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*"],
+        "js": [ "custom.user.js"]
+        }
+    ]
+    
+}
