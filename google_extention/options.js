@@ -1,5 +1,7 @@
 // Saves options to chrome.storage
 function save_options() {
+    var year = document.getElementById('year').value;
+    var fac = document.getElementById('fac').value;
     var login_auto = document.getElementById('login_auto').checked;
     var adfs_auto = document.getElementById('adfs_auto').checked;
     var menu_exit_auto = document.getElementById('menu_exit_auto').checked;
@@ -8,6 +10,8 @@ function save_options() {
     var additional_lms = document.getElementById('additional_lms').checked;
     var finished_report = document.getElementById('finished_report').checked;
     chrome.storage.sync.set({
+        year : year ,
+        fac : fac ,
         login_auto : login_auto,
         adfs_auto : adfs_auto,
         menu_exit_auto : menu_exit_auto,
@@ -27,6 +31,8 @@ function save_options() {
     function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get({
+        year : '2021',
+        fac : 'ko1',
         login_auto: true,
         adfs_auto: true,
         menu_exit_auto: true,
@@ -35,6 +41,8 @@ function save_options() {
         additional_lms: true,
         finished_report: true
     }, function(items) {
+        document.getElementById('year').value = items.year;
+        document.getElementById('fac').value = items.fac;
         document.getElementById('login_auto').checked = items.login_auto;
         document.getElementById('adfs_auto').checked = items.adfs_auto;
         document.getElementById('menu_exit_auto').checked = items.menu_exit_auto;
