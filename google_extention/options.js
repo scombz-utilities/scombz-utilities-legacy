@@ -6,13 +6,15 @@ function save_options() {
     var submenu = document.getElementById('submenu').checked;
     var exam = document.getElementById('exam').checked;
     var additional_lms = document.getElementById('additional_lms').checked;
+    var finished_report = document.getElementById('finished_report').checked;
     chrome.storage.sync.set({
         login_auto : login_auto,
         adfs_auto : adfs_auto,
         menu_exit_auto : menu_exit_auto,
         submenu : submenu,
         exam : exam,
-        additional_lms : additional_lms
+        additional_lms : additional_lms,
+        finished_report : finished_report
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -30,7 +32,8 @@ function save_options() {
         menu_exit_auto: true,
         submenu: true,
         exam: true,
-        additional_lms: true
+        additional_lms: true,
+        finished_report: true
     }, function(items) {
         document.getElementById('login_auto').checked = items.login_auto;
         document.getElementById('adfs_auto').checked = items.adfs_auto;
@@ -38,6 +41,7 @@ function save_options() {
         document.getElementById('submenu').checked = items.submenu;
         document.getElementById('exam').checked = items.exam;
         document.getElementById('additional_lms').checked = items.additional_lms;
+        document.getElementById('finished_report').checked = items.finished_report;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);

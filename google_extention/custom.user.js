@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         More-Useful-ScombZ
 // @namespace    https://twitter.com/yudai1204
-// @version      2.1.0
+// @version      2.2.1
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -21,7 +21,8 @@
         menu_exit_auto: true,
         submenu: true,
         exam: true,
-        additional_lms: true
+        additional_lms: true,
+        finished_report: true
     }, function(items) {
         localStorage.setItem("udai:settings_login_auto",items.login_auto);
         localStorage.setItem("udai:settings_adfs_auto",items.adfs_auto);
@@ -29,6 +30,7 @@
         localStorage.setItem("udai:settings_submenu",items.submenu);
         localStorage.setItem("udai:settings_exam",items.exam);
         localStorage.setItem("udai:settings_additional_lms",items.additional_lms);
+        localStorage.setItem("udai:settings_finished_report",items.finished_report);
     });
     var $settings_login_auto = localStorage.getItem("udai:settings_login_auto");
     var $settings_adfs_auto = localStorage.getItem("udai:settings_adfs_auto");
@@ -36,6 +38,7 @@
     var $settings_submenu = localStorage.getItem("udai:settings_submenu");
     var $settings_exam = localStorage.getItem("udai:settings_exam");
     var $settings_additional_lms = localStorage.getItem("udai:settings_additional_lms");
+    var $settings_finished_report = localStorage.getItem("udai:settings_finished_report");
     function s2b(str){
         if(str == 'true' || str === null || str === undefined){
             return true;
@@ -49,9 +52,9 @@
     console.log("submenu:"+$settings_submenu);
     console.log("exam:"+$settings_exam);
     console.log("additional_lms:"+$settings_additional_lms);
-    console.log("型:"+typeof(s2b($settings_login_auto)));
+    console.log("finished_report:"+$settings_finished_report);
     
-        //------------------------------------------------
+    //------------------------------------------------
     //ADFSスキップ
     if (document.domain == 'adfs.sic.shibaura-it.ac.jp'){
         if(s2b($settings_adfs_auto)){
@@ -111,10 +114,19 @@
         }
         //メニューを閉じる
             var $closeButton = document.getElementById('sidemenuClose');
-            if(s2b($settings_exit_auto)){
+            if($closeButton && s2b($settings_exit_auto)){
                 $closeButton.click();
         }
             window.onload = function(){
+                //提出済み課題
+                //将来的にはhas()を使用
+                if(location.href == 'https://scombz.shibaura-it.ac.jp/portal/home' && $settings_finished_report){
+                    const $finRepList = document.querySelectorAll('.portal-subblock-mark-finish');
+                    for(const $finRep of $finRepList){
+                        $finRep.parentNode.parentNode.style.display = 'none';
+                    }
+                }
+                //横メニュー
                 if($settings_submenu){
                 //head追加
                 const $head = document.head;
@@ -188,14 +200,20 @@
                             visibility:visible;
                             z-index:15;
                             display:visible;
+                            opacity:1;
+                            transition:opacity 300ms;
                         }
                         .sidemenu-hide.page-main .subtimetableBody{
+                            opacity:0;
                             visibility:hidden;
+                            transition:opacity 300ms;
                         }
                     }
                     @media (max-width:899px){
                         .subtimetableBody{
+                            opacity:0;
                             visibility:hidden;
+                            transition:opacity 300ms;
                         }
                     }
                     img.scombz-icon{
@@ -386,12 +404,15 @@
                 }else{
                     $pageMain.insertAdjacentHTML('beforeEnd',`
                 <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-                <p class="usFooter">ScombZ Utilities ver.2.1.0<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
+                <p class="usFooter">ScombZ Utilities ver.2.2.1<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
                 `);
                 }
 
                 
                 //お知らせを変更する
+                const $sidemenuInfoList = document.querySelectorAll('.sidemenu-link.info-icon');
+                $sidemenuInfoList[0].style.borderTop = '1px solid #ccc';
+                /* 2022/4/27 ScombZの仕様変更により標準仕様となった
                 const $sidemenuInfoList = document.querySelectorAll('.sidemenu-link.info-icon');
                 if($sidemenuInfoList[0]){
                     //お知らせページへの遷移へと変更
@@ -404,6 +425,7 @@
                         $sidemenuInfoList[i].remove();
                     }
                 }
+                */
 
                 //各メニューの縦幅をすべて50pxにする
                 const $sidemenuLinkList = document.querySelectorAll('.sidemenu-link');
