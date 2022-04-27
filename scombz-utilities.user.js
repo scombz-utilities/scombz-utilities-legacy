@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         More-Useful-ScombZ
 // @namespace    https://twitter.com/yudai1204
-// @version      1.5
+// @version      2.0.0
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -99,7 +99,7 @@
                     position:fixed;
                     bottom:0;
                     right:5px;
-                    font-size:5px;
+                    font-size:8px;
                     color:#000000;
                     visibility:visible;
                     z-index:15;
@@ -107,6 +107,7 @@
                 .sidemenu-hide.page-main .usFooter{
                     visibility:hidden;
                 }
+                
                 .sidemenu-open.hamburger-icon{
                     display:block;
                 }
@@ -126,10 +127,28 @@
                     background:#e0e0e0;
                 }
                 
-                @media (min-width:800px){
+                @media (min-width:900px){
                     .mainmenu-head-logo{
                         left:calc(50vw - 27.5px);
                         visibility:visible;
+                    }
+                    .page-main .subtimetableBody{
+                        position:fixed;
+                        Top:10px;
+                        right:10px;
+                        font-size:15px;
+                        color:#000000;
+                        visibility:visible;
+                        z-index:15;
+                        display:visible;
+                    }
+                    .sidemenu-hide.page-main .subtimetableBody{
+                        visibility:hidden;
+                    }
+                }
+                @media (max-width:899px){
+                    .subtimetableBody{
+                        visibility:hidden;
                     }
                 }
                 img.scombz-icon{
@@ -208,11 +227,112 @@
                 $closeButton.innerHTML = '<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>';
                 $closeButton.style.left = '0';
                 $closeButton.style.top = '0';
+            //LMS取得
+            if(location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable'){
+                const $courseList = document.querySelectorAll('.timetable-course-top-btn');
+                if($courseList[0]){
+                    function han2Zenkaku($str) {
+                        return $str.replace(/[０-９]/g, function(s) {
+                            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+                        });
+                    }
+                    function jigenInt($str){
+                        return han2Zenkaku($str.charAt(0));
+                    }
+                    //JSON生成
+                    let $timetableData = '[';
+                    for(const $course of $courseList) {
+                        $timetableData+="{";
+                        for(var $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
+                            if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
+                                $timetableData+='"day":'+$yobicolNum+`,`;
+                                break;
+                            }
+                        }
+                        $timetableData+='"time":'+jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML)+',';
+                        $timetableData+= '"id":"'+$course.getAttribute("id")+`",`;
+                        $timetableData+= '"name":"'+$course.innerHTML+`"},`;
+                    }
+                    $timetableData+='{"day":-1}]';
+                    localStorage.setItem("udai:timetableDataList",encodeURIComponent($timetableData));
+                    //JSON生成完了
+                }
+            }
             //グレーレイヤーの追加
+            //LMS表示
+            const $timetableDataStr = decodeURIComponent(localStorage.getItem("udai:timetableDataList"));
+            const $timetableData = JSON.parse($timetableDataStr);
+            console.log($timetableDataStr);
+            let $subTimetable =`
+            <style type="text/css">
+                .SubTimetable {
+                    text-align:center;
+                    decolation:none;
+                    font-size:100%;
+                }
+                @media(max-width:1281px){
+                    .SubTimetable {
+                        font-size:90%;
+                    }
+                }
+                td.SubTimetable , th.SubTimetable {
+                    width:calc((100vw - 300px)/7);
+                    height:4vh;
+                    background:#EDF3F7;
+                }
+                td.SubTimetable:nth-child(1) , th.SubTimetable:nth-child(1) {
+                    width:30px;
+                    background:#ec9c93;
+                }
+                th.SubTimetable{
+                    background:#bea87b;
+                    height:30px;
+                }
+                a.SubTimetable{
+                    display:block;
+                    width:100%;
+                    height:100%;
+                    padding:height:2vh 0;
+                }
+                a.SubTimetable:hover{
+                    background:rgba(206, 213, 217,0.5);
+                }
+                .subtimetableBody{
+                    background:rgba(255,255,255,0.5);
+                }
+            </style>
+            <div class="subtimetableBody">
+            <table class="SubTimetable">
+                <thead>
+                    <tr>
+                        <th class="SubTimetable"></th>
+                        <th class="SubTimetable">月</th>
+                        <th class="SubTimetable">火</th>
+                        <th class="SubTimetable">水</th>
+                        <th class="SubTimetable">木</th>
+                        <th class="SubTimetable">金</th>
+                        <th class="SubTimetable">土</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            var num=0;
+            for(var i=0; i<7; i++){ //i=時限
+                $subTimetable+='<tr>';
+                for(var j=0; j<7; j++){ //j=曜日
+                    var $subjData = (j==0) ? i+1 : '';
+                    if( $timetableData[num].day == j && $timetableData[num].time == i+1 ){
+                        $subjData = `<a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=`+$timetableData[num].id+`" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">`+$timetableData[num].name+`</span></a>`;
+                        num++;
+                    }            
+                    $subTimetable+=`<td class="SubTimetable">`+$subjData+`</td>`;
+                }
+                $subTimetable+='</tr>';
+            }
+            $subTimetable += `</tbody></table></div>`;
             $pageMain.insertAdjacentHTML('beforeEnd',`
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-            <p class="usFooter">ScombZ Utilities ver.1.5.0<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
-            `);
+            <p class="usFooter">ScombZ Utilities ver.2.0.0<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
+            `+$subTimetable);
             //お知らせを変更する
             const $sidemenuInfoList = document.querySelectorAll('.sidemenu-link.info-icon');
             if($sidemenuInfoList[0]){
