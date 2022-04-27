@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         More-Useful-ScombZ
 // @namespace    https://twitter.com/yudai1204
-// @version      2.2.1
+// @version      2.3.0
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -409,7 +409,7 @@
                     }else{
                         $pageMain.insertAdjacentHTML('beforeEnd',`
                 <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-                <p class="usFooter">ScombZ Utilities ver.2.2.1<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
+                <p class="usFooter">ScombZ Utilities ver.2.3.0<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
                 `);
                 }
 
@@ -459,7 +459,14 @@
                         console.log($courseTitle.innerHTML);
                         const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
                         const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
-                        $courseTitle.insertAdjacentHTML('afterEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?query=`+EscapeEUCJP($courseName)+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0">[`+$courseName+`]のシラバスを検索</a>
+                        let $courseNameStr ='';
+                        if( $courseName.search(/[０-９]|[0-9]/) > 0){
+                            $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
+                            $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
+                        }else{
+                            $courseNameStr = $courseName;
+                        }
+                        $courseTitle.insertAdjacentHTML('afterEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?query=`+EscapeEUCJP($courseNameStr)+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer">[`+$courseName+`]のシラバスを検索</a>
                         `);
                     }
                 }
