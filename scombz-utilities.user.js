@@ -516,13 +516,12 @@ const $$version = '2.5.0';
                             $courseNameStr = $courseName;
                         }
                         console.log('授業検索名を決定しました['+$courseNameStr+']');
-                        $courseTitle.insertAdjacentHTML('afterEnd',`<script href="https://greasyfork.org/scripts/444156-euc-jp-converter/code/EUC-JP-Converter.user.js"></script>`);
                         
                         if($settings_year == null || $settings_fac == null || $settings_fac == null || $settings_year == null){
                             $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、学年と学部を設定してください</span>`);
                         }else{
                             console.log("EUC-JPに変換中");
-                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=`+escaped+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
+                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=`+EscapeEUCJP($courseNameStr)+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
                             <span style="margin-left:35px;margin-bottom:10px;font-size:60%;">※自動検索で関連付けているため、違う教科のシラバスが開かれることがあります。</span>
                             `);
                         }
