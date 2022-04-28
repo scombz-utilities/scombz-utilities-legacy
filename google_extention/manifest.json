@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ScombZ Utilities",
-    "version": "2.2.1",
+    "version": "2.5.0",
     "action":{
         "default_title":"設定",
         "default_popup":"popup.html"
@@ -13,10 +13,9 @@
     "author": "yudai1204",
     "content_scripts": [
         {
-        "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*"],
-        "js": [ "custom.user.js"]
+        "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*"],
+        "js": [ "encoding/encoding.min.js","custom.user.js"]
         }
     ],
     "permissions":["storage"]
-    
 }
