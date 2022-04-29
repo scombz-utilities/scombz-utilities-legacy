@@ -174,7 +174,7 @@ const $$version = '2.5.8';
                 //head追加
                 const $head = document.head;
                 $head.insertAdjacentHTML('beforeEnd',`
-                <styletype="text/css">
+                <style type="text/css">
                     .sidemenu-hide{
                         min-width:371px;
                     }
