@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities
 // @namespace    https://twitter.com/yudai1204
-// @version      2.5.6
+// @version      2.5.8
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204 , @to_ku_me
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -10,7 +10,7 @@
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
 // @grant        none
 // ==/UserScript==
-const $$version = '2.5.6';
+const $$version = '2.5.8';
 (function() {
     console.log(`welcome to Scomb Utilities ver.${$$version}`);
     'use strict';
@@ -68,8 +68,41 @@ const $$version = '2.5.6';
             };
         }
     }
+    //ログアウト画面変更
+    else if(location.href == 'https://scombz.shibaura-it.ac.jp/logout'){
+        window.addEventListener('load', function(){
+            const $logoutMainContent = document.getElementById('logout');
+            const $logoutButton = document.querySelector('.btn-logout');
+            if($logoutMainContent && $logoutButton){
+                $logoutButton.style.background = "#f43c49";
+                $logoutButton.style.border = "1px solid #ff0000";
+                $logoutButton.style.boxShadow = "none";
+                $logoutButton.style.fontWeight="bold";
+                
+                $logoutMainContent.style.width = '100%';
+                $logoutMainContent.style.margin = '0 auto';
+                $logoutMainContent.style.minWidth = '0';
+                $logoutButton.insertAdjacentHTML('afterEnd',`
+                <style>
+                .btn-back{
+                    margin-top:10px;
+                    width:300px;
+                    box-shadow:none;
+                }
+                @media (max-width: 480px){
+                    .btn-back {
+                        width: 200px;
+                    }
+                }
+                </style>
+                <br><a class="btn-inline btn-back btn-color btn-txt" href="#" onclick="history.back(-1);return false;" >戻る</a>
+                `);
+            }
+        });
+    }
     //その他
     else if(document.domain == 'scombz.shibaura-it.ac.jp'){
+        
         //テスト改善
         if (location.href.includes('examination') && document.body.clientWidth > 480){
             if(s2b($settings_exam)){
@@ -141,7 +174,7 @@ const $$version = '2.5.6';
                 //head追加
                 const $head = document.head;
                 $head.insertAdjacentHTML('beforeEnd',`
-                <style>
+                <styletype="text/css">
                     .sidemenu-hide{
                         min-width:371px;
                     }
@@ -305,7 +338,25 @@ const $$version = '2.5.6';
                     $closeButton.style.left = '0';
                     $closeButton.style.top = '0';
                 console.log('サイドメニューのスタイルを変更しました');
-
+                //科目ページの最大横幅を変更
+                if(location.href.includes("lms/course?idnumber=") && location.href.length < 80){
+                    console.log('科目ページの最大横幅を変更します');
+                    $head.insertAdjacentHTML('beforeEnd',`
+                    <style type="text/css">
+                    #courseTopForm{
+                        max-width: 1280px;
+                        margin: 0 auto;
+                    }
+                    @media(min-width:1281px){
+                        .course-header{
+                            border-left:1px solid #ccc;
+                            border-right:1px solid #ccc;
+                        }
+                    }
+                    </style>
+                    `);
+                    console.log("最大横幅は1280pxに設定されました");
+                }
                 //LMS取得
                 var $subTimetable='';
                 if(s2b($settings_additional_lms)){
@@ -389,11 +440,12 @@ const $$version = '2.5.6';
                             a.SubTimetable:hover{
                                 background:rgba(206, 213, 217,0.5);
                             }
-                            .subtimetableBody{
+                            .subtimetableBodyCulm{
                                 background:rgba(255,255,255,0.5);
                             }
                         </style>
                         <div class="subtimetableBody">
+                        <div class="subtimetableBodyCulm">
                         <table class="SubTimetable">
                             <thead>
                                 <tr>
@@ -432,13 +484,14 @@ const $$version = '2.5.6';
                             }
                             $subTimetable+='</tr>';
                         }
-                        $subTimetable += `</tbody></table>`;
+                        $subTimetable += `</tbody></table></div>`;
                         //曜日時間不定授業
                         if($timetableData[num].day != -1){
                             console.log('読み取り完了 課外授業なし day:'+$timetableData[num].day);
                         }else{
                             console.log('曜日時間不定授業・集中講座を検出しました');
-                            $subTimetable+= `<table class="SubTimetable" style="margin-top:10px;">
+                            $subTimetable+= `
+                            <div class="subtimetableBodyCulm"><table class="SubTimetable" style="margin-top:10px;">
                             <tr class="SubTimetable">
                                 <th class="SubTimetable">その他の授業</th>
                             </tr>`;
@@ -448,7 +501,7 @@ const $$version = '2.5.6';
                                     <td class="SubTimetable" style="background:#EDF3F7;width:calc((100vw - 300px)/5);height:4vh;"><a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a></td>
                                 </tr>`;
                             }
-                            $subTimetable+=`</table>`;
+                            $subTimetable+=`</table></div>`;
                             console.log('読み取り完了 課外授業あり day:'+$timetableData[num].day);
                         }
                         $subTimetable+=`</div>`;
@@ -539,6 +592,7 @@ const $$version = '2.5.6';
             }
             //レポート提出ボタン変更
             if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+                console.log('レポート提出画面を検出しました\nボタンのレイアウトを変更します');
                 document.head.insertAdjacentHTML('beforeEnd',`
                 <style>
                 .block-under-area .block-under-area-btn{
@@ -583,6 +637,7 @@ const $$version = '2.5.6';
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             document.querySelector('.page-directlink').remove();
+            console.log("レポート提出ボタンのレイアウトが変更されました");
             }
             console.log('すべての機能の実行が完了しました');
         });
