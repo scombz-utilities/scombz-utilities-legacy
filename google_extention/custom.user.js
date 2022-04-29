@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities
 // @namespace    https://twitter.com/yudai1204
-// @version      2.5.2
+// @version      2.5.4
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204 , @to_ku_me
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -10,10 +10,10 @@
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
 // @grant        none
 // ==/UserScript==
-const $$version = '2.5.2';
+const $$version = '2.5.4';
 (function() {
-    console.log(`welcome to Scomb Utilities ver.${$$version}`);
     'use strict';
+    console.log(`welcome to Scomb Utilities ver.${$$version}`);
     //----------------chrome拡張機能部分----------------
     //chrome storageの反応性が不安定だったため、chrome storageでの設定を一度localStorageに読み込むことで解決
     console.log('Chrome拡張機能設定を読み込んでいます');
@@ -89,7 +89,7 @@ const $$version = '2.5.2';
     //その他
     else if(document.domain == 'scombz.shibaura-it.ac.jp'){
         //テスト改善
-        if (location.href.indexOf('examination') !== -1 && document.body.clientWidth > 480){
+        if (location.href.includes('examination') && document.body.clientWidth > 480){
             if(s2b($settings_exam)){
                 console.log('テスト改善を実行します');
                 const $exa_contsize = document.getElementById('pageContents');
@@ -456,21 +456,24 @@ const $$version = '2.5.2';
                         }
                         $subTimetable += `</tbody></table></div>`;
                         //曜日時間不定授業
-                        if($timetableData[--num].id == -1){
+                        if($timetableData[num].day != -1){
+                            console.log('読み取り完了 課外授業なし day:'+$timetableData[num].day);
+                        }else{
                             console.log('曜日時間不定授業・集中講座を検出しました');
                             $subTimetable+= `<div class="subtimetableBody"><table class="SubTimetable">
                             <tr class="SubTimetable">
                                 <th class="SubTimetable">その他の授業</th>
                             </tr>`;
-                            for(;$timetableData[num].id == -1;num++){
+                            for(;$timetableData[num].day == -1;num++){
                             $subTimetable+=`
                                 <tr>
                                     <td class="SubTimetable" style="background:#EDF3F7;width:calc((100vw - 300px)/5);height:4vh;"><a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a></td>
                                 </tr>`;
                             }
                             $subTimetable+=`</table></div>`;
+                            console.log('読み取り完了 課外授業あり day:'+$timetableData[num].day);
                         }
-                        console.log('時間割の生成に成功しました\nコマ数:'+num-1);
+                        console.log('時間割の生成に成功しました\nコマ数:'+num);
                         $pageMain.insertAdjacentHTML('beforeEnd',`
                         <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
                         <p class="usFooter">ScombZ Utilities ver.${$$version}<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
@@ -524,7 +527,7 @@ const $$version = '2.5.2';
                     $pagetopBtn.remove();
                 }
                 //シラバスリンク
-                if (location.href.indexOf('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
+                if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
                     console.log('授業別ページを検出しました\nシラバスのデータと連携します');
                     const $courseTitle = document.querySelector('.course-title-txt');
                     if($courseTitle){
@@ -532,25 +535,22 @@ const $$version = '2.5.2';
                         const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
                         const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
                         let $courseNameStr ='';
+                        let $courseNameStrEnc ='';
                         if( $courseName.search(/[０-９]|[0-9]/) > 0){
                             $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
                             $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
-                            $courseNameStr = `+subject:"${$courseNameStr}"`;
+                            $courseNameStrEnc = EscapeEUCJP($courseNameStr);
                         }else{
                             $courseNameStr = `subject:"${$courseName}"`;
+                            $courseNameStrEnc = `%2B${EscapeEUCJP($courseNameStr)}`;
                         }
                         console.log('授業検索名を決定しました['+$courseNameStr+']');
                         
-                        if($settings_year == 'null' || $settings_fac == 'null' || $settings_fac == null || $settings_year == null){
+                        if($settings_year == null || $settings_fac == null || $settings_fac == null || $settings_year == null){
                             $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、学年と学部を設定してください</span>`);
                         }else{
-                            console.log("UnicodeからEUC-JPエスケープに変換中です");
-                            // EUC-JP に変換
-                            actual  = Encoding.convert($courseNameStr.split('').map((v) => v.charCodeAt()), 'EUCJP', 'UNICODE');
-                            // URL用にエスケープ
-                            escaped = Encoding.urlEncode(actual);
-                            console.log("変換が完了しました");
-                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=%2B`+escaped+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
+                            console.log("EUC-JPに変換中");
+                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=${$courseNameStrEnc}&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
                             <span style="margin-left:35px;margin-bottom:10px;font-size:60%;">※自動検索で関連付けているため、違う教科のシラバスが開かれることがあります。</span>
                             `);
                         }
@@ -562,43 +562,79 @@ const $$version = '2.5.2';
         });
     }
     //シラバス適用
+    //シラバス適用
     if(document.domain == "syllabus.sic.shibaura-it.ac.jp"){
         if(location.href.includes("namazu") && location.href.includes("ajaxmode=true")){
             console.log("ScombZからのシラバスへの遷移を検出しました")
-            //検索からの自動リンク
-            const $sylSubjLink = document.getElementById("hit_1");
-            const $sylSubDDTag = document.getElementsByTagName("a");
-            if($sylSubjLink){
-                console.log("科目ページに遷移します by ID");
-                $sylSubjLink.click();
-            }else if($sylSubDDTag[22]){
-                console.log("科目ページに遷移します by Tag");
-                window.location.href = $sylSubDDTag[22].innerHTML;
+            const $namazuHeader = document.querySelector(".namazu-result-header");
+            if(location.href.includes("%2Bsubject") && document.getElementsByTagName("dt")[15]){
+                //複数あった時の処理
+                if($namazuHeader){
+                    $namazuHeader.setAttribute('id', 'searchResult');
+                    $namazuHeader.insertAdjacentHTML('beforeEnd',`
+                        <div style="width:100%;">
+                        <h1>複数のシラバスデータを検出しました</h1>
+                        <h3>以下の一覧から該当する科目を選択してください</h3>
+                        </div>
+                    `);
+                    document.querySelector(".namazu-result-footer").insertAdjacentHTML('afterEnd',`
+                    <div style="width:100%;height:50vh;">
+                    </div>
+                    `);
+                    window.location.href = "#searchResult";
+                }
             }else{
-                console.log("科目が見つかりませんでした");
-                document.querySelector(".namazu-result-header").innerHTML = `
-                <p>検索結果 参考ヒット数:0</p>
-                <div style="width:100%;height:100vh;">
-                <h1>シラバスデータの取得に失敗しました</h1>
-                <h3>該当する科目が見つかりませんでした。お手数おかけしますが、シラバス内で直接お探しください。</h3>
-                <h3><a href="http://syllabus.sic.shibaura-it.ac.jp/">シラバスへ</a></h3>
-                </div>
-                `;
+                //検索からの自動リンク
+                const $sylSubjLink = document.getElementById("hit_1");
+                const $sylSubDDTag = document.getElementsByTagName("a");
+                if($sylSubjLink){
+                    console.log("科目ページに遷移します by ID");
+                    $sylSubjLink.click();
+                }else if($sylSubDDTag[22]){
+                    console.log("科目ページに遷移します by Tag");
+                    window.location.href = $sylSubDDTag[22].innerHTML;
+                }else{
+                    console.log("科目が見つかりませんでした");
+                    $namazuHeader.setAttribute('id', 'searchResult');
+                    $namazuHeader.insertAdjacentHTML('beforeEnd',`
+                    <div style="height:100vh;">
+                    <h1>シラバスデータの取得に失敗しました</h1>
+                    <h3>該当する科目が見つかりませんでした。お手数おかけしますが、シラバス内で直接お探しください。</h3>
+                    <h3><a href="http://syllabus.sic.shibaura-it.ac.jp/">シラバスへ</a></h3>
+                    </div>
+                    `);
+                    window.location.href = "#searchResult";
+                }
             }
         }else if(location.href.includes("Matrix")){
             //見やすくする by とくめいっ！
             console.log("シラバスのスタイルを変更します");
-            document.querySelector(".table_sticky thead tr td").style.position = "static";
-            let li = document.querySelectorAll(".table_sticky thead:nth-child(2) tr:nth-child(1) th");
-            for (let i =0;i<li.length;i++){
-            li[i].style.position = "static";
-            }
-
-            let li2 = document.querySelectorAll(".table_sticky thead:nth-child(2) tr:nth-child(2) th");
-            for (let i =0;i<li.length;i++){
-            li2[i].style.position = "static";
-            }
-            console.log("変更が完了しました");
+            window.addEventListener('load', function(){
+                const $list1 = document.querySelector(".table_sticky thead tr td");
+                if($list1){
+                    $list1.style.position = "static";
+                    let li = document.querySelectorAll(".table_sticky thead:nth-child(2) tr:nth-child(1) th");
+                    for (const l of li){
+                        l.style.position = "static";
+                    }
+                }
+                const $list2 = document.querySelectorAll(".table_sticky thead:nth-child(2) tr:nth-child(2) th");
+                if($list2[0]){
+                    for (const li2 of $list2){
+                        li2.style.position = "static";
+                    }
+                }
+                console.log("変更が完了しました");
+            });
         }
     }
 })();
+
+/*USとChromeで違うゾーン*/
+EscapeEUCJP=function(str){
+    // EUC-JP に変換
+    actual  = Encoding.convert(str.split('').map((v) => v.charCodeAt()), 'EUCJP', 'UNICODE');
+    // URL用にエスケープ
+    return Encoding.urlEncode(actual);
+}
+/*USとChromeで違うゾーン*/
