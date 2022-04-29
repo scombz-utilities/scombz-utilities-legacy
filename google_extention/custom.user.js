@@ -38,7 +38,6 @@ const $$version = '2.5.5';
         localStorage.setItem("udai:settings_exam",items.exam);
         localStorage.setItem("udai:settings_additional_lms",items.additional_lms);
         localStorage.setItem("udai:settings_finished_report",items.finished_report);
-        localStorage.setItem("udai:settings_syll_btn",items.syll_btn);
     });
     var $settings_year = localStorage.getItem("udai:settings_year");
     var $settings_fac = localStorage.getItem("udai:settings_fac");
@@ -49,7 +48,7 @@ const $$version = '2.5.5';
     var $settings_exam = localStorage.getItem("udai:settings_exam");
     var $settings_additional_lms = localStorage.getItem("udai:settings_additional_lms");
     var $settings_finished_report = localStorage.getItem("udai:settings_finished_report");
-    var $settings_syll_btn = localStorage.getItem("udai:settings_syll_btn");
+    var $settings_syll_btn = 'true';
     function s2b(str){
         if(str == 'true' || str === null || str === undefined){
             return true;
@@ -171,23 +170,23 @@ const $$version = '2.5.5';
                         min-width:371px;
                     }
                     .page-main #graylayer{
-                            width:100%;
-                            height:100%;
-                            position:fixed;
-                            z-index:11;
-                            background:#000000;
-                            opacity:0.5;
-                            visibility:visible;
-                            transition:opacity 300ms;
+                        width:100%;
+                        height:100%;
+                        position:fixed;
+                        z-index:11;
+                        background:#000000;
+                        opacity:0.5;
+                        visibility:visible;
+                        transition:opacity 300ms;
                         }
                     .sidemenu-hide.page-main #graylayer{
-                            width:100%;
-                            height:100%;
-                            position:fixed;
-                            z-index:11;
-                            background:#000000;
-                            opacity:0;
-                            visibility:hidden;
+                        width:100%;
+                        height:100%;
+                        position:fixed;
+                        z-index:11;
+                        background:#000000;
+                        opacity:0;
+                        visibility:hidden;
 
                     }
                     .page-main .usFooter{
@@ -536,6 +535,7 @@ const $$version = '2.5.5';
                 }
             }
             //シラバスリンク
+            console.log('')
             if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=') && s2b($settings_syll_btn)){
                 console.log('授業別ページを検出しました\nシラバスのデータと連携します');
                 const $courseTitle = document.querySelector('.course-title-txt');
@@ -569,7 +569,6 @@ const $$version = '2.5.5';
             console.log('すべての機能の実行が完了しました');
         });
     }
-    //シラバス適用
     //シラバス適用
     if(document.domain == "syllabus.sic.shibaura-it.ac.jp"){
         if(location.href.includes("namazu") && location.href.includes("ajaxmode=true")){
