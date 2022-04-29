@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ScombZ Utilities",
-    "version": "2.5.4",
+    "version": "2.5.5",
     "action":{
         "default_title":"設定",
         "default_popup":"popup.html"

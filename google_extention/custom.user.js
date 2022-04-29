@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities
 // @namespace    https://twitter.com/yudai1204
-// @version      2.5.4
+// @version      2.5.5
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204 , @to_ku_me
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -10,7 +10,7 @@
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
 // @grant        none
 // ==/UserScript==
-const $$version = '2.5.4';
+const $$version = '2.5.5';
 (function() {
     'use strict';
     console.log(`welcome to Scomb Utilities ver.${$$version}`);
@@ -26,7 +26,8 @@ const $$version = '2.5.4';
         submenu: true,
         exam: true,
         additional_lms: true,
-        finished_report: true
+        finished_report: true,
+        syll_btn: true
     }, function(items) {
         localStorage.setItem("udai:settings_year",items.year);
         localStorage.setItem("udai:settings_fac",items.fac);
@@ -37,6 +38,7 @@ const $$version = '2.5.4';
         localStorage.setItem("udai:settings_exam",items.exam);
         localStorage.setItem("udai:settings_additional_lms",items.additional_lms);
         localStorage.setItem("udai:settings_finished_report",items.finished_report);
+        localStorage.setItem("udai:settings_syll_btn",items.syll_btn);
     });
     var $settings_year = localStorage.getItem("udai:settings_year");
     var $settings_fac = localStorage.getItem("udai:settings_fac");
@@ -47,6 +49,7 @@ const $$version = '2.5.4';
     var $settings_exam = localStorage.getItem("udai:settings_exam");
     var $settings_additional_lms = localStorage.getItem("udai:settings_additional_lms");
     var $settings_finished_report = localStorage.getItem("udai:settings_finished_report");
+    var $settings_syll_btn = localStorage.getItem("udai:settings_syll_btn");
     function s2b(str){
         if(str == 'true' || str === null || str === undefined){
             return true;
@@ -63,6 +66,7 @@ const $$version = '2.5.4';
     console.log("exam:"+$settings_exam);
     console.log("additional_lms:"+$settings_additional_lms);
     console.log("finished_report:"+$settings_finished_report);
+    console.log("syll_btn:"+$settings_syll_btn);
     console.log("読み込み完了");
     //------------------------------------------------
     //ADFSスキップ
@@ -138,6 +142,9 @@ const $$version = '2.5.4';
                 if( !(document.getElementById('pageMain').classList.contains('sidemenu-hide')) ){
                     document.getElementById('pageMain').classList.add('sidemenu-hide');
                 }
+                if( !(document.getElementById('pageMain').classList.contains('sidemenu-hide')) ){
+                    document.getElementById('pageMain').classList.add('sidemenu-hide');
+                }
                 console.log('メニューを閉じました');
             }
             console.log('Webページ読み込み完了まで待機しています');
@@ -154,7 +161,7 @@ const $$version = '2.5.4';
                     console.log('提出済課題非表示 実行終了');
                 }
                 //横メニュー
-                if($settings_submenu){
+                if(s2b($settings_submenu)){
                 console.log('サイドメニューのスタイル変更を開始します');
                 //head追加
                 const $head = document.head;
@@ -454,13 +461,13 @@ const $$version = '2.5.4';
                             }
                             $subTimetable+='</tr>';
                         }
-                        $subTimetable += `</tbody></table></div>`;
+                        $subTimetable += `</tbody></table>`;
                         //曜日時間不定授業
                         if($timetableData[num].day != -1){
                             console.log('読み取り完了 課外授業なし day:'+$timetableData[num].day);
                         }else{
                             console.log('曜日時間不定授業・集中講座を検出しました');
-                            $subTimetable+= `<div class="subtimetableBody"><table class="SubTimetable">
+                            $subTimetable+= `<table class="SubTimetable" style="margin-top:10px;">
                             <tr class="SubTimetable">
                                 <th class="SubTimetable">その他の授業</th>
                             </tr>`;
@@ -470,9 +477,10 @@ const $$version = '2.5.4';
                                     <td class="SubTimetable" style="background:#EDF3F7;width:calc((100vw - 300px)/5);height:4vh;"><a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a></td>
                                 </tr>`;
                             }
-                            $subTimetable+=`</table></div>`;
+                            $subTimetable+=`</table>`;
                             console.log('読み取り完了 課外授業あり day:'+$timetableData[num].day);
                         }
+                        $subTimetable+=`</div>`;
                         console.log('時間割の生成に成功しました\nコマ数:'+num);
                         $pageMain.insertAdjacentHTML('beforeEnd',`
                         <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
@@ -526,36 +534,36 @@ const $$version = '2.5.4';
                 if($pagetopBtn){
                     $pagetopBtn.remove();
                 }
-                //シラバスリンク
-                if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
-                    console.log('授業別ページを検出しました\nシラバスのデータと連携します');
-                    const $courseTitle = document.querySelector('.course-title-txt');
-                    if($courseTitle){
-                        console.log($courseTitle.innerHTML);
-                        const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
-                        const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
-                        let $courseNameStr ='';
-                        let $courseNameStrEnc ='';
-                        if( $courseName.search(/[０-９]|[0-9]/) > 0){
-                            $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
-                            $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
-                            $courseNameStrEnc = EscapeEUCJP($courseNameStr);
-                        }else{
-                            $courseNameStr = `subject:"${$courseName}"`;
-                            $courseNameStrEnc = `%2B${EscapeEUCJP($courseNameStr)}`;
-                        }
-                        console.log('授業検索名を決定しました['+$courseNameStr+']');
-                        
-                        if($settings_year == null || $settings_fac == null || $settings_fac == null || $settings_year == null){
-                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、学年と学部を設定してください</span>`);
-                        }else{
-                            console.log("EUC-JPに変換中");
-                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=${$courseNameStrEnc}&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
-                            <span style="margin-left:35px;margin-bottom:10px;font-size:60%;">※自動検索で関連付けているため、違う教科のシラバスが開かれることがあります。</span>
-                            `);
-                        }
-                        console.log("シラバスリンクの挿入が完了しました");
+            }
+            //シラバスリンク
+            if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=') && s2b($settings_syll_btn)){
+                console.log('授業別ページを検出しました\nシラバスのデータと連携します');
+                const $courseTitle = document.querySelector('.course-title-txt');
+                if($courseTitle){
+                    console.log($courseTitle.innerHTML);
+                    const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
+                    const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
+                    let $courseNameStr ='';
+                    let $courseNameStrEnc ='';
+                    if( $courseName.search(/[０-９]|[0-9]/) > 0){
+                        $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
+                        $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
+                        $courseNameStrEnc = EscapeEUCJP($courseNameStr);
+                    }else{
+                        $courseNameStr = `subject:"${$courseName}"`;
+                        $courseNameStrEnc = `%2B${EscapeEUCJP($courseNameStr)}`;
                     }
+                    console.log('授業検索名を決定しました['+$courseNameStr+']');
+                    
+                    if($settings_year == null || $settings_fac == null || $settings_fac == null || $settings_year == null){
+                        $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、学年と学部を設定してください</span>`);
+                    }else{
+                        console.log("EUC-JPに変換中");
+                        $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=${$courseNameStrEnc}&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
+                        <span style="margin-left:35px;margin-bottom:10px;font-size:60%;">※自動検索で関連付けているため、違う教科のシラバスが開かれることがあります。</span>
+                        `);
+                    }
+                    console.log("シラバスリンクの挿入が完了しました");
                 }
             }
             console.log('すべての機能の実行が完了しました');
