@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities
 // @namespace    https://twitter.com/yudai1204
-// @version      2.5.8
+// @version      2.5.9
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
 // @author       @yudai1204 , @to_ku_me
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -10,7 +10,7 @@
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
 // @grant        none
 // ==/UserScript==
-const $$version = '2.5.8';
+const $$version = '2.5.9';
 (function() {
     console.log(`welcome to Scomb Utilities ver.${$$version}`);
     'use strict';
@@ -665,27 +665,69 @@ const $$version = '2.5.8';
                 }
             }else{
                 //検索からの自動リンク
+                function delstrong(str){
+                    str.replace(`<strong class="keyword">`,'');
+                    str.replace(`</strong>`,'');
+                    return str;
+                }
                 const $sylSubjLink = document.getElementById("hit_1");
                 const $sylSubDDTag = document.getElementsByTagName("a");
+                const $sylSubjLink2 = document.getElementById("hit_2");
+                const $sylSubjLink3 = document.getElementById("hit_3");
+                const $sylSubjLink4 = document.getElementById("hit_4");
+                let $suggestSubj = '';
+                if ($sylSubjLink2){
+                    $suggestSubj += "?scombzredirect=true&sug1l="+$sylSubjLink2.href.substring($sylSubjLink2.href.length - 14)+"&sug1n="+delstrong($sylSubjLink2.innerHTML);
+                }
+                if ($sylSubjLink3){
+                    $suggestSubj += "&sug2l="+$sylSubjLink3.href.substring($sylSubjLink3.href.length - 14)+"&sug2n="+delstrong($sylSubjLink3.innerHTML);
+                }
+                if ($sylSubjLink4){
+                    $suggestSubj += "&sug3l="+$sylSubjLink4.href.substring($sylSubjLink4.href.length - 14)+"&sug2n="+delstrong($sylSubjLink4.innerHTML);
+                }
                 if($sylSubjLink){
                     console.log("科目ページに遷移します by ID");
-                    $sylSubjLink.click();
+                    window.location.href = `${$sylSubjLink.href}${$suggestSubj}`;
                 }else if($sylSubDDTag[22]){
                     console.log("科目ページに遷移します by Tag");
-                    window.location.href = $sylSubDDTag[22].innerHTML;
+                    window.location.href = `${$sylSubDDTag[22].innerHTML}${$suggestSubj}`;
                 }else{
                     console.log("科目が見つかりませんでした");
                     $namazuHeader.setAttribute('id', 'searchResult');
                     $namazuHeader.insertAdjacentHTML('beforeEnd',`
                     <div style="height:100vh;">
                     <h1>シラバスデータの取得に失敗しました</h1>
-                    <h3>該当する科目が見つかりませんでした。お手数おかけしますが、シラバス内で直接お探しください。</h3>
+                    <h3>該当する科目が見つかりませんでした。科目名に記号が含まれているとうまく見つからない場合があります。\nお手数おかけしますが、シラバス内で直接お探しください。</h3>
                     <h3><a href="http://syllabus.sic.shibaura-it.ac.jp/">シラバスへ</a></h3>
                     </div>
                     `);
                     window.location.href = "#searchResult";
                 }
             }
+        }else if(location.href.includes(`${$settings_year}/${$settings_fac}/`) && location.href.includes("?scombzredirect=true")){
+            //もしかしてを…表示する
+            /* まだ実装途中 科目名の表示が不適切 */
+            var urlPrm = new Object;
+            var urlSearch = location.search.substring(1).split('&');
+            for(let i=0;urlSearch[i];i++) {
+                var kv = urlSearch[i].split('=');
+                urlPrm[kv[0]]=kv[1];
+            }
+            let $suggest = '<div class="suggest">';
+            if(urlPrm.sug1n && urlPrm.sug1l){
+                $suggest += `<a href="${urlPrm.sug1l}" style="margin:1px 10px;">${urlPrm.sug1n}</a>`;
+            }
+            if(urlPrm.sug2n && urlPrm.sug2l){
+                $suggest += `<a href="${urlPrm.sug2l}" style="margin:1px 10px;">${urlPrm.sug2n}</a>`;
+            }
+            if(urlPrm.sug3n && urlPrm.sug3l){
+                $suggest += `<a href="${urlPrm.sug3l}" style="margin:1px 10px;">${urlPrm.sug3n}</a>`;
+            }
+            $suggest += "</div>";
+            console.log($suggest);
+                console.log("挿入中");
+                document.body.insertAdjacentHTML(`afterBegin`,`<p style="margin-top:50px;">こちらの教科をお探しですか？</p>${$suggest}
+                `);
         }else if(location.href.includes("Matrix")){
             //見やすくする by とくめいっ！
             console.log("シラバスのスタイルを変更します");
