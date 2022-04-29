@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name         ScombZ-Utilities
 // @namespace    https://twitter.com/yudai1204
-// @version      2.5.0
+// @version      2.5.2
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
-// @author       @yudai1204
+// @author       @yudai1204 , @to_ku_me
 // @match        https://scombz.shibaura-it.ac.jp/*
 // @match        https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*
 // @match        http://syllabus.sic.shibaura-it.ac.jp/*
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
 // @grant        none
 // ==/UserScript==
-const $$version = '2.5.0';
+const $$version = '2.5.2';
 (function() {
     console.log(`welcome to Scomb Utilities ver.${$$version}`);
     'use strict';
@@ -368,6 +368,10 @@ const $$version = '2.5.0';
                     console.log('グレーレイヤーを追加します');
                     if(localStorage.getItem("udai:timetableDataList") == null) {
                         console.log('LocalStrageのアクセスに失敗しました');
+                        $pageMain.insertAdjacentHTML('beforeEnd',`
+                        <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
+                        <p class="usFooter">ScombZ Utilities ver.${$$version}<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
+                        `);
                     }else{
                         const $timetableDataStr = decodeURIComponent(localStorage.getItem("udai:timetableDataList"));
                         console.log('LocalStrageのアクセスに成功しました\nJSONファイルにparseします');
@@ -531,8 +535,9 @@ const $$version = '2.5.0';
                         if( $courseName.search(/[０-９]|[0-9]/) > 0){
                             $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
                             $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
+                            $courseNameStr = `+subject:"${$courseNameStr}"`;
                         }else{
-                            $courseNameStr = $courseName;
+                            $courseNameStr = `subject:"${$courseName}"`;
                         }
                         console.log('授業検索名を決定しました['+$courseNameStr+']');
                         
@@ -545,7 +550,7 @@ const $$version = '2.5.0';
                             // URL用にエスケープ
                             escaped = Encoding.urlEncode(actual);
                             console.log("変換が完了しました");
-                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=`+escaped+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
+                            $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<a href="http://syllabus.sic.shibaura-it.ac.jp/namazu/namazu.cgi?ajaxmode=true&query=%2B`+escaped+`&whence=0&idxname=`+$settings_year+`%2F`+$settings_fac+`&max=20&result=normal&sort=score#:~:text=%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C,-%E5%8F%82%E8%80%83%E3%83%92%E3%83%83%E3%83%88%E6%95%B0"  target="_blank" rel="noopener noreferrer" class="btn btn-square btn-square-area btn-txt white-btn-color" style="margin-left:40px;margin-bottom:5px;">シラバスを表示</a>
                             <span style="margin-left:35px;margin-bottom:10px;font-size:60%;">※自動検索で関連付けているため、違う教科のシラバスが開かれることがあります。</span>
                             `);
                         }
