@@ -1,0 +1,46 @@
+{
+    "manifest_version":3 ,
+    "name": "ScombZ Utilities",
+    "version": "3.0.0",
+    "description": "ScombZをカスタムする拡張機能",
+    "icons": { 
+        "48":  "icons/icon48.png",
+        "128": "icons/icon128.png" 
+    },
+    "action":{
+        "default_title":"ScombZ Utilities",
+        "default_popup":"popup/popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*"],
+            "all_frames": true,
+            "run_at": "document_start",
+            "js": [
+                "js/adfs.js",
+                "js/syllabus.js",
+                "main.js",
+                "lib/encoding/encoding.min.js",
+                "js/clickLogin.js",
+                "js/addSubTimetable.js",
+                "js/changeReportBtn.js",
+                "js/eucjp.js",
+                "js/exitSidemenu.js",
+                "js/hideCompletedTask.js",
+                "js/loading.js",
+                "js/styleDialog.js",
+                "js/styleExam.js",
+                "js/styleSidemenu.js",
+                "js/syllBtn.js",
+                "js/layout.js"
+            ]
+        }
+    ],
+    "permissions":[
+        "storage"
+    ],
+    "web_accessible_resources": [{
+        "resources": ["fonts/*.ttf", "fonts/*.woff2"],
+        "matches": ["<all_urls>"]
+    }]
+}

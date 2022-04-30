@@ -1,0 +1,11 @@
+#mainbody{
+    width: 800px;
+    height: 600px;
+    background: #ddd;
+}
+h1{
+    text-align: center;
+}
+.announcement{
+    font-size:80%;
+}

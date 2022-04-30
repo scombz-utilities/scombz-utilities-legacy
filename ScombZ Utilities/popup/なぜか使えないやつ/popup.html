@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="popup.css">
+        <title>ScombZ</title>
+    </head>
+    <body>
+        <div id="mainbody">
+            <h1>ScombZ Utilities Settings</h1>
+            入学年度:
+            <select id="year">
+                JavaScriptを有効にしてください
+            </select><br>
+            学部:
+            <select id="fac">
+                <option value="din">大学院</option>
+                <option value="arc">建築学部</option>
+                <option value="dsn">デザイン工学部</option>
+                <option value="sys">システム理工学部</option>
+                <option value="ko1">工学部</option>
+            </select><br>
+                <label><input type="checkbox" id="clickLoginBtn">ログインボタン自動クリック</label><br>
+                <label><input type="checkbox" id="adfsSkip">ADFS自動スキップ</label><br>
+                <label><input type="checkbox" id="exitSidemenu">サイドメニューを自動で閉じる</label><br>
+                <label><input type="checkbox" id="styleSidemenu">サイドメニューのスタイル変更</label><br>
+                <label><input type="checkbox" id="styleExam">テストのスタイル変更</label><br>
+                <label><input type="checkbox" id="addSubTimetable">メニュー横の時間割表示(※左メニュースタイル変更必須)</label><br>
+                <label><input type="checkbox" id="hideCompletedTask">提出済み課題を非表示化</label><br>
+                <label><input type="checkbox" id="styleDialog">お知らせダイアログを大きくする</label><br>
+                <label><input type="checkbox" id="changeReportBtn">ユーザビリティに配慮したボタン</label><br>
+                <label><input type="checkbox" id="syllBtn">シラバスリンクボタンの追加</label><br>
+            <div id="status"></div><br>
+            <p class="announcement">※1入学年度・学部はシラバス検索のみに使われます。外部には送信されません。<br>※2設定の反映には何度か再読み込みをする必要があります。<br>また、変更時には予期せぬ不具合が発生する恐れがあります。<br>その場合はキャッシュのクリアをしてから再度読み込みをしてください。<br>
+            <a href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        </div>
+        <script type="text/javascript" src="options.js"></script>
+    </body>
+</html>

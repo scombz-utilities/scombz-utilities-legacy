@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #mainbody{
+                width: 350px;
+                height: 500px;
+            }
+            h1{
+                text-align: center;
+            }
+            .announcement{
+                font-size:80%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mainbody">
+            <h1>ScombZ Utilities Settings</h1>
+            入学年度:
+            <select id="year">
+                <option value="2015">2015年度入学</option>
+                <option value="2016">2016年度入学</option>
+                <option value="2017">2017年度入学</option>
+                <option value="2018">2018年度入学</option>
+                <option value="2019">2019年度入学</option>
+                <option value="2020">2020年度入学</option>
+                <option value="2021">2021年度入学</option>
+                <option value="2022">2022年度入学</option>
+                <option value="2023">2023年度入学</option>
+                <option value="2024">2024年度入学</option>
+                <option value="2025">2025年度入学</option>
+                <option value="2026">2026年度入学</option>
+                <option value="2027">2027年度入学</option>
+                <option value="2028">2028年度入学</option>
+                <option value="2029">2029年度入学</option>
+                <option value="2030">2030年度入学</option>
+            </select><br>
+            学部:
+            <select id="fac">
+                <option value="din">大学院</option>
+                <option value="arc">建築学部</option>
+                <option value="dsn">デザイン工学部</option>
+                <option value="sys">システム理工学部</option>
+                <option value="ko1">工学部</option>
+            </select><br>
+            <label><input type="checkbox" id="login_auto">ログインボタン自動クリック</label><br>
+            <label><input type="checkbox" id="adfs_auto">ADFSスキップ自動クリック</label><br>
+            <label><input type="checkbox" id="exam">テストのスタイル変更</label><br>
+            <label><input type="checkbox" id="menu_exit_auto">左メニューを自動で閉じる</label><br>
+            <label><input type="checkbox" id="submenu">左メニューのスタイル変更</label><br>
+            <label><input type="checkbox" id="additional_lms">メニュー横の時間割表示(※左メニュースタイル変更必須)</label><br>
+            <label><input type="checkbox" id="hideCompletedReports">完了したレポートをカレンダーに表示しない</label><br>
+            <label><input type="checkbox" id="styleDialog">ダイアログを大きくする</label><br>
+            <label><input type="checkbox" id="syll_btn">シラバスリンクボタンの追加</label><br>
+            <label><input type="checkbox" id="changeReportBtn">提出ボタンの変更</label><br>
+            <label><input type="checkbox" id="changeLogout">ログアウトボタンの変更</label><br>
+            <label><input type="checkbox" id="setMaxWidth">科目ページ最大横幅を設定</label><br>
+            <label><input type="checkbox" id="pageTopBtn">トップへボタンを消す</label><br>
+            <div id="status"></div><br>
+            <button type="button" id="save">保存</button> 
+            <p class="announcement">※1入学年度・学部はシラバス検索のみに使われます。外部には送信されません。<br>※2設定の反映には何度か再読み込みをする必要があります。<br>また、変更時には予期せぬ不具合が発生する恐れがあります。<br>その場合はキャッシュのクリアをしてから再度読み込みをしてください。<br>
+            <a href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        </div>
+        <script type="text/javascript" src="options.js"></script>
+    </body>
+</html>
