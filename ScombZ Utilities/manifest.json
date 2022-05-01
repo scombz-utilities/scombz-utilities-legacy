@@ -21,6 +21,7 @@
                 "js/syllabus.js",
                 "main.js",
                 "lib/encoding/encoding.min.js",
+                "lib/jquery/jquery-3.6.0.min.js",
                 "js/clickLogin.js",
                 "js/addSubTimetable.js",
                 "js/changeReportBtn.js",
