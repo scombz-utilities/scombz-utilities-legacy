@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base", "helpers:pinGitHubActionDigests"],
+  "labels": ["renovate"],
+  "lockFileMaintenance": {
+    "automerge": true,
+    "enabled": true,
+    "schedule": ["on sunday"]
+  },
+  "schedule": ["on sunday"],
+  "timezone": "Asia/Tokyo"
+}

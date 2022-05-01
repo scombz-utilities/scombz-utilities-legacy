@@ -1,0 +1,35 @@
+{
+  "name": "scombz-utilities",
+  "version": "3.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yudai1204/ScombZ-Utilities.git"
+  },
+  "author": "yudai1204",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yudai1204/ScombZ-Utilities/issues"
+  },
+  "homepage": "https://github.com/yudai1204/ScombZ-Utilities#readme",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "eslint": "8.14.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.0",
+    "eslint-plugin-promise": "6.0.0",
+    "prettier": "2.6.2"
+  },
+  "dependencies": {
+    "encoding-japanese": "2.0.0",
+    "rollup": "2.71.1",
+    "rollup-plugin-chrome-extension": "3.6.8"
+  },
+  "volta": {
+    "node": "16.15.0",
+    "npm": "8.8.0"
+  }
+}
