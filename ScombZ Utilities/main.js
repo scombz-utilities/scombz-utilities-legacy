@@ -40,7 +40,7 @@
             }
             if(document.domain == "syllabus.sic.shibaura-it.ac.jp"){
                 //シラバスだったらsyllabus.jsに飛ばす
-                syllabusLoaded(items.year , items.month, items.fac);
+                syllabusLoaded(items.year , items.fac);
             }
             if(document.domain == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
@@ -77,7 +77,6 @@
                 }
                 //ログアウト画面の変更
                 if(items.changeLogout === true){
-                    console.log("changeLogout");
                     changeLogout();
                 }
                 //画面横幅最大値の変更
