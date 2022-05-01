@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.0.0';
+    const $$version = '3.0.1';
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -28,7 +28,7 @@
         
     }
     /* ローディング画面 */
-    //onLoadingScombZ;
+    onLoading();
     /* メイン処理 */
     document.addEventListener('DOMContentLoaded', function(){
         //chrome Storage API読み込み
@@ -45,6 +45,10 @@
             if(document.domain == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
                 console.log(items);
+                //非表示にしていたものを表示
+                setTimeout(function(){
+                    document.documentElement.style.visibility = '';
+                },300);
                 //ログインボタン自動クリック
                 if(items.clickLoginBtn === true){
                     clickLoginBtn();
@@ -101,3 +105,15 @@
         });
     });
 })();
+function onLoading(){
+    'use strict';
+    console.log('Loading');
+    if(document.domain == "scombz.shibaura-it.ac.jp"){
+        console.log("SCOMBZ");
+        //一度非表示
+        document.documentElement.style.visibility = 'hidden';
+    }else{
+        console.log("NOT SCOMBZ");
+    }
+    return;
+}
