@@ -35,13 +35,13 @@ function syllabusLoaded($settings_year , $settings_fac){
             const $sylSubjLink4 = document.getElementById("hit_4");
             let $suggestSubj = '';
             if ($sylSubjLink2){
-                $suggestSubj += "?scombzredirect=true&sug1l="+$sylSubjLink2.href.substring($sylSubjLink2.href.length - 14)+"&sug1n="+delstrong($sylSubjLink2.innerHTML);
+                $suggestSubj += "?scombzredirect=true&sug1l="+$sylSubjLink2.href.substring($sylSubjLink2.href.length - 14);
             }
             if ($sylSubjLink3){
-                $suggestSubj += "&sug2l="+$sylSubjLink3.href.substring($sylSubjLink3.href.length - 14)+"&sug2n="+delstrong($sylSubjLink3.innerHTML);
+                $suggestSubj += "&sug2l="+$sylSubjLink3.href.substring($sylSubjLink3.href.length - 14);
             }
             if ($sylSubjLink4){
-                $suggestSubj += "&sug3l="+$sylSubjLink4.href.substring($sylSubjLink4.href.length - 14)+"&sug2n="+delstrong($sylSubjLink4.innerHTML);
+                $suggestSubj += "&sug3l="+$sylSubjLink4.href.substring($sylSubjLink4.href.length - 14);
             }
             if($sylSubjLink){
                 console.log("科目ページに遷移します by ID");
@@ -65,27 +65,36 @@ function syllabusLoaded($settings_year , $settings_fac){
     }else if(location.href.includes(`${$settings_year}/${$settings_fac}/`) && location.href.includes("?scombzredirect=true")){
         //もしかしてを…表示する
         /* まだ実装途中 科目名の表示が不適切 */
-        var urlPrm = new Object;
-        var urlSearch = location.search.substring(1).split('&');
-        for(let i=0;urlSearch[i];i++) {
-            var kv = urlSearch[i].split('=');
-            urlPrm[kv[0]]=kv[1];
-        }
-        let $suggest = '<div class="suggest">';
-        if(urlPrm.sug1n && urlPrm.sug1l){
-            $suggest += `<a href="${urlPrm.sug1l}" style="margin:1px 10px;">${urlPrm.sug1n}</a>`;
-        }
-        if(urlPrm.sug2n && urlPrm.sug2l){
-            $suggest += `<a href="${urlPrm.sug2l}" style="margin:1px 10px;">${urlPrm.sug2n}</a>`;
-        }
-        if(urlPrm.sug3n && urlPrm.sug3l){
-            $suggest += `<a href="${urlPrm.sug3l}" style="margin:1px 10px;">${urlPrm.sug3n}</a>`;
-        }
-        $suggest += "</div>";
-        console.log($suggest);
-            console.log("挿入中");
-            document.body.insertAdjacentHTML(`afterBegin`,`<p style="margin-top:50px;">こちらの教科をお探しですか？</p>${$suggest}
-            `);
+        //jQueryを使って実装
+        $(function() {
+            console.log("SUGGESTING");
+            var urlPrm = new Object;
+            var urlSearch = location.search.substring(1).split('&');
+            for(let i=0;urlSearch[i];i++) {
+                var kv = urlSearch[i].split('=');
+                urlPrm[kv[0]]=kv[1];
+            }
+            $.ajax({
+                type: "GET",
+                url: urlPrm.sug1l,
+                dataType:"html"
+            })
+            .then(
+                //通信成功時
+                function(data) {
+                    console.log("読み込み成功");
+                    const sug1n = $(data).find("span.kamoku").html();
+                    let $suggest = '<div class="suggest">';
+                        $suggest += `<a href="${urlPrm.sug1l}" style="margin:1px 10px;">${sug1n}</a>`;
+                        console.log("挿入中");
+                        document.body.insertAdjacentHTML(`afterBegin`,`<p style="margin-top:50px;">こちらの教科をお探しですか？</p>${$suggest}
+                        `);
+                    },
+                function(){
+                    console.log("読み込み失敗");
+                }
+            );
+        });
     }else if(location.href.includes("Matrix")){
         //見やすくする by とくめいっ！
         console.log("シラバスのスタイルを変更します");
