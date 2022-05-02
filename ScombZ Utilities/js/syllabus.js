@@ -59,7 +59,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     </div>
                 `);
                 console.log("類似度: "+ ($score1word-$score2word));
-                if($score1word-$score2word < 3){
+                if($score1word-$score2word < ){
                     const $sylSubjLink3 = document.getElementById("hit_3");
                     if ($sylSubjLink2 && $sylSubjLink3){
                         $autoredirect = false;
