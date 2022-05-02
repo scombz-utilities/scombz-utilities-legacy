@@ -10,7 +10,7 @@ function displaySyllabus(year , fac){
             console.log($courseTitle.innerHTML);
             //科目IDを除外し、科目名だけを抽出
             const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
-            const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
+            let $courseName = $courseTitle.innerHTML.slice($nameInt+1);
             /*検索精度向上アルゴリズム
             科目名に数字が入っていたとき
                 数字はシラバス検索システムではエラーの要因、英数字と日本語の間をスペースで分割することで検索精度向上することが分かった
@@ -18,16 +18,30 @@ function displaySyllabus(year , fac){
             科目名に数字がないとき
                 教科名を+Subject"教科名"で検索に投げることで、教科の名前のみで合致するか検索するようになるためそれを挿入
                 スペースで区切られていたり、数字が入っている科目の場合はこれだと検索できない場合が多かったので数字がないときとは処理を分岐
+            記号が入っている科目
+                スペースに置換
+            特定の科目
+                特定の文字列に変換
             */
+                $courseName = specificCourse($courseName);
+                $courseName = $courseName.replace(/＆/g," ");
+                $courseName = $courseName.replace(/．/g," ");
+                $courseName = $courseName.replace(/・/g," ");
+                $courseName = $courseName.replace(/（/g," ");
+                $courseName = $courseName.replace(/）/g," ");
+                $courseName = $courseName.replace(/／/g," ");
             let $courseNameStr ='';
             let $courseNameStrEnc ='';
             if( $courseName.search(/[０-９]|[0-9]/) > 0){
                 $courseNameStr = $courseName.slice(0,$courseName.search(/[０-９]|[0-9]/));
                 $courseNameStr = $courseNameStr + ' ' +$courseName.slice($courseName.search(/[０-９]|[0-9]/));
                 $courseNameStrEnc = EscapeEUCJP($courseNameStr);
-            }else{
+            }else if(!($courseName.includes(' '))){
                 $courseNameStr = `subject:"${$courseName}"`;
                 $courseNameStrEnc = `%2B${EscapeEUCJP($courseNameStr)}`;
+            }else{
+                $courseNameStr = $courseName;
+                $courseNameStrEnc = EscapeEUCJP($courseNameStr);
             }
             console.log('授業検索名を決定しました['+$courseNameStr+']');
             console.log("EUC-JPに変換中");
@@ -46,4 +60,13 @@ function displaySyllabusError(){
         $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、学年と学部を設定してください</span>`);
     }
     return;
+}
+function specificCourse(courseName) {
+    if (courseName.includes("ＷｒｉｔｉｎｇI")){
+        courseName = courseName.replace("ＷｒｉｔｉｎｇI","Ｗｒｉｔｉｎｇ I");
+    }
+    if (courseName == "Ｈ．Ｃ．インタラクション"){
+        courseName = "インタラクション";
+    }
+    return courseName;
 }

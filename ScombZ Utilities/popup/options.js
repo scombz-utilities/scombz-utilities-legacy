@@ -12,7 +12,7 @@ function save_options() {
     var styleDialog = document.getElementById('styleDialog').checked;
     var syllBtn = document.getElementById('syll_btn').checked;
     var hideCompletedReports = document.getElementById('hideCompletedReports').checked;
-    var changeLogout = document.getElementById('chageLogout').checked;
+    var changeLogout = document.getElementById('changeLogout').checked;
     var setMaxWidth = document.getElementById('setMaxWidth').checked;
     var pageTopBtn = document.getElementById('pageTopBtn').checked;
     chrome.storage.local.set({
@@ -33,8 +33,7 @@ function save_options() {
         pageTopBtn : pageTopBtn
     }, function() {
         // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = '保存されました';
+        console.log("settings changed");
     });
     }
     
@@ -77,5 +76,13 @@ function save_options() {
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
-    document.getElementById('save').addEventListener('click',
-        save_options);
+    //チェックボックスが更新されたら保存
+    const $checkboxList= document.querySelectorAll("input[type='checkbox']");
+    for(let $checkbox of $checkboxList){
+        $checkbox.addEventListener('change', save_options);
+    }
+    //プルダウンメニューが更新されたら保存
+    const $menuList= document.querySelectorAll("select");
+    for(let $menu of $menuList){
+        $menu.addEventListener('change', save_options);
+    }
