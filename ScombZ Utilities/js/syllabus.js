@@ -38,14 +38,18 @@ function syllabusLoaded($settings_year , $settings_fac){
                     .gakkaname{
                         font-weight:bold;
                         font-size:80%;
+                        background:#eee;
                         border:1px solid #ccc;
                         width:fit-content;
-                        padding:2px;
-                        border-radius:2px;
+                        padding:4px;
+                        border-radius:3px;
                         margin-right:2px;
+                        margin-bottom:3px;
                         display:inline-block;
                     }
                     .gakkaname-area{
+                        padding-top:5px;
+                        border-top:1px solid #ccc;
                         width:100%;
                     }
                 </style>
