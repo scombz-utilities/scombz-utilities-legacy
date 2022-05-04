@@ -59,7 +59,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     </div>
                 `);
                 console.log("類似度: "+ ($score1word-$score2word));
-                if($score1word-$score2word < 3){
+                if($score1word-$score2word < 6){
                     const $sylSubjLink3 = document.getElementById("hit_3");
                     if ($sylSubjLink2 && $sylSubjLink3){
                         $autoredirect = false;
@@ -81,7 +81,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     //Ajax通信
                     const hitarea = document.querySelector(".namazu-result-header").innerHTML.indexOf("<!-- HIT -->");
                     const the_number_of_hit = Number(document.querySelector(".namazu-result-header").innerHTML.slice(hitarea+12 , hitarea+17).replace(/[^0-9]/g,''));
-                    for(let i = 0; i < 20 && i < the_number_of_hit ; i++){
+                    for(let i = 0; i < 20 && i < the_number_of_hit+1 ; i++){
                         let link = $sylSubDDTag[22+i*2].innerHTML;
                         getDepartment(link,i+1);
                     }
@@ -129,6 +129,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     `);
                     window.location.href = "#searchResult";
                 }
+                console.log("redirect:"+$autoredirect);
             }
     }else if(location.href.includes(`${$settings_year}/${$settings_fac}/`) && location.href.includes("?suggesting=true")){
         //もしかしてを…表示する
