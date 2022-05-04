@@ -27,7 +27,7 @@
                 "js/changeReportBtn.js",
                 "js/eucjp.js",
                 "js/exitSidemenu.js",
-                "js/hideCompletedTask.js",
+                "js/hideCompletedReports.js",
                 "js/loading.js",
                 "js/styleDialog.js",
                 "js/styleExam.js",

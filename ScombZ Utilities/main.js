@@ -18,7 +18,7 @@
             styleSidemenu: true,        //サイドメニューのスタイル変更
             styleExam: true,            //テストのスタイル変更
             addSubTimetable: true,      //メニューを展開したときの時間割
-            hideCompletedTask: true,    //完了したレポートをカレンダーに表示しない
+            hideCompletedReports: true, //完了したレポートをカレンダーに表示しない
             styleDialog: true,          //ダイアログを大きくする
             changeReportBtn: true,      //レポート提出ボタンの変更
             syllBtn: true,              //シラバスリンクボタンを表示
@@ -69,7 +69,7 @@
                     styleExam();
                 }
                 //完了したレポートをカレンダーに表示しない
-                if(items.hideCompletedTask === true){
+                if(items.hideCompletedReports === true){
                     hideCompletedReports();
                 }
                 //ダイアログを大きくする
