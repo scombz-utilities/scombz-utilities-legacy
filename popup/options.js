@@ -9,7 +9,7 @@ function save_options() {
     var exam = document.getElementById('exam').checked;
     var additional_lms = document.getElementById('additional_lms').checked;
     var changeReportBtn = document.getElementById('changeReportBtn').checked;
-    var styleDialog = document.getElementById('styleDialog').checked;
+    //var styleDialog = document.getElementById('styleDialog').checked;
     var syllBtn = document.getElementById('syll_btn').checked;
     var hideCompletedReports = document.getElementById('hideCompletedReports').checked;
     var changeLogout = document.getElementById('changeLogout').checked;
@@ -25,7 +25,7 @@ function save_options() {
         styleExam : exam,
         addSubTimetable : additional_lms,
         changeReportBtn : changeReportBtn,
-        styleDialog : styleDialog,
+        //styleDialog : styleDialog,
         hideCompletedReports : hideCompletedReports,
         syllBtn : syllBtn,
         changeLogout : changeLogout,
@@ -51,7 +51,7 @@ function save_options() {
         styleExam: true,
         addSubTimetable: true,
         changeReportBtn: true,
-        styleDialog: true,
+        //styleDialog: true,
         hideCompletedReports: true,
         syllBtn: true,
         changeLogout: true,
@@ -67,7 +67,7 @@ function save_options() {
         document.getElementById('exam').checked = items.styleExam;
         document.getElementById('additional_lms').checked = items.addSubTimetable;
         document.getElementById('changeReportBtn').checked = items.changeReportBtn;
-        document.getElementById('styleDialog').checked = items.styleDialog;
+        //document.getElementById('styleDialog').checked = items.styleDialog;
         document.getElementById('hideCompletedReports').checked = items.hideCompletedReports;
         document.getElementById('syll_btn').checked = items.syllBtn;
         document.getElementById('changeLogout').checked = items.changeLogout;
