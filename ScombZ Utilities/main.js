@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.0.4';
+    const $$version = '3.1.0';
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -22,9 +22,10 @@
             styleDialog: true,          //ダイアログを大きくする
             changeReportBtn: true,      //レポート提出ボタンの変更
             syllBtn: true,              //シラバスリンクボタンを表示
-            changeLogout: true,          //ログアウト画面変更
+            changeLogout: true,         //ログアウト画面変更
             setMaxWidth: true,          //科目ページに最大横幅を設定
-            pageTopBtn: true            //ページトップへ行くボタンを消すかどうか
+            pageTopBtn: true,           //ページトップへ行くボタンを消すかどうか
+            mouseDown: true             //ホイールクリックをできるようにする
         
     }
     /* ローディング画面 */
@@ -90,6 +91,10 @@
                 //ページトップボタンの表示有無
                 if(items.pageTopBtn === true){
                     remomvePageTop();
+                }
+                //ホイールクリックをできる機能
+                if(items.mouseDown === true){
+                mouseEvents();
                 }
                 //シラバスリンクボタンを表示
                 if(items.syllBtn === true){
