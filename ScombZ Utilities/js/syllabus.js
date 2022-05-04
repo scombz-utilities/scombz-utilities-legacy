@@ -59,7 +59,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     </div>
                 `);
                 console.log("類似度: "+ ($score1word-$score2word));
-                if($score1word-$score2word < ){
+                if($score1word-$score2word < 6){
                     const $sylSubjLink3 = document.getElementById("hit_3");
                     if ($sylSubjLink2 && $sylSubjLink3){
                         $autoredirect = false;
@@ -129,6 +129,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                     `);
                     window.location.href = "#searchResult";
                 }
+                console.log("redirect:"+$autoredirect);
             }
     }else if(location.href.includes(`${$settings_year}/${$settings_fac}/`) && location.href.includes("?suggesting=true")){
         //もしかしてを…表示する
