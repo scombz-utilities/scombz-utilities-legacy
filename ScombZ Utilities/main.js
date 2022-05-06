@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.1.1';
+    const $$version = '3.1.2';
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -34,6 +34,10 @@
     document.addEventListener('DOMContentLoaded', function(){
         //chrome Storage API読み込み
         chrome.storage.local.get(defaults, (items) => {
+            if(document.domain == "scomb.shibaura-it.ac.jp"){
+                console.log("旧Scomb");
+                scombLogin();
+            }
             if(document.domain == "adfs.sic.shibaura-it.ac.jp"){
                 console.log("adfs");
                 //ADFSだったらadfs.jsに飛ばす
