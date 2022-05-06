@@ -1,7 +1,7 @@
 /* ScombZ Utilities */
 /* oldScomb.js */
 function scombLogin(){
-    if(document.href == "https://scomb.shibaura-it.ac.jp/portal/index"){
+    if(.href == "https://scomb.shibaura-it.ac.jp/portal/index"){
         const $scombLoginBtns = document.querySelectorAll("strong");
         for(const $scombLoginBtn of $scombLoginBtns){
             if($scombLoginBtn.innerHTML.includes("ScombZ")){
