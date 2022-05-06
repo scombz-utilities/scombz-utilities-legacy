@@ -200,7 +200,7 @@ function displaySubTimetable($$version){
 
             document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-            <p class="usFooter">ScombZ Utilities ver.${$$version}<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
+            <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             `+$subTimetable);
         }
     });
@@ -210,8 +210,8 @@ function displaySubTimetable($$version){
 function displayGrayLayer($$version){
     'use strict';
     document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
-                    <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-                    <p class="usFooter">ScombZ Utilities ver.${$$version}<br>presented by <a style="color:#000000;" href="https://twitter.com/yudai1204" target="_blank" rel="noopener noreferrer">@yudai1204</a></p>
-                    `);
+            <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
+            <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            `);
     return;
 }
