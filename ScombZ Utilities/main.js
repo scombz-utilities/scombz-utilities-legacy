@@ -50,14 +50,14 @@
             if(document.domain == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
                 console.log(items);
-                //帰ってきて芝猫
-                if(items.clickLoginBtn !== true){
-                    topShibaneko();
-                }
                 //非表示にしていたものを表示
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
                 },300);
+                //帰ってきて芝猫
+                if(items.clickLoginBtn !== true){
+                    topShibaneko();
+                }
                 //ログインボタン自動クリック
                 if(items.clickLoginBtn === true){
                     clickLoginBtn();
