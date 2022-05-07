@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.1.2';
+    const $$version = '3.1.3';
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -50,6 +50,10 @@
             if(document.domain == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
                 console.log(items);
+                //帰ってきて芝猫
+                if(items.clickLoginBtn !== true){
+                    topShibaneko();
+                }
                 //非表示にしていたものを表示
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
