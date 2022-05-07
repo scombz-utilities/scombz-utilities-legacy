@@ -67,3 +67,14 @@ function remomvePageTop(){
     }
     return;
 }
+function topShibaneko(){
+    if(location.href=="https://scombz.shibaura-it.ac.jp/login"){
+        const $topLogo = document.querySelector(".sitelogo");
+        if($topLogo){
+            console.log("にゃーん");
+            $topLogo.insertAdjacentHTML("beforeBegin",`
+            <div style="text-align:center;"><img src="https://scomb.shibaura-it.ac.jp/theme1/skin/common/img/007.jpg" alt="slide1" style="width:960px;height:153px;"></div>
+            `);
+        }
+    }
+}
