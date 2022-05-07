@@ -111,7 +111,7 @@ function styleSidemenu(){
             .pagetop-head{
                 top:0;
                 left:195px;
-                width:calc(100vw - 195px);
+                width:calc(100% - 195px);
                 height:100%;
                 position:absolute;
                 display:block;
@@ -142,7 +142,7 @@ function styleSidemenu(){
         $pageMain.style.position = ('absolute');
         $pageMain.style.top = ('0');
         $pageMain.style.left = ('0');
-        $pageMain.style.width = '100vw';
+        $pageMain.style.width = '100%';
         $pageMain.style.minWidth = ('371px');
     //サイドメニューをモノトーンに
     const $menuIconList = document.querySelectorAll('.sidemenu-icon');
