@@ -69,8 +69,9 @@ function createTimeTempBtn(){
                 width:100%;
             }
             .min-slider-bar{
-                margin:10px 5%;
+                margin:10px 25px;
                 width:90%;
+                max-width:500px;
             }
             </style>
             <div class="minBtnArea">
