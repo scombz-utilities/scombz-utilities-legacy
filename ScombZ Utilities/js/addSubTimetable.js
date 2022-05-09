@@ -2,9 +2,8 @@
 /* addSubTimetable.js */
 
 //LMS取得&表示
-function subTimetable($timetableDisplay,$$version){
+function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
     'use strict';
-    const $tasklistDisplay = true;
     if(document.getElementById('pageMain') === null){
         return;
     }
@@ -46,6 +45,7 @@ function getSubTimetable(){
     if($courseList[0]){
         //JSON生成
         const $timetableData = [];
+        let futei = 0;
         for(const $course of $courseList) {
             const $timetableClassData={};
             for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
@@ -57,6 +57,7 @@ function getSubTimetable(){
                 if($yobicolNum == 6){
                     $timetableClassData.day = -1;
                     $timetableClassData.time = -1; // 曜日時限不定履修
+                    futei++;
                 }
             }
             $timetableClassData.id = $course.getAttribute("id");
@@ -79,7 +80,8 @@ function getSubTimetable(){
         });
         console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
         chrome.storage.local.set({
-            timetableData : encodeURIComponent(JSON.stringify($timetableData))
+            timetableData : encodeURIComponent(JSON.stringify($timetableData)),
+            specialSubj : futei
         },function(){
             console.log('ChromeLocalStorageに保存しました');
             }
@@ -97,7 +99,7 @@ function displaySubTimetable($$version){
     },function(item){
         if(item.timetableData == null){
             console.log('時間割情報が存在しません');
-            displayGrayLayer();
+            displayGrayLayer($$version);
         }else{
             const $timetableDataStr = decodeURIComponent(item.timetableData);
             console.log('ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします');
@@ -225,12 +227,11 @@ function displayGrayLayer($$version){
 function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
         TaskGetTime: null,
-        tasklistData: null
+        tasklistData: null,
+        specialSubj: 0
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
-            if(items.tasklistData == "[]"){
-                return;
-            }
+            
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
             //JSONファイル展開
             console.log(decodeURIComponent(items.tasklistData));
@@ -239,13 +240,23 @@ function displayTaskListsOnGrayLayer(){
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
             let timetableHeight = 0;
             if($subTimetable[0]){
-                //timetableHeight = $subTimetable[0].clientHeight;
                 timetableHeight = 40;
+                if(Number(items.specialSubj) > 0){
+                    timetableHeight += 10*Number(items.specialSubj);
+                }
             }
             //メイン生成部分
             let kadaiListHTML="";
+            if(!$tasklistObj[0]){
+                return;
+            }
             for(let i=0; $tasklistObj[i] ;i++){
-                kadaiListHTML += `<div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div><div class="subk-link"><a href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div><div class="subk-deadline">${$tasklistObj[i].deadline}</div></div>`;
+                kadaiListHTML += `
+                <div class="subk-column">
+                    <div class="subk-subjname">${$tasklistObj[i].course}</div>
+                    <div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div>
+                    <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
+                </div>`;
             }
             const lastgettime =  `${new Date(items.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
             //合体させてHTMLをつくる
@@ -254,7 +265,7 @@ function displayTaskListsOnGrayLayer(){
                 #subTaskList{
                     top:${timetableHeight}vh;
                     background :rgba(255,255,255,0.5);
-                    width: 40vw;
+                    width: 60vw;
                     min-width: 500px;
                     padding: 2px;
                 }
@@ -271,9 +282,10 @@ function displayTaskListsOnGrayLayer(){
                     padding:4px;
                     background:#fff;
                     border-bottom:2px solid #ccc;
-                    font-size:14px;
+                    font-size:15px;
                     padding-left:10px;
                     font-weight:bold;
+                    height:23px;
                 }
                 .subk-column{
                     height:25px;
@@ -286,16 +298,27 @@ function displayTaskListsOnGrayLayer(){
                     background:#FFFAF0;
                 }
                 .subk-subjname{
-                    font-size:10px;
+                    font-size:12px;
                     padding:2px;
                     border:1px solid #ccc;
                     float:left;
                 }
-                .subk-link{
+                div.subk-link{
+                    padding:2px;
+                    font-size:14px;
                     float:left;
                     margin-left:30px;
                 }
+                div.subk-link:hover{
+                    background:rgba(0,0,100,0.1);
+                }
+                a.subk-link{
+                    color:#111;
+                }
                 .subk-deadline{
+                    margin-top:2px;
+                    margin-right:4px;
+                    font-size:14px;
                     float:right;
                 }
             </style>
