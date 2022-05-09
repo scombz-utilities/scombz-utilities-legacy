@@ -250,7 +250,7 @@ function displayTaskListsOnGrayLayer(){
             if(!$tasklistObj[0]){
                 return;
             }
-            for(let i=0; $tasklistObj[i] ;i++){
+            for(let i=0; $tasklistObj[i] && i<20 ;i++){
                 kadaiListHTML += `
                 <div class="subk-column">
                     <div class="subk-subjname">${$tasklistObj[i].course}</div>
