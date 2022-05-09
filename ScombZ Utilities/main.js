@@ -3,7 +3,8 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.1.3';
+    const $$version = '3.2.0';          //バージョン
+    const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -54,6 +55,8 @@
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
                 },300);
+                //課題一覧取得
+                getTaskLists($$reacquisitionMin);
                 //帰ってきて芝猫
                 if(items.clickLoginBtn !== true){
                     topShibaneko();
@@ -69,7 +72,7 @@
                 //サイドメニューのスタイル変更
                 if(items.styleSidemenu === true){
                     styleSidemenu();
-                //メニューを展開したときの時間割 (オフだった場合はグレーレイヤーだけ表示)
+                //メニューを展開したときの時間割 (オフだった場合はグレーレイヤーだけ表示) , メニュー横に課題一覧を表示
                     subTimetable(items.addSubTimetable , $$version);
                 }
                 //テストのスタイル変更

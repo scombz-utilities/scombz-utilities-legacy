@@ -133,7 +133,6 @@ function syllabusLoaded($settings_year , $settings_fac){
             }
     }else if(location.href.includes(`${$settings_year}/${$settings_fac}/`) && location.href.includes("?suggesting=true")){
         //もしかしてを…表示する
-        /* まだ実装途中 科目名の表示が不適切 */
         //jQueryを使って実装
         $(function() {
             console.log("SUGGESTING");

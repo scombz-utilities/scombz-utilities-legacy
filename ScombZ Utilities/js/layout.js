@@ -59,6 +59,7 @@ function maxWidthOnSubjPage(){
     }
     return;
 }
+
 function remomvePageTop(){
     //ページトップボタン
     const $pagetopBtn = document.querySelector('.page-top-btn');
