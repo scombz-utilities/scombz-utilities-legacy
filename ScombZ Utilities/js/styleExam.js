@@ -4,7 +4,6 @@
 function styleExam(){
     'use strict';
     if (location.href.includes('examination') && document.body.clientWidth > 480){
-        if(s2b($settings_exam)){
             console.log('テスト改善を実行します');
             const $exa_contsize = document.getElementById('pageContents');
             const $exa_examImgList = document.querySelectorAll('.downloadFile');
@@ -39,7 +38,6 @@ function styleExam(){
                 }
             }
             console.log('テスト改善の実行が完了しました');
-        }
     }
     return;
 }

@@ -16,6 +16,7 @@ function save_options() {
     var setMaxWidth = document.getElementById('setMaxWidth').checked;
     var pageTopBtn = document.getElementById('pageTopBtn').checked;
     var mouseDown = document.getElementById('mouseDown').checked;
+    var tasklistDisplay = document.getElementById('tasklistDisplay').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -32,7 +33,8 @@ function save_options() {
         changeLogout : changeLogout,
         setMaxWidth : setMaxWidth,
         pageTopBtn : pageTopBtn,
-        mouseDown : mouseDown
+        mouseDown : mouseDown,
+        tasklistDisplay : tasklistDisplay
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -59,7 +61,8 @@ function save_options() {
         changeLogout: true,
         setMaxWidth: true,
         pageTopBtn : true,
-        mouseDown: true
+        mouseDown: true,
+        tasklistDisplay: true
     }, function(items) {
         document.getElementById('year').value = items.year;
         document.getElementById('fac').value = items.fac;
@@ -77,6 +80,7 @@ function save_options() {
         document.getElementById('setMaxWidth').checked = items.setMaxWidth;
         document.getElementById('pageTopBtn').checked = items.pageTopBtn;
         document.getElementById('mouseDown').checked = items.mouseDown;
+        document.getElementById('tasklistDisplay').checked = items.tasklistDisplay;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);

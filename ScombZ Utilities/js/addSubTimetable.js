@@ -2,7 +2,7 @@
 /* addSubTimetable.js */
 
 //LMS取得&表示
-function subTimetable($timetableDisplay,$$version){
+function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
     'use strict';
     if(document.getElementById('pageMain') === null){
         return;
@@ -18,6 +18,11 @@ function subTimetable($timetableDisplay,$$version){
         console.log('グレーレイヤーを追加します');
         displayGrayLayer($$version);
         console.log('グレーレイヤーを追加しました');
+    }
+    if( $tasklistDisplay === true ){
+        console.log('メニュー課題表示を開始します');
+        displayTaskListsOnGrayLayer();
+        console.log('メニュー横に課題を表示しました');
     }
     return;
 }
@@ -40,6 +45,7 @@ function getSubTimetable(){
     if($courseList[0]){
         //JSON生成
         const $timetableData = [];
+        let futei = 0;
         for(const $course of $courseList) {
             const $timetableClassData={};
             for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
@@ -51,6 +57,7 @@ function getSubTimetable(){
                 if($yobicolNum == 6){
                     $timetableClassData.day = -1;
                     $timetableClassData.time = -1; // 曜日時限不定履修
+                    futei++;
                 }
             }
             $timetableClassData.id = $course.getAttribute("id");
@@ -73,7 +80,8 @@ function getSubTimetable(){
         });
         console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
         chrome.storage.local.set({
-            timetableData : encodeURIComponent(JSON.stringify($timetableData))
+            timetableData : encodeURIComponent(JSON.stringify($timetableData)),
+            specialSubj : futei
         },function(){
             console.log('ChromeLocalStorageに保存しました');
             }
@@ -91,7 +99,7 @@ function displaySubTimetable($$version){
     },function(item){
         if(item.timetableData == null){
             console.log('時間割情報が存在しません');
-            displayGrayLayer();
+            displayGrayLayer($$version);
         }else{
             const $timetableDataStr = decodeURIComponent(item.timetableData);
             console.log('ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします');
@@ -214,4 +222,114 @@ function displayGrayLayer($$version){
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             `);
     return;
+}
+//課題一覧の表示
+function displayTaskListsOnGrayLayer(){
+    chrome.storage.local.get({
+        TaskGetTime: null,
+        tasklistData: null,
+        specialSubj: 0
+    },function(items){
+        if(items.TaskGetTime && items.tasklistData){
+            
+            console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
+            //JSONファイル展開
+            console.log(decodeURIComponent(items.tasklistData));
+            const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
+            //JSONから生成
+            const $subTimetable = document.getElementsByClassName("subtimetableBody");
+            let timetableHeight = 0;
+            if($subTimetable[0]){
+                timetableHeight = 40;
+                if(Number(items.specialSubj) > 0){
+                    timetableHeight += 10*Number(items.specialSubj);
+                }
+            }
+            //メイン生成部分
+            let kadaiListHTML="";
+            if(!$tasklistObj[0]){
+                return;
+            }
+            for(let i=0; $tasklistObj[i] && i<20 ;i++){
+                kadaiListHTML += `
+                <div class="subk-column">
+                    <div class="subk-subjname">${$tasklistObj[i].course}</div>
+                    <div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div>
+                    <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
+                </div>`;
+            }
+            const lastgettime =  `${new Date(items.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
+            //合体させてHTMLをつくる
+            let kadaiHTML =`
+            <style>
+                #subTaskList{
+                    top:${timetableHeight}vh;
+                    background :rgba(255,255,255,0.5);
+                    width: 60vw;
+                    min-width: 500px;
+                    padding: 2px;
+                }
+                .task-get-time{
+                    font-weight: normal;
+                    font-size: 80%;
+                    float:right;
+                }
+                .subk-box{
+                    margin:0;
+                }
+                .subk-head{
+                    margin:0;
+                    padding:4px;
+                    background:#fff;
+                    border-bottom:2px solid #ccc;
+                    font-size:15px;
+                    padding-left:10px;
+                    font-weight:bold;
+                    height:23px;
+                }
+                .subk-column{
+                    height:25px;
+                    padding:2px;
+                    margin:0;
+                    background:#fff;
+                    border-bottom:1px solid #ccc;
+                }
+                .subk-column:nth-child(2n){
+                    background:#FFFAF0;
+                }
+                .subk-subjname{
+                    font-size:12px;
+                    padding:2px;
+                    border:1px solid #ccc;
+                    float:left;
+                }
+                div.subk-link{
+                    padding:2px;
+                    font-size:14px;
+                    float:left;
+                    margin-left:30px;
+                }
+                div.subk-link:hover{
+                    background:rgba(0,0,100,0.1);
+                }
+                a.subk-link{
+                    color:#111;
+                }
+                .subk-deadline{
+                    margin-top:2px;
+                    margin-right:4px;
+                    font-size:14px;
+                    float:right;
+                }
+            </style>
+            <div class="subtimetableBody" id="subTaskList">
+            <div class="subk-box">
+                <div class="subk-head">課題一覧<span class="task-get-time">最終更新:${lastgettime}</span></div>
+                ${kadaiListHTML}
+            </div>
+            </div>
+            `;
+            document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+        }
+    });
 }

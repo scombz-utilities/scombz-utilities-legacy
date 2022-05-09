@@ -3,7 +3,8 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.1.3';
+    const $$version = '3.2.0';          //バージョン
+    const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -25,7 +26,8 @@
             changeLogout: true,         //ログアウト画面変更
             setMaxWidth: true,          //科目ページに最大横幅を設定
             pageTopBtn: true,           //ページトップへ行くボタンを消すかどうか
-            mouseDown: true             //ホイールクリックをできるようにする
+            mouseDown: true,            //ホイールクリックをできるようにする
+            tasklistDisplay: true       //メニュー横課題表示
         
     }
     /* ローディング画面 */
@@ -69,9 +71,13 @@
                 //サイドメニューのスタイル変更
                 if(items.styleSidemenu === true){
                     styleSidemenu();
-                //メニューを展開したときの時間割 (オフだった場合はグレーレイヤーだけ表示)
-                    subTimetable(items.addSubTimetable , $$version);
+                //メニューを展開したときの時間割 (オフだった場合はグレーレイヤーだけ表示) , メニュー横に課題一覧を表示
+                    subTimetable(items.addSubTimetable , items.tasklistDisplay , $$version);
                 }
+                //課題一覧取得
+                if( items.tasklistDisplay === true ){
+                getTaskLists($$reacquisitionMin);
+                };
                 //テストのスタイル変更
                 if(items.styleExam === true){
                     styleExam();

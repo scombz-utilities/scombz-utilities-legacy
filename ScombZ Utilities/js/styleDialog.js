@@ -2,6 +2,7 @@
 /* styleDialog.js */
 function styleDialog(){
     'use strict';
+    //お知らせダイアログ処理
     const dialogObserver = new MutationObserver((mutations) => {
         const $infoDialog = document.querySelector('[aria-describedby="infoDetailView"]');
         const $progressDialog = document.querySelector('[aria-describedby="progress_dialog"]');

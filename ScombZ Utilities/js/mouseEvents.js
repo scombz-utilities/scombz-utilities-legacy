@@ -3,10 +3,14 @@
 function mouseEvents(){
     'use strict';
     const dlLinks = document.querySelectorAll(".material-file-name");
+    const dlFiles = document.querySelectorAll(".downloadFile");
     const LMSLinks = document.querySelectorAll(".timetable-course-top-btn");
     const courseInfo = document.querySelectorAll(".course-view-information-name");
     if(dlLinks){
         mousedownClick(dlLinks);
+    }
+    if(dlFiles){
+        mousedownClick(dlFiles);
     }
     if(courseInfo){
         mousedownClick(courseInfo);

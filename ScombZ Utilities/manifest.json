@@ -1,7 +1,7 @@
 {
     "manifest_version":3 ,
     "name": "ScombZ Utilities",
-    "version": "3.1.3",
+    "version": "3.2.0",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -35,7 +35,8 @@
                 "js/syllBtn.js",
                 "js/layout.js",
                 "js/mouseEvents.js",
-                "js/oldScomb.js"
+                "js/oldScomb.js",
+                "js/getTaskLists.js"
             ]
         }
     ],
