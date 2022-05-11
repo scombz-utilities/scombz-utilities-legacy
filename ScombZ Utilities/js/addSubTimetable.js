@@ -235,10 +235,13 @@ function displayTaskListsOnGrayLayer(){
             //JSONから生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
             let timetableHeight = 5;
+            let timetableminHeight = 0;
             if($subTimetable[0]){
                 timetableHeight = 40;
+                timetableminHeight = 330;
                 if(Number(items.specialSubj) > 0){
                     timetableHeight += 10*Number(items.specialSubj);
+                    timetableminHeight += 60*Number(items.specialSubj);
                 }
             }
             //メイン生成部分
@@ -259,7 +262,7 @@ function displayTaskListsOnGrayLayer(){
             let kadaiHTML =`
             <style>
                 #subTaskList{
-                    top:${timetableHeight}vh;
+                    top:max(${timetableHeight}vh,${timetableminHeight}px);
                     background :rgba(255,255,255,0.5);
                     width: 60vw;
                     min-width: 500px;

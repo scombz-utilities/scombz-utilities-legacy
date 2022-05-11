@@ -349,6 +349,8 @@ h3 {
 .wrap {
     margin: 2em 0;
     padding: 0;
+    max-width: 760px;
+    user-select: none;
 }
 
 .wrap label {
@@ -364,16 +366,29 @@ h3 {
     display: none;
 }
 
-.wrap .content {
+.wrap .wraped-content {
     height: 0;
-    padding: 0;
     overflow: hidden;
     margin-bottom: 10px;
     border: 1px solid #ccc;
 }
-
-.switch:checked+.content {
+.wraped-content img{
+    box-shadow: 0 0 4px #666;
+    max-width: 740px;
+}
+.wrap-switch:checked+.wraped-content {
     height: auto;
     padding: 8px;
     background: #f7f7f7;
+}
+
+.imgexp{
+    margin: 0;
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.links{
+    color:#444;
+    text-decoration: underline;
 }
