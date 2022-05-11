@@ -32,7 +32,7 @@
             <hr>
             <div class="setting-column">
                 <h3>入学年度と学部の設定</h3>
-                <p class="explains">入学年度と、学部を設定してください。<br>この情報は、シラバスの絞り込みにのみ利用され、それ以外の目的には利用されません。</p>
+                <div class="explains">入学年度と、学部を設定してください。<br>この情報は、シラバスの絞り込みにのみ利用され、それ以外の目的には利用されません。</div>
                 <div class="input-box">
                     <span class="switch-explain">入学年度<br></span>
                     <select id="year">
@@ -68,55 +68,88 @@
                 </div>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="login_auto"><label class="ItemBox-CheckBox-Label" for="login_auto"></label>ログインボタン自動クリック
+                <h3>ログインボタン自動クリック</h3>
+                <input class="ItemBox-CheckBox-Input"  type="checkbox" id="login_auto"><label class="ItemBox-CheckBox-Label" for="login_auto"></label>
+                <div class="explains">「学生ログイン」ボタンを自動でクリックします。<br>ログイン状態でないときにアクセスすると、すぐにパスワード入力ダイアログが表示されます。</div>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="adfs_auto"><label class="ItemBox-CheckBox-Label" for="adfs_auto"></label>ADFSスキップ自動クリック
+                <h3>ADFS自動クリック</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="adfs_auto"><label class="ItemBox-CheckBox-Label" for="adfs_auto"></label>
+                <div class="explains">ADFS二段階認証確認画面の次へボタンを自動でクリックします。<br>ログイン後、自動でScombZの画面に入れます。<br>※スマートフォンを利用した二段階認証を利用している方はご利用になれません。</div>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="menu_exit_auto"><label class="ItemBox-CheckBox-Label" for="menu_exit_auto"></label>左メニューを自動で閉じる
+                <h3>左メニューを自動で閉じる</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="menu_exit_auto"><label class="ItemBox-CheckBox-Label" for="menu_exit_auto"></label>
+                <div class="explains">ScombZの左側に表示されるサイドメニューを、常に閉じた状態でページ読み込みします。<br>メニューボタンを押すことで展開できます。<br>左メニュースタイル変更をオンにしている場合は、本項目もオンにすることが推奨されます。</div>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="submenu"><label class="ItemBox-CheckBox-Label" for="submenu"></label>左メニューのスタイル変更
+                <h3>左メニューのスタイル変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="submenu"><label class="ItemBox-CheckBox-Label" for="submenu"></label>
+                <div class="explains">ScombZの左側に表示されるサイドメニューを、ユーザビリティに配慮したスタイルに変更します。<br>
+                    <div class="wrap">
+                        <label for="label1">▼ クリックで展開1</label>
+                        <input type="checkbox" id="label1" class="switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="content">
+                            <p>
+                                hogehoge
+                            </p>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="additional_lms"><label class="ItemBox-CheckBox-Label" for="additional_lms"></label>メニュー横の時間割表示(※左メニュースタイル変更必須)
+                <h3>メニュー横の時間割表示(※左メニュースタイル変更必須)</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="additional_lms"><label class="ItemBox-CheckBox-Label" for="additional_lms"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="hideCompletedReports"><label class="ItemBox-CheckBox-Label" for="hideCompletedReports"></label>完了したレポートをカレンダーに表示しない
+                <h3>完了したレポートをカレンダーに表示しない</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="hideCompletedReports"><label class="ItemBox-CheckBox-Label" for="hideCompletedReports"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleDialog"><label class="ItemBox-CheckBox-Label" for="styleDialog"></label>ダイアログを大きくする
+                <h3>ダイアログを大きくする</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleDialog"><label class="ItemBox-CheckBox-Label" for="styleDialog"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="syll_btn"><label class="ItemBox-CheckBox-Label" for="syll_btn"></label>シラバスリンクボタンの追加
+                <h3>シラバスリンクボタンの追加</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="syll_btn"><label class="ItemBox-CheckBox-Label" for="syll_btn"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeReportBtn"><label class="ItemBox-CheckBox-Label" for="changeReportBtn"></label>レポート提出ボタンの変更
+                <h3>レポート提出ボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeReportBtn"><label class="ItemBox-CheckBox-Label" for="changeReportBtn"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeLogout"><label class="ItemBox-CheckBox-Label" for="changeLogout"></label>ログアウトボタンの変更
+                <h3>ログアウトボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeLogout"><label class="ItemBox-CheckBox-Label" for="changeLogout"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="setMaxWidth"><label class="ItemBox-CheckBox-Label" for="setMaxWidth"></label>科目ページ最大横幅を設定
+                <h3>科目ページ最大横幅を設定</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="setMaxWidth"><label class="ItemBox-CheckBox-Label" for="setMaxWidth"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pageTopBtn"><label class="ItemBox-CheckBox-Label" for="pageTopBtn"></label>トップへボタンを消す
+                <h3>トップへボタンを消す</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pageTopBtn"><label class="ItemBox-CheckBox-Label" for="pageTopBtn"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="mouseDown"><label class="ItemBox-CheckBox-Label" for="mouseDown"></label>ホイールクリックで新規タブで開けるようにする
+                <h3>ホイールクリックで新規タブで開けるようにする</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="mouseDown"><label class="ItemBox-CheckBox-Label" for="mouseDown"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="tasklistDisplay"><label class="ItemBox-CheckBox-Label" for="tasklistDisplay"></label>メニュー横の課題表示
+                <h3>メニュー横の課題表示</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="tasklistDisplay"><label class="ItemBox-CheckBox-Label" for="tasklistDisplay"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleNowPeriod"><label class="ItemBox-CheckBox-Label" for="styleNowPeriod"></label>現在のコマを目立たせる
+                <h3>現在のコマを目立たせる</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleNowPeriod"><label class="ItemBox-CheckBox-Label" for="styleNowPeriod"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>テストのボタンの変更
+                <h3>テストのボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>
             </div>
             <div class="setting-column">
-                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>テストの画像スタイル変更(試験的)
+                <h3>テストの画像スタイル変更(試験的)</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>
             </div>
             
             <br>

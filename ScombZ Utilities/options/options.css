@@ -105,7 +105,7 @@ a:hover {
     width: 100%;
     list-style: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
-    border-top: 1px solid rgba(0,0,0, .2);
+    border-top: 1px solid rgba(0, 0, 0, .2);
 }
 
 .nav-collapse li {
@@ -207,7 +207,6 @@ a:hover {
         text-indent: 0;
         text-align: center;
         line-height: 65px;
-        speak: none;
         width: 100%;
         top: 0;
         left: 0;
@@ -249,69 +248,88 @@ a:hover {
         left: 18em
     }
 }
-.logo{
+
+.logo {
     object-fit: contain;
-    width: calc(100vw - 400px) ;
+    width: calc(100vw - 400px);
     max-width: 500px;
     border: 1px solid #ccc;
     margin-bottom: 15px;
 }
-.pagebody{
+
+.pagebody {
     min-width: 650px;
 }
-.home-content{
-    padding:50px 20px;
-    text-align:center;
-    border:1px solid #ccc;
+
+.home-content {
+    padding: 50px 20px;
+    text-align: center;
+    border: 1px solid #ccc;
 }
-.settings{
-    margin-top:40px;
+
+.settings {
+    margin-top: 40px;
 }
-.subtitle{
-    font-size:32px;
+
+.subtitle {
+    font-size: 32px;
 }
-hr{
+
+hr {
     background-color: #fff;
-	border-top: 2px dotted #8c8b8b;
-    margin:15px 0;
+    border-top: 2px dotted #8c8b8b;
+    margin: 15px 0;
 }
-.setting-column{
+
+.setting-column {
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
-    padding:15px;
-    margin:5px;
+    padding: 15px;
+    margin: 5px;
 }
-h3{
+
+h3 {
     margin: 0;
 }
-p.explains{
+
+.explains {
+    display: block;
     margin-top: 5px;
-    margin-left:10px;
-    font-size:14px;
+    margin-left: 10px;
+    font-size: 14px;
 }
-.input-box{
-    margin:3px;
-    font-size:13px;
-    
+
+.input-box {
+    margin: 3px;
+    font-size: 13px;
+
 }
-.ItemBox-CheckBox-Input{
-    display: none; /* inputタグは非表示にする */
-    }
-    .ItemBox-CheckBox-Label{
-    display:inline-block;
+
+.ItemBox-CheckBox-Input {
+    display: none;
+    /* inputタグは非表示にする */
+}
+
+.ItemBox-CheckBox-Label {
+    display: block;
     position: relative;
-    margin-left: auto;
+    margin: 10px;
     width: 56px;
     height: 24px;
     border-radius: 80px;
-    background: #d0d2d9; /* チェックされていない時の背景色 */
+    background: #d0d2d9;
+    /* チェックされていない時の背景色 */
     cursor: pointer;
-    transition: .2s ease; /* 円が動くスピードを指定 */
-    }
-    .ItemBox-CheckBox-Input:checked + .ItemBox-CheckBox-Label{
-    background: #41c9b4; /* チェックされた時の背景色 */
-    }
-    .ItemBox-CheckBox-Label:before{
+    transition: .2s ease;
+    /* 円が動くスピードを指定 */
+}
+
+.ItemBox-CheckBox-Input:checked+.ItemBox-CheckBox-Label {
+    background: #41c9b4;
+    /* チェックされた時の背景色 */
+}
+
+.ItemBox-CheckBox-Label:before {
     content: '';
     position: absolute;
     top: 2px;
@@ -320,8 +338,42 @@ p.explains{
     width: 20px;
     height: 20px;
     background: #fff;
-    transition: .2s ease; /* 円が動くスピードを指定 */
-    }
-    .ItemBox-CheckBox-Input:checked + .ItemBox-CheckBox-Label:before{
+    transition: .2s ease;
+    /* 円が動くスピードを指定 */
+}
+
+.ItemBox-CheckBox-Input:checked+.ItemBox-CheckBox-Label:before {
     left: 33px;
-    }
+}
+
+.wrap {
+    margin: 2em 0;
+    padding: 0;
+}
+
+.wrap label {
+    display: block;
+    padding: 8px;
+    color: #fff;
+    font-weight: bold;
+    background: #999;
+    cursor: pointer;
+}
+
+.wrap input[type="checkbox"] {
+    display: none;
+}
+
+.wrap .content {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.switch:checked+.content {
+    height: auto;
+    padding: 8px;
+    background: #f7f7f7;
+}
