@@ -1,7 +1,7 @@
 {
     "manifest_version":3 ,
     "name": "ScombZ Utilities",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -11,6 +11,7 @@
         "default_title":"ScombZ Utilities",
         "default_popup":"popup/popup.html"
     },
+    "options_page":"options/options.html",
     "content_scripts": [
         {
             "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
@@ -36,7 +37,8 @@
                 "js/layout.js",
                 "js/mouseEvents.js",
                 "js/oldScomb.js",
-                "js/getTaskLists.js"
+                "js/getTaskLists.js",
+                "js/supportFunctions.js"
             ]
         }
     ],

@@ -1,9 +1,10 @@
 /* ScombZ Utilities */
 /* changeReportBtn.js */
+//提出ボタンのユーザビリティ向上
 function changeReportBtn(){
     'use strict';
-    createTimeTempBtn();
     if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+        createTimeTempBtn();
         document.head.insertAdjacentHTML('beforeEnd',`
         <style>
         .block-under-area .block-under-area-btn{
@@ -18,14 +19,15 @@ function changeReportBtn(){
             min-height:50px;
             box-shadow:none;
         }
-        .block-under-area .block-under-area-btn #backPage,#back{
+        .block-under-area .block-under-area-btn #backPage,#back,#backBtn{
             color:#545555;
             background:#fff;
             font-size:90%;
             border:1px solid #ccc;
             min-height:40px;
+            box-shadow:none;
         }
-        .block-under-area .block-under-area-btn #backPage,#back:hover{
+        .block-under-area .block-under-area-btn #back:hover{
             border:1px solid #999;
             box-shadow:0 0 3px #888;
         }
@@ -44,13 +46,15 @@ function changeReportBtn(){
     const $submitBtnArea = document.querySelector('.block-under-area-btn');
     $submitBtnArea.style.maxWidth = "450px";
     if($submitBtnArea.childElementCount == 2){
-        $submitBtnArea.firstElementChild.id = "back";
+        $submitBtnArea.firstElementChild.id = $submitBtnArea.firstElementChild.id || "back";
         $submitBtnArea.appendChild($submitBtnArea.children[0]);
     }
-    document.querySelector('.page-directlink').remove();
+    if(document.querySelector('.page-directlink'))
+        document.querySelector('.page-directlink').remove();
     }
     return;
 }
+//課題提出時の作成にかかった時間をマウス操作だけで入力できるようにボタンとバーを付ける
 function createTimeTempBtn(){
     'use strict';
     console.log('createTimeTempBtn');

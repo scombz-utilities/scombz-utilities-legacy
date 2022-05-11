@@ -3,9 +3,193 @@
 //テスト改善
 function styleExam(){
     'use strict';
-    if (location.href.includes('examination') && document.body.clientWidth > 480){
-            console.log('テスト改善を実行します');
-            const $exa_contsize = document.getElementById('pageContents');
+    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/examination/take")){
+        //テストを受ける前の画面
+        if(document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("受験する")){
+            console.log('テスト受験確認画面');
+            document.head.insertAdjacentHTML('beforeEnd',`
+            <style>
+            .block-under-area .block-under-area-btn{
+                margin:0 auto;
+            }
+            .block-under-area .block-under-area-btn .btn-color{
+                display: grid;
+                place-items: center;
+                margin:10px auto;
+                width:100%;
+                min-width:140px;
+                min-height:50px;
+                box-shadow:none;
+            }
+            .block-under-area .block-under-area-btn #backbtn,#back{
+                color:#545555;
+                background:#fff;
+                font-size:90%;
+                border:1px solid #ccc;
+                min-height:40px;
+            }
+            
+            .block-under-area .block-under-area-btn #takebtn{
+                color:#fff;
+                background:#4892e0;
+                font-weight:bold;
+                font-size:110%;
+                border:1px solid #ccc;
+            }
+            </style>
+            `);
+            const $submitBtnArea = document.querySelector('.block-under-area-btn');
+            $submitBtnArea.style.maxWidth = "450px";
+            if($submitBtnArea.childElementCount == 2){
+                $submitBtnArea.appendChild($submitBtnArea.children[0]);
+            }
+            if(document.querySelector('.page-directlink'))
+                document.querySelector('.page-directlink').remove();
+        }
+        //テスト中の画面
+        if((document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("一時保存する"))){
+            console.log("テスト中画面");
+            window.onbeforeunload = function(e) {
+                e.returnValue = "ページを離れようとしています。よろしいですか？";
+            }
+            document.head.insertAdjacentHTML('beforeEnd',`
+            <style>
+            .block-under-area .block-under-area-btn{
+                margin:0 auto;
+            }
+            .block-under-area .block-under-area-btn .btn-color{
+                display: grid;
+                place-items: center;
+                margin:10px auto;
+                width:100%;
+                min-width:140px;
+                min-height:50px;
+                box-shadow:none;
+            }
+            .block-under-area .block-under-area-btn .takeConfirm{
+                color:#fff;
+                background:#4892e0;
+                font-weight:bold;
+                font-size:110%;
+                border:1px solid #ccc;
+            }
+            .block-under-area .block-under-area-btn .tempSaveBtn{
+                color:#545555;
+                background:#fff;
+                font-weight:bold;
+                border:1px solid #ccc;
+                min-height:40px;
+                box-shadow:none;
+            }
+            .block-under-area .block-under-area-btn .tempSaveBtn{
+                border:1px solid #999;
+                box-shadow:0 0 3px #888;
+            }
+            .take-save-temp-area{
+                display:block;
+            }
+            </style>
+            `);
+            const $submitBtnArea = document.querySelector('.block-under-area-btn');
+            $submitBtnArea.style.maxWidth = "450px";
+            const $confirmBtn = document.querySelector(".block-under-area .block-under-area-btn .takeConfirm");
+            if($confirmBtn){
+                $confirmBtn.addEventListener("click", function(){
+                    window.onbeforeunload = null;
+                });
+            }
+            if($submitBtnArea.childElementCount == 2){
+                $submitBtnArea.appendChild($submitBtnArea.children[0]);
+            }
+            if(document.querySelector('.page-directlink'))
+                document.querySelector('.page-directlink').remove();
+        }
+        //テスト提出確認画面
+        if(location.href == "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
+            console.log('テスト提出確認画面');
+            window.onbeforeunload = function(e) {
+                e.returnValue = "ページを離れようとしています。よろしいですか？";
+            }
+            document.head.insertAdjacentHTML('beforeEnd',`
+            <style>
+            .block-under-area .block-under-area-btn{
+                margin:0 auto;
+            }
+            .block-under-area .block-under-area-btn .btn-color{
+                display: grid;
+                place-items: center;
+                margin:10px auto;
+                width:100%;
+                min-width:140px;
+                min-height:50px;
+                box-shadow:none;
+            }
+            .block-under-area .block-under-area-btn .backbutton{
+                color:#545555;
+                background:#fff;
+                font-size:90%;
+                border:1px solid #ccc;
+                min-height:40px;
+            }
+            .block-under-area .block-under-area-btn .backbutton:hover{
+                border:1px solid #999;
+                box-shadow:0 0 3px #888;
+            }
+            .block-under-area .block-under-area-btn #submit{
+                color:#fff;
+                background:#4892e0;
+                font-weight:bold;
+                font-size:110%;
+                border:1px solid #ccc;
+            }
+            </style>
+            `);
+            const $submitBtnArea = document.querySelector('.block-under-area-btn');
+            $submitBtnArea.style.maxWidth = "450px";
+            if($submitBtnArea.childElementCount == 2){
+                $submitBtnArea.appendChild($submitBtnArea.children[0]);
+            }
+            const $confirmBtnList = document.querySelectorAll(".block-under-area .block-under-area-btn a");
+            for(const $confirmBtn of $confirmBtnList){
+                $confirmBtn.addEventListener("click", function(){
+                    window.onbeforeunload = null;
+                });
+            }
+            if(document.querySelector('.page-directlink'))
+                document.querySelector('.page-directlink').remove();
+        }
+        //テストを受け終わった画面
+        //すでに受けたテストを参照する画面
+        if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm") || location.href.includes("takeresult")){
+            console.log('テスト提出確認画面');
+            document.head.insertAdjacentHTML('beforeEnd',`
+            <style>
+            .block-under-area .block-under-area-btn{
+                margin:0 auto;
+            }
+            .block-under-area .block-under-area-btn .btn-color{
+                display: grid;
+                place-items: center;
+                margin:10px auto;
+                min-width:140px;
+                min-height:50px;
+                box-shadow:none;
+            }
+            </style>
+            `);
+            if(document.querySelector('.page-directlink'))
+                document.querySelector('.page-directlink').remove();
+        }
+        
+    return;
+    }
+}
+
+function styleExamImg(){
+    'use strict';
+    if (location.href.includes('examination/take') && document.body.clientWidth > 480){
+            console.log('テスト画像改善を実行します');
+            const $exa_contsize = document.getElementById('examQuestionSubblock') || document.getElementById('pageContents');
             const $exa_examImgList = document.querySelectorAll('.downloadFile');
             const $exa_cheadList = document.querySelectorAll('.contents-header');
             const $exa_img = document.querySelector('.exam-question-img');
@@ -37,7 +221,7 @@ function styleExam(){
                 $exa_timer.style.width = document.body.clientWidth - $exa_examImgList[0].clientWidth + 'px';
                 }
             }
-            console.log('テスト改善の実行が完了しました');
+            console.log('テスト画像改善の実行が完了しました');
     }
     return;
 }

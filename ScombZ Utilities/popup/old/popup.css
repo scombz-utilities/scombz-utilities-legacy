@@ -9,7 +9,7 @@
 #mainbody{
     margin :0;
     width: 350px;
-    height: 300px;
+    height: 500px;
 }
 h1{
     text-align: center;
@@ -39,24 +39,4 @@ h1{
 }
 h1{
     margin-bottom:15px;
-}
-.setting-button{
-    display: grid;
-    place-items: center;
-    width:120px;
-    height:40px;
-    background-color:#585;
-    color:#fff;
-    border-radius:5px;
-    font-size: 14px;
-}
-.setting-button:hover{
-    background-color:#474;
-}
-#go-to-options{
-    display: block;
-}
-.setting-icon{
-    width:20px;
-    height:20px;
 }
