@@ -1,5 +1,6 @@
 /* ScombZ Utilities */
 /* layout.js */
+//ログアウト画面変更
 function changeLogout(){
     'use strict';
     if(location.href == 'https://scombz.shibaura-it.ac.jp/logout'){
@@ -37,6 +38,7 @@ function changeLogout(){
     console.log("ログアウト画面を変更しました");
     return;
 }
+//ページ最大横幅
 function maxWidthOnSubjPage(){
     'use strict';
     if(location.href.includes("lms/course?idnumber=") && location.href.length < 80){
@@ -68,6 +70,7 @@ function remomvePageTop(){
     }
     return;
 }
+//芝猫表示
 function topShibaneko(){
     if(location.href=="https://scombz.shibaura-it.ac.jp/login"){
         const $topLogo = document.querySelector(".sitelogo");
@@ -78,4 +81,29 @@ function topShibaneko(){
             `);
         }
     }
+}
+//現在時刻のコマを目立たせる
+function styleNowPeriod() {
+    const $nowperiod = getNowPeriod();
+    console.log("現在のコマ: "+$nowperiod);
+    if($nowperiod == -1){
+        return;
+    }
+    if(location.href == "https://scombz.shibaura-it.ac.jp/lms/timetable"){
+        console.log("LMSの現在のコマを目立たせます");
+        const $courseList = document.querySelectorAll('.timetable-course-top-btn');
+        for(const $course of $courseList) {
+            for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
+                if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
+                    if($yobicolNum*10 + Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML)) -1 == $nowperiod){
+                        $course.style.background ="rgb(91 237 146)";
+                        $course.parentNode.parentNode.style.color ="#000";
+                        $course.innerHTML =`<span style="font-size:6px;font-weight:normal;color:#000;display:inline-block;background-color:#fff;padding:2px;border-radius:10px;transform:translate(-3px,-4px)">NOW</span>`+$course.innerHTML;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return;
 }

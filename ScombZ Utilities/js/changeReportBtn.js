@@ -2,8 +2,8 @@
 /* changeReportBtn.js */
 function changeReportBtn(){
     'use strict';
-    createTimeTempBtn();
     if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+        createTimeTempBtn();
         document.head.insertAdjacentHTML('beforeEnd',`
         <style>
         .block-under-area .block-under-area-btn{

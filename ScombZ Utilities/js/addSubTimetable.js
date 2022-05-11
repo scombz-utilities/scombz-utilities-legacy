@@ -34,10 +34,6 @@ function han2Zenkaku($str) {
         return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });
 }
-//1文字目だけを切り取って半角にしてくれる関数
-function jigenInt($str){
-    return han2Zenkaku($str.charAt(0));
-}
 //LMSから情報を取得してJSON化する関数
 function getSubTimetable(){
     console.log('LMSを取得開始します');
@@ -238,7 +234,7 @@ function displayTaskListsOnGrayLayer(){
             const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
             //JSONから生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
-            let timetableHeight = 0;
+            let timetableHeight = 5;
             if($subTimetable[0]){
                 timetableHeight = 40;
                 if(Number(items.specialSubj) > 0){
@@ -252,9 +248,9 @@ function displayTaskListsOnGrayLayer(){
             }
             for(let i=0; $tasklistObj[i] && i<20 ;i++){
                 kadaiListHTML += `
-                <div class="subk-column">
-                    <div class="subk-subjname">${$tasklistObj[i].course}</div>
-                    <div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div>
+                <div class="subk-line">
+                    <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
+                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
                     <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
                 </div>`;
             }
@@ -287,26 +283,24 @@ function displayTaskListsOnGrayLayer(){
                     font-weight:bold;
                     height:23px;
                 }
-                .subk-column{
+                .subk-line{
                     height:25px;
                     padding:2px;
                     margin:0;
                     background:#fff;
                     border-bottom:1px solid #ccc;
                 }
-                .subk-column:nth-child(2n){
+                .subk-line:nth-child(2n){
                     background:#FFFAF0;
                 }
                 .subk-subjname{
                     font-size:12px;
                     padding:2px;
-                    border:1px solid #ccc;
-                    float:left;
+                    width:fit-content;
                 }
                 div.subk-link{
-                    padding:2px;
+                    padding:2px 2px 0px 2px;
                     font-size:14px;
-                    float:left;
                     margin-left:30px;
                 }
                 div.subk-link:hover{
@@ -320,6 +314,18 @@ function displayTaskListsOnGrayLayer(){
                     margin-right:4px;
                     font-size:14px;
                     float:right;
+                }
+                .subk-column{
+                    margin:0;
+                    padding:0;
+                    float:left
+                }
+                .subk-column:nth-child(3n+1){
+                    width:30%;
+                    float:left
+                }
+                .subk-column(3n+2){
+                    min-width:160px;
                 }
             </style>
             <div class="subtimetableBody" id="subTaskList">

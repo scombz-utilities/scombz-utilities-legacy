@@ -5,7 +5,7 @@ function styleExam(){
     'use strict';
     if (location.href.includes('examination') && document.body.clientWidth > 480){
             console.log('テスト改善を実行します');
-            const $exa_contsize = document.getElementById('pageContents');
+            const $exa_contsize = document.getElementById('examQuestionSubblock');
             const $exa_examImgList = document.querySelectorAll('.downloadFile');
             const $exa_cheadList = document.querySelectorAll('.contents-header');
             const $exa_img = document.querySelector('.exam-question-img');

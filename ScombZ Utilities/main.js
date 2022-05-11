@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.2.0';          //バージョン
+    const $$version = '3.2.1';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -17,7 +17,7 @@
             adfsSkip: true,             //adfsスキップ
             exitSidemenu: true,         //サイドメニューを閉じる
             styleSidemenu: true,        //サイドメニューのスタイル変更
-            styleExam: true,            //テストのスタイル変更
+            styleExam: false,            //テストのスタイル変更
             addSubTimetable: true,      //メニューを展開したときの時間割
             hideCompletedReports: true, //完了したレポートをカレンダーに表示しない
             styleDialog: true,          //ダイアログを大きくする
@@ -119,6 +119,8 @@
                         displaySyllabusError();
                     }
                 }
+                //現在の授業を目立たせる
+                styleNowPeriod();
                 console.log('すべての機能の実行が完了しました');
             }
         });

@@ -52,7 +52,7 @@ function save_options() {
         adfsSkip: true,
         exitSidemenu: true,
         styleSidemenu: true,
-        styleExam: true,
+        styleExam: false,
         addSubTimetable: true,
         changeReportBtn: true,
         styleDialog: true,
