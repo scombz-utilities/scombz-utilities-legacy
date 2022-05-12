@@ -59,7 +59,6 @@ function displaySyllabusError(){
         const $courseTitle = document.querySelector('.course-title-txt');
         $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、拡張機能アイコンから設定画面に行き、学年と学部を設定してください。</span>`);
     }
-    
     return;
 }
 function specificCourse(courseName) {

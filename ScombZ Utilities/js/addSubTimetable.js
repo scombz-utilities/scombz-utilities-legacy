@@ -235,6 +235,7 @@ function displayTaskListsOnGrayLayer(){
             //JSONから生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
             let timetableHeight = 5;
+            let timetableminHeight = 0;
             if($subTimetable[0]){
                 timetableHeight = 40;
                 timetableminHeight = 330;
