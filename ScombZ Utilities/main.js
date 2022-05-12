@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.2.1';          //バージョン
+    const $$version = '3.3.0';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -17,7 +17,8 @@
             adfsSkip: true,             //adfsスキップ
             exitSidemenu: true,         //サイドメニューを閉じる
             styleSidemenu: true,        //サイドメニューのスタイル変更
-            styleExam: false,            //テストのスタイル変更
+            styleExamBtn: true,        //テストのボタンスタイル変更
+            styleExamImg: false,        //テストの画像スタイル変更
             addSubTimetable: true,      //メニューを展開したときの時間割
             hideCompletedReports: true, //完了したレポートをカレンダーに表示しない
             styleDialog: true,          //ダイアログを大きくする
@@ -27,7 +28,8 @@
             setMaxWidth: true,          //科目ページに最大横幅を設定
             pageTopBtn: true,           //ページトップへ行くボタンを消すかどうか
             mouseDown: true,            //ホイールクリックをできるようにする
-            tasklistDisplay: true       //メニュー横課題表示
+            tasklistDisplay: true,      //メニュー横課題表示
+            styleNowPeriod: true        //現在のコマを目立たせる
         
     }
     /* ローディング画面 */
@@ -79,8 +81,11 @@
                 getTaskLists($$reacquisitionMin);
                 };
                 //テストのスタイル変更
-                if(items.styleExam === true){
+                if(items.styleExamBtn === true){
                     styleExam();
+                }
+                if(items.styleExamImg === true){
+                    styleExamImg();
                 }
                 //完了したレポートをカレンダーに表示しない
                 if(items.hideCompletedReports === true){
@@ -120,7 +125,9 @@
                     }
                 }
                 //現在の授業を目立たせる
-                styleNowPeriod();
+                if(items.styleNowPeriod === true){
+                    styleNowPeriod();
+                }
                 console.log('すべての機能の実行が完了しました');
             }
         });

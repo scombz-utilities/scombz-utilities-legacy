@@ -120,6 +120,13 @@ function syllabusLoaded($settings_year , $settings_fac){
                 }else{
                     console.log("科目が見つかりませんでした");
                     $namazuHeader.setAttribute('id', 'searchResult');
+                    if(location.href.includes("null")){
+                        $namazuHeader.insertAdjacentHTML('beforeEnd',`
+                        <div style="height:100vh;">
+                        <h1>ScombZ Utilitiesの拡張機能で学部・学年が設定されていません。設定してください</h1>
+                        </div>
+                        `);
+                    }
                     $namazuHeader.insertAdjacentHTML('beforeEnd',`
                     <div style="height:100vh;">
                     <h1>シラバスデータの取得に失敗しました</h1>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+    <meta charset="utf-8">
+    <title>ScombZ Utilities</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="pagebody">
+    <div role="navigation" id="foo" class="nav-collapse">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#settings">基本設定</a></li>
+            <li><a href="#advancedSettings">詳細設定</a></li>
+            <li><a href="#infomation">拡張機能情報</a></li>
+        </ul>
+    </div>
+
+    <div role="main" class="main">
+        <div id="home">
+            <div class="home-content">
+                <img src="./scombZ.png" class="logo"/>
+                <p class="intro">ScombZ Utilities設定へようこそ!</p>
+            </div>
+        </div>
+        <div class="settings" id="settings">
+            <hr>
+            <h1 class="subtitle">基本設定</h1>
+            <hr>
+            <div class="setting-column">
+                <h3>入学年度と学部の設定</h3>
+                <div class="explains">入学年度と、学部を設定してください。<br>この情報は、シラバスの絞り込みにのみ利用され、それ以外の目的には利用されません。</div>
+                <div class="input-box">
+                    <span class="switch-explain">入学年度<br></span>
+                    <select id="year">
+                        <option value="null">設定してください</option>
+                        <option value="2015">2015年度入学</option>
+                        <option value="2016">2016年度入学</option>
+                        <option value="2017">2017年度入学</option>
+                        <option value="2018">2018年度入学</option>
+                        <option value="2019">2019年度入学</option>
+                        <option value="2020">2020年度入学</option>
+                        <option value="2021">2021年度入学</option>
+                        <option value="2022">2022年度入学</option>
+                        <option value="2023">2023年度入学</option>
+                        <option value="2024">2024年度入学</option>
+                        <option value="2025">2025年度入学</option>
+                        <option value="2026">2026年度入学</option>
+                        <option value="2027">2027年度入学</option>
+                        <option value="2028">2028年度入学</option>
+                        <option value="2029">2029年度入学</option>
+                        <option value="2030">2030年度入学</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">学部<br></span>
+                    <select id="fac">
+                        <option value="null">設定してください</option>
+                        <option value="din">大学院</option>
+                        <option value="arc">建築学部</option>
+                        <option value="dsn">デザイン工学部</option>
+                        <option value="sys">システム理工学部</option>
+                        <option value="ko1">工学部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>ログインボタン自動クリック</h3>
+                <input class="ItemBox-CheckBox-Input"  type="checkbox" id="login_auto"><label class="ItemBox-CheckBox-Label" for="login_auto"></label>
+                <div class="explains">「学生ログイン」ボタンを自動でクリックします。<br>ログイン状態でないときにアクセスすると、すぐにパスワード入力ダイアログが表示されます。</div>
+            </div>
+            <div class="setting-column">
+                <h3>ADFS自動クリック</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="adfs_auto"><label class="ItemBox-CheckBox-Label" for="adfs_auto"></label>
+                <div class="explains">ADFS二段階認証確認画面の次へボタンを自動でクリックします。<br>ログイン後、自動でScombZの画面に入れます。<br>※スマートフォンを利用した二段階認証を利用している方はご利用になれません。</div>
+            </div>
+            <div class="setting-column">
+                <h3>左メニューを自動で閉じる</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="menu_exit_auto"><label class="ItemBox-CheckBox-Label" for="menu_exit_auto"></label>
+                <div class="explains">ScombZの左側に表示されるサイドメニューを、常に閉じた状態でページ読み込みします。<br>メニューボタンを押すことで展開できます。<br>左メニュースタイル変更をオンにしている場合は、本項目もオンにすることが推奨されます。</div>
+            </div>
+            <div class="setting-column">
+                <h3>左メニューのスタイル変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="submenu"><label class="ItemBox-CheckBox-Label" for="submenu"></label>
+                <div class="explains">ScombZの左側に表示されるサイドメニューを、ユーザビリティに配慮したスタイルに変更します。<br>表示だけでなく、グレーの部分をクリックすることによっても、メニューを閉じられるようになります。<br>
+                    <div class="wrap">
+                        <label for="label1">▼詳細を見る</label>
+                        <input type="checkbox" id="label1" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before</p>
+                                <img src="./imgs/menu_before.png">
+                                <p class="imgexp">after</p>
+                                <img src="./imgs/menu_after.png">
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>メニュー横の時間割表示</h3>
+                <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="additional_lms"><label class="ItemBox-CheckBox-Label" for="additional_lms"></label>
+                <div class="explains">サイドメニュー展開時に、右のスペースに簡易的な時間割を表示します。<br>この時間割はLMS以外の画面でも展開できるため、科目ページに直接アクセスできます。<br>
+                    <div class="wrap">
+                        <label for="label2">▼詳細を見る</label>
+                        <input type="checkbox" id="label2" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">時間割のみを表示した場合</p>
+                                <img src="./imgs/subtimetable.png">
+                                <p class="imgexp">時間割と課題一覧を表示した場合</p>
+                                <img src="./imgs/subtimetable_taskdisplay.png">
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>メニュー横の課題表示(※左メニュースタイル変更必須)</h3>
+                <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="tasklistDisplay"><label class="ItemBox-CheckBox-Label" for="tasklistDisplay"></label>
+                <div class="explains">サイドメニュー展開時に、右のスペースに簡易的なテスト・課題一覧を表示します。<br>この課題一覧は、約15分毎に自動更新され、課題一覧ページに直接飛ぶことでも更新できます。<br>
+                    <div class="wrap">
+                        <label for="label3">▼詳細を見る</label>
+                        <input type="checkbox" id="label3" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">課題一覧のみを表示した場合</p>
+                                <img src="./imgs/taskdisplay.png">
+                                <p class="imgexp">時間割と課題一覧を表示した場合</p>
+                                <img src="./imgs/subtimetable_taskdisplay.png">
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>レポート提出ボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeReportBtn"><label class="ItemBox-CheckBox-Label" for="changeReportBtn"></label>
+                <div class="explains">レポート提出画面に、制作時間の簡易入力ボタンを追加します。また、提出ボタンをユーザビリティに配慮した色や配置にします。<br>
+                    <div class="wrap">
+                        <label for="label4">▼詳細を見る</label>
+                        <input type="checkbox" id="label4" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before</p>
+                                <img src="./imgs/reportbtn_before.png">
+                                <p class="imgexp">after</p>
+                                <img src="./imgs/reportbtn.png">
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>テストのボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>
+                <div class="explains">
+                    レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>ホイールクリックで新規タブで開けるようにする</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="mouseDown"><label class="ItemBox-CheckBox-Label" for="mouseDown"></label>
+                <div class="explains">
+                    LMSや授業の添付ファイルなど、ホイールクリックや右クリックができないリンクを、通常のハイパーリンクと同様に、マウスのホイールボタンを押し下げたときに新規タブで開けるようになります。<br>
+                    ただし、本拡張機能でサポートするのはLMSの各科目リンクと、各科目ページに添付されたファイルのみで、それ以外のリンクは未対応のものがあります。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>完了したレポートをカレンダーに表示しない</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="hideCompletedReports"><label class="ItemBox-CheckBox-Label" for="hideCompletedReports"></label>
+                <div class="explains">ScombZのホーム画面に表示されるカレンダーにおいて、既に提出済みである課題を非表示にします。<br>
+                    <div class="wrap">
+                        <label for="label5">▼詳細を見る</label>
+                        <input type="checkbox" id="label5" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before<br>
+                                <img src="./imgs/calender_before.png"></p>
+                                <p class="imgexp">after<br>
+                                <img src="./imgs/calender_after.png"></p>
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>おしらせダイアログを大きくする</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleDialog"><label class="ItemBox-CheckBox-Label" for="styleDialog"></label>
+                <div class="explains">ScombZのお知らせなどのダイアログを、ウィンドウのサイズまで拡張して見やすくします。<br>また、ダイアログの外をクリックすることでもダイアログを閉じられるようになります。<br>
+                    <div class="wrap">
+                        <label for="label6">▼詳細を見る</label>
+                        <input type="checkbox" id="label6" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before<br>
+                                <img src="./imgs/dialog_before.png"></p>
+                                <p class="imgexp">after<br>
+                                <img src="./imgs/dialog_after.png"></p>
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>各科目にシラバスボタンの追加</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="syll_btn"><label class="ItemBox-CheckBox-Label" for="syll_btn"></label>
+                <div class="explains">ScombZの各科目ページから、シラバスへ飛べるようにリンクを設置します。<br>このリンクは自動生成されたものであり、うまく授業のシラバスがみつからなかったり、違う科目の授業が開くことがあります。<br>
+                    <div class="wrap">
+                        <label for="label7">▼詳細を見る</label>
+                        <input type="checkbox" id="label7" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <img src="./imgs/syllabus_link.png"></p>
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>ログアウトボタンの変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeLogout"><label class="ItemBox-CheckBox-Label" for="changeLogout"></label>
+                <div class="explains">ログアウト画面を少しだけわかりやすくします。<br>
+                    <div class="wrap">
+                        <label for="label8">▼詳細を見る</label>
+                        <input type="checkbox" id="label8" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before<br>
+                                <img src="./imgs/logout_before.png"></p>
+                                <p class="imgexp">after<br>
+                                <img src="./imgs/logout_after.png"></p>
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>科目ページ最大横幅を設定</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="setMaxWidth"><label class="ItemBox-CheckBox-Label" for="setMaxWidth"></label>
+                <div class="explains">
+                    ウィンドウ幅が一定以上の時、各科目の詳細ページが横に広がりすぎるのを防止します。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>トップへボタンを消す</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pageTopBtn"><label class="ItemBox-CheckBox-Label" for="pageTopBtn"></label>
+                <div class="explains">
+                    常に画面右下にある「トップへ」というボタンを非表示にします。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>LMSで現在のコマを目立たせる</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleNowPeriod"><label class="ItemBox-CheckBox-Label" for="styleNowPeriod"></label>
+                <div class="explains">
+                    LMSページで現在授業中の授業を少し目立たせます。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>テストの画像スタイル変更(試験的)</h3>
+                <span style="color:red;font-size: 13px;">※この設定は試験的です。必要がない場合はオフにしてください</span><br>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>
+                <div class="explains">
+                    画像1枚に問題文がすべて書いてあるタイプのテストを受験しやすくします。
+                </div>
+            </div>
+            
+            <br>
+        </div>
+        <div id="advancedSettings">
+            <hr>
+            <h1 class="subtitle">詳細設定</h1>
+            <hr>
+            <p>現在準備中です</p>
+        </div>
+        <div id="infomation">
+            <hr>
+            <h1 class="subtitle">拡張機能情報</h1>
+            <hr>
+            <h3>ScombZ Utilities</h3>
+            <p>この拡張機能は、ScombZのユーザビリティの向上を目的としたオープンソースプロジェクトです。</p>
+            <p><a class="links" href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja">Chrome Web Store</a></p>
+            <p><a class="links" href="https://github.com/yudai1204/ScombZ-Utilities">GitHub</a></p>
+            <p>制作 : <a class="links" href="https://twitter.com/yudai1204">うだい</a></p>
+            <p>共同制作 : <a class="links" href="https://twitter.com/naname_eis">さか</a> <a class="links" href="https://twitter.com/usr_3_14">さばみそ</a></p>
+            <p>アイコン作成 : <a class="links" href="https://twitter.com/373Alpswater">Miuye</a></p>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="options.js"></script>
+</body>
+
+</html>
