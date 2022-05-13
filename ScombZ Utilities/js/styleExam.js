@@ -28,7 +28,10 @@ function styleExam(){
                 border:1px solid #ccc;
                 min-height:40px;
             }
-            
+            .block-under-area .block-under-area-btn #backbtn:hover,#back:hover{
+                border:1px solid #999;
+                box-shadow:0 0 3px #888;
+            }
             .block-under-area .block-under-area-btn #takebtn{
                 color:#fff;
                 background:#4892e0;
@@ -81,7 +84,7 @@ function styleExam(){
                 min-height:40px;
                 box-shadow:none;
             }
-            .block-under-area .block-under-area-btn .tempSaveBtn{
+            .block-under-area .block-under-area-btn .tempSaveBtn:hover{
                 border:1px solid #999;
                 box-shadow:0 0 3px #888;
             }
@@ -161,7 +164,7 @@ function styleExam(){
         //テストを受け終わった画面
         //すでに受けたテストを参照する画面
         if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm") || location.href.includes("takeresult")){
-            console.log('テスト提出確認画面');
+            console.log('テスト完了画面');
             document.head.insertAdjacentHTML('beforeEnd',`
             <style>
             .block-under-area .block-under-area-btn{
@@ -179,10 +182,16 @@ function styleExam(){
             `);
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
+            if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm")){
+                //提出完了時にAjax通信をして課題一覧を更新
+                console.log("テスト提出完了ページを検出");
+                setTimeout(function(){
+                    getTaskLists(0);
+                },500);
+            }
         }
-        
-    return;
     }
+    return;
 }
 
 function styleExamImg(){

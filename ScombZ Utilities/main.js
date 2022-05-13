@@ -3,14 +3,14 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.3.0';          //バージョン
+    const $$version = '3.4.0';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
     /* 設定読み込み*/
     //初期状態（設定が保存されていない場合に適用される）
-    let defaults = {
+    const defaults = {
             year: null,                 //入学年度
             fac: null,                  //学部
             clickLoginBtn: true,        //ログインボタンクリック
@@ -29,7 +29,9 @@
             pageTopBtn: true,           //ページトップへ行くボタンを消すかどうか
             mouseDown: true,            //ホイールクリックをできるようにする
             tasklistDisplay: true,      //メニュー横課題表示
-            styleNowPeriod: true        //現在のコマを目立たせる
+            styleNowPeriod: true,       //現在のコマを目立たせる
+            displayName: false,         //履修者表示名を変更する
+            layoutHome: true            //HOMEのレイアウト
         
     }
     /* ローディング画面 */
@@ -58,9 +60,15 @@
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
                 },300);
+                //設定ボタンを追加
+                addExtensionSettingsBtn();
                 //帰ってきて芝猫
                 if(items.clickLoginBtn !== true){
                     topShibaneko();
+                }
+                //HOMEをレイアウト
+                if(items.layoutHome === true){
+                layoutHome();
                 }
                 //ログインボタン自動クリック
                 if(items.clickLoginBtn === true){
@@ -127,6 +135,10 @@
                 //現在の授業を目立たせる
                 if(items.styleNowPeriod === true){
                     styleNowPeriod();
+                }
+                //表示名を変更
+                if(items.displayName === true){
+                    removeName();
                 }
                 console.log('すべての機能の実行が完了しました');
             }

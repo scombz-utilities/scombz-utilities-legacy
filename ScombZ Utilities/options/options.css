@@ -392,3 +392,24 @@ h3 {
     color:#444;
     text-decoration: underline;
 }
+select,input[type="number"],input[type="text"]{
+    width:250px;
+    font-size:120%;
+    padding:5px;
+}
+.footer-link{
+    color: #000;
+    text-decoration: line;
+}
+#footer{
+    margin:0;
+    width:100%;
+    height: 20px;
+    Bottom: 0;
+    text-align:center;
+    padding:5px;
+}
+.saveBtn{
+    margin:4px 0 5px 3px;
+    padding:3px;
+}
