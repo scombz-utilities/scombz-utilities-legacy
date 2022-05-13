@@ -238,7 +238,7 @@ function displayTaskListsOnGrayLayer(){
             let timetableminHeight = 0;
             if($subTimetable[0]){
                 timetableHeight = 40;
-                timetableminHeight = 330;
+                timetableminHeight = 350;
                 if(Number(items.specialSubj) > 0){
                     timetableHeight += 10*Number(items.specialSubj);
                     timetableminHeight += 60*Number(items.specialSubj);
@@ -249,13 +249,17 @@ function displayTaskListsOnGrayLayer(){
             if(!$tasklistObj[0]){
                 return;
             }
-            for(let i=0; $tasklistObj[i] && i<20 ;i++){
-                kadaiListHTML += `
-                <div class="subk-line">
-                    <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
-                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
-                    <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
-                </div>`;
+            if($tasklistObj[0] && $tasklistObj[0].data === null){
+                kadaiListHTML +=`<div class="subk-line">未提出の課題・テスト一覧はありません。</div>`;
+            }else{
+                for(let i=0; $tasklistObj[i] && i<20 ;i++){
+                    kadaiListHTML += `
+                    <div class="subk-line">
+                        <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
+                        <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
+                        <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
+                    </div>`;
+                }
             }
             const lastgettime =  `${new Date(items.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
             //合体させてHTMLをつくる

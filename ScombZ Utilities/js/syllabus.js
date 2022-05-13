@@ -123,10 +123,14 @@ function syllabusLoaded($settings_year , $settings_fac){
                     if(location.href.includes("null")){
                         $namazuHeader.insertAdjacentHTML('beforeEnd',`
                         <div style="height:100vh;">
-                        <h1>ScombZ Utilitiesの拡張機能で学部・学年が設定されていません。設定してください</h1>
+                        <h1>ScombZ Utilitiesの拡張機能で学部・学年が設定されていません。<br>
+                        <a href="javascript:void(0);" id="link_to_extention">拡張機能設定</a>から設定してください</h1>
                         </div>
                         `);
                     }
+                    document.getElementById("link_to_extention").addEventListener("click", function(){
+                        chrome.runtime.sendMessage({"action": "openOptionsPage"});
+                    });
                     $namazuHeader.insertAdjacentHTML('beforeEnd',`
                     <div style="height:100vh;">
                     <h1>シラバスデータの取得に失敗しました</h1>

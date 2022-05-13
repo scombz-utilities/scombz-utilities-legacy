@@ -19,6 +19,11 @@ function save_options() {
     var mouseDown = document.getElementById('mouseDown').checked;
     var tasklistDisplay = document.getElementById('tasklistDisplay').checked;
     var styleNowPeriod = document.getElementById('styleNowPeriod').checked;
+    var displayName = document.getElementById('displayName').checked;
+    var subjWidth = document.getElementById('subjWidth').value;
+    var lmsWidth = document.getElementById('lmsWidth').value;
+    var layoutHome = document.getElementById('layoutHome').checked;
+    var nickname = document.getElementById('nickname').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -38,7 +43,14 @@ function save_options() {
         pageTopBtn : pageTopBtn,
         mouseDown : mouseDown,
         tasklistDisplay : tasklistDisplay,
-        styleNowPeriod : styleNowPeriod
+        styleNowPeriod : styleNowPeriod,
+        displayName : displayName,
+        layoutHome : layoutHome,
+        nickname : nickname,
+        maxWidthPx:{
+            subj: subjWidth,
+            lms: lmsWidth
+        }
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -68,7 +80,14 @@ function save_options() {
         pageTopBtn : true,
         mouseDown: true,
         tasklistDisplay: true,
-        styleNowPeriod: true
+        styleNowPeriod: true,
+        displayName: false,
+        layoutHome:true,
+        nickname: "",
+        maxWidthPx:{
+            subj: 1280,
+            lms: 1280
+        }
     }, function(items) {
         document.getElementById('year').value = items.year;
         document.getElementById('fac').value = items.fac;
@@ -89,16 +108,34 @@ function save_options() {
         document.getElementById('mouseDown').checked = items.mouseDown;
         document.getElementById('tasklistDisplay').checked = items.tasklistDisplay;
         document.getElementById('styleNowPeriod').checked = items.styleNowPeriod;
+        document.getElementById('subjWidth').value = items.maxWidthPx.subj;
+        document.getElementById('lmsWidth').value = items.maxWidthPx.lms;
+        document.getElementById('displayName').checked = items.displayName;
+        document.getElementById('layoutHome').checked = items.layoutHome;
+        document.getElementById('nickname').value = items.nickname;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
     //チェックボックスが更新されたら保存
     const $checkboxList= document.querySelectorAll("input[type='checkbox']");
-    for(let $checkbox of $checkboxList){
+    for(const $checkbox of $checkboxList){
         $checkbox.addEventListener('change', save_options);
     }
     //プルダウンメニューが更新されたら保存
     const $menuList= document.querySelectorAll("select");
-    for(let $menu of $menuList){
+    for(const $menu of $menuList){
         $menu.addEventListener('change', save_options);
+    }
+    //保存ボタンが押されたら保存
+    const $saveBtnList = document.querySelectorAll(".saveBtn");
+    for(const $saveBtn of $saveBtnList){
+        $saveBtn.addEventListener('click', function(){
+            save_options();
+            $saveBtn.insertAdjacentHTML("afterEnd",`
+                <div class="savelog">保存されました</div>
+            `);
+            setTimeout(function(){
+            document.getElementsByClassName("savelog")[0].remove();
+            },1000);
+        });
     }

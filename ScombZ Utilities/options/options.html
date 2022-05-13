@@ -260,7 +260,7 @@
                 <h3>科目ページ最大横幅を設定</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="setMaxWidth"><label class="ItemBox-CheckBox-Label" for="setMaxWidth"></label>
                 <div class="explains">
-                    ウィンドウ幅が一定以上の時、各科目の詳細ページが横に広がりすぎるのを防止します。
+                    ウィンドウ幅が一定以上の時、各科目の詳細ページ、LMSページが横に広がりすぎるのを防止します。<br>最大幅はデフォルトで1280pxですが、詳細設定で変更できます。
                 </div>
             </div>
             <div class="setting-column">
@@ -278,6 +278,34 @@
                 </div>
             </div>
             <div class="setting-column">
+                <h3>ホーム画面のスタイル変更</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="layoutHome"><label class="ItemBox-CheckBox-Label" for="layoutHome"></label>
+                <div class="explains">
+                    ホーム画面の表示を変更します。<br>最大横幅(1280px変更不可)が適用され、重要リンク集が右カラムに表示されます。
+                    <div class="wrap">
+                        <label for="label9">▼詳細を見る</label>
+                        <input type="checkbox" id="label9" class="wrap-switch" />
+                        <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                        <div class="wraped-content">
+                            <div style="text-align:center;">
+                                <p class="imgexp">before<br>
+                                <img src="./imgs/layoutHome_before.png"></p>
+                                <p class="imgexp">after<br>
+                                <img src="./imgs/layoutHome_after.png"></p>
+                            </div>
+                        </div>
+                        <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                    </div>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>履修者名表示</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="displayName"><label class="ItemBox-CheckBox-Label" for="displayName"></label>
+                <div class="explains">
+                    ページ右上部に表示される履修者名の表示を変更します。<br>この設定をオンにすると、右上部に名前が表示されなくなります。<br>詳細設定から、表示名をニックネーム等に変更することもできます。
+                </div>
+            </div>
+            <div class="setting-column">
                 <h3>テストの画像スタイル変更(試験的)</h3>
                 <span style="color:red;font-size: 13px;">※この設定は試験的です。必要がない場合はオフにしてください</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>
@@ -292,7 +320,32 @@
             <hr>
             <h1 class="subtitle">詳細設定</h1>
             <hr>
-            <p>現在準備中です</p>
+            <div class="setting-column">
+                <h3>最大横幅の設定</h3>
+                <div class="explains">
+                    ウィンドウ幅が一定以上の時、各科目の詳細ページ、LMSページがここで設定した最大値以上に横に広がらなくなります。<br>デフォルトは1280pxです。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">教科の詳細ページの横幅(px)<br></span>
+                    <input type="number" id="subjWidth">
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">LMSページの横幅(px)<br></span>
+                    <input type="number" id="lmsWidth">
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
+            <div class="setting-column">
+                <h3>ニックネームの設定</h3>
+                <div class="explains">
+                    ページ右上部に表示される履修者名の表示を変更します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">表示される名前<br></span>
+                    <input type="text" id="nickname">
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
         </div>
         <div id="infomation">
             <hr>
