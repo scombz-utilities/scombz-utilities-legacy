@@ -107,3 +107,34 @@ function styleNowPeriod() {
     }
     return;
 }
+function layoutHome(){
+    "use strict";
+    console.log("homeを検知しました");
+    document.head.insertAdjacentHTML("beforeEnd",`
+    <style>
+    .downloadFile.roo.portal-banner-list-li-img.portal-banner-img.portal-banner-img-contain{
+        transition:opacity 150ms;
+    }
+    .downloadFile.roo.portal-banner-list-li-img.portal-banner-img.portal-banner-img-contain:hover{
+        opacity:0.6;
+    }
+    </style>
+    `);
+    return;
+}
+function addExtensionSettingsBtn(){
+    "use strict";
+    console.log("拡張機能設定ボタンを追加します")
+    const $headerBtnArea = document.querySelector(".page-head-navi-unordered-list");
+    if($headerBtnArea){
+        $headerBtnArea.insertAdjacentHTML("afterBegin",`
+        <li class="page-head-navi-list">
+			<a class="page-head-navi-colomn" href="javascript:void(0);" id="link_to_extention">拡張機能設定</a>
+		</li>
+        `);
+        document.getElementById("link_to_extention").addEventListener("click", function(){
+            chrome.runtime.sendMessage({"action": "openOptionsPage"});
+        });
+    }
+    return;
+}

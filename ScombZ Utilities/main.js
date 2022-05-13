@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.3.0';          //バージョン
+    const $$version = '3.3.1';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -128,6 +128,10 @@
                 if(items.styleNowPeriod === true){
                     styleNowPeriod();
                 }
+                //HOMEをレイアウト
+                layoutHome();
+                //設定ボタンを追加
+                addExtensionSettingsBtn();
                 console.log('すべての機能の実行が完了しました');
             }
         });

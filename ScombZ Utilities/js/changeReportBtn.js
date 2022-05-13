@@ -4,7 +4,16 @@
 function changeReportBtn(){
     'use strict';
     if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+        ////課題提出完了時にAjax通信をして課題一覧を更新
+        if(document.querySelector(".contents-detail.contents-complete")){
+            console.log("課題提出完了ページを検出");
+            setTimeout(function(){
+                getTaskLists(0);
+            },500);
+        }
+        //時間入力バーを作る
         createTimeTempBtn();
+        //ボタンを変える
         document.head.insertAdjacentHTML('beforeEnd',`
         <style>
         .block-under-area .block-under-area-btn{
@@ -27,7 +36,7 @@ function changeReportBtn(){
             min-height:40px;
             box-shadow:none;
         }
-        .block-under-area .block-under-area-btn #back:hover{
+        .block-under-area .block-under-area-btn #backPage:hover,#back:hover{
             border:1px solid #999;
             box-shadow:0 0 3px #888;
         }

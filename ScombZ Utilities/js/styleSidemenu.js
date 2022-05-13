@@ -186,6 +186,19 @@ function styleSidemenu(){
             $sidemenuPull.style.padding = '17px 40px 12px 81px';
         }
     }
+    //お知らせ、アンケートを直リンクにする
+    //お知らせ
+    const $infoButton = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon");
+    if ($infoButton){
+        $infoButton.href = "https://scombz.shibaura-it.ac.jp/portal/home/information/list";
+        $infoButton.removeAttribute("onclick");
+    }
+    //アンケート
+    const $questionnaire = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.questionnaire-color.sidemenu-icon.questionnaire-icon");
+    if ($questionnaire){
+        $questionnaire.href = "https://scombz.shibaura-it.ac.jp/portal/surveys/list";
+        $questionnaire.removeAttribute("onclick");
+    }
     console.log('サイドメニューのスタイルを変更しました');
     return;
 }
