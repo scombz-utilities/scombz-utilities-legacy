@@ -25,12 +25,10 @@ h1{
 .footer{
     padding-top:10px;
     text-align: center;
-    position:absolute;
     background-color:#ddd;
     width: 100%;
     height:30px;
     margin: 0;
-    Bottom: 0;
 }
 .settings{
     width:330px;
