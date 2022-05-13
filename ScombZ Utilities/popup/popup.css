@@ -9,7 +9,6 @@
 #mainbody{
     margin :0;
     width: 350px;
-    height: 300px;
 }
 h1{
     text-align: center;
@@ -57,4 +56,74 @@ h1{
 .setting-icon{
     width:20px;
     height:20px;
+}
+
+#weekdayTabsContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.5em;
+}
+#weekdayTabsContainer .weekday-tab{
+    width: calc(100% / 6);
+    text-align: center;
+}
+.weekday-tab.active{
+    font-weight: bold;
+    cursor: default;
+    border-bottom: 2px gray solid;
+}
+.weekday-tab:not(.active){
+    cursor: pointer;
+    color: gray;
+    border-bottom: 1px lightgray solid;
+}
+.weekday-tab:not(.active):hover{
+    color: inherit;
+    border-bottom: 1px gray solid;
+}
+#timetable{
+    width: 100%;
+    border-bottom: 1px lightgray solid;
+    margin-bottom: 10px;
+}
+.timetable-row{
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    padding: 2px 0;
+}
+.timetable-row:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.timetable-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70px;
+    margin-right: 10px;
+}
+.time-term{
+    font-size: x-small;
+    color: gray;
+}
+.subjects-container{
+    width: 100%;
+}
+.subject{
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.subject.quarter{
+    height: 20px;
+    margin: 2px 0;
+}
+.subject-name a{
+    color: dodgerblue;
+    font-weight: bold;
+    text-decoration: none;
+}
+.subject-name a:hover{
+    text-decoration: underline;
 }
