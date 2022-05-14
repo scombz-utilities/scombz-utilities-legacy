@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.4.0';          //バージョン
+    const $$version = '3.4.1';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -31,7 +31,8 @@
             tasklistDisplay: true,      //メニュー横課題表示
             styleNowPeriod: true,       //現在のコマを目立たせる
             displayName: false,         //履修者表示名を変更する
-            layoutHome: true            //HOMEのレイアウト
+            layoutHome: true,           //HOMEのレイアウト
+            fixHeadShadow: true         //キモイヘッダの影なおす
         
     }
     /* ローディング画面 */
@@ -65,6 +66,10 @@
                 //帰ってきて芝猫
                 if(items.clickLoginBtn !== true){
                     topShibaneko();
+                }
+                //ページ上部にある固定ヘッダのキモい影を直す
+                if(items.fixHeadShadow === true){
+                    fixHeadShadow();
                 }
                 //HOMEをレイアウト
                 if(items.layoutHome === true){

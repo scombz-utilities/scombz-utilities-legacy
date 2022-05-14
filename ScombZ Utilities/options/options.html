@@ -15,6 +15,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#settings">基本設定</a></li>
             <li><a href="#advancedSettings">詳細設定</a></li>
+            <li><a href="#customCSS">カスタムCSS</a></li>
             <li><a href="#infomation">拡張機能情報</a></li>
         </ul>
     </div>
@@ -299,15 +300,39 @@
                 </div>
             </div>
             <div class="setting-column">
+                <h3>ページ上部にあるバーのスタイル</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="fixHeadShadow"><label class="ItemBox-CheckBox-Label" for="fixHeadShadow"></label>
+                <div class="explains">
+                    透明度がなく、不自然に見える影を修正します。
+                </div>
+                <div class="wrap">
+                    <label for="label10">▼詳細を見る</label>
+                    <input type="checkbox" id="label10" class="wrap-switch" />
+                    <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                    <div class="wraped-content">
+                        <div style="text-align:center;">
+                            <p class="imgexp">before<br>
+                            <img src="./imgs/shadow_before.png"></p>
+                            <p class="imgexp">after<br>
+                            <img src="./imgs/shadow_after.png"></p>
+                        </div>
+                    </div>
+                    <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                </div>
+            </div>
+            <div class="setting-column">
                 <h3>履修者名表示</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="displayName"><label class="ItemBox-CheckBox-Label" for="displayName"></label>
                 <div class="explains">
                     ページ右上部に表示される履修者名の表示を変更します。<br>この設定をオンにすると、右上部に名前が表示されなくなります。<br>詳細設定から、表示名をニックネーム等に変更することもできます。
                 </div>
             </div>
+            <hr>
+            <h2>実験的な設定</h2>
+            バグが確認されているか、バグになる可能性が高い設定です。<br>
             <div class="setting-column">
-                <h3>テストの画像スタイル変更(試験的)</h3>
-                <span style="color:red;font-size: 13px;">※この設定は試験的です。必要がない場合はオフにしてください</span><br>
+                <h3>テストの画像スタイル変更(実験的)</h3>
+                <span style="color:red;font-size: 13px;">※この設定は実験的です。必要がない場合はオフにしてください</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>
                 <div class="explains">
                     画像1枚に問題文がすべて書いてあるタイプのテストを受験しやすくします。
@@ -346,6 +371,44 @@
                 </div>
                 <button type="button" class="saveBtn">保存する</button>
             </div>
+            <div class="setting-column">
+                <h3>作成時間簡易入力の設定</h3>
+                <div class="explains">
+                    レポート提出時に、作成時間を簡易入力するためのボタン及びスライダーバーの値をカスタマイズします
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">ボタンの選択<br></span>
+                    <select id="timesBtnValue" style="width:350px;">
+                        <option value="mode1">10分,30分,60分,100分,200分,300分,600分</option>
+                        <option value="mode2">10分,30分,60分,120分,180分,300分,600分</option>
+                        <option value="mode3">10分,20分,30分,60分,90分,120分,180分</option>
+                        <option value="mode4">10分,60分,120分,180分,300分,600分,1000分</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">スライダーバーの最大値(分)<br></span>
+                    <input type="number" id="sliderBarMax">
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
+            <div class="setting-column">
+                <h3>課題一覧の位置調整</h3>
+                <div class="explains">
+                    メニュー横の課題表示をオンにしていた場合表示される「課題一覧」の表示高さを調整します。<br>この値を大きくすると表示位置が下に移動し、小さくすると上に移動します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">課題一覧表示調整(px)<br></span>
+                    <input type="number" id="tasklistTranslate">
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
+        </div>
+        <div id="customCSS">
+            <hr>
+            <h1 class="subtitle">カスタムCSS</h1>
+            <hr>
+            <p>※上級者向け ScombZにカスタムCSSを適用することができます 準備中</p>
+            <div id="editor" style="height: 600px;width:600px;"></div>
         </div>
         <div id="infomation">
             <hr>

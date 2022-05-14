@@ -81,7 +81,7 @@ function maxWidthOnSubjPage(){
             }
             </style>
             `);
-            console.log("最大横幅は${items.maxWidthPx}pxに設定されました");
+            console.log(`最大横幅は${items.maxWidthPx}pxに設定されました`);
         });
     }
     return;
@@ -258,4 +258,11 @@ function removeName(){
             $loginViewName.innerHTML= items.nickname;
         });
     }
+}
+//ページ上部にある固定ヘッダのキモい影を直す
+function fixHeadShadow(){
+    if(document.getElementById("page_head")){
+        document.getElementById("page_head").style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
+    }
+    return;
 }
