@@ -2,7 +2,7 @@
 /* styleSidemenu.js */
 function styleSidemenu(){
     'use strict';
-    if(document.getElementById('page_head') === null){
+    if(document.getElementById('sidemenu') === null){
         return;
     }
     console.log('サイドメニューのスタイル変更を開始します');
@@ -120,7 +120,12 @@ function styleSidemenu(){
         .sidemenu-close {
             transform: translateX(-100%);
         }
-        
+        .sidemenu-link.sidemenu-lms-link.sidemenu-link-txt{
+            background:#fff;
+        }
+        .sidemenu-link.sidemenu-lms-link.sidemenu-link-txt:hover{
+            background:#f0f0f0;
+        }
     </style>
     `);
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
@@ -144,19 +149,7 @@ function styleSidemenu(){
         $pageMain.style.left = ('0');
         $pageMain.style.width = '100%';
         $pageMain.style.minWidth = ('371px');
-    //サイドメニューをモノトーンに
-    const $menuIconList = document.querySelectorAll('.sidemenu-icon');
-    for (const $menuIcon of $menuIconList){
-        //通常時
-        $menuIcon.style.background = '#ffffff';
-        $menuIcon.addEventListener('mouseleave', function(){
-            $menuIcon.style.background = '#ffffff';
-        })
-        //マウスホバー時
-        $menuIcon.addEventListener('mouseover', function(){
-            $menuIcon.style.background = '#f0f0f0';
-        })
-    }
+    
     //サイドメニューのヘッドサイズを小さくする
     const $sidemenuHead = document.querySelector('.sidemenu-head');
         $sidemenuHead.style.height = '60px';
@@ -187,10 +180,11 @@ function styleSidemenu(){
         }
     }
     //お知らせ、アンケートを直リンクにする
-    //お知らせ
+    //お知らせ(ついでにborder-topもつけてスタイル直す)
     const $infoButton = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon");
     if ($infoButton){
         $infoButton.href = "https://scombz.shibaura-it.ac.jp/portal/home/information/list";
+        $infoButton.style.borderTop = "1px solid #CCC";
         $infoButton.removeAttribute("onclick");
     }
     //アンケート
@@ -198,6 +192,15 @@ function styleSidemenu(){
     if ($questionnaire){
         $questionnaire.href = "https://scombz.shibaura-it.ac.jp/portal/surveys/list";
         $questionnaire.removeAttribute("onclick");
+    }
+    //お知らせ、アンケートが表示されてないとき追加する
+    const $comBtn = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.community-search-color.sidemenu-icon.search-icon");
+    if($comBtn && !$infoButton && !$questionnaire){
+        $comBtn.insertAdjacentHTML('afterEnd',`
+        <br>
+        <a class="sidemenu-link sidemenu-lms-link sidemenu-link-txt info-color sidemenu-icon info-icon " href="https://scombz.shibaura-it.ac.jp/portal/home/information/list" style="height: 50px;border-top: 1px solid #CCC;">お知らせ</a>
+        <a class="sidemenu-link sidemenu-lms-link sidemenu-link-txt questionnaire-color sidemenu-icon questionnaire-icon" href="https://scombz.shibaura-it.ac.jp/portal/surveys/list" style="height: 50px;">アンケート</a>
+        `);
     }
     console.log('サイドメニューのスタイルを変更しました');
     return;

@@ -48,6 +48,9 @@ function getSubTimetable(){
                 if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
                     $timetableClassData.day = $yobicolNum,
                     $timetableClassData.time = Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML));
+                    if(!$timetableClassData.time){
+                        $timetableClassData.time = Number($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML.slice(-1));
+                    }
                     break;
                 }
                 if($yobicolNum == 6){
@@ -224,7 +227,8 @@ function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
         TaskGetTime: null,
         tasklistData: null,
-        specialSubj: 0
+        specialSubj: 0,
+        tasklistTranslate: 0
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             
@@ -266,8 +270,9 @@ function displayTaskListsOnGrayLayer(){
             let kadaiHTML =`
             <style>
                 #subTaskList{
-                    top:max(${timetableHeight}vh,${timetableminHeight}px);
-                    background :rgba(255,255,255,0.5);
+                    top: max(${timetableHeight}vh,${timetableminHeight}px);
+                    transform: translateY(${items.tasklistTranslate}px);
+                    background: rgba(255,255,255,0.5);
                     width: 60vw;
                     min-width: 500px;
                     padding: 2px;

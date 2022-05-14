@@ -21,6 +21,7 @@ function styleDialog(){
             $widgetOverlay.addEventListener('click', function(){
                 $infoDialog.querySelector('.commonDialogButtonArea button.under-btn.btn-color.btn-txt.ui-button.ui-corner-all.ui-widget').click();
             }, { once: true });
+            styleadd();
         }
 
         //  お知らせのダイアログの処理
@@ -30,6 +31,7 @@ function styleDialog(){
             $widgetOverlay.addEventListener('click', function(){
                 $notificationDialog.querySelector('.commonDialogButtonArea button.under-btn.btn-color.btn-txt.ui-button.ui-corner-all.ui-widget').click();
             }, { once: true });
+            styleadd();
         }
 
         //  LMSの授業詳細ページ＆コミュニティ詳細ページのダイアログの処理
@@ -39,6 +41,7 @@ function styleDialog(){
             $widgetOverlay.addEventListener('click', function(){
                 $courseDialog.querySelector('.commonDialogButtonArea button.under-btn.btn-color.btn-txt.ui-button.ui-corner-all.ui-widget').click();
             }, { once: true });
+            styleadd();
         }
     });
 
@@ -49,6 +52,20 @@ function styleDialog(){
     const target = document.body;
 
     dialogObserver.observe(target, config);
+
+    function styleadd(){
+        document.head.insertAdjacentHTML('beforeEnd',`
+        <style>
+            .information-popup-block{
+                box-shadow: 0 0 15px #c2c2c2;
+            }
+            .ui-widget-overlay.ui-front{
+                background: #000;
+                opacity: .5;
+            }
+        </style>
+        `);
+    };
 
     return;
 }

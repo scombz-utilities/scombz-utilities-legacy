@@ -24,6 +24,10 @@ function save_options() {
     var lmsWidth = document.getElementById('lmsWidth').value;
     var layoutHome = document.getElementById('layoutHome').checked;
     var nickname = document.getElementById('nickname').value;
+    var timesBtnValue = document.getElementById('timesBtnValue').value;
+    var sliderBarMax = document.getElementById('sliderBarMax').value;
+    var tasklistTranslate = document.getElementById('tasklistTranslate').value;
+    var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -47,6 +51,10 @@ function save_options() {
         displayName : displayName,
         layoutHome : layoutHome,
         nickname : nickname,
+        timesBtnValue : timesBtnValue,
+        sliderBarMax : sliderBarMax,
+        tasklistTranslate : tasklistTranslate,
+        fixHeadShadow : fixHeadShadow,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -83,7 +91,11 @@ function save_options() {
         styleNowPeriod: true,
         displayName: false,
         layoutHome:true,
-        nickname: "",
+        nickname: '',
+        timesBtnValue:'mode1',
+        sliderBarMax: 600,
+        tasklistTranslate: 0,
+        fixHeadShadow: true,
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -113,6 +125,10 @@ function save_options() {
         document.getElementById('displayName').checked = items.displayName;
         document.getElementById('layoutHome').checked = items.layoutHome;
         document.getElementById('nickname').value = items.nickname;
+        document.getElementById('timesBtnValue').value = items.timesBtnValue;
+        document.getElementById('sliderBarMax').value = items.sliderBarMax;
+        document.getElementById('tasklistTranslate').value = items.tasklistTranslate;
+        document.getElementById('fixHeadShadow').checked = items.fixHeadShadow;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
@@ -139,3 +155,5 @@ function save_options() {
             },1000);
         });
     }
+    //CSSエディタ
+    
