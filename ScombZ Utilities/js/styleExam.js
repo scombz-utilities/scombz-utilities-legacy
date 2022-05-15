@@ -106,6 +106,20 @@ function styleExam(){
             }
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
+            //Ctrl+Sで自動保存
+            $(window).bind('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch (String.fromCharCode(e.which).toLowerCase()) {
+                    case 's':
+                        e.preventDefault();
+                        const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
+                        if($saveBtn){
+                            $saveBtn.click();
+                        }
+                        break;
+                    }
+                }
+            });
         }
         //テスト提出確認画面
         if(location.href == "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
