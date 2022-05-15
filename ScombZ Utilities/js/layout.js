@@ -266,3 +266,20 @@ function fixHeadShadow(){
     }
     return;
 }
+//カスタムCSS
+function customizeCSS(){
+    chrome.storage.local.get({
+        customcss: null
+    },function(items){
+        if(items.customcss){
+            if(document.head){
+                document.head.insertAdjacentHTML("beforeEnd",`
+                <style type="text/css">
+                ${items.customcss}
+                </style>
+                `);
+            }
+        }
+    });
+    return;
+}

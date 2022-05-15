@@ -155,5 +155,3 @@ function save_options() {
             },1000);
         });
     }
-    //CSSエディタ
-    

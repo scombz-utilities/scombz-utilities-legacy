@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <title>ScombZ Utilities Custom CSS Settings</title>
+        <link rel="stylesheet" href="lib/codemirror.css">
+        <link rel="stylesheet" href="addon/hint/show-hint.css">
+        <link rel="stylesheet" href="theme/panda-syntax.css">
+        <link rel="stylesheet" href="addon/lint/lint.css">
+        <link rel="stylesheet" href="addon/dialog/dialog.css">
+        <link rel="stylesheet" href="addon/search/matchesonscrollbar.css">
+        <script src="../lib/jquery/jquery-3.6.0.min.js"></script>
+        <script src="lib/codemirror.js"></script>
+        <script src="mode/css/css.js"></script>
+
+        <script src="addon/dialog/dialog.js"></script>
+        <script src="addon/display/fullscreen.js"></script>
+        <script src="addon/edit/closebrackets.js"></script>
+        <script src="addon/edit/matchbrackets.js"></script>
+        <script src="addon/hint/show-hint.js"></script>
+        <script src="addon/hint/css-hint.js"></script>
+        <script src="addon/lint/csslint.js"></script>
+        <script src="addon/lint/lint.js"></script>
+        <script src="addon/lint/css-lint.js"></script>
+        <script src="addon/scroll/annotatescrollbar.js"></script>
+        <script src="addon/search/searchcursor.js"></script>
+        <script src="addon/search/match-highlighter.js"></script>
+        <script src="addon/search/search.js"></script>
+        <script src="addon/search/matchesonscrollbar.js"></script>
+        <script src="addon/search/jump-to-line.js"></script>
+        <script src="addon/selection/active-line.js"></script>
+        <style>
+            .page_header{
+                height:130px;
+            }
+            .CodeMirror{
+                margin-top:20px;
+                width:100%;
+                font-size:16px;
+                height:calc(100vh - 170px);
+                border:1px solid #ccc;
+            }
+            .CodeMirror-hints{
+                font-size:14px;
+            }
+            .cm-matchhighlight {background-color: #ccf4}
+            .CodeMirror-selection-highlight-scrollbar {
+                background-color: #66f;
+            }
+            dt {font-family: monospace; color: #666;}
+            .CodeMirror-selected {background-color: #CCC4 !important;}
+            a{
+                color:#000;
+            }
+            h1{margin:0;}
+        </style>
+    </head>
+    <body>
+        <div class="page_header">
+            <h1>カスタムCSS</h1>
+            <div><a href="./options.html">設定に戻る</a></div>
+            <p>Ctrl+Space:自動補完　Ctrl+S:保存　F11:全画面(Escで閉じる) Ctrl+Click:マルチカーソル Alt+F:検索 Shift+Ctrl+F:置換 </p>
+            <input type="button" value="SAVE" id="saveBtn"><div id="savelog" style="height:19px;padding:0;margin:0;font-size: 18px;"></div>
+        </div>
+        <textarea id="editor_js" rows="30" cols="50"></textarea>
+        <script src="custom.js"></script>
+    </body>
+</html>
