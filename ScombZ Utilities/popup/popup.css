@@ -22,11 +22,13 @@ h1{
     color: #000;
 }
 .footer{
-    padding-top:10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     background-color:#ddd;
     width: 100%;
-    height:30px;
+    height:40px;
     margin: 0;
 }
 .settings{
@@ -37,25 +39,18 @@ h1{
 h1{
     margin-bottom:15px;
 }
-.setting-button{
-    display: grid;
-    place-items: center;
-    width:120px;
-    height:40px;
-    background-color:#585;
-    color:#fff;
-    border-radius:5px;
-    font-size: 14px;
-}
-.setting-button:hover{
-    background-color:#474;
-}
 #go-to-options{
-    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1.0;
 }
-.setting-icon{
-    width:20px;
-    height:20px;
+#go-to-options:hover{
+    opacity: 0.85;
+    cursor: pointer;
 }
 
 #weekdayTabsContainer{
@@ -82,8 +77,6 @@ h1{
 }
 #timetable{
     width: 100%;
-    border-bottom: 1px lightgray solid;
-    margin-bottom: 10px;
 }
 .timetable-row{
     display: flex;
@@ -91,23 +84,23 @@ h1{
     min-height: 48px;
     padding: 0 4px;
     box-sizing: border-box;
-}
-.timetable-row:not(:last-child){
     border-bottom: 1px lightgray solid;
 }
-.timetable-row:hover{
-    background-color: rgba(0, 0, 0, 0.02);
+.timetable-row.intensive-subjects{
+    margin-top: 12px;
+    border-top: 1px lightgray solid;
 }
 .timetable-time{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70px;
+    width: 80px;
     margin-right: 12px;
 }
 .time-term{
     font-size: x-small;
     color: gray;
+    white-space: nowrap;
 }
 .subjects-container{
     width: 100%;
@@ -120,10 +113,26 @@ h1{
     flex-direction: column;
     justify-content: center;
 }
+.subject-name{
+    display: flex;
+}
 .subject-name a{
     color: #000;
     text-decoration: none;
+    white-space: nowrap;
 }
 .subject-name a:hover{
     text-decoration: underline;
+}
+.subject-classroom{
+    color: gray;
+    padding-left: 12px;
+    display: -webkit-box;
+    width: auto;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+}
+.subject-classroom:hover{
+    -webkit-line-clamp: unset;
 }

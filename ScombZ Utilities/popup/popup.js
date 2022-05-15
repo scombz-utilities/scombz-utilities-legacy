@@ -104,10 +104,32 @@ function renderWeekTimetable(timetableData, weekday){
                 let subject = weekTimetableData[i][j];
                 let subjectDataElement = document.createElement('div');
                 subjectDataElement.classList = isQuarter ? 'subject quarter' : 'subject';
-                subjectDataElement.innerHTML = `<div class='subject-name'><a href='https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${subject.id}' target='_blank' rel='noopener noreferrer'>${escapeHtml(subject.name)}</div>`
+                subjectDataElement.innerHTML = `<div class='subject-name'><a href='https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${subject.id}' target='_blank' rel='noopener noreferrer'>${escapeHtml(subject.name)}</a><span class='subject-classroom'>${escapeHtml(subject.classroom ? ' - ' + subject.classroom : '')}</span></div>`;
                 subjectsContainerElement.appendChild(subjectDataElement);
             }
         }
+        rowElement.appendChild(subjectsContainerElement);
+
+        timetableElement.appendChild(rowElement);
+    }
+
+    if(intensiveSubjectsData.length > 0){
+        let rowElement = document.createElement('div');
+        rowElement.classList = 'timetable-row intensive-subjects';
+
+        let timeDataElement = document.createElement('div');
+        timeDataElement.classList = 'timetable-time';
+        timeDataElement.innerHTML = `<span class='time-number'>その他</span><span class='time-term'>曜日時限不定など</span>`;
+        rowElement.appendChild(timeDataElement);
+
+        let subjectsContainerElement = document.createElement('div');
+        subjectsContainerElement.classList = 'subjects-container';
+        intensiveSubjectsData.forEach(subject => {
+            let subjectDataElement = document.createElement('div');
+            subjectDataElement.classList ='subject';
+            subjectDataElement.innerHTML = `<div class='subject-name'><a href='https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${subject.id}' target='_blank' rel='noopener noreferrer'>${escapeHtml(subject.name)}</a><span class='subject-classroom'>${escapeHtml(subject.classroom ? ' - ' + subject.classroom : '')}</span></div>`;
+            subjectsContainerElement.appendChild(subjectDataElement);
+        });
         rowElement.appendChild(subjectsContainerElement);
 
         timetableElement.appendChild(rowElement);
