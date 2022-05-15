@@ -138,7 +138,11 @@ function layoutHome(){
         console.log("homeを検知しました");
         document.head.insertAdjacentHTML("beforeEnd",`
         <style>
-        
+        @media screen and (min-width: 1800px){
+            .portal-link-list-li{
+                min-width:440px;
+            }
+        }
         .downloadFile.roo.portal-banner-list-li-img.portal-banner-img.portal-banner-img-contain{
             transition:opacity 150ms;
         }
@@ -176,6 +180,9 @@ function layoutHome(){
             .portal-right{
                 right: calc(50vw - 625px);
             }
+        }
+        #top_links{
+            overflow: visible;
         }
         </style>
         `);
