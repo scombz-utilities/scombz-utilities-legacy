@@ -212,7 +212,12 @@ function layoutHome(){
                         </dd>
                         <dd class="portal-subblock-link">
                             <div>
-                                <a class="portal-subblock-link-main-a" href="https://supereigo2.sic.shibaura-it.ac.jp/sso/" target="_blank" rel="noopener noreferrer">新スーパー英語 AE3</a>
+                                <a class="portal-subblock-link-main-a" href="https://supereigo2.sic.shibaura-it.ac.jp/sso/" target="_blank" rel="noopener noreferrer">新スーパー英語</a>
+                            </div>
+                        </dd>
+                        <dd class="portal-subblock-link">
+                            <div>
+                                <a class="portal-subblock-link-main-a" href="https://scomb.shibaura-it.ac.jp/portal/dologin" target="_blank" rel="noopener noreferrer">旧Scomb</a>
                             </div>
                         </dd>
                         <dd class="portal-subblock-link">
