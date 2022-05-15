@@ -166,14 +166,18 @@ function styleSidemenu(){
     `);
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
     const $pageHead = document.getElementById('page_head');
-    $pageHead.insertAdjacentHTML('afterBegin',`<a href="javascript:void(0);" onclick='javascript:window.scrollTo({ top: 0, behavior: "smooth" });' class="pagetop-head"></a>`);
-    $pageHead.insertAdjacentHTML('beforeEnd',`
-    <a href="/portal/home" id="pagetop-head-logo"><div class="mainmenu-head-logo"><img src="/sitelogo" class="scombz-icon" alt="Top"></div></a>
-    `);
+    if($pageHead){
+        $pageHead.insertAdjacentHTML('afterBegin',`<a href="javascript:void(0);" onclick='javascript:window.scrollTo({ top: 0, behavior: "smooth" });' class="pagetop-head"></a>`);
+        $pageHead.insertAdjacentHTML('beforeEnd',`
+        <a href="/portal/home" id="pagetop-head-logo"><div class="mainmenu-head-logo"><img src="/sitelogo" class="scombz-icon" alt="Top"></div></a>
+        `);
+    }
     //サイドメニューの開閉ボタンを変える
-    var $closeButton = document.getElementById('sidemenuClose');
+    const $closeButton = document.getElementById('sidemenuClose');
+    if($closeButton){
         $closeButton.classList.add('hamburger-icon');
         $closeButton.innerHTML = '<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>';
+    }
     //お知らせ、アンケートを直リンクにする
     //お知らせ(ついでにborder-topもつけてスタイル直す)
     const $infoButton = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon");
