@@ -81,7 +81,7 @@ function maxWidthOnSubjPage(){
             }
             </style>
             `);
-            console.log(`最大横幅は${items.maxWidthPx}pxに設定されました`);
+            console.log(`最大横幅は${items.maxWidthPx.lms}pxに設定されました`);
         });
     }
     return;
@@ -120,9 +120,9 @@ function styleNowPeriod() {
             for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
                 if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
                     if($yobicolNum*10 + Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML)) -1 == $nowperiod){
-                        $course.style.background ="rgb(91 237 146)";
+                        $course.classList.add("now-period");
                         $course.parentNode.parentNode.style.color ="#000";
-                        $course.innerHTML =`<span style="font-size:6px;font-weight:normal;color:#000;display:inline-block;background-color:#fff;padding:2px;border-radius:10px;transform:translate(-3px,-4px)">NOW</span>`+$course.innerHTML;
+                        $course.innerHTML =`<style>.now-period{background:rgb(91 237 146);}</style><span id="nowPeriod" style="font-size:6px;font-weight:normal;color:#000;display:inline-block;background-color:#fff;padding:2px;border-radius:10px;transform:translate(-3px,-4px)">NOW</span>`+$course.innerHTML;
                         break;
                     }
                 }

@@ -228,7 +228,8 @@ function displayTaskListsOnGrayLayer(){
         TaskGetTime: null,
         tasklistData: null,
         specialSubj: 0,
-        tasklistTranslate: 0
+        tasklistTranslate: 0,
+        deadlinemode: 'absolute-relative'
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             
@@ -253,15 +254,45 @@ function displayTaskListsOnGrayLayer(){
             if(!$tasklistObj[0]){
                 return;
             }
-            if($tasklistObj[0] && $tasklistObj[0].data === null){
+            if(!$tasklistObj[1] && $tasklistObj[0].data === null){
                 kadaiListHTML +=`<div class="subk-line">未提出の課題・テスト一覧はありません。</div>`;
             }else{
+                let deadline='XXXX/XX/XX XX:XX:XX';
                 for(let i=0; $tasklistObj[i] && i<20 ;i++){
+                    if($tasklistObj[i].data === null)continue;
+                    //絶対表示
+                    deadline = $tasklistObj[i].deadline;
+                    if(items.deadlinemode.includes('absoluteShort'))
+                        deadline = $tasklistObj[i].deadline.slice(6,-3);
+                    //相対表示
+                    if(items.deadlinemode.includes('relative')){
+                        if(items.deadlinemode == 'relative'){
+                            const nowUnix = Date.now();
+                            const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
+                            if(relativeDeadline < 120){
+                                deadline = '残り約'+Math.floor(relativeDeadline)+'分';
+                            }else if(relativeDeadline < 60*24){
+                                deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
+                            }else{
+                                deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
+                            }
+                        }else{
+                            const nowUnix = Date.now();
+                            const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
+                            if(relativeDeadline < 120){
+                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
+                            }else if(relativeDeadline < 60*24){
+                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
+                            }else{
+                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
+                            }
+                        }
+                    }
                     kadaiListHTML += `
                     <div class="subk-line">
                         <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
-                        <div class="subk-deadline">${$tasklistObj[i].deadline}</div>
+                        <div class="subk-deadline">${deadline}</div>
                     </div>`;
                 }
             }
@@ -338,6 +369,16 @@ function displayTaskListsOnGrayLayer(){
                 }
                 .subk-column(3n+2){
                     min-width:160px;
+                }
+                .relative-deadline-time{
+                    font-size:80%;
+                    margin-right:20px;
+                    color:red;
+                }
+                @media(max-width:1280px){
+                    .relative-deadline-time{
+                        display:none;
+                    }
                 }
             </style>
             <div class="subtimetableBody" id="subTaskList">

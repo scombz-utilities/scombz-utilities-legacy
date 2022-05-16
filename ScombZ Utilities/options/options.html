@@ -402,6 +402,23 @@
                 </div>
                 <button type="button" class="saveBtn">保存する</button>
             </div>
+            <div class="setting-column">
+                <h3>課題一覧の表示方式</h3>
+                <div class="explains">
+                    メニュー横の課題表示をオンにしていた場合表示される「課題一覧」の、提出期限の表示方式を選択します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">表示方式選択</span><br></span>
+                    <select id="deadlinemode" style="width:350px;">
+                        <option value="relative-absoluteLong">残り時間 + 年/月/日 時:分:秒</option>
+                        <option value="absoluteLong">年/月/日 時:分:秒</option>
+                        <option value="relative-absoluteShort">残り時間 + 月/日 時:分</option>
+                        <option value="absoluteShort">月/日 時:分</option>
+                        <option value="relative">残り時間</option>
+                    </select>
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
         <div id="infomation">
             <hr>
             <h1 class="subtitle">拡張機能情報</h1>
