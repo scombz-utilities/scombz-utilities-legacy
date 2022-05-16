@@ -40,7 +40,8 @@
                 "js/mouseEvents.js",
                 "js/oldScomb.js",
                 "js/getTaskLists.js",
-                "js/supportFunctions.js"
+                "js/supportFunctions.js",
+                "js/notepad.js"
             ]
         }
     ],

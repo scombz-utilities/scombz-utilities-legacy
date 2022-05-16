@@ -4,7 +4,7 @@
     'use strict';
     /*  定数  */
     const $$version = '3.5.3';          //バージョン
-    const $$reacquisitionMin = 15;      //再取得までの時間(分)
+    const $$reacquisitionMin = 0;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -17,7 +17,7 @@
             adfsSkip: true,             //adfsスキップ
             exitSidemenu: true,         //サイドメニューを閉じる
             styleSidemenu: true,        //サイドメニューのスタイル変更
-            styleExamBtn: true,        //テストのボタンスタイル変更
+            styleExamBtn: true,         //テストのボタンスタイル変更
             styleExamImg: false,        //テストの画像スタイル変更
             addSubTimetable: true,      //メニューを展開したときの時間割
             hideCompletedReports: true, //完了したレポートをカレンダーに表示しない
@@ -145,9 +145,10 @@
                 if(items.displayName === true){
                     removeName();
                 }
+                //メモ機能
+                notepad(items.tasklistDisplay);
                 //カスタムCSSの適用
                 customizeCSS();
-                
                 console.log('すべての機能の実行が完了しました');
             }
         });

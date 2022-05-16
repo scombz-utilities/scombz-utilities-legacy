@@ -388,7 +388,8 @@ function displayTaskListsOnGrayLayer(){
             </div>
             </div>
             `;
-            document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+            if(document.getElementById('pageMain'))
+                document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
         }
     });
 }
