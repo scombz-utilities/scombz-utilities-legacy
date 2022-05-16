@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.5.2';          //バージョン
+    const $$version = '3.5.3';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -147,6 +147,7 @@
                 }
                 //カスタムCSSの適用
                 customizeCSS();
+                
                 console.log('すべての機能の実行が完了しました');
             }
         });
