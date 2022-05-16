@@ -1,14 +1,16 @@
 /* ScombZ Utilities */
 /* styleSidemenu.js */
-function styleSidemenu(){
+function styleSidemenu() {
     'use strict';
-    if(document.getElementById('sidemenu') === null){
+    if (document.getElementById('sidemenu') === null) {
         return;
     }
     console.log('サイドメニューのスタイル変更を開始します');
     //head追加
     const $head = document.head;
-    $head.insertAdjacentHTML('beforeEnd',`
+    $head.insertAdjacentHTML(
+        'beforeEnd',
+        `
     <style type="text/css">
         .sidemenu-hide{
             min-width:371px;
@@ -163,43 +165,62 @@ function styleSidemenu(){
             padding:17px 40px 12px 81px;
         }
     </style>
-    `);
+    `
+    );
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
     const $pageHead = document.getElementById('page_head');
-    if($pageHead){
-        $pageHead.insertAdjacentHTML('afterBegin',`<a href="javascript:void(0);" onclick='javascript:window.scrollTo({ top: 0, behavior: "smooth" });' class="pagetop-head"></a>`);
-        $pageHead.insertAdjacentHTML('beforeEnd',`
+    if ($pageHead) {
+        $pageHead.insertAdjacentHTML(
+            'afterBegin',
+            `<a href="javascript:void(0);" onclick='javascript:window.scrollTo({ top: 0, behavior: "smooth" });' class="pagetop-head"></a>`
+        );
+        $pageHead.insertAdjacentHTML(
+            'beforeEnd',
+            `
         <a href="/portal/home" id="pagetop-head-logo"><div class="mainmenu-head-logo"><img src="/sitelogo" class="scombz-icon" alt="Top"></div></a>
-        `);
+        `
+        );
     }
     //サイドメニューの開閉ボタンを変える
     const $closeButton = document.getElementById('sidemenuClose');
-    if($closeButton){
+    if ($closeButton) {
         $closeButton.classList.add('hamburger-icon');
-        $closeButton.innerHTML = '<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>';
+        $closeButton.innerHTML =
+            '<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>';
     }
     //お知らせ、アンケートを直リンクにする
     //お知らせ(ついでにborder-topもつけてスタイル直す)
-    const $infoButton = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon");
-    if ($infoButton){
-        $infoButton.href = "https://scombz.shibaura-it.ac.jp/portal/home/information/list";
-        $infoButton.style.borderTop = "1px solid #CCC";
-        $infoButton.removeAttribute("onclick");
+    const $infoButton = document.querySelector(
+        '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon'
+    );
+    if ($infoButton) {
+        $infoButton.href =
+            'https://scombz.shibaura-it.ac.jp/portal/home/information/list';
+        $infoButton.style.borderTop = '1px solid #CCC';
+        $infoButton.removeAttribute('onclick');
     }
     //アンケート
-    const $questionnaire = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.questionnaire-color.sidemenu-icon.questionnaire-icon");
-    if ($questionnaire){
-        $questionnaire.href = "https://scombz.shibaura-it.ac.jp/portal/surveys/list";
-        $questionnaire.removeAttribute("onclick");
+    const $questionnaire = document.querySelector(
+        '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.questionnaire-color.sidemenu-icon.questionnaire-icon'
+    );
+    if ($questionnaire) {
+        $questionnaire.href =
+            'https://scombz.shibaura-it.ac.jp/portal/surveys/list';
+        $questionnaire.removeAttribute('onclick');
     }
     //お知らせ、アンケートが表示されてないとき追加する
-    const $comBtn = document.querySelector(".sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.community-search-color.sidemenu-icon.search-icon");
-    if($comBtn && !$infoButton && !$questionnaire){
-        $comBtn.insertAdjacentHTML('afterEnd',`
+    const $comBtn = document.querySelector(
+        '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.community-search-color.sidemenu-icon.search-icon'
+    );
+    if ($comBtn && !$infoButton && !$questionnaire) {
+        $comBtn.insertAdjacentHTML(
+            'afterEnd',
+            `
         <br>
         <a class="sidemenu-link sidemenu-lms-link sidemenu-link-txt info-color sidemenu-icon info-icon " href="https://scombz.shibaura-it.ac.jp/portal/home/information/list" style="height: 50px;border-top: 1px solid #CCC;">お知らせ</a>
         <a class="sidemenu-link sidemenu-lms-link sidemenu-link-txt questionnaire-color sidemenu-icon questionnaire-icon" href="https://scombz.shibaura-it.ac.jp/portal/surveys/list" style="height: 50px;">アンケート</a>
-        `);
+        `
+        );
     }
     console.log('サイドメニューのスタイルを変更しました');
     return;

@@ -1,13 +1,24 @@
 /* ScombZ Utilities */
 /* styleExam.js */
 //テスト改善
-function styleExam(){
+function styleExam() {
     'use strict';
-    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/examination/take")){
+    if (
+        location.href.includes(
+            'scombz.shibaura-it.ac.jp/lms/course/examination/take'
+        )
+    ) {
         //テストを受ける前の画面
-        if(document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("受験する")){
+        if (
+            document.querySelector('.block-under-area-btn') &&
+            document
+                .querySelector('.block-under-area-btn')
+                .innerHTML.includes('受験する')
+        ) {
             console.log('テスト受験確認画面');
-            document.head.insertAdjacentHTML('beforeEnd',`
+            document.head.insertAdjacentHTML(
+                'beforeEnd',
+                `
             <style>
             .block-under-area .block-under-area-btn{
                 margin:0 auto;
@@ -40,22 +51,33 @@ function styleExam(){
                 border:1px solid #ccc;
             }
             </style>
-            `);
-            const $submitBtnArea = document.querySelector('.block-under-area-btn');
-            $submitBtnArea.style.maxWidth = "450px";
-            if($submitBtnArea.childElementCount == 2){
+            `
+            );
+            const $submitBtnArea = document.querySelector(
+                '.block-under-area-btn'
+            );
+            $submitBtnArea.style.maxWidth = '450px';
+            if ($submitBtnArea.childElementCount == 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
-            if(document.querySelector('.page-directlink'))
+            if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
         }
         //テスト中の画面
-        if((document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("一時保存する"))){
-            console.log("テスト中画面");
-            window.onbeforeunload = function(e) {
-                e.returnValue = "ページを離れようとしています。よろしいですか？";
-            }
-            document.head.insertAdjacentHTML('beforeEnd',`
+        if (
+            document.querySelector('.block-under-area-btn') &&
+            document
+                .querySelector('.block-under-area-btn')
+                .innerHTML.includes('一時保存する')
+        ) {
+            console.log('テスト中画面');
+            window.onbeforeunload = function (e) {
+                e.returnValue =
+                    'ページを離れようとしています。よろしいですか？';
+            };
+            document.head.insertAdjacentHTML(
+                'beforeEnd',
+                `
             <style>
             .block-under-area .block-under-area-btn{
                 margin:0 auto;
@@ -92,42 +114,56 @@ function styleExam(){
                 display:block;
             }
             </style>
-            `);
-            const $submitBtnArea = document.querySelector('.block-under-area-btn');
-            $submitBtnArea.style.maxWidth = "450px";
-            const $confirmBtn = document.querySelector(".block-under-area .block-under-area-btn .takeConfirm");
-            if($confirmBtn){
-                $confirmBtn.addEventListener("click", function(){
+            `
+            );
+            const $submitBtnArea = document.querySelector(
+                '.block-under-area-btn'
+            );
+            $submitBtnArea.style.maxWidth = '450px';
+            const $confirmBtn = document.querySelector(
+                '.block-under-area .block-under-area-btn .takeConfirm'
+            );
+            if ($confirmBtn) {
+                $confirmBtn.addEventListener('click', function () {
                     window.onbeforeunload = null;
                 });
             }
-            if($submitBtnArea.childElementCount == 2){
+            if ($submitBtnArea.childElementCount == 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
-            if(document.querySelector('.page-directlink'))
+            if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
             //Ctrl+Sで自動保存
-            $(window).bind('keydown', function(e) {
+            $(window).bind('keydown', function (e) {
                 if (e.ctrlKey || e.metaKey) {
                     switch (String.fromCharCode(e.which).toLowerCase()) {
-                    case 's':
-                        e.preventDefault();
-                        const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
-                        if($saveBtn){
-                            $saveBtn.click();
+                        case 's': {
+                            e.preventDefault();
+                            const $saveBtn = document.querySelector(
+                                '.block-under-area .block-under-area-btn .tempSaveBtn'
+                            );
+                            if ($saveBtn) {
+                                $saveBtn.click();
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             });
         }
         //テスト提出確認画面
-        if(location.href == "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
+        if (
+            location.href ==
+            'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
+        ) {
             console.log('テスト提出確認画面');
-            window.onbeforeunload = function(e) {
-                e.returnValue = "ページを離れようとしています。よろしいですか？";
-            }
-            document.head.insertAdjacentHTML('beforeEnd',`
+            window.onbeforeunload = function (e) {
+                e.returnValue =
+                    'ページを離れようとしています。よろしいですか？';
+            };
+            document.head.insertAdjacentHTML(
+                'beforeEnd',
+                `
             <style>
             .block-under-area .block-under-area-btn{
                 margin:0 auto;
@@ -160,26 +196,38 @@ function styleExam(){
                 border:1px solid #ccc;
             }
             </style>
-            `);
-            const $submitBtnArea = document.querySelector('.block-under-area-btn');
-            $submitBtnArea.style.maxWidth = "450px";
-            if($submitBtnArea.childElementCount == 2){
+            `
+            );
+            const $submitBtnArea = document.querySelector(
+                '.block-under-area-btn'
+            );
+            $submitBtnArea.style.maxWidth = '450px';
+            if ($submitBtnArea.childElementCount == 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
-            const $confirmBtnList = document.querySelectorAll(".block-under-area .block-under-area-btn a");
-            for(const $confirmBtn of $confirmBtnList){
-                $confirmBtn.addEventListener("click", function(){
+            const $confirmBtnList = document.querySelectorAll(
+                '.block-under-area .block-under-area-btn a'
+            );
+            for (const $confirmBtn of $confirmBtnList) {
+                $confirmBtn.addEventListener('click', function () {
                     window.onbeforeunload = null;
                 });
             }
-            if(document.querySelector('.page-directlink'))
+            if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
         }
         //テストを受け終わった画面
         //すでに受けたテストを参照する画面
-        if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm") || location.href.includes("takeresult")){
+        if (
+            location.href.includes(
+                'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
+            ) ||
+            location.href.includes('takeresult')
+        ) {
             console.log('テスト完了画面');
-            document.head.insertAdjacentHTML('beforeEnd',`
+            document.head.insertAdjacentHTML(
+                'beforeEnd',
+                `
             <style>
             .block-under-area .block-under-area-btn{
                 margin:0 auto;
@@ -193,58 +241,75 @@ function styleExam(){
                 box-shadow:none;
             }
             </style>
-            `);
-            if(document.querySelector('.page-directlink'))
+            `
+            );
+            if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
-            if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm")){
+            if (
+                location.href.includes(
+                    'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
+                )
+            ) {
                 //提出完了時にAjax通信をして課題一覧を更新
-                console.log("テスト提出完了ページを検出");
-                setTimeout(function(){
+                console.log('テスト提出完了ページを検出');
+                setTimeout(function () {
                     getTaskLists(0);
-                },500);
+                }, 500);
             }
         }
     }
     return;
 }
 
-function styleExamImg(){
+function styleExamImg() {
     'use strict';
-    if (location.href.includes('examination/take') && document.body.clientWidth > 480){
-            console.log('テスト画像改善を実行します');
-            const $exa_contsize = document.getElementById('examQuestionSubblock') || document.getElementById('pageContents');
-            const $exa_examImgList = document.querySelectorAll('.downloadFile');
-            const $exa_cheadList = document.querySelectorAll('.contents-header');
-            const $exa_img = document.querySelector('.exam-question-img');
-            const $exa_footer = document.getElementById('page_foot');
-            const $exa_timer = document.getElementById('examTimer');
-            if ($exa_footer){
-                $exa_footer.style.visibility = 'hidden';
-            }
+    if (
+        location.href.includes('examination/take') &&
+        document.body.clientWidth > 480
+    ) {
+        console.log('テスト画像改善を実行します');
+        const $exa_contsize =
+            document.getElementById('examQuestionSubblock') ||
+            document.getElementById('pageContents');
+        const $exa_examImgList = document.querySelectorAll('.downloadFile');
+        const $exa_cheadList = document.querySelectorAll('.contents-header');
+        const $exa_img = document.querySelector('.exam-question-img');
+        const $exa_footer = document.getElementById('page_foot');
+        const $exa_timer = document.getElementById('examTimer');
+        if ($exa_footer) {
+            $exa_footer.style.visibility = 'hidden';
+        }
 
-            for (const $exa_chead of $exa_cheadList){
-                $exa_chead.style.width = '8%';
-                $exa_chead.style.background = '#f6f6ff';
+        for (const $exa_chead of $exa_cheadList) {
+            $exa_chead.style.width = '8%';
+            $exa_chead.style.background = '#f6f6ff';
+        }
+        if ($exa_img) {
+            for (const $exa_examImg of $exa_examImgList) {
+                $exa_examImg.style.maxHeight = '100vh';
+                $exa_examImg.style.boxShadow = '0 0 1px #000000 ';
             }
-            if ($exa_img){
-                for (const $exa_examImg of $exa_examImgList){
-                    $exa_examImg.style.maxHeight = '100vh';
-                    $exa_examImg.style.boxShadow= '0 0 1px #000000 ';
-                }
-                $exa_examImgList[0].style.maxHeight = '95vh';
-                $exa_examImgList[0].style.maxWidth = '50vw';
-                $exa_examImgList[0].style.position = 'fixed';
-                $exa_examImgList[0].style.right= '1px';
-                $exa_examImgList[0].style.top= '5vh';
-                $exa_examImgList[0].style.boxShadow= '0 0 1px #000000 ';
-                if ($exa_contsize) {
-                    $exa_contsize.style.width = document.body.clientWidth - $exa_examImgList[0].clientWidth - 3 + 'px';
-                }
-                if($exa_timer){
-                $exa_timer.style.width = document.body.clientWidth - $exa_examImgList[0].clientWidth + 'px';
-                }
+            $exa_examImgList[0].style.maxHeight = '95vh';
+            $exa_examImgList[0].style.maxWidth = '50vw';
+            $exa_examImgList[0].style.position = 'fixed';
+            $exa_examImgList[0].style.right = '1px';
+            $exa_examImgList[0].style.top = '5vh';
+            $exa_examImgList[0].style.boxShadow = '0 0 1px #000000 ';
+            if ($exa_contsize) {
+                $exa_contsize.style.width =
+                    document.body.clientWidth -
+                    $exa_examImgList[0].clientWidth -
+                    3 +
+                    'px';
             }
-            console.log('テスト画像改善の実行が完了しました');
+            if ($exa_timer) {
+                $exa_timer.style.width =
+                    document.body.clientWidth -
+                    $exa_examImgList[0].clientWidth +
+                    'px';
+            }
+        }
+        console.log('テスト画像改善の実行が完了しました');
     }
     return;
 }

@@ -1,9 +1,9 @@
 /* ScombZ Utilities */
 /* background.js */
 //オプションページを開く
-chrome.runtime.onMessage.addListener(function(message) {
+chrome.runtime.onMessage.addListener(function (message) {
     switch (message.action) {
-        case "openOptionsPage":
+        case 'openOptionsPage':
             openOptionsPage();
             break;
         default:
@@ -11,6 +11,6 @@ chrome.runtime.onMessage.addListener(function(message) {
     }
 });
 
-function openOptionsPage(){
+function openOptionsPage() {
     chrome.runtime.openOptionsPage();
 }

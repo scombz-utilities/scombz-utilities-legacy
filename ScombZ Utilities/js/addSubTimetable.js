@@ -2,24 +2,24 @@
 /* addSubTimetable.js */
 
 //LMS取得&表示
-function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
+function subTimetable($timetableDisplay, $tasklistDisplay, $$version) {
     'use strict';
-    if(document.getElementById('pageMain') === null){
+    if (document.getElementById('pageMain') === null) {
         return;
     }
-    if($timetableDisplay === true){
-        if(location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable'){
+    if ($timetableDisplay === true) {
+        if (location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable') {
             getSubTimetable();
         }
         console.log('グレーレイヤー&時間割を追加します');
         displaySubTimetable($$version);
         console.log('グレーレイヤー&時間割を追加しました');
-    }else{
+    } else {
         console.log('グレーレイヤーを追加します');
         displayGrayLayer($$version);
         console.log('グレーレイヤーを追加しました');
     }
-    if( $tasklistDisplay === true ){
+    if ($tasklistDisplay === true) {
         console.log('メニュー課題表示を開始します');
         displayTaskListsOnGrayLayer();
         console.log('メニュー横に課題を表示しました');
@@ -30,59 +30,82 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
 //------------LMS情報取得------------
 //全角数字→半角数字にする関数
 function han2Zenkaku($str) {
-    return $str.replace(/[０-９]/g, function(s) {
-        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    return $str.replace(/[０-９]/g, function (s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
     });
 }
 //LMSから情報を取得してJSON化する関数
-function getSubTimetable(){
+function getSubTimetable() {
     console.log('LMSを取得開始します');
     const $courseList = document.querySelectorAll('.timetable-course-top-btn');
-    if($courseList[0]){
+    if ($courseList[0]) {
         //JSON生成
         const $timetableData = [];
         let futei = 0;
-        for(const $course of $courseList) {
-            const $timetableClassData={};
-            for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
-                if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
-                    $timetableClassData.day = $yobicolNum,
-                    $timetableClassData.time = Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML));
-                    if(!$timetableClassData.time){
-                        $timetableClassData.time = Number($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML.slice(-1));
+        for (const $course of $courseList) {
+            const $timetableClassData = {};
+            for (let $yobicolNum = 1; $yobicolNum < 7; $yobicolNum++) {
+                if (
+                    $course.parentNode.parentNode.className.indexOf(
+                        $yobicolNum + '-yobicol'
+                    ) != -1
+                ) {
+                    ($timetableClassData.day = $yobicolNum),
+                        ($timetableClassData.time = Number(
+                            jigenInt(
+                                $course.parentNode.parentNode.parentNode
+                                    .firstElementChild.innerHTML
+                            )
+                        ));
+                    if (!$timetableClassData.time) {
+                        $timetableClassData.time = Number(
+                            $course.parentNode.parentNode.parentNode.firstElementChild.innerHTML.slice(
+                                -1
+                            )
+                        );
                     }
                     break;
                 }
-                if($yobicolNum == 6){
+                if ($yobicolNum == 6) {
                     $timetableClassData.day = -1;
                     $timetableClassData.time = -1; // 曜日時限不定履修
                     futei++;
                 }
             }
-            $timetableClassData.id = $course.getAttribute("id");
+            $timetableClassData.id = $course.getAttribute('id');
             $timetableClassData.name = $course.innerHTML;
-            $timetableClassData.classroom = $course.nextElementSibling.firstElementChild.getAttribute("title");
-            const $courseTeacherList = $course.nextElementSibling.firstElementChild.querySelectorAll("span");
-            const $courseTeachers =[];
-            for(const $teacher of $courseTeacherList){
-                if(!($teacher.hasAttribute("class"))){
-                    $courseTeachers.push($teacher.innerHTML.replace(",  ",""));
+            $timetableClassData.classroom =
+                $course.nextElementSibling.firstElementChild.getAttribute(
+                    'title'
+                );
+            const $courseTeacherList =
+                $course.nextElementSibling.firstElementChild.querySelectorAll(
+                    'span'
+                );
+            const $courseTeachers = [];
+            for (const $teacher of $courseTeacherList) {
+                if (!$teacher.hasAttribute('class')) {
+                    $courseTeachers.push($teacher.innerHTML.replace(',  ', ''));
                 }
             }
-            $timetableClassData.teacher= $courseTeachers;
+            $timetableClassData.teacher = $courseTeachers;
             $timetableData.push($timetableClassData);
-        } 
+        }
         $timetableData.push({
-            day:-2,
-            time:-2,
-            name:"授業は存在しません"
+            day: -2,
+            time: -2,
+            name: '授業は存在しません'
         });
-        console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
-        chrome.storage.local.set({
-            timetableData : encodeURIComponent(JSON.stringify($timetableData)),
-            specialSubj : futei
-        },function(){
-            console.log('ChromeLocalStorageに保存しました');
+        console.log('LMSを取得しました\n\n' + JSON.stringify($timetableData));
+        chrome.storage.local.set(
+            {
+                timetableData: encodeURIComponent(
+                    JSON.stringify($timetableData)
+                ),
+                specialSubj: futei
+            },
+            function () {
+                console.log('ChromeLocalStorageに保存しました');
             }
         );
         //JSON生成完了
@@ -91,20 +114,26 @@ function getSubTimetable(){
 }
 
 //------------LMS情報表示------------
-function displaySubTimetable($$version){
+function displaySubTimetable($$version) {
     'use strict';
-    chrome.storage.local.get({
-        timetableData : null
-    },function(item){
-        if(item.timetableData == null){
-            console.log('時間割情報が存在しません');
-            displayGrayLayer($$version);
-        }else{
-            const $timetableDataStr = decodeURIComponent(item.timetableData);
-            console.log('ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします');
-            const $timetableData = JSON.parse($timetableDataStr);
-            console.log('JSONファイルを読み込みました'+$timetableDataStr);
-            let $subTimetable =`
+    chrome.storage.local.get(
+        {
+            timetableData: null
+        },
+        function (item) {
+            if (item.timetableData == null) {
+                console.log('時間割情報が存在しません');
+                displayGrayLayer($$version);
+            } else {
+                const $timetableDataStr = decodeURIComponent(
+                    item.timetableData
+                );
+                console.log(
+                    'ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします'
+                );
+                const $timetableData = JSON.parse($timetableDataStr);
+                console.log('JSONファイルを読み込みました' + $timetableDataStr);
+                let $subTimetable = `
             <style type="text/css">
                 .SubTimetable {
                     text-align:center;
@@ -157,148 +186,233 @@ function displaySubTimetable($$version){
                     </tr>
                 </thead>
                 <tbody>`;
-            console.log('LMSを表示します');
-            let num=0;
-            //通常授業
-            for(let i=0; i<7; i++){ //i=時限
-                $subTimetable+='<tr>';
-                for(let j=0; j<7; j++){ //j=曜日
-                    let $subjData = (j==0) ? i+1 : '';
-                    if( $timetableData[num].day == j && $timetableData[num].time == i+1 ){
-                        //2Q、4Qのことを考える
-                        if( $timetableData[num+1].day == j && $timetableData[num+1].time == i+1 ){
-                            console.log('クォーター制授業を検出しました 曜日:'+j+' 時間:'+i);
-                            $subjData = `
-                            <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${$timetableData[num].name}</span></a>
-                            <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num+1].id}" class="SubTimetable" style="color:#000000;text-decoration:none;margin-top:1px;border-top:1px solid #ccc; white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${$timetableData[num+1].name}</span></a>`;
+                console.log('LMSを表示します');
+                let num = 0;
+                //通常授業
+                for (let i = 0; i < 7; i++) {
+                    //i=時限
+                    $subTimetable += '<tr>';
+                    for (let j = 0; j < 7; j++) {
+                        //j=曜日
+                        let $subjData = j == 0 ? i + 1 : '';
+                        if (
+                            $timetableData[num].day == j &&
+                            $timetableData[num].time == i + 1
+                        ) {
+                            //2Q、4Qのことを考える
+                            if (
+                                $timetableData[num + 1].day == j &&
+                                $timetableData[num + 1].time == i + 1
+                            ) {
+                                console.log(
+                                    'クォーター制授業を検出しました 曜日:' +
+                                        j +
+                                        ' 時間:' +
+                                        i
+                                );
+                                $subjData = `
+                            <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${
+                                $timetableData[num].id
+                            }" class="SubTimetable" style="color:#000000;text-decoration:none;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
+                                    $timetableData[num].name
+                                }</span></a>
+                            <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${
+                                $timetableData[num + 1].id
+                            }" class="SubTimetable" style="color:#000000;text-decoration:none;margin-top:1px;border-top:1px solid #ccc; white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
+                                    $timetableData[num + 1].name
+                                }</span></a>`;
+                                num++;
+                            } else {
+                                //2Q,4Qが存在しないとき
+                                console.log(
+                                    '通常授業を検出しました 曜日:' +
+                                        j +
+                                        ' 時間:' +
+                                        i
+                                );
+                                $subjData = `<a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a>`;
+                            }
                             num++;
-                        }else{//2Q,4Qが存在しないとき
-                            console.log('通常授業を検出しました 曜日:'+j+' 時間:'+i);
-                            $subjData = `<a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a>`;
                         }
-                        num++;
-                    }            
-                    $subTimetable+=`<td class="SubTimetable">${$subjData}</td>`;
+                        $subTimetable += `<td class="SubTimetable">${$subjData}</td>`;
+                    }
+                    $subTimetable += '</tr>';
                 }
-                $subTimetable+='</tr>';
-            }
-            $subTimetable += `</tbody></table></div>`;
-            //曜日時間不定授業
-            if($timetableData[num].day != -1){
-                console.log('読み取り完了 課外授業なし day:'+$timetableData[num].day);
-            }else{
-                console.log('曜日時間不定授業・集中講座を検出しました');
-                $subTimetable+= `
+                $subTimetable += `</tbody></table></div>`;
+                //曜日時間不定授業
+                if ($timetableData[num].day != -1) {
+                    console.log(
+                        '読み取り完了 課外授業なし day:' +
+                            $timetableData[num].day
+                    );
+                } else {
+                    console.log('曜日時間不定授業・集中講座を検出しました');
+                    $subTimetable += `
                 <div class="subtimetableBodyCulm"><table class="SubTimetable" style="margin-top:10px;">
                 <tr class="SubTimetable">
                     <th class="SubTimetable">その他の授業</th>
                 </tr>`;
-                for(;$timetableData[num].day == -1;num++){
-                $subTimetable+=`
+                    for (; $timetableData[num].day == -1; num++) {
+                        $subTimetable += `
                     <tr>
                         <td class="SubTimetable" style="background:#EDF3F7;width:calc((100vw - 300px)/5);height:4vh;"><a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a></td>
                     </tr>`;
+                    }
+                    $subTimetable += `</table></div>`;
+                    console.log(
+                        '読み取り完了 課外授業あり day:' +
+                            $timetableData[num].day
+                    );
                 }
-                $subTimetable+=`</table></div>`;
-                console.log('読み取り完了 課外授業あり day:'+$timetableData[num].day);
-            }
-            $subTimetable+=`</div>`;
-            console.log('時間割の生成に成功しました\nコマ数:'+num);
+                $subTimetable += `</div>`;
+                console.log('時間割の生成に成功しました\nコマ数:' + num);
 
-            document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
+                document.getElementById('pageMain').insertAdjacentHTML(
+                    'beforeEnd',
+                    `
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-            `+$subTimetable);
+            ` + $subTimetable
+                );
+            }
         }
-    });
+    );
     return;
 }
 //時間割のないグレーレイヤーの表示関数
-function displayGrayLayer($$version){
+function displayGrayLayer($$version) {
     'use strict';
-    document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
+    document.getElementById('pageMain').insertAdjacentHTML(
+        'beforeEnd',
+        `
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-            `);
+            `
+    );
     return;
 }
 //課題一覧の表示
-function displayTaskListsOnGrayLayer(){
-    chrome.storage.local.get({
-        TaskGetTime: null,
-        tasklistData: null,
-        specialSubj: 0,
-        tasklistTranslate: 0,
-        deadlinemode: 'absolute-relative'
-    },function(items){
-        if(items.TaskGetTime && items.tasklistData){
-            
-            console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
-            //JSONファイル展開
-            console.log(decodeURIComponent(items.tasklistData));
-            const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
-            //JSONから生成
-            const $subTimetable = document.getElementsByClassName("subtimetableBody");
-            let timetableHeight = 5;
-            let timetableminHeight = 0;
-            if($subTimetable[0]){
-                timetableHeight = 40;
-                timetableminHeight = 350;
-                if(Number(items.specialSubj) > 0){
-                    timetableHeight += 10*Number(items.specialSubj);
-                    timetableminHeight += 60*Number(items.specialSubj);
+function displayTaskListsOnGrayLayer() {
+    chrome.storage.local.get(
+        {
+            TaskGetTime: null,
+            tasklistData: null,
+            specialSubj: 0,
+            tasklistTranslate: 0,
+            deadlinemode: 'absolute-relative'
+        },
+        function (items) {
+            if (items.TaskGetTime && items.tasklistData) {
+                console.log(
+                    'ChromeLocalStorageを読み込みました\n課題一覧を表示します'
+                );
+                //JSONファイル展開
+                console.log(decodeURIComponent(items.tasklistData));
+                const $tasklistObj = JSON.parse(
+                    decodeURIComponent(items.tasklistData)
+                );
+                //JSONから生成
+                const $subTimetable =
+                    document.getElementsByClassName('subtimetableBody');
+                let timetableHeight = 5;
+                let timetableminHeight = 0;
+                if ($subTimetable[0]) {
+                    timetableHeight = 40;
+                    timetableminHeight = 350;
+                    if (Number(items.specialSubj) > 0) {
+                        timetableHeight += 10 * Number(items.specialSubj);
+                        timetableminHeight += 60 * Number(items.specialSubj);
+                    }
                 }
-            }
-            //メイン生成部分
-            let kadaiListHTML="";
-            if(!$tasklistObj[0]){
-                return;
-            }
-            if(!$tasklistObj[1] && $tasklistObj[0].data === null){
-                kadaiListHTML +=`<div class="subk-line">未提出の課題・テスト一覧はありません。</div>`;
-            }else{
-                let deadline='XXXX/XX/XX XX:XX:XX';
-                for(let i=0; $tasklistObj[i] && i<20 ;i++){
-                    if($tasklistObj[i].data === null)continue;
-                    //絶対表示
-                    deadline = $tasklistObj[i].deadline;
-                    if(items.deadlinemode.includes('absoluteShort'))
-                        deadline = $tasklistObj[i].deadline.slice(6,-3);
-                    //相対表示
-                    if(items.deadlinemode.includes('relative')){
-                        if(items.deadlinemode == 'relative'){
-                            const nowUnix = Date.now();
-                            const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 120){
-                                deadline = '残り約'+Math.floor(relativeDeadline)+'分';
-                            }else if(relativeDeadline < 60*24){
-                                deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
-                            }else{
-                                deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
-                            }
-                        }else{
-                            const nowUnix = Date.now();
-                            const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 120){
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
-                            }else if(relativeDeadline < 60*24){
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
-                            }else{
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
+                //メイン生成部分
+                let kadaiListHTML = '';
+                if (!$tasklistObj[0]) {
+                    return;
+                }
+                if (!$tasklistObj[1] && $tasklistObj[0].data === null) {
+                    kadaiListHTML += `<div class="subk-line">未提出の課題・テスト一覧はありません。</div>`;
+                } else {
+                    let deadline = 'XXXX/XX/XX XX:XX:XX';
+                    for (let i = 0; $tasklistObj[i] && i < 20; i++) {
+                        if ($tasklistObj[i].data === null) continue;
+                        //絶対表示
+                        deadline = $tasklistObj[i].deadline;
+                        if (items.deadlinemode.includes('absoluteShort'))
+                            deadline = $tasklistObj[i].deadline.slice(6, -3);
+                        //相対表示
+                        if (items.deadlinemode.includes('relative')) {
+                            if (items.deadlinemode == 'relative') {
+                                const nowUnix = Date.now();
+                                const relativeDeadline =
+                                    (Number(
+                                        Date.parse($tasklistObj[i].deadline)
+                                    ) -
+                                        Number(nowUnix)) /
+                                    60000;
+                                if (relativeDeadline < 120) {
+                                    deadline =
+                                        '残り約' +
+                                        Math.floor(relativeDeadline) +
+                                        '分';
+                                } else if (relativeDeadline < 60 * 24) {
+                                    deadline =
+                                        '残り約' +
+                                        Math.floor(relativeDeadline / 60) +
+                                        '時間';
+                                } else {
+                                    deadline =
+                                        '残り約' +
+                                        Math.floor(
+                                            relativeDeadline / (60 * 24)
+                                        ) +
+                                        '日';
+                                }
+                            } else {
+                                const nowUnix = Date.now();
+                                const relativeDeadline =
+                                    (Number(
+                                        Date.parse($tasklistObj[i].deadline)
+                                    ) -
+                                        Number(nowUnix)) /
+                                    60000;
+                                if (relativeDeadline < 120) {
+                                    deadline =
+                                        '<span class="relative-deadline-time">残り約' +
+                                        Math.floor(relativeDeadline) +
+                                        '分</span>' +
+                                        deadline;
+                                } else if (relativeDeadline < 60 * 24) {
+                                    deadline =
+                                        '<span class="relative-deadline-time">残り約' +
+                                        Math.floor(relativeDeadline / 60) +
+                                        '時間</span>' +
+                                        deadline;
+                                } else {
+                                    deadline =
+                                        '<span class="relative-deadline-time">残り約' +
+                                        Math.floor(
+                                            relativeDeadline / (60 * 24)
+                                        ) +
+                                        '日</span>' +
+                                        deadline;
+                                }
                             }
                         }
-                    }
-                    kadaiListHTML += `
+                        kadaiListHTML += `
                     <div class="subk-line">
                         <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
                         <div class="subk-deadline">${deadline}</div>
                     </div>`;
+                    }
                 }
-            }
-            const lastgettime =  `${new Date(items.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
-            //合体させてHTMLをつくる
-            let kadaiHTML =`
+                const lastgettime = `${new Date(
+                    items.TaskGetTime
+                ).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime)
+                    .toLocaleTimeString('ja-JP')
+                    .slice(0, -3)}`;
+                //合体させてHTMLをつくる
+                let kadaiHTML = `
             <style>
                 #subTaskList{
                     top: max(${timetableHeight}vh,${timetableminHeight}px);
@@ -388,7 +502,10 @@ function displayTaskListsOnGrayLayer(){
             </div>
             </div>
             `;
-            document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+                document
+                    .getElementById('pageMain')
+                    .insertAdjacentHTML('beforeend', kadaiHTML);
+            }
         }
-    });
+    );
 }
