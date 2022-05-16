@@ -4,7 +4,7 @@
     'use strict';
     /*  定数  */
     const $$version = '3.5.2';          //バージョン
-    const $$reacquisitionMin = 0;      //再取得までの時間(分)
+    const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
