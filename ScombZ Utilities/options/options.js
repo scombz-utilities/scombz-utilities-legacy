@@ -28,6 +28,7 @@ function save_options() {
     var sliderBarMax = document.getElementById('sliderBarMax').value;
     var tasklistTranslate = document.getElementById('tasklistTranslate').value;
     var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
+    var deadlinemode = document.getElementById('deadlinemode').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -55,6 +56,7 @@ function save_options() {
         sliderBarMax : sliderBarMax,
         tasklistTranslate : tasklistTranslate,
         fixHeadShadow : fixHeadShadow,
+        deadlinemode : deadlinemode,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -96,6 +98,7 @@ function save_options() {
         sliderBarMax: 600,
         tasklistTranslate: 0,
         fixHeadShadow: true,
+        deadlinemode: 'relative-absoluteLong',
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -129,6 +132,7 @@ function save_options() {
         document.getElementById('sliderBarMax').value = items.sliderBarMax;
         document.getElementById('tasklistTranslate').value = items.tasklistTranslate;
         document.getElementById('fixHeadShadow').checked = items.fixHeadShadow;
+        document.getElementById('deadlinemode').value = items.deadlinemode;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
