@@ -15,6 +15,9 @@ function getTasksOnTaskpage(){
     const $taskList = document.getElementById("taskList");
     if($taskList){
         const $taskListsObj = [];
+        $taskListsObj.push({
+            data: null
+        });
         const $tasks = $taskList.querySelectorAll(".result_list_line");
         for(const $task of $tasks){
             const $taskObj = {};
@@ -45,9 +48,9 @@ function getTasksByAdjax($$reacquisitionMin){
         TaskGetTime : 0
     },function(item){
         if(Number(item.TaskGetTime) + $$reacquisitionMin*1000*60 > Number($nowUnix) ){
-            console.log(`前回日時: ${item.TaskGetTime}\n現在日時: ${Number($nowUnix)}\n${$$reacquisitionMin}分経過していないため、再取得をスキップします`);
+            console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}\n${$$reacquisitionMin}分経過していないため、再取得をスキップします`);
         }else{
-            console.log(`前回日時: ${item.TaskGetTime}\n現在日時: ${Number($nowUnix)}`);
+            console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}`);
             console.log("課題取得を開始します");
             //Ajax通信
             //jQueryを使って実装
@@ -63,11 +66,9 @@ function getTasksByAdjax($$reacquisitionMin){
                     function(data) {
                         console.log("課題一覧ページAjax読み込み成功");
                         const $taskListsObj = [];
-                        if ($(data).find(".contents-list.contents-display-flex .no-data").eq(0)){
-                            $taskListsObj.push({
-                                data: null
-                            });
-                        }
+                        $taskListsObj.push({
+                            data: null
+                        });
                         for (let i = 0 ; $(data).find(".result_list_line .course").eq(i).html() ; i++){
                             const $taskObj = {};
                             $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
