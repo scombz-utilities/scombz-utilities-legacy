@@ -18,24 +18,9 @@ function notepad(tasklistDisplay){
     }
     return;
 }
-function addNotepad(){
-    return;
-}
-function removeNotepad(){
-    return;
-}
 function displayNotepad(){
     chrome.storage.local.get({
-        notepadData:[
-            {
-                title: "テストメモ",
-                index: "これはテストです。This is Test."
-            },
-            {
-                title: "OSのミニッツペーパー",
-                index:"提出する。"
-            }
-        ],
+        notepadData:[],
         addSubTimetable: true,
         tasklistTranslate: 0,
         specialSubj: 0,
@@ -244,9 +229,11 @@ function displayNotepad(){
             //保存ボタンをクリックしたとき
             if(noteSaveBtn){
                 noteSaveBtn.addEventListener('click',function(){
+                    let noteInputTitleDataEsc = document.getElementById("noteInputTitle").value.replace(/"|<|>/g,' ').replace("\n","<br>");
+                    let noteInputIndexDataEsc = document.getElementById("noteInputIndex").value.replace(/"|<|>/g,' ').replace("\n","<br>");
                     const newNote = {
-                        title: document.getElementById("noteInputTitle").value,
-                        index: document.getElementById("noteInputIndex").value
+                        title: noteInputTitleDataEsc,
+                        index: noteInputIndexDataEsc
                     };
                     //追加したメモを保存する
                     newNotepadData.push(newNote);
@@ -263,8 +250,8 @@ function displayNotepad(){
                         //すでにメモがあるとき
                         noteLine[noteLine.length-1].insertAdjacentHTML("afterEnd",`
                             <div class="note-line">
-                            <div class="note-title">${document.getElementById("noteInputTitle").value}</div>
-                            <div class="note-index">${document.getElementById("noteInputIndex").value}</div>
+                            <div class="note-title">${noteInputTitleDataEsc}</div>
+                            <div class="note-index">${noteInputIndexDataEsc}</div>
                             <div class="note-kara"></div>
                             </div>
                         `);
@@ -272,8 +259,8 @@ function displayNotepad(){
                         //メモが一個もないとき
                         document.getElementsByClassName("note-head")[0].insertAdjacentHTML("afterEnd",`
                             <div class="note-line">
-                            <div class="note-title">${document.getElementById("noteInputTitle").value}</div>
-                            <div class="note-index">${document.getElementById("noteInputIndex").value}</div>
+                            <div class="note-title">${noteInputTitleDataEsc}</div>
+                            <div class="note-index">${noteInputIndexDataEsc}</div>
                             <div class="note-kara"></div>
                             </div>
                         `);
