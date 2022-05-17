@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.0';          //バージョン
+    const $$version = '3.6.2';          //バージョン
     const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -88,7 +88,7 @@
                 if(items.styleSidemenu === true){
                     styleSidemenu();
                 //メニューを展開したときの時間割 (オフだった場合はグレーレイヤーだけ表示) , メニュー横に課題一覧を表示
-                    subTimetable(items.addSubTimetable , items.tasklistDisplay , $$version);
+                    subTimetable(items.addSubTimetable , items.tasklistDisplay , $$version,$$reacquisitionMin);
                 }
                 //課題一覧取得
                 if( items.tasklistDisplay === true ){

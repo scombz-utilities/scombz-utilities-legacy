@@ -2,7 +2,7 @@
 /* addSubTimetable.js */
 
 //LMS取得&表示
-function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
+function subTimetable($timetableDisplay,$tasklistDisplay,$$version,$$reacquisitionMin){
     'use strict';
     if(document.getElementById('pageMain') === null){
         return;
@@ -21,8 +21,18 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version){
     }
     if( $tasklistDisplay === true ){
         console.log('メニュー課題表示を開始します');
-        displayTaskListsOnGrayLayer();
-        console.log('メニュー横に課題を表示しました');
+        chrome.storage.local.get({
+            TaskGetTime: 0
+        },function(items){
+            if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60 ){
+                setTimeout(function(){
+                    displayTaskListsOnGrayLayer();
+                },1000);
+            }else{
+            displayTaskListsOnGrayLayer();
+            }
+            console.log('メニュー横に課題を表示しました');
+        });
     }
     return;
 }
@@ -225,7 +235,7 @@ function displayGrayLayer($$version){
 //課題一覧の表示
 function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
-        TaskGetTime: null,
+        TaskGetTime: 0,
         tasklistData: null,
         specialSubj: 0,
         tasklistTranslate: 0,
@@ -251,9 +261,6 @@ function displayTaskListsOnGrayLayer(){
             }
             //メイン生成部分
             let kadaiListHTML="";
-            if(!$tasklistObj[0]){
-                return;
-            }
             if(!$tasklistObj[1] && $tasklistObj[0].data === null){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
@@ -305,7 +312,7 @@ function displayTaskListsOnGrayLayer(){
                     transform: translateY(${items.tasklistTranslate}px);
                     background: rgba(255,255,255,0.5);
                     width: 60vw;
-                    min-width: 500px;
+                    min-width: 550px;
                     padding: 2px;
                 }
                 .task-get-time{
