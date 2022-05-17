@@ -16,7 +16,8 @@
     "build": "rollup -c"
   },
   "devDependencies": {
-    "eslint": "8.14.0",
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.0",
