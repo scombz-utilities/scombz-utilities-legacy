@@ -4,7 +4,7 @@
         "es2021": true,
         "webextensions": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
