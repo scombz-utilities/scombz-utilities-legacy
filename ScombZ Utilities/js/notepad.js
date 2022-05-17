@@ -229,8 +229,8 @@ function displayNotepad(){
             //保存ボタンをクリックしたとき
             if(noteSaveBtn){
                 noteSaveBtn.addEventListener('click',function(){
-                    let noteInputTitleDataEsc = document.getElementById("noteInputTitle").value.replace(/"|<|>/g,' ');
-                    let noteInputIndexDataEsc = document.getElementById("noteInputIndex").value.replace(/"|<|>/g,' ');
+                    let noteInputTitleDataEsc = document.getElementById("noteInputTitle").value.replace(/"|<|>/g,' ').replace("\n","<br>");
+                    let noteInputIndexDataEsc = document.getElementById("noteInputIndex").value.replace(/"|<|>/g,' ').replace("\n","<br>");
                     const newNote = {
                         title: noteInputTitleDataEsc,
                         index: noteInputIndexDataEsc

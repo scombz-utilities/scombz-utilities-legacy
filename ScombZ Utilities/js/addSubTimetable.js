@@ -319,6 +319,8 @@ function displayTaskListsOnGrayLayer(){
                     font-weight: normal;
                     font-size: 80%;
                     float:right;
+                    text-decoration:none;
+                    color:#222;
                 }
                 .subk-box{
                     margin:0;
@@ -352,8 +354,12 @@ function displayTaskListsOnGrayLayer(){
                     padding:2px 2px 0px 2px;
                     font-size:14px;
                     margin-left:30px;
+                    max-width:100%;
+                    white-space: nowrap; 
+                    overflow: hidden; 
+                    text-overflow: ellipsis; 
                 }
-                div.subk-link:hover{
+                a.subk-link:hover{
                     background:rgba(0,0,100,0.1);
                 }
                 a.subk-link{
@@ -374,8 +380,9 @@ function displayTaskListsOnGrayLayer(){
                     width:30%;
                     float:left
                 }
-                .subk-column(3n+2){
+                .subk-column:nth-child(3n+2){
                     min-width:160px;
+                    width:calc(70% - 260px);
                 }
                 .relative-deadline-time{
                     font-size:80%;
@@ -386,17 +393,23 @@ function displayTaskListsOnGrayLayer(){
                     .relative-deadline-time{
                         display:none;
                     }
+                    .subk-column:nth-child(3n+2){
+                        width:calc(70% - 160px);
+                    }
                 }
             </style>
             <div class="subtimetableBody" id="subTaskList">
             <div class="subk-box">
-                <div class="subk-head">課題一覧<span class="task-get-time">最終更新:${lastgettime}</span></div>
+                <div class="subk-head">課題一覧<a class="task-get-time" id="reloadTasks" href="javascript:void(0);">最終更新:${lastgettime}</a></div>
                 ${kadaiListHTML}
             </div>
             </div>
             `;
             if(document.getElementById('pageMain'))
                 document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+            document.getElementById('reloadTasks').addEventListener("click",function(){
+                getTaskLists(1);
+            });
         }
     });
 }
