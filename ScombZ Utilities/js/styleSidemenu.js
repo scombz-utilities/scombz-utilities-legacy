@@ -164,6 +164,16 @@ function styleSidemenu(){
         }
     </style>
     `);
+    //LMSページ飛び出る問題
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
+            const reportList = document.getElementById("reportList");
+            if(reportList){
+                setTimeout(() =>{
+                reportList.parentNode.style.height = reportList.clientHeight+'px';
+                reportList.parentNode.previousElementSibling.style.height = reportList.clientHeight+'px';
+                },100);
+            }
+    }
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
     const $pageHead = document.getElementById('page_head');
     if($pageHead){

@@ -3,8 +3,8 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.5.3';          //バージョン
-    const $$reacquisitionMin = 0;      //再取得までの時間(分)
+    const $$version = '3.6.0';          //バージョン
+    const $$reacquisitionMin = 15;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
     
@@ -32,7 +32,8 @@
             styleNowPeriod: true,       //現在のコマを目立たせる
             displayName: false,         //履修者表示名を変更する
             layoutHome: true,           //HOMEのレイアウト
-            fixHeadShadow: true         //キモイヘッダの影なおす
+            fixHeadShadow: true,        //キモイヘッダの影なおす
+            notepadMode: true           //メモモード
         
     }
     /* ローディング画面 */
@@ -146,7 +147,9 @@
                     removeName();
                 }
                 //メモ機能
-                notepad(items.tasklistDisplay);
+                if(items.notepadMode === true){
+                    notepad(items.tasklistDisplay);
+                }
                 //カスタムCSSの適用
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
