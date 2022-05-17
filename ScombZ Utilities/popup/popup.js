@@ -1,12 +1,14 @@
 //設定ページへ
-document.querySelector('#go-to-options').addEventListener('click', function() {
-    if (chrome.runtime.openOptionsPage) {
-        chrome.runtime.openOptionsPage();
-    } else {
-        window.open(chrome.runtime.getURL('options.html'));
-    }
+const optBtns = document.querySelectorAll('.go-to-options');
+for(const optBtn of optBtns) {
+    optBtn.addEventListener('click', function() {
+        if (chrome.runtime.openOptionsPage) {
+            chrome.runtime.openOptionsPage();
+        } else {
+            window.open(chrome.runtime.getURL('options.html'));
+        }
 });
-
+}
 /* -------- ポップアップ時間割 -------- */
 const terms = [
     '9:00~10:40',

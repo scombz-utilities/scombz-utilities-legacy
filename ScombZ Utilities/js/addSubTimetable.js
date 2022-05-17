@@ -255,7 +255,7 @@ function displayTaskListsOnGrayLayer(){
                 return;
             }
             if(!$tasklistObj[1] && $tasklistObj[0].data === null){
-                kadaiListHTML +=`<div class="subk-line">未提出の課題・テスト一覧はありません。</div>`;
+                kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 let deadline='XXXX/XX/XX XX:XX:XX';
                 for(let i=0; $tasklistObj[i] && i<20 ;i++){
@@ -388,7 +388,8 @@ function displayTaskListsOnGrayLayer(){
             </div>
             </div>
             `;
-            document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+            if(document.getElementById('pageMain'))
+                document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
         }
     });
 }

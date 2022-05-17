@@ -66,9 +66,6 @@ function getTasksByAdjax($$reacquisitionMin){
                     function(data) {
                         console.log("課題一覧ページAjax読み込み成功");
                         const $taskListsObj = [];
-                        $taskListsObj.push({
-                            data: null
-                        });
                         for (let i = 0 ; $(data).find(".result_list_line .course").eq(i).html() ; i++){
                             const $taskObj = {};
                             $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
