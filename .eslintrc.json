@@ -12,6 +12,7 @@
     "rules": {
         "no-unused-vars": "off",
         "no-undef": "off",
-        "eqeqeq": "error"
+        "eqeqeq": "error",
+        "prefer-const": "error"
     }
 }
