@@ -31,7 +31,7 @@ chrome.storage.local.get({
     //保存
     function saveCss(){
         jsEditor.save();
-        const editorIndex = document.getElementById('editor_js').value;
+        const editorIndex = document.getElementById('editor_js').value.replace(/<\//g,'');
         chrome.storage.local.set({
             customcss : editorIndex
         },function(){
