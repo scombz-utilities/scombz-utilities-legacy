@@ -29,6 +29,7 @@ function save_options() {
     var tasklistTranslate = document.getElementById('tasklistTranslate').value;
     var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
     var deadlinemode = document.getElementById('deadlinemode').value;
+    var notepadMode = document.getElementById('notepadMode').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -57,6 +58,7 @@ function save_options() {
         tasklistTranslate : tasklistTranslate,
         fixHeadShadow : fixHeadShadow,
         deadlinemode : deadlinemode,
+        notepadMode : notepadMode,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -99,6 +101,7 @@ function save_options() {
         tasklistTranslate: 0,
         fixHeadShadow: true,
         deadlinemode: 'relative-absoluteLong',
+        notepadMode: true,
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -133,6 +136,7 @@ function save_options() {
         document.getElementById('tasklistTranslate').value = items.tasklistTranslate;
         document.getElementById('fixHeadShadow').checked = items.fixHeadShadow;
         document.getElementById('deadlinemode').value = items.deadlinemode;
+        document.getElementById('notepadMode').checked = items.notepadMode;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
