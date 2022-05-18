@@ -95,9 +95,16 @@ function styleExam(){
             `);
             const $submitBtnArea = document.querySelector('.block-under-area-btn');
             $submitBtnArea.style.maxWidth = "450px";
+            //押しても大丈夫なボタン
             const $confirmBtn = document.querySelector(".block-under-area .block-under-area-btn .takeConfirm");
             if($confirmBtn){
                 $confirmBtn.addEventListener("click", function(){
+                    window.onbeforeunload = null;
+                });
+            }
+            const $examTimer = document.getElementById('examTimer');
+            if($examTimer && $examTimer.querySelector("a.takeConfirm")){
+                $examTimer.querySelector("a.takeConfirm").addEventListener("click",function() {
                     window.onbeforeunload = null;
                 });
             }
