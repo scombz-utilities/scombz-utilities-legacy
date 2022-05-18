@@ -241,12 +241,11 @@ function displayGrayLayer($$version){
 function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
         TaskGetTime: 1,
-        tasklistData: [{
-            data:null
-        }],
+        tasklistData: [],
         specialSubj: 0,
         tasklistTranslate: 0,
-        deadlinemode: 'absolute-relative'
+        deadlinemode: 'absolute-relative',
+        maxTaskDisplay: 15
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             
@@ -272,14 +271,14 @@ function displayTaskListsOnGrayLayer(){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 let deadline='XXXX/XX/XX XX:XX:XX';
-                for(let i=0; $tasklistObj[i] && i<20 ;i++){
+                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay ;i++){
                     if($tasklistObj[i].data === null)continue;
                     //絶対表示
                     deadline = $tasklistObj[i].deadline;
                     if(items.deadlinemode.includes('absoluteShort'))
                         deadline = $tasklistObj[i].deadline.slice(6,-3);
                     //相対表示
-                    if(items.deadlinemode.includes('relative')){
+                    if(items.deadlinemode.includes('relative') && $tasklistObj[i].deadline !== null ){
                         if(items.deadlinemode == 'relative'){
                             const nowUnix = Date.now();
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
