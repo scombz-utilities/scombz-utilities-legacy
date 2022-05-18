@@ -140,7 +140,7 @@ function styleSidemenu(){
             top:0;
             left:0;
             width:100%;
-            minW-width:371px;
+            min-width:371px;
         }
         .sidemenu-head{
             height:60px;
@@ -166,13 +166,16 @@ function styleSidemenu(){
     `);
     //LMSページ飛び出る問題
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
-            const reportList = document.getElementById("reportList");
-            if(reportList){
+        const contentsDetails = document.querySelectorAll(".contents-detail");
+        for(const contentsDetail of contentsDetails){
+            if(contentsDetail.parentNode.parentNode && contentsDetail.parentNode.parentNode.classList.contains("block") && contentsDetail.parentNode.parentNode.classList.contains("clearfix")){
                 setTimeout(() =>{
-                reportList.parentNode.style.height = reportList.clientHeight+'px';
-                reportList.parentNode.previousElementSibling.style.height = reportList.clientHeight+'px';
-                },100);
+                    contentsDetail.parentNode.style.height = contentsDetail.clientHeight+'px';
+                    if(contentsDetail.parentNode.previousElementSibling)
+                        contentsDetail.parentNode.previousElementSibling.style.height = contentsDetail.clientHeight+'px';
+                    },300);
             }
+        }
     }
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
     const $pageHead = document.getElementById('page_head');

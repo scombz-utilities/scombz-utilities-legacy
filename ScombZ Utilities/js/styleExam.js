@@ -106,6 +106,14 @@ function styleExam(){
             }
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
+            //毎分自動保存
+            setInterval(function() {
+                const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
+                if($saveBtn){
+                    $saveBtn.click();
+                    console.log("上書き保存 Auto");
+                }
+            },60000);//秒数
             //Ctrl+Sで自動保存
             $(window).bind('keydown', function(e) {
                 if (e.ctrlKey || e.metaKey) {
@@ -115,6 +123,7 @@ function styleExam(){
                         const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
                         if($saveBtn){
                             $saveBtn.click();
+                            console.log("上書き保存 ctrl+S");
                         }
                         break;
                     }
@@ -177,7 +186,7 @@ function styleExam(){
         }
         //テストを受け終わった画面
         //すでに受けたテストを参照する画面
-        if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm") || location.href.includes("takeresult")){
+        if(location.href.includes("examination/take?complete")){
             console.log('テスト完了画面');
             document.head.insertAdjacentHTML('beforeEnd',`
             <style>
@@ -191,18 +200,17 @@ function styleExam(){
                 min-width:140px;
                 min-height:50px;
                 box-shadow:none;
+                max-width: 440px;
             }
             </style>
             `);
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
-            if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm")){
-                //提出完了時にAjax通信をして課題一覧を更新
-                console.log("テスト提出完了ページを検出");
-                setTimeout(function(){
-                    getTaskLists(0);
-                },500);
-            }
+            //提出完了時にAjax通信をして課題一覧を更新
+            console.log("テスト提出完了ページを検出");
+            setTimeout(function(){
+                getTaskLists(0);
+            },500);
         }
     }
     return;
