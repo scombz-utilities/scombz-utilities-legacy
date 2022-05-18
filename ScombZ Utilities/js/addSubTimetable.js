@@ -46,6 +46,11 @@ function han2Zenkaku($str) {
 }
 //LMSから情報を取得してJSON化する関数
 function getSubTimetable(){
+    //時間割じゃなくてスケジュールだったら取得できないので取得しない
+    if(!document.getElementById('displayMode1') || !document.getElementById('displayMode1').checked) {
+        return;
+    }
+    //取得する
     console.log('LMSを取得開始します');
     const $courseList = document.querySelectorAll('.timetable-course-top-btn');
     if($courseList[0]){
@@ -235,8 +240,10 @@ function displayGrayLayer($$version){
 //課題一覧の表示
 function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
-        TaskGetTime: 0,
-        tasklistData: null,
+        TaskGetTime: 1,
+        tasklistData: [{
+            data:null
+        }],
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative'

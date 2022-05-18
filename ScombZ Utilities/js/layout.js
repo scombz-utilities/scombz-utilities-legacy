@@ -241,7 +241,7 @@ function addExtensionSettingsBtn(){
     if($headerBtnArea){
         $headerBtnArea.insertAdjacentHTML("afterBegin",`
         <style>
-        @media (max-width:630px){
+        @media (max-width:650px){
             #link_to_extention{
                 display:none;
             }
@@ -275,6 +275,9 @@ function removeName(){
 function fixHeadShadow(){
     if(document.getElementById("page_head")){
         document.getElementById("page_head").style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
+    }
+    if(document.getElementById("examTimer")){
+        document.getElementById("examTimer").style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
     }
     return;
 }
