@@ -77,6 +77,14 @@ function getTasksByAdjax($$reacquisitionMin){
                             }
                             $taskListsObj.push($taskObj);
                         }
+                        if(!$taskListsObj[0]){
+                            $taskListsObj.push({
+                                course: "",
+                                title: "",
+                                link: "",
+                                deadline: ""
+                            });
+                        }
                         console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
                         chrome.storage.local.set({
                             TaskGetTime: $nowUnix,

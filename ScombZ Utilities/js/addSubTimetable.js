@@ -268,7 +268,7 @@ function displayTaskListsOnGrayLayer(){
             }
             //メイン生成部分
             let kadaiListHTML="";
-            if(!$tasklistObj[1] && $tasklistObj[0].data === null){
+            if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 let deadline='XXXX/XX/XX XX:XX:XX';
