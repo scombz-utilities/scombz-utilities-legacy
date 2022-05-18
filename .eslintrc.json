@@ -4,7 +4,7 @@
         "es2021": true,
         "webextensions": true
     },
-    "extends": ["google"],
+    "extends": ["google", "eslint-config-prettier"],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
