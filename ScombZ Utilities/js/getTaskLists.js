@@ -77,17 +77,19 @@ function getTasksByAdjax($$reacquisitionMin){
                             }
                             $taskListsObj.push($taskObj);
                         }
-                        if(!$taskListsObj[0] && $$reacquisitionMin > 5){
+                        if(!$taskListsObj[0]){
                             $taskListsObj.push({
                                 course: "",
                                 title: "",
                                 link: "",
                                 deadline: null
                             });
-                            //更新に5分以上のスパン設定であるかつ取得データが存在しなかったとき、もう一度確認のために取得する
-                            setTimeout(function(){
-                                getTasksByAdjax(0);
-                            },1000);
+                            if($$reacquisitionMin > 5){
+                                //更新に5分以上のスパン設定であるかつ取得データが存在しなかったとき、もう一度確認のために取得する
+                                setTimeout(function(){
+                                    getTasksByAdjax(0);
+                                },1000);
+                            }
                         }
                         console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
                         chrome.storage.local.set({
