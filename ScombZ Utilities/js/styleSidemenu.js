@@ -165,7 +165,7 @@ function styleSidemenu(){
     </style>
     `);
     //LMSページ飛び出る問題
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
         const contentsDetails = document.querySelectorAll(".contents-detail");
         for(const contentsDetail of contentsDetails){
             if(contentsDetail.parentNode.parentNode && contentsDetail.parentNode.parentNode.classList.contains("block") && contentsDetail.parentNode.parentNode.classList.contains("clearfix")){
