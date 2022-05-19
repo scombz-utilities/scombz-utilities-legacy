@@ -1,6 +1,6 @@
 /* ScombZ Utilities */
 /* layout.js */
-//ログアウト画面変更
+// ログアウト画面変更
 function changeLogout() {
     'use strict';
     if (location.href == 'https://scombz.shibaura-it.ac.jp/logout') {
@@ -41,7 +41,7 @@ function changeLogout() {
     console.log('ログアウト画面を変更しました');
     return;
 }
-//ページ最大横幅
+// ページ最大横幅
 function maxWidthOnSubjPage() {
     'use strict';
     if (
@@ -108,7 +108,7 @@ function maxWidthOnSubjPage() {
     }
     return;
 }
-//ページトップボタン
+// ページトップボタン
 function remomvePageTop() {
     const $pagetopBtn = document.querySelector('.page-top-btn');
     if ($pagetopBtn) {
@@ -116,7 +116,7 @@ function remomvePageTop() {
     }
     return;
 }
-//芝猫表示
+// 芝猫表示
 function topShibaneko() {
     if (location.href == 'https://scombz.shibaura-it.ac.jp/login') {
         const $topLogo = document.querySelector('.sitelogo');
@@ -131,7 +131,7 @@ function topShibaneko() {
         }
     }
 }
-//現在時刻のコマを目立たせる
+// 現在時刻のコマを目立たせる
 function styleNowPeriod() {
     const $nowperiod = getNowPeriod();
     console.log('現在のコマ: ' + $nowperiod);
@@ -174,7 +174,7 @@ function styleNowPeriod() {
     }
     return;
 }
-//ホームのレイアウト
+// ホームのレイアウト
 function layoutHome() {
     'use strict';
     if (
@@ -234,7 +234,7 @@ function layoutHome() {
         </style>
         `
         );
-        //リンクをすべて表示する
+        // リンクをすべて表示する
         const $school_link_list = document.getElementById('school_link_list');
         if ($school_link_list) {
             setTimeout(() => {
@@ -243,7 +243,7 @@ function layoutHome() {
                     .click();
             }, 300);
         }
-        //カレンダーの下にリンク集を追加する
+        // カレンダーの下にリンク集を追加する
         const $top_attention = document.getElementById('top_attention');
         if ($top_attention) {
             console.log('注目コンテンツを取得しました');
@@ -286,7 +286,7 @@ function layoutHome() {
     }
     return;
 }
-//拡張機能設定ボタンの追加
+// 拡張機能設定ボタンの追加
 function addExtensionSettingsBtn() {
     'use strict';
     console.log('拡張機能設定ボタンを追加します');
@@ -317,7 +317,7 @@ function addExtensionSettingsBtn() {
     }
     return;
 }
-//名前を消す
+// 名前を消す
 function removeName() {
     'use strict';
     console.log('名前を変更します');
@@ -334,7 +334,7 @@ function removeName() {
         );
     }
 }
-//ページ上部にある固定ヘッダのキモい影を直す
+// ページ上部にある固定ヘッダのキモい影を直す
 function fixHeadShadow() {
     if (document.getElementById('page_head')) {
         document.getElementById('page_head').style.boxShadow =
@@ -342,7 +342,7 @@ function fixHeadShadow() {
     }
     return;
 }
-//カスタムCSS
+// カスタムCSS
 function customizeCSS() {
     chrome.storage.local.get(
         {

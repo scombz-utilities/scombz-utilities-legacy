@@ -20,18 +20,18 @@ function mouseEvents() {
     for (const LMSLink of LMSLinks) {
         LMSLink.addEventListener('mousedown', function (event) {
             switch (event.which) {
-                case 2:
-                    console.log('リンクホイールクリック検知');
-                    window.open(
-                        'https://scombz.shibaura-it.ac.jp/lms/course?idnumber=' +
+            case 2:
+                console.log('リンクホイールクリック検知');
+                window.open(
+                    'https://scombz.shibaura-it.ac.jp/lms/course?idnumber=' +
                             LMSLink.getAttribute('id')
-                    );
-                    break;
-                case 3:
-                    console.log('リンク右クリ検知');
-                    break;
-                default:
-                    console.log('リンクのクリックを検知');
+                );
+                break;
+            case 3:
+                console.log('リンク右クリ検知');
+                break;
+            default:
+                console.log('リンクのクリックを検知');
             }
         });
     }
@@ -42,15 +42,15 @@ function mousedownClick(items) {
     for (const item of items) {
         item.addEventListener('mousedown', function (event) {
             switch (event.which) {
-                case 2:
-                    console.log('リンクホイールクリック検知');
-                    item.click();
-                    break;
-                case 3:
-                    console.log('リンク右クリ検知');
-                    break;
-                default:
-                    console.log('リンクのクリックを検知');
+            case 2:
+                console.log('リンクホイールクリック検知');
+                item.click();
+                break;
+            case 3:
+                console.log('リンク右クリ検知');
+                break;
+            default:
+                console.log('リンクのクリックを検知');
             }
         });
     }

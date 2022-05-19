@@ -53,7 +53,7 @@ function getTasksOnTaskpage() {
 }
 function getTasksByAdjax($$reacquisitionMin) {
     'use strict';
-    //現在時刻と前回取得日時を取得して比較
+    // 現在時刻と前回取得日時を取得して比較
     const $nowUnix = Date.now();
     chrome.storage.local.get(
         {
@@ -80,8 +80,8 @@ function getTasksByAdjax($$reacquisitionMin) {
                     ).toLocaleString()}`
                 );
                 console.log('課題取得を開始します');
-                //Ajax通信
-                //jQueryを使って実装
+                // Ajax通信
+                // jQueryを使って実装
                 $(function () {
                     console.log('Getting Timetable Data By Ajax');
                     $.ajax({
@@ -89,7 +89,7 @@ function getTasksByAdjax($$reacquisitionMin) {
                         url: 'https://scombz.shibaura-it.ac.jp/lms/task',
                         dataType: 'html'
                     }).then(
-                        //通信成功時
+                        // 通信成功時
                         function (data) {
                             console.log('課題一覧ページAjax読み込み成功');
                             const $taskListsObj = [];
@@ -152,7 +152,7 @@ function getTasksByAdjax($$reacquisitionMin) {
                                 }
                             );
                         },
-                        //通信失敗時
+                        // 通信失敗時
                         function () {
                             console.log('読み込み失敗');
                         }

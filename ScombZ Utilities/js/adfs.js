@@ -1,6 +1,6 @@
 /* ScombZ Utilities */
 /* adfs.js */
-//ADFSスキップ
+// ADFSスキップ
 function adfsLoaded() {
     'use strict';
     if (document.domain == 'adfs.sic.shibaura-it.ac.jp') {

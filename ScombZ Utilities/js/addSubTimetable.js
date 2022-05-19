@@ -1,7 +1,7 @@
 /* ScombZ Utilities */
 /* addSubTimetable.js */
 
-//LMS取得&表示
+// LMS取得&表示
 function subTimetable($timetableDisplay, $tasklistDisplay, $$version) {
     'use strict';
     if (document.getElementById('pageMain') === null) {
@@ -27,19 +27,19 @@ function subTimetable($timetableDisplay, $tasklistDisplay, $$version) {
     return;
 }
 
-//------------LMS情報取得------------
-//全角数字→半角数字にする関数
+// ------------LMS情報取得------------
+// 全角数字→半角数字にする関数
 function han2Zenkaku($str) {
     return $str.replace(/[０-９]/g, function (s) {
         return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
     });
 }
-//LMSから情報を取得してJSON化する関数
+// LMSから情報を取得してJSON化する関数
 function getSubTimetable() {
     console.log('LMSを取得開始します');
     const $courseList = document.querySelectorAll('.timetable-course-top-btn');
     if ($courseList[0]) {
-        //JSON生成
+        // JSON生成
         const $timetableData = [];
         let futei = 0;
         for (const $course of $courseList) {
@@ -51,12 +51,12 @@ function getSubTimetable() {
                     ) != -1
                 ) {
                     ($timetableClassData.day = $yobicolNum),
-                        ($timetableClassData.time = Number(
-                            jigenInt(
-                                $course.parentNode.parentNode.parentNode
-                                    .firstElementChild.innerHTML
-                            )
-                        ));
+                    ($timetableClassData.time = Number(
+                        jigenInt(
+                            $course.parentNode.parentNode.parentNode
+                                .firstElementChild.innerHTML
+                        )
+                    ));
                     if (!$timetableClassData.time) {
                         $timetableClassData.time = Number(
                             $course.parentNode.parentNode.parentNode.firstElementChild.innerHTML.slice(
@@ -108,12 +108,12 @@ function getSubTimetable() {
                 console.log('ChromeLocalStorageに保存しました');
             }
         );
-        //JSON生成完了
+        // JSON生成完了
     }
     return;
 }
 
-//------------LMS情報表示------------
+// ------------LMS情報表示------------
 function displaySubTimetable($$version) {
     'use strict';
     chrome.storage.local.get(
@@ -188,18 +188,18 @@ function displaySubTimetable($$version) {
                 <tbody>`;
                 console.log('LMSを表示します');
                 let num = 0;
-                //通常授業
+                // 通常授業
                 for (let i = 0; i < 7; i++) {
-                    //i=時限
+                    // i=時限
                     $subTimetable += '<tr>';
                     for (let j = 0; j < 7; j++) {
-                        //j=曜日
+                        // j=曜日
                         let $subjData = j == 0 ? i + 1 : '';
                         if (
                             $timetableData[num].day == j &&
                             $timetableData[num].time == i + 1
                         ) {
-                            //2Q、4Qのことを考える
+                            // 2Q、4Qのことを考える
                             if (
                                 $timetableData[num + 1].day == j &&
                                 $timetableData[num + 1].time == i + 1
@@ -212,18 +212,18 @@ function displaySubTimetable($$version) {
                                 );
                                 $subjData = `
                             <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${
-                                $timetableData[num].id
-                            }" class="SubTimetable" style="color:#000000;text-decoration:none;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
-                                    $timetableData[num].name
-                                }</span></a>
+    $timetableData[num].id
+}" class="SubTimetable" style="color:#000000;text-decoration:none;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
+    $timetableData[num].name
+}</span></a>
                             <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${
-                                $timetableData[num + 1].id
-                            }" class="SubTimetable" style="color:#000000;text-decoration:none;margin-top:1px;border-top:1px solid #ccc; white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
-                                    $timetableData[num + 1].name
-                                }</span></a>`;
+    $timetableData[num + 1].id
+}" class="SubTimetable" style="color:#000000;text-decoration:none;margin-top:1px;border-top:1px solid #ccc; white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${
+    $timetableData[num + 1].name
+}</span></a>`;
                                 num++;
                             } else {
-                                //2Q,4Qが存在しないとき
+                                // 2Q,4Qが存在しないとき
                                 console.log(
                                     '通常授業を検出しました 曜日:' +
                                         j +
@@ -239,7 +239,7 @@ function displaySubTimetable($$version) {
                     $subTimetable += '</tr>';
                 }
                 $subTimetable += `</tbody></table></div>`;
-                //曜日時間不定授業
+                // 曜日時間不定授業
                 if ($timetableData[num].day != -1) {
                     console.log(
                         '読み取り完了 課外授業なし day:' +
@@ -279,7 +279,7 @@ function displaySubTimetable($$version) {
     );
     return;
 }
-//時間割のないグレーレイヤーの表示関数
+// 時間割のないグレーレイヤーの表示関数
 function displayGrayLayer($$version) {
     'use strict';
     document.getElementById('pageMain').insertAdjacentHTML(
@@ -291,7 +291,7 @@ function displayGrayLayer($$version) {
     );
     return;
 }
-//課題一覧の表示
+// 課題一覧の表示
 function displayTaskListsOnGrayLayer() {
     chrome.storage.local.get(
         {
@@ -306,12 +306,12 @@ function displayTaskListsOnGrayLayer() {
                 console.log(
                     'ChromeLocalStorageを読み込みました\n課題一覧を表示します'
                 );
-                //JSONファイル展開
+                // JSONファイル展開
                 console.log(decodeURIComponent(items.tasklistData));
                 const $tasklistObj = JSON.parse(
                     decodeURIComponent(items.tasklistData)
                 );
-                //JSONから生成
+                // JSONから生成
                 const $subTimetable =
                     document.getElementsByClassName('subtimetableBody');
                 let timetableHeight = 5;
@@ -324,7 +324,7 @@ function displayTaskListsOnGrayLayer() {
                         timetableminHeight += 60 * Number(items.specialSubj);
                     }
                 }
-                //メイン生成部分
+                // メイン生成部分
                 let kadaiListHTML = '';
                 if (!$tasklistObj[0]) {
                     return;
@@ -335,11 +335,11 @@ function displayTaskListsOnGrayLayer() {
                     let deadline = 'XXXX/XX/XX XX:XX:XX';
                     for (let i = 0; $tasklistObj[i] && i < 20; i++) {
                         if ($tasklistObj[i].data === null) continue;
-                        //絶対表示
+                        // 絶対表示
                         deadline = $tasklistObj[i].deadline;
                         if (items.deadlinemode.includes('absoluteShort'))
                             deadline = $tasklistObj[i].deadline.slice(6, -3);
-                        //相対表示
+                        // 相対表示
                         if (items.deadlinemode.includes('relative')) {
                             if (items.deadlinemode == 'relative') {
                                 const nowUnix = Date.now();
@@ -411,8 +411,8 @@ function displayTaskListsOnGrayLayer() {
                 ).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime)
                     .toLocaleTimeString('ja-JP')
                     .slice(0, -3)}`;
-                //合体させてHTMLをつくる
-                let kadaiHTML = `
+                // 合体させてHTMLをつくる
+                const kadaiHTML = `
             <style>
                 #subTaskList{
                     top: max(${timetableHeight}vh,${timetableminHeight}px);

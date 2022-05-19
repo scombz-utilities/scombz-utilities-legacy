@@ -1,36 +1,36 @@
 // Saves options to chrome.storage
 function save_options() {
-    var year = document.getElementById('year').value;
-    var fac = document.getElementById('fac').value;
-    var login_auto = document.getElementById('login_auto').checked;
-    var adfs_auto = document.getElementById('adfs_auto').checked;
-    var menu_exit_auto = document.getElementById('menu_exit_auto').checked;
-    var submenu = document.getElementById('submenu').checked;
-    var examBtn = document.getElementById('exam_btn').checked;
-    var examImg = document.getElementById('exam_img').checked;
-    var additional_lms = document.getElementById('additional_lms').checked;
-    var changeReportBtn = document.getElementById('changeReportBtn').checked;
-    var styleDialog = document.getElementById('styleDialog').checked;
-    var syllBtn = document.getElementById('syll_btn').checked;
-    var hideCompletedReports = document.getElementById(
+    const year = document.getElementById('year').value;
+    const fac = document.getElementById('fac').value;
+    const login_auto = document.getElementById('login_auto').checked;
+    const adfs_auto = document.getElementById('adfs_auto').checked;
+    const menu_exit_auto = document.getElementById('menu_exit_auto').checked;
+    const submenu = document.getElementById('submenu').checked;
+    const examBtn = document.getElementById('exam_btn').checked;
+    const examImg = document.getElementById('exam_img').checked;
+    const additional_lms = document.getElementById('additional_lms').checked;
+    const changeReportBtn = document.getElementById('changeReportBtn').checked;
+    const styleDialog = document.getElementById('styleDialog').checked;
+    const syllBtn = document.getElementById('syll_btn').checked;
+    const hideCompletedReports = document.getElementById(
         'hideCompletedReports'
     ).checked;
-    var changeLogout = document.getElementById('changeLogout').checked;
-    var setMaxWidth = document.getElementById('setMaxWidth').checked;
-    var pageTopBtn = document.getElementById('pageTopBtn').checked;
-    var mouseDown = document.getElementById('mouseDown').checked;
-    var tasklistDisplay = document.getElementById('tasklistDisplay').checked;
-    var styleNowPeriod = document.getElementById('styleNowPeriod').checked;
-    var displayName = document.getElementById('displayName').checked;
-    var subjWidth = document.getElementById('subjWidth').value;
-    var lmsWidth = document.getElementById('lmsWidth').value;
-    var layoutHome = document.getElementById('layoutHome').checked;
-    var nickname = document.getElementById('nickname').value;
-    var timesBtnValue = document.getElementById('timesBtnValue').value;
-    var sliderBarMax = document.getElementById('sliderBarMax').value;
-    var tasklistTranslate = document.getElementById('tasklistTranslate').value;
-    var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
-    var deadlinemode = document.getElementById('deadlinemode').value;
+    const changeLogout = document.getElementById('changeLogout').checked;
+    const setMaxWidth = document.getElementById('setMaxWidth').checked;
+    const pageTopBtn = document.getElementById('pageTopBtn').checked;
+    const mouseDown = document.getElementById('mouseDown').checked;
+    const tasklistDisplay = document.getElementById('tasklistDisplay').checked;
+    const styleNowPeriod = document.getElementById('styleNowPeriod').checked;
+    const displayName = document.getElementById('displayName').checked;
+    const subjWidth = document.getElementById('subjWidth').value;
+    const lmsWidth = document.getElementById('lmsWidth').value;
+    const layoutHome = document.getElementById('layoutHome').checked;
+    const nickname = document.getElementById('nickname').value;
+    const timesBtnValue = document.getElementById('timesBtnValue').value;
+    const sliderBarMax = document.getElementById('sliderBarMax').value;
+    const tasklistTranslate = document.getElementById('tasklistTranslate').value;
+    const fixHeadShadow = document.getElementById('fixHeadShadow').checked;
+    const deadlinemode = document.getElementById('deadlinemode').value;
     chrome.storage.local.set(
         {
             year: year,
@@ -154,17 +154,17 @@ function restore_options() {
     );
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-//チェックボックスが更新されたら保存
+// チェックボックスが更新されたら保存
 const $checkboxList = document.querySelectorAll("input[type='checkbox']");
 for (const $checkbox of $checkboxList) {
     $checkbox.addEventListener('change', save_options);
 }
-//プルダウンメニューが更新されたら保存
+// プルダウンメニューが更新されたら保存
 const $menuList = document.querySelectorAll('select');
 for (const $menu of $menuList) {
     $menu.addEventListener('change', save_options);
 }
-//保存ボタンが押されたら保存
+// 保存ボタンが押されたら保存
 const $saveBtnList = document.querySelectorAll('.saveBtn');
 for (const $saveBtn of $saveBtnList) {
     $saveBtn.addEventListener('click', function () {

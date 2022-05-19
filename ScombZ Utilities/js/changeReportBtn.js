@@ -1,6 +1,6 @@
 /* ScombZ Utilities */
 /* changeReportBtn.js */
-//提出ボタンのユーザビリティ向上
+// 提出ボタンのユーザビリティ向上
 function changeReportBtn() {
     'use strict';
     if (
@@ -8,16 +8,16 @@ function changeReportBtn() {
             'scombz.shibaura-it.ac.jp/lms/course/report/submission'
         )
     ) {
-        ////課題提出完了時にAjax通信をして課題一覧を更新
+        // //課題提出完了時にAjax通信をして課題一覧を更新
         if (document.querySelector('.contents-detail.contents-complete')) {
             console.log('課題提出完了ページを検出');
             setTimeout(function () {
                 getTaskLists(0);
             }, 500);
         }
-        //時間入力バーを作る
+        // 時間入力バーを作る
         createTimeTempBtn();
-        //ボタンを変える
+        // ボタンを変える
         document.head.insertAdjacentHTML(
             'beforeEnd',
             `
@@ -71,7 +71,7 @@ function changeReportBtn() {
     }
     return;
 }
-//課題提出時の作成にかかった時間をマウス操作だけで入力できるようにボタンとバーを付ける
+// 課題提出時の作成にかかった時間をマウス操作だけで入力できるようにボタンとバーを付ける
 function createTimeTempBtn() {
     'use strict';
     console.log('createTimeTempBtn');

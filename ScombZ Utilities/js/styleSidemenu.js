@@ -6,7 +6,7 @@ function styleSidemenu() {
         return;
     }
     console.log('サイドメニューのスタイル変更を開始します');
-    //head追加
+    // head追加
     const $head = document.head;
     $head.insertAdjacentHTML(
         'beforeEnd',
@@ -167,7 +167,7 @@ function styleSidemenu() {
     </style>
     `
     );
-    //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
+    // ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
     const $pageHead = document.getElementById('page_head');
     if ($pageHead) {
         $pageHead.insertAdjacentHTML(
@@ -181,15 +181,15 @@ function styleSidemenu() {
         `
         );
     }
-    //サイドメニューの開閉ボタンを変える
+    // サイドメニューの開閉ボタンを変える
     const $closeButton = document.getElementById('sidemenuClose');
     if ($closeButton) {
         $closeButton.classList.add('hamburger-icon');
         $closeButton.innerHTML =
             '<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>\n<div class="hamburger-line"></div>';
     }
-    //お知らせ、アンケートを直リンクにする
-    //お知らせ(ついでにborder-topもつけてスタイル直す)
+    // お知らせ、アンケートを直リンクにする
+    // お知らせ(ついでにborder-topもつけてスタイル直す)
     const $infoButton = document.querySelector(
         '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.info-color.sidemenu-icon.info-icon'
     );
@@ -199,7 +199,7 @@ function styleSidemenu() {
         $infoButton.style.borderTop = '1px solid #CCC';
         $infoButton.removeAttribute('onclick');
     }
-    //アンケート
+    // アンケート
     const $questionnaire = document.querySelector(
         '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.questionnaire-color.sidemenu-icon.questionnaire-icon'
     );
@@ -208,7 +208,7 @@ function styleSidemenu() {
             'https://scombz.shibaura-it.ac.jp/portal/surveys/list';
         $questionnaire.removeAttribute('onclick');
     }
-    //お知らせ、アンケートが表示されてないとき追加する
+    // お知らせ、アンケートが表示されてないとき追加する
     const $comBtn = document.querySelector(
         '.sidemenu-link.sidemenu-lms-link.sidemenu-link-txt.community-search-color.sidemenu-icon.search-icon'
     );

@@ -1,6 +1,6 @@
 /* ScombZ Utilities */
 /* styleExam.js */
-//テスト改善
+// テスト改善
 function styleExam() {
     'use strict';
     if (
@@ -8,7 +8,7 @@ function styleExam() {
             'scombz.shibaura-it.ac.jp/lms/course/examination/take'
         )
     ) {
-        //テストを受ける前の画面
+        // テストを受ける前の画面
         if (
             document.querySelector('.block-under-area-btn') &&
             document
@@ -63,7 +63,7 @@ function styleExam() {
             if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
         }
-        //テスト中の画面
+        // テスト中の画面
         if (
             document.querySelector('.block-under-area-btn') &&
             document
@@ -133,25 +133,25 @@ function styleExam() {
             }
             if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
-            //Ctrl+Sで自動保存
+            // Ctrl+Sで自動保存
             $(window).bind('keydown', function (e) {
                 if (e.ctrlKey || e.metaKey) {
                     switch (String.fromCharCode(e.which).toLowerCase()) {
-                        case 's': {
-                            e.preventDefault();
-                            const $saveBtn = document.querySelector(
-                                '.block-under-area .block-under-area-btn .tempSaveBtn'
-                            );
-                            if ($saveBtn) {
-                                $saveBtn.click();
-                            }
-                            break;
+                    case 's': {
+                        e.preventDefault();
+                        const $saveBtn = document.querySelector(
+                            '.block-under-area .block-under-area-btn .tempSaveBtn'
+                        );
+                        if ($saveBtn) {
+                            $saveBtn.click();
                         }
+                        break;
+                    }
                     }
                 }
             });
         }
-        //テスト提出確認画面
+        // テスト提出確認画面
         if (
             location.href ==
             'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
@@ -216,8 +216,8 @@ function styleExam() {
             if (document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
         }
-        //テストを受け終わった画面
-        //すでに受けたテストを参照する画面
+        // テストを受け終わった画面
+        // すでに受けたテストを参照する画面
         if (
             location.href.includes(
                 'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
@@ -250,7 +250,7 @@ function styleExam() {
                     'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
                 )
             ) {
-                //提出完了時にAjax通信をして課題一覧を更新
+                // 提出完了時にAjax通信をして課題一覧を更新
                 console.log('テスト提出完了ページを検出');
                 setTimeout(function () {
                     getTaskLists(0);

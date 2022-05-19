@@ -37,7 +37,7 @@ chrome.storage.local.get(
             }
         );
         document.getElementById('saveBtn').addEventListener('click', saveCss);
-        //保存
+        // 保存
         function saveCss() {
             jsEditor.save();
             const editorIndex = document.getElementById('editor_js').value;
@@ -57,14 +57,14 @@ chrome.storage.local.get(
             );
             return;
         }
-        //Ctrl+Sで自動保存
+        // Ctrl+Sで自動保存
         $(window).bind('keydown', function (e) {
             if (e.ctrlKey || e.metaKey) {
                 switch (String.fromCharCode(e.which).toLowerCase()) {
-                    case 's':
-                        e.preventDefault();
-                        saveCss();
-                        break;
+                case 's':
+                    e.preventDefault();
+                    saveCss();
+                    break;
                 }
             }
         });
