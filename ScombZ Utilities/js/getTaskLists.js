@@ -82,7 +82,7 @@ function getTasksByAdjax($$reacquisitionMin){
                                 course: "",
                                 title: "",
                                 link: "",
-                                deadline: null
+                                deadline: ""
                             });
                             if($$reacquisitionMin > 5){
                                 //更新に5分以上のスパン設定であるかつ取得データが存在しなかったとき、もう一度確認のために取得する

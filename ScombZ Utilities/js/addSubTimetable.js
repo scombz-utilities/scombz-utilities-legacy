@@ -278,7 +278,7 @@ function displayTaskListsOnGrayLayer(){
                     if(items.deadlinemode.includes('absoluteShort'))
                         deadline = $tasklistObj[i].deadline.slice(6,-3);
                     //相対表示
-                    if(items.deadlinemode.includes('relative') && $tasklistObj[i].deadline !== null ){
+                    if(items.deadlinemode.includes('relative') && $tasklistObj[i].deadline != "" ){
                         if(items.deadlinemode == 'relative'){
                             const nowUnix = Date.now();
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;

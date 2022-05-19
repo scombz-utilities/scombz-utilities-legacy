@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.5';          //バージョン
+    const $$version = '3.6.7';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -42,20 +42,20 @@
     document.addEventListener('DOMContentLoaded', function(){
         //chrome Storage API読み込み
         chrome.storage.local.get(defaults, (items) => {
-            if(document.domain == "scomb.shibaura-it.ac.jp"){
+            if(location.hostname == "scomb.shibaura-it.ac.jp"){
                 console.log("旧Scomb");
                 scombLogin();
             }
-            if(document.domain == "adfs.sic.shibaura-it.ac.jp"){
+            if(location.hostname == "adfs.sic.shibaura-it.ac.jp"){
                 console.log("adfs");
                 //ADFSだったらadfs.jsに飛ばす
                 adfsLoaded();
             }
-            if(document.domain == "syllabus.sic.shibaura-it.ac.jp"){
+            if(location.hostname == "syllabus.sic.shibaura-it.ac.jp"){
                 //シラバスだったらsyllabus.jsに飛ばす
                 syllabusLoaded(items.year , items.fac);
             }
-            if(document.domain == 'scombz.shibaura-it.ac.jp'){
+            if(location.hostname == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
                 console.log(items);
                 //非表示にしていたものを表示
@@ -160,7 +160,7 @@
 function onLoading(){
     'use strict';
     console.log('Loading');
-    if(document.domain == "scombz.shibaura-it.ac.jp"){
+    if(location.hostname == "scombz.shibaura-it.ac.jp"){
         console.log("SCOMBZ");
         //一度非表示
         document.documentElement.style.visibility = 'hidden';

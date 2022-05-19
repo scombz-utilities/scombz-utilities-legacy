@@ -193,6 +193,11 @@ function layoutHome(){
                 $school_link_list.querySelector(".portal-link-bottom a").click();
             },300);
         }
+        //学年歴ボタンを作る
+        const $exportGoogleBtn = document.querySelector(".portal-calendar-event-export.calendar_ics_download");
+        if($exportGoogleBtn){
+            $exportGoogleBtn.insertAdjacentHTML("afterEnd",`<a class="portal-calendar-event-export-a" href="https://www.shibaura-it.ac.jp/campus_life/school_calendar/" target="_blank" rel="noopener noreferrer">学年歴を見る</a>`);
+        }
         //カレンダーの下にリンク集を追加する
         const $top_attention = document.getElementById("top_attention");
         if($top_attention){
