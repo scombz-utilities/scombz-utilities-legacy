@@ -1,1 +1,7 @@
 dist
+node_modules
+ScombZ Utilities/lib
+ScombZ Utilities/options/addon
+ScombZ Utilities/options/lib
+ScombZ Utilities/options/mode
+ScombZ Utilities/options/theme

@@ -1,4 +1,4 @@
-//設定ページへ
+// 設定ページへ
 document.querySelector('#go-to-options').addEventListener('click', function () {
     if (chrome.runtime.openOptionsPage) {
         chrome.runtime.openOptionsPage();
@@ -56,10 +56,10 @@ function renderWeekTimetable(timetableData, weekday) {
     const target = document.getElementById('timetable');
     target.innerHTML = '';
 
-    let weekdayTabsContainer = document.createElement('div');
+    const weekdayTabsContainer = document.createElement('div');
     weekdayTabsContainer.id = 'weekdayTabsContainer';
     for (let i = 1; i < 7; i++) {
-        let weekdayTabElement = document.createElement('div');
+        const weekdayTabElement = document.createElement('div');
         weekdayTabElement.innerText = weekdays[i - 1];
         if (i === weekday) {
             weekdayTabElement.classList = 'weekday-tab active';
@@ -73,8 +73,8 @@ function renderWeekTimetable(timetableData, weekday) {
     }
     target.appendChild(weekdayTabsContainer);
 
-    let weekTimetableData = [[], [], [], [], [], []];
-    let intensiveSubjectsData = [];
+    const weekTimetableData = [[], [], [], [], [], []];
+    const intensiveSubjectsData = [];
     for (let i = 0; i < timetableData.length; i++) {
         if (timetableData[i].day === weekday) {
             weekTimetableData[timetableData[i].time - 1].push(timetableData[i]);
@@ -83,27 +83,27 @@ function renderWeekTimetable(timetableData, weekday) {
         }
     }
 
-    let timetableElement = document.createElement('div');
+    const timetableElement = document.createElement('div');
     timetableElement.classList = 'timetable-body';
     for (let i = 0; i < 6; i++) {
-        let rowElement = document.createElement('div');
+        const rowElement = document.createElement('div');
         rowElement.classList = 'timetable-row';
 
-        let timeDataElement = document.createElement('div');
+        const timeDataElement = document.createElement('div');
         timeDataElement.classList = 'timetable-time';
         timeDataElement.innerHTML = `<span class='time-number'>${
             i + 1
         }限</span><span class='time-term'>${terms[i]}</span>`;
         rowElement.appendChild(timeDataElement);
 
-        let subjectsContainerElement = document.createElement('div');
+        const subjectsContainerElement = document.createElement('div');
         subjectsContainerElement.classList = 'subjects-container';
         if (weekTimetableData.length > 0) {
-            let isQuarter = weekTimetableData[i].length === 2;
+            const isQuarter = weekTimetableData[i].length === 2;
 
             for (let j = 0; j < weekTimetableData[i].length; j++) {
-                let subject = weekTimetableData[i][j];
-                let subjectDataElement = document.createElement('div');
+                const subject = weekTimetableData[i][j];
+                const subjectDataElement = document.createElement('div');
                 subjectDataElement.classList = isQuarter
                     ? 'subject quarter'
                     : 'subject';
@@ -123,18 +123,18 @@ function renderWeekTimetable(timetableData, weekday) {
     }
 
     if (intensiveSubjectsData.length > 0) {
-        let rowElement = document.createElement('div');
+        const rowElement = document.createElement('div');
         rowElement.classList = 'timetable-row intensive-subjects';
 
-        let timeDataElement = document.createElement('div');
+        const timeDataElement = document.createElement('div');
         timeDataElement.classList = 'timetable-time';
         timeDataElement.innerHTML = `<span class='time-number'>その他</span><span class='time-term'>曜日時限不定など</span>`;
         rowElement.appendChild(timeDataElement);
 
-        let subjectsContainerElement = document.createElement('div');
+        const subjectsContainerElement = document.createElement('div');
         subjectsContainerElement.classList = 'subjects-container';
         intensiveSubjectsData.forEach((subject) => {
-            let subjectDataElement = document.createElement('div');
+            const subjectDataElement = document.createElement('div');
             subjectDataElement.classList = 'subject';
             subjectDataElement.innerHTML = `<div class='subject-name'><a href='https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${
                 subject.id

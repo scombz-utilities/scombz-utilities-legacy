@@ -14,7 +14,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
         const $namazuHeader = document.querySelector('.namazu-result-header');
         let $autoredirect = true;
         if (document.getElementsByTagName('dt')[15]) {
-            //スコアが近いものが複数あった時の処理
+            // スコアが近いものが複数あった時の処理
             const $dltag = String(
                 document.getElementsByTagName('dl')[2].innerHTML
             );
@@ -22,10 +22,10 @@ function syllabusLoaded($settings_year, $settings_fac) {
             const $score2 = 5 + $dltag.indexOf('スコア:', $score1 + 1);
             const $score1word = Number(
                 $dltag.slice($score1, $dltag.indexOf(')', $score1 + 1))
-            ); //1つ目のスコア
+            ); // 1つ目のスコア
             const $score2word = Number(
                 $dltag.slice($score2, $dltag.indexOf(')', $score2 + 1))
-            ); //2つ目のスコア
+            ); // 2つ目のスコア
             if ($namazuHeader) {
                 $namazuHeader.insertAdjacentHTML(
                     'beforeEnd',
@@ -105,7 +105,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
                     `
                         );
                     window.location.href = '#searchResult';
-                    //Ajax通信
+                    // Ajax通信
                     const hitarea = document
                         .querySelector('.namazu-result-header')
                         .innerHTML.indexOf('<!-- HIT -->');
@@ -116,10 +116,10 @@ function syllabusLoaded($settings_year, $settings_fac) {
                             .replace(/[^0-9]/g, '')
                     );
                     for (let i = 0; i < 20 && i < the_number_of_hit + 1; i++) {
-                        let link = $sylSubDDTag[22 + i * 2].innerHTML;
+                        const link = $sylSubDDTag[22 + i * 2].innerHTML;
                         getDepartment(link, i + 1);
                     }
-                    //Ajax関数定義
+                    // Ajax関数定義
                     function getDepartment(URL, cnt) {
                         async function getDepResponse() {
                             const res = await fetch(URL);
@@ -128,7 +128,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
                         }
                         getDepResponse()
                             .then((data) => {
-                                let gakkaID = data.slice(
+                                const gakkaID = data.slice(
                                     data.indexOf(`<div id="KamokuCD">`) + 19,
                                     data.indexOf(`<div id="KamokuCD">`) + 21
                                 );
@@ -149,7 +149,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
                 }
             }
         }
-        //検索からの自動リンク
+        // 検索からの自動リンク
         $suggestSubj = '';
         if ($sylSubjLink2) {
             $suggestSubj +=
@@ -202,14 +202,14 @@ function syllabusLoaded($settings_year, $settings_fac) {
         location.href.includes(`${$settings_year}/${$settings_fac}/`) &&
         location.href.includes('?suggesting=true')
     ) {
-        //もしかしてを…表示する
-        //jQueryを使って実装
+        // もしかしてを…表示する
+        // jQueryを使って実装
         $(function () {
             console.log('SUGGESTING');
-            var urlPrm = new Object();
-            var urlSearch = location.search.substring(1).split('&');
+            const urlPrm = new Object();
+            const urlSearch = location.search.substring(1).split('&');
             for (let i = 0; urlSearch[i]; i++) {
-                var kv = urlSearch[i].split('=');
+                const kv = urlSearch[i].split('=');
                 urlPrm[kv[0]] = kv[1];
             }
             $.ajax({
@@ -217,7 +217,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
                 url: urlPrm.sug1l,
                 dataType: 'html'
             }).then(
-                //通信成功時
+                // 通信成功時
                 function (data) {
                     console.log('読み込み成功');
                     const sug1n = $(data).find('span.kamoku').html();
@@ -236,13 +236,13 @@ function syllabusLoaded($settings_year, $settings_fac) {
             );
         });
     } else if (location.href.includes('Matrix')) {
-        //見やすくする by とくめいっ！
+        // 見やすくする by とくめいっ！
         console.log('シラバスのスタイルを変更します');
         window.addEventListener('load', function () {
             const $list1 = document.querySelector('.table_sticky thead tr td');
             if ($list1) {
                 $list1.style.position = 'static';
-                let li = document.querySelectorAll(
+                const li = document.querySelectorAll(
                     '.table_sticky thead:nth-child(2) tr:nth-child(1) th'
                 );
                 for (const l of li) {

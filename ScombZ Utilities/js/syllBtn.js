@@ -8,15 +8,15 @@ function displaySyllabus(year, fac) {
         console.log('授業別ページを検出しました\nシラバスのデータと連携します');
         const $courseTitle = document.querySelector('.course-title-txt');
         if ($courseTitle) {
-            //タイトルを取得
+            // タイトルを取得
             console.log($courseTitle.innerHTML);
-            //科目IDを除外し、科目名だけを抽出
+            // 科目IDを除外し、科目名だけを抽出
             const $nameInt = $courseTitle.innerHTML.indexOf(
                 ' ',
                 $courseTitle.innerHTML.indexOf(' ') + 2
             );
             let $courseName = $courseTitle.innerHTML.slice($nameInt + 1);
-            /*検索精度向上アルゴリズム
+            /* 検索精度向上アルゴリズム
             科目名に数字が入っていたとき
                 数字はシラバス検索システムではエラーの要因、英数字と日本語の間をスペースで分割することで検索精度向上することが分かった
                 →数字を含む科目名の場合スペースを数字の前に挿入するという処理を実行 [基礎情報演習１Ｂ]→[基礎情報演習 １Ｂ]

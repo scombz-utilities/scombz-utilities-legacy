@@ -1,8 +1,8 @@
 /* ScombZ Utilities */
 /* hideCompletedReports.js */
 
-//提出済み課題
-//将来的にはhas()を使用
+// 提出済み課題
+// 将来的にはhas()を使用
 function hideCompletedReports() {
     'use strict';
     if (

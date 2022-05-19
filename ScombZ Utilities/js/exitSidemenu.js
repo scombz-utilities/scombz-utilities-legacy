@@ -2,13 +2,13 @@
 /* exitSidemenu.js */
 function exitSidemenu() {
     'use strict';
-    var $closeButton = document.getElementById('sidemenuClose');
+    const $closeButton = document.getElementById('sidemenuClose');
     if ($closeButton) {
         console.log('メニューを閉じます');
-        //一時的にサイドメニューのtransitionを無効化する
+        // 一時的にサイドメニューのtransitionを無効化する
         document.getElementById('sidemenu').style.transition = 'none';
         $closeButton.click();
-        //逆に開く問題の修正
+        // 逆に開く問題の修正
         if (
             !document
                 .getElementById('sidemenu')
@@ -30,7 +30,7 @@ function exitSidemenu() {
         ) {
             document.getElementById('pageMain').classList.add('sidemenu-hide');
         }
-        //サイドメニューのtransitionをデフォルトに復元する
+        // サイドメニューのtransitionをデフォルトに復元する
         document.getElementById('sidemenuOpen').addEventListener(
             'click',
             function () {
