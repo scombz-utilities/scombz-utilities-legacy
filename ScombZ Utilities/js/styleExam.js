@@ -52,8 +52,13 @@ function styleExam(){
         //テスト中の画面
         if((document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("一時保存する"))){
             console.log("テスト中画面");
+            const $examTimer = document.getElementById('examTimer');
             window.onbeforeunload = function(e) {
-                e.returnValue = "ページを離れようとしています。よろしいですか？";
+                if($examTimer && $examTimer.querySelector("a.tempSaveBtn") && $examTimer.querySelector("a.tempSaveBtn").classList.contains("disabled")){
+                    window.onbeforeunload = null;
+                }else{
+                    e.returnValue = "ページを離れようとしています。よろしいですか？";
+                }
             }
             document.head.insertAdjacentHTML('beforeEnd',`
             <style>
@@ -102,7 +107,7 @@ function styleExam(){
                     window.onbeforeunload = null;
                 });
             }
-            const $examTimer = document.getElementById('examTimer');
+            
             if($examTimer && $examTimer.querySelector("a.takeConfirm")){
                 $examTimer.querySelector("a.takeConfirm").addEventListener("click",function() {
                     window.onbeforeunload = null;
@@ -116,7 +121,7 @@ function styleExam(){
             //毎分自動保存
             setInterval(function() {
                 const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
-                if($saveBtn){
+                if($saveBtn && $examTimer && $examTimer.querySelector("a.tempSaveBtn") && !$examTimer.querySelector("a.tempSaveBtn").classList.contains("disabled")){
                     $saveBtn.click();
                     console.log("上書き保存 Auto");
                 }
@@ -128,7 +133,7 @@ function styleExam(){
                     case 's':
                         e.preventDefault();
                         const $saveBtn = document.querySelector(".block-under-area .block-under-area-btn .tempSaveBtn");
-                        if($saveBtn){
+                        if($saveBtn && $examTimer && $examTimer.querySelector("a.tempSaveBtn") && !$examTimer.querySelector("a.tempSaveBtn").classList.contains("disabled")){
                             $saveBtn.click();
                             console.log("上書き保存 ctrl+S");
                         }
