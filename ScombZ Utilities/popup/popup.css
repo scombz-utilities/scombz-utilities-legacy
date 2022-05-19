@@ -1,90 +1,90 @@
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-#mainbody{
-    margin :0;
+#mainbody {
+    margin: 0;
     width: 350px;
 }
-.popuplogo{
-    display:block;
-    margin :0 auto;
+.popuplogo {
+    display: block;
+    margin: 0 auto;
     margin-bottom: 8px;
-    width:200px;
+    width: 200px;
 }
-h1{
+h1 {
     text-align: center;
 }
-.announcement{
-    font-size:85%;
+.announcement {
+    font-size: 85%;
     text-decoration: none;
     color: #000;
 }
-.footer-link{
+.footer-link {
     color: #000;
 }
-.footer{
+.footer {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color:#ddd;
+    background-color: #ddd;
     width: 100%;
-    height:40px;
+    height: 40px;
     margin: 0;
 }
-.settings{
-    width:330px;
+.settings {
+    width: 330px;
     margin: 0 auto;
-    padding:10px;
+    padding: 10px;
 }
-h1{
-    margin-bottom:15px;
+h1 {
+    margin-bottom: 15px;
 }
-#go-to-options{
+#go-to-options {
     width: 24px;
     height: 24px;
     position: absolute;
     right: 6px;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 1.0;
+    opacity: 1;
 }
-#go-to-options:hover{
+#go-to-options:hover {
     opacity: 0.85;
     cursor: pointer;
 }
 
-#weekdayTabsContainer{
+#weekdayTabsContainer {
     display: flex;
     justify-content: space-around;
 }
-#weekdayTabsContainer .weekday-tab{
+#weekdayTabsContainer .weekday-tab {
     width: calc(100% / 6);
     text-align: center;
 }
-.weekday-tab.active{
+.weekday-tab.active {
     font-weight: bold;
     cursor: default;
     border-bottom: 2px gray solid;
 }
-.weekday-tab:not(.active){
+.weekday-tab:not(.active) {
     cursor: pointer;
     color: gray;
     border-bottom: 1px lightgray solid;
 }
-.weekday-tab:not(.active):hover{
+.weekday-tab:not(.active):hover {
     color: inherit;
     border-bottom: 1px gray solid;
 }
-#timetable{
+#timetable {
     width: 100%;
 }
-.timetable-row{
+.timetable-row {
     display: flex;
     width: 100%;
     min-height: 48px;
@@ -92,53 +92,53 @@ h1{
     box-sizing: border-box;
     border-bottom: 1px lightgray solid;
 }
-.timetable-row.intensive-subjects{
+.timetable-row.intensive-subjects {
     margin-top: 12px;
     border-top: 1px lightgray solid;
 }
-.timetable-time{
+.timetable-time {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 80px;
     margin-right: 12px;
 }
-.time-term{
+.time-term {
     font-size: x-small;
     color: gray;
     white-space: nowrap;
 }
-.subjects-container{
+.subjects-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
-.subject{
+.subject {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.subject-name{
+.subject-name {
     display: flex;
 }
-.subject-name a{
+.subject-name a {
     color: #000;
     text-decoration: none;
     white-space: nowrap;
 }
-.subject-name a:hover{
+.subject-name a:hover {
     text-decoration: underline;
 }
-.subject-classroom{
+.subject-classroom {
     color: gray;
     padding-left: 12px;
     display: -webkit-box;
     width: auto;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    overflow: hidden; 
+    overflow: hidden;
 }
-.subject-classroom:hover{
+.subject-classroom:hover {
     -webkit-line-clamp: unset;
 }

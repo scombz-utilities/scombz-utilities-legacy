@@ -1,23 +1,28 @@
 {
-    "manifest_version":3 ,
+    "manifest_version": 3,
     "name": "ScombZ Utilities",
     "version": "3.5.2",
     "description": "ScombZをカスタムする拡張機能",
-    "icons": { 
-        "48":  "icons/icon48.png",
-        "128": "icons/icon128.png" 
+    "icons": {
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
     },
-    "action":{
-        "default_title":"ScombZ Utilities",
-        "default_popup":"popup/popup.html"
+    "action": {
+        "default_title": "ScombZ Utilities",
+        "default_popup": "popup/popup.html"
     },
-    "background":{
+    "background": {
         "service_worker": "js/background.js"
     },
-    "options_page":"options/options.html",
+    "options_page": "options/options.html",
     "content_scripts": [
         {
-            "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
+            "matches": [
+                "https://scombz.shibaura-it.ac.jp/*",
+                "https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*",
+                "http://syllabus.sic.shibaura-it.ac.jp/*",
+                "https://scomb.shibaura-it.ac.jp/*"
+            ],
             "all_frames": true,
             "run_at": "document_start",
             "js": [
@@ -44,11 +49,11 @@
             ]
         }
     ],
-    "permissions":[
-        "storage"
-    ],
-    "web_accessible_resources": [{
-        "resources": ["fonts/*.ttf", "fonts/*.woff2"],
-        "matches": ["<all_urls>"]
-    }]
+    "permissions": ["storage"],
+    "web_accessible_resources": [
+        {
+            "resources": ["fonts/*.ttf", "fonts/*.woff2"],
+            "matches": ["<all_urls>"]
+        }
+    ]
 }
