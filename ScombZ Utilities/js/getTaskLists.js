@@ -2,7 +2,7 @@
 /* getTaskLists.js */
 function getTaskLists($$reacquisitionMin) {
     'use strict';
-    if (location.href == 'https://scombz.shibaura-it.ac.jp/lms/task') {
+    if (location.href === 'https://scombz.shibaura-it.ac.jp/lms/task') {
         getTasksOnTaskpage();
     } else {
         getTasksByAdjax($$reacquisitionMin);

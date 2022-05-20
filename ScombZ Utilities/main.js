@@ -40,20 +40,20 @@
     document.addEventListener('DOMContentLoaded', function () {
         // chrome Storage API読み込み
         chrome.storage.local.get(defaults, (items) => {
-            if (document.domain == 'scomb.shibaura-it.ac.jp') {
+            if (document.domain === 'scomb.shibaura-it.ac.jp') {
                 console.log('旧Scomb');
                 scombLogin();
             }
-            if (document.domain == 'adfs.sic.shibaura-it.ac.jp') {
+            if (document.domain === 'adfs.sic.shibaura-it.ac.jp') {
                 console.log('adfs');
                 // ADFSだったらadfs.jsに飛ばす
                 adfsLoaded();
             }
-            if (document.domain == 'syllabus.sic.shibaura-it.ac.jp') {
+            if (document.domain === 'syllabus.sic.shibaura-it.ac.jp') {
                 // シラバスだったらsyllabus.jsに飛ばす
                 syllabusLoaded(items.year, items.fac);
             }
-            if (document.domain == 'scombz.shibaura-it.ac.jp') {
+            if (document.domain === 'scombz.shibaura-it.ac.jp') {
                 // デバッグ用 itemsをログ出力
                 console.log(items);
                 // 非表示にしていたものを表示
@@ -158,7 +158,7 @@
 function onLoading() {
     'use strict';
     console.log('Loading');
-    if (document.domain == 'scombz.shibaura-it.ac.jp') {
+    if (document.domain === 'scombz.shibaura-it.ac.jp') {
         console.log('SCOMBZ');
         // 一度非表示
         document.documentElement.style.visibility = 'hidden';

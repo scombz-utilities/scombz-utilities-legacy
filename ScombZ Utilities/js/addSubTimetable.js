@@ -8,7 +8,9 @@ function subTimetable($timetableDisplay, $tasklistDisplay, $$version) {
         return;
     }
     if ($timetableDisplay === true) {
-        if (location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable') {
+        if (
+            location.href === 'https://scombz.shibaura-it.ac.jp/lms/timetable'
+        ) {
             getSubTimetable();
         }
         console.log('グレーレイヤー&時間割を追加します');
@@ -48,7 +50,7 @@ function getSubTimetable() {
                 if (
                     $course.parentNode.parentNode.className.indexOf(
                         $yobicolNum + '-yobicol'
-                    ) != -1
+                    ) !== -1
                 ) {
                     ($timetableClassData.day = $yobicolNum),
                     ($timetableClassData.time = Number(
@@ -66,7 +68,7 @@ function getSubTimetable() {
                     }
                     break;
                 }
-                if ($yobicolNum == 6) {
+                if ($yobicolNum === 6) {
                     $timetableClassData.day = -1;
                     $timetableClassData.time = -1; // 曜日時限不定履修
                     futei++;
@@ -121,7 +123,7 @@ function displaySubTimetable($$version) {
             timetableData: null
         },
         function (item) {
-            if (item.timetableData == null) {
+            if (item.timetableData === null) {
                 console.log('時間割情報が存在しません');
                 displayGrayLayer($$version);
             } else {
@@ -194,15 +196,15 @@ function displaySubTimetable($$version) {
                     $subTimetable += '<tr>';
                     for (let j = 0; j < 7; j++) {
                         // j=曜日
-                        let $subjData = j == 0 ? i + 1 : '';
+                        let $subjData = j === 0 ? i + 1 : '';
                         if (
-                            $timetableData[num].day == j &&
-                            $timetableData[num].time == i + 1
+                            $timetableData[num].day === j &&
+                            $timetableData[num].time === i + 1
                         ) {
                             // 2Q、4Qのことを考える
                             if (
-                                $timetableData[num + 1].day == j &&
-                                $timetableData[num + 1].time == i + 1
+                                $timetableData[num + 1].day === j &&
+                                $timetableData[num + 1].time === i + 1
                             ) {
                                 console.log(
                                     'クォーター制授業を検出しました 曜日:' +
@@ -240,7 +242,7 @@ function displaySubTimetable($$version) {
                 }
                 $subTimetable += `</tbody></table></div>`;
                 // 曜日時間不定授業
-                if ($timetableData[num].day != -1) {
+                if ($timetableData[num].day !== -1) {
                     console.log(
                         '読み取り完了 課外授業なし day:' +
                             $timetableData[num].day
@@ -252,7 +254,7 @@ function displaySubTimetable($$version) {
                 <tr class="SubTimetable">
                     <th class="SubTimetable">その他の授業</th>
                 </tr>`;
-                    for (; $timetableData[num].day == -1; num++) {
+                    for (; $timetableData[num].day === -1; num++) {
                         $subTimetable += `
                     <tr>
                         <td class="SubTimetable" style="background:#EDF3F7;width:calc((100vw - 300px)/5);height:4vh;"><a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a></td>
@@ -341,7 +343,7 @@ function displayTaskListsOnGrayLayer() {
                             deadline = $tasklistObj[i].deadline.slice(6, -3);
                         // 相対表示
                         if (items.deadlinemode.includes('relative')) {
-                            if (items.deadlinemode == 'relative') {
+                            if (items.deadlinemode === 'relative') {
                                 const nowUnix = Date.now();
                                 const relativeDeadline =
                                     (Number(

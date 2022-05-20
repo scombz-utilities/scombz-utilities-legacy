@@ -57,7 +57,7 @@ function styleExam() {
                 '.block-under-area-btn'
             );
             $submitBtnArea.style.maxWidth = '450px';
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             if (document.querySelector('.page-directlink'))
@@ -128,7 +128,7 @@ function styleExam() {
                     window.onbeforeunload = null;
                 });
             }
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             if (document.querySelector('.page-directlink'))
@@ -153,7 +153,7 @@ function styleExam() {
         }
         // テスト提出確認画面
         if (
-            location.href ==
+            location.href ===
             'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
         ) {
             console.log('テスト提出確認画面');
@@ -202,7 +202,7 @@ function styleExam() {
                 '.block-under-area-btn'
             );
             $submitBtnArea.style.maxWidth = '450px';
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             const $confirmBtnList = document.querySelectorAll(

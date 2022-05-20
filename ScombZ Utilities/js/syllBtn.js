@@ -93,7 +93,7 @@ function specificCourse(courseName) {
     if (courseName.includes('ＷｒｉｔｉｎｇI')) {
         courseName = courseName.replace('ＷｒｉｔｉｎｇI', 'Ｗｒｉｔｉｎｇ I');
     }
-    if (courseName == 'Ｈ．Ｃ．インタラクション') {
+    if (courseName === 'Ｈ．Ｃ．インタラクション') {
         courseName = 'インタラクション';
     }
     return courseName;
