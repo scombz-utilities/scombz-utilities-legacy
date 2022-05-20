@@ -206,7 +206,7 @@ function syllabusLoaded($settings_year, $settings_fac) {
         // jQueryを使って実装
         $(function () {
             console.log('SUGGESTING');
-            const urlPrm = new Object();
+            const urlPrm = {};
             const urlSearch = location.search.substring(1).split('&');
             for (let i = 0; urlSearch[i]; i++) {
                 const kv = urlSearch[i].split('=');
