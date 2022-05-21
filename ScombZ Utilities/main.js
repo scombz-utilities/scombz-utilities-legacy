@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.7';          //バージョン
+    const $$version = '3.6.8';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -65,9 +65,7 @@
                 //設定ボタンを追加
                 addExtensionSettingsBtn();
                 //帰ってきて芝猫
-                if(items.clickLoginBtn !== true){
-                    topShibaneko();
-                }
+                topShibaneko();
                 //ページ上部にある固定ヘッダのキモい影を直す
                 if(items.fixHeadShadow === true){
                     fixHeadShadow();
