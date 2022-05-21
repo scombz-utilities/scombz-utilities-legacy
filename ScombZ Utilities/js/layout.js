@@ -235,19 +235,17 @@ function layoutHome() {
         `
         );
         // リンクをすべて表示する
-        const $school_link_list = document.getElementById('school_link_list');
-        if ($school_link_list) {
+        const $schoolLinkList = document.getElementById('school_link_list');
+        if ($schoolLinkList) {
             setTimeout(() => {
-                $school_link_list
-                    .querySelector('.portal-link-bottom a')
-                    .click();
+                $schoolLinkList.querySelector('.portal-link-bottom a').click();
             }, 300);
         }
         // カレンダーの下にリンク集を追加する
-        const $top_attention = document.getElementById('top_attention');
-        if ($top_attention) {
+        const $topAttention = document.getElementById('top_attention');
+        if ($topAttention) {
             console.log('注目コンテンツを取得しました');
-            $top_attention.insertAdjacentHTML(
+            $topAttention.insertAdjacentHTML(
                 'beforeBegin',
                 `
             <dl id="right-links" class="portal-subblock portal-subblock-dl-initial">

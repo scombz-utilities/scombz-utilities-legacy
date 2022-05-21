@@ -1,14 +1,14 @@
 // Saves options to chrome.storage
-function save_options() {
+function saveOptions() {
     const year = document.getElementById('year').value;
     const fac = document.getElementById('fac').value;
-    const login_auto = document.getElementById('login_auto').checked;
-    const adfs_auto = document.getElementById('adfs_auto').checked;
-    const menu_exit_auto = document.getElementById('menu_exit_auto').checked;
+    const loginAuto = document.getElementById('login_auto').checked;
+    const adfsAuto = document.getElementById('adfs_auto').checked;
+    const menuExitAuto = document.getElementById('menu_exit_auto').checked;
     const submenu = document.getElementById('submenu').checked;
     const examBtn = document.getElementById('exam_btn').checked;
     const examImg = document.getElementById('exam_img').checked;
-    const additional_lms = document.getElementById('additional_lms').checked;
+    const additionalLms = document.getElementById('additional_lms').checked;
     const changeReportBtn = document.getElementById('changeReportBtn').checked;
     const styleDialog = document.getElementById('styleDialog').checked;
     const syllBtn = document.getElementById('syll_btn').checked;
@@ -28,20 +28,21 @@ function save_options() {
     const nickname = document.getElementById('nickname').value;
     const timesBtnValue = document.getElementById('timesBtnValue').value;
     const sliderBarMax = document.getElementById('sliderBarMax').value;
-    const tasklistTranslate = document.getElementById('tasklistTranslate').value;
+    const tasklistTranslate =
+        document.getElementById('tasklistTranslate').value;
     const fixHeadShadow = document.getElementById('fixHeadShadow').checked;
     const deadlinemode = document.getElementById('deadlinemode').value;
     chrome.storage.local.set(
         {
             year: year,
             fac: fac,
-            clickLoginBtn: login_auto,
-            adfsSkip: adfs_auto,
-            exitSidemenu: menu_exit_auto,
+            clickLoginBtn: loginAuto,
+            adfsSkip: adfsAuto,
+            exitSidemenu: menuExitAuto,
             styleSidemenu: submenu,
             styleExamBtn: examBtn,
             styleExamImg: examImg,
-            addSubTimetable: additional_lms,
+            addSubTimetable: additionalLms,
             changeReportBtn: changeReportBtn,
             styleDialog: styleDialog,
             hideCompletedReports: hideCompletedReports,
@@ -74,7 +75,7 @@ function save_options() {
 
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
-function restore_options() {
+function restoreOptions() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.local.get(
         {
@@ -153,22 +154,22 @@ function restore_options() {
         }
     );
 }
-document.addEventListener('DOMContentLoaded', restore_options);
+document.addEventListener('DOMContentLoaded', restoreOptions);
 // チェックボックスが更新されたら保存
 const $checkboxList = document.querySelectorAll("input[type='checkbox']");
 for (const $checkbox of $checkboxList) {
-    $checkbox.addEventListener('change', save_options);
+    $checkbox.addEventListener('change', saveOptions);
 }
 // プルダウンメニューが更新されたら保存
 const $menuList = document.querySelectorAll('select');
 for (const $menu of $menuList) {
-    $menu.addEventListener('change', save_options);
+    $menu.addEventListener('change', saveOptions);
 }
 // 保存ボタンが押されたら保存
 const $saveBtnList = document.querySelectorAll('.saveBtn');
 for (const $saveBtn of $saveBtnList) {
     $saveBtn.addEventListener('click', function () {
-        save_options();
+        saveOptions();
         $saveBtn.insertAdjacentHTML(
             'afterEnd',
             `
