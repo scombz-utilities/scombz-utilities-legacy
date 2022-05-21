@@ -66,6 +66,7 @@ function getTasksByAdjax($$reacquisitionMin){
                     function(data) {
                         console.log("課題一覧ページAjax読み込み成功");
                         const $taskListsObj = [];
+                        
                         for (let i = 0 ; $(data).find(".result_list_line .course").eq(i).html() ; i++){
                             const $taskObj = {};
                             $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
@@ -78,17 +79,19 @@ function getTasksByAdjax($$reacquisitionMin){
                             $taskListsObj.push($taskObj);
                         }
                         if(!$taskListsObj[0]){
-                            $taskListsObj.push({
-                                course: "",
-                                title: "",
-                                link: "",
-                                deadline: ""
-                            });
-                            if($$reacquisitionMin > 5){
-                                //更新に5分以上のスパン設定であるかつ取得データが存在しなかったとき、もう一度確認のために取得する
-                                setTimeout(function(){
-                                    getTasksByAdjax(0);
-                                },1000);
+                            //課題完了か確認
+                            if($(data).find(".no-data").eq(0).html()){
+                                $taskListsObj.push({
+                                    data: null
+                                });
+                            }else{
+                            //エラー時
+                                $taskListsObj.push({
+                                    course: "取得ERROR",
+                                    title: "課題一覧ページ",
+                                    link: "https://scombz.shibaura-it.ac.jp/lms/task",
+                                    deadline: ""
+                                });
                             }
                         }
                         console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));

@@ -27,7 +27,7 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version,$$reacquisiti
             if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60 ){
                 setTimeout(function(){
                     displayTaskListsOnGrayLayer();
-                },1000);
+                },1300);
             }else{
             displayTaskListsOnGrayLayer();
             }
@@ -266,12 +266,16 @@ function displayTaskListsOnGrayLayer(){
                 }
             }
             //メイン生成部分
-            let kadaiListHTML="";
+            let kadaiListHTML=``;
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 let deadline='XXXX/XX/XX XX:XX:XX';
                 for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay ;i++){
+                    if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
+                        kadaiListHTML=`<div class="subk-line">未提出課題は存在しません。</div>`;
+                        break;
+                    }
                     if($tasklistObj[i].data === null)continue;
                     //絶対表示
                     deadline = $tasklistObj[i].deadline;
@@ -301,9 +305,10 @@ function displayTaskListsOnGrayLayer(){
                             }
                         }
                     }
+                    subjlink = $tasklistObj[i].link && $tasklistObj[i].link.slice($tasklistObj[i].link.indexOf('idnumber=')+9,$tasklistObj[i].link.indexOf('&reportId'));
                     kadaiListHTML += `
                     <div class="subk-line">
-                        <div class="subk-column"><div class="subk-subjname">${$tasklistObj[i].course}</div></div>
+                        <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${(subjlink)?`https://scombz.shibaura-it.ac.jp/lms/course?idnumber=`+subjlink:"javascript:void(0);"}">${$tasklistObj[i].course}</a></div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
                         <div class="subk-deadline">${deadline}</div>
                     </div>`;
@@ -394,6 +399,14 @@ function displayTaskListsOnGrayLayer(){
                     font-size:80%;
                     margin-right:20px;
                     color:red;
+                }
+                .subk-subjname-link{
+                    color: #000;
+                    text-decoration: none;
+                }
+                .subk-subjname-link:hover{
+                    color: #222;
+                    text-decoration: underline;
                 }
                 @media(max-width:1280px){
                     .relative-deadline-time{
