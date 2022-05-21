@@ -52,63 +52,68 @@ function getTasksByAdjax($$reacquisitionMin){
         }else{
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}`);
             console.log("課題取得を開始します");
+            setTimeout(function(){
             //Ajax通信
             //jQueryを使って実装
-            $(function() {
-                console.log("Getting Timetable Data By Ajax");
-                $.ajax({
-                    type: "GET",
-                    url: "https://scombz.shibaura-it.ac.jp/lms/task",
-                    dataType:"html"
-                })
-                .then(
-                    //通信成功時
-                    function(data) {
-                        console.log("課題一覧ページAjax読み込み成功");
-                        const $taskListsObj = [];
-                        
-                        for (let i = 0 ; $(data).find(".result_list_line .course").eq(i).html() ; i++){
-                            const $taskObj = {};
-                            $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
-                            $taskObj.title    =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).html();
-                            $taskObj.link     =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).attr('href');
-                            $taskObj.deadline =  $(data).find(".result_list_line .tasklist-deadline .deadline").eq(i).html();
-                            if(!$taskObj.link.includes("https://scombz.shibaura-it.ac.jp")){
-                                $taskObj.link = "https://scombz.shibaura-it.ac.jp" + $taskObj.link;
+                $(function() {
+                    console.log("Getting Timetable Data By Ajax");
+                    $.ajax({
+                        type: "GET",
+                        url: "https://scombz.shibaura-it.ac.jp/lms/task",
+                        dataType:"html"
+                    })
+                    .then(
+                        //通信成功時
+                        function(data) {
+                            console.log("課題一覧ページAjax読み込み成功");
+                            const $taskListsObj = [];
+                            
+                            for (let i = 0 ; $(data).find(".result_list_line .course").eq(i).html() ; i++){
+                                const $taskObj = {};
+                                $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
+                                $taskObj.title    =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).html();
+                                $taskObj.link     =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).attr('href');
+                                $taskObj.deadline =  $(data).find(".result_list_line .tasklist-deadline .deadline").eq(i).html();
+                                if(!$taskObj.link.includes("https://scombz.shibaura-it.ac.jp")){
+                                    $taskObj.link = "https://scombz.shibaura-it.ac.jp" + $taskObj.link;
+                                }
+                                $taskListsObj.push($taskObj);
                             }
-                            $taskListsObj.push($taskObj);
+                            if(!$taskListsObj[0]){
+                                //課題完了か確認
+                                if($(data).find(".no-data").eq(0).html()){
+                                    $taskListsObj.push({
+                                        data: null
+                                    });
+                                }else{
+                                //エラー時
+                                    $taskListsObj.push({
+                                        course: "取得ERROR",
+                                        title: "課題一覧ページ",
+                                        link: "https://scombz.shibaura-it.ac.jp/lms/task",
+                                        deadline: ""
+                                    });
+                                    setTimeout(function(){
+
+                                    },1000);
+                                }
+                            }
+                            console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
+                            chrome.storage.local.set({
+                                TaskGetTime: $nowUnix,
+                                tasklistData : encodeURIComponent(JSON.stringify($taskListsObj))
+                            },function(){
+                                console.log('課題一覧と現在時刻をChromeLocalStorageに保存しました');
+                                }
+                            );
+                        },
+                        //通信失敗時
+                        function(){
+                            console.log("読み込み失敗");
                         }
-                        if(!$taskListsObj[0]){
-                            //課題完了か確認
-                            if($(data).find(".no-data").eq(0).html()){
-                                $taskListsObj.push({
-                                    data: null
-                                });
-                            }else{
-                            //エラー時
-                                $taskListsObj.push({
-                                    course: "取得ERROR",
-                                    title: "課題一覧ページ",
-                                    link: "https://scombz.shibaura-it.ac.jp/lms/task",
-                                    deadline: ""
-                                });
-                            }
-                        }
-                        console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
-                        chrome.storage.local.set({
-                            TaskGetTime: $nowUnix,
-                            tasklistData : encodeURIComponent(JSON.stringify($taskListsObj))
-                        },function(){
-                            console.log('課題一覧と現在時刻をChromeLocalStorageに保存しました');
-                            }
-                        );
-                    },
-                    //通信失敗時
-                    function(){
-                        console.log("読み込み失敗");
-                    }
-                );
-            });
+                    );
+                });
+            },500);
         }
     });
     return;
