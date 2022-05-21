@@ -427,7 +427,8 @@ function displayTaskListsOnGrayLayer(){
             if(document.getElementById('pageMain'))
                 document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
             document.getElementById('reloadTasks').addEventListener("click",function(){
-                getTaskLists(1);
+                getTaskLists(0);
+                alert("更新結果を表示するにはページをリロードしてください");
             });
         }
     });

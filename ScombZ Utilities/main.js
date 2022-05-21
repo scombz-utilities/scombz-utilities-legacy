@@ -65,9 +65,7 @@
                 //設定ボタンを追加
                 addExtensionSettingsBtn();
                 //帰ってきて芝猫
-                if(items.clickLoginBtn !== true){
-                    topShibaneko();
-                }
+                topShibaneko();
                 //ページ上部にある固定ヘッダのキモい影を直す
                 if(items.fixHeadShadow === true){
                     fixHeadShadow();
