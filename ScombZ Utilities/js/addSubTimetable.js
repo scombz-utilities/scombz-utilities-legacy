@@ -305,7 +305,10 @@ function displayTaskListsOnGrayLayer(){
                             }
                         }
                     }
-                    subjlink = $tasklistObj[i].link && $tasklistObj[i].link.slice($tasklistObj[i].link.indexOf('idnumber=')+9,$tasklistObj[i].link.indexOf('&reportId'));
+                    let subjlink = $tasklistObj[i].link;
+                    if(subjlink){
+                        subjlink = (subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId'));
+                    }
                     kadaiListHTML += `
                     <div class="subk-line">
                         <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${(subjlink)?`https://scombz.shibaura-it.ac.jp/lms/course?idnumber=`+subjlink:"javascript:void(0);"}">${$tasklistObj[i].course}</a></div></div>
