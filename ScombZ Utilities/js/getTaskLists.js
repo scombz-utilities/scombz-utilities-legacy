@@ -47,7 +47,7 @@ function getTasksByAdjax($$reacquisitionMin){
     chrome.storage.local.get({
         TaskGetTime : 0
     },function(item){
-        if(Number(item.TaskGetTime) + $$reacquisitionMin*1000*60 > Number($nowUnix) ){
+        if(Number(item.TaskGetTime) + $$reacquisitionMin*1000*60 > Number($nowUnix) || location.href == "https://scombz.shibaura-it.ac.jp/login"){
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}\n${$$reacquisitionMin}分経過していないため、再取得をスキップします`);
         }else{
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}`);
@@ -113,7 +113,7 @@ function getTasksByAdjax($$reacquisitionMin){
                         }
                     );
                 });
-            },500);
+            },200);
         }
     });
     return;
