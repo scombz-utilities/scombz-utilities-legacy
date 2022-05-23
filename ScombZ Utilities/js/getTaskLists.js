@@ -93,9 +93,6 @@ function getTasksByAdjax($$reacquisitionMin){
                                         link: "https://scombz.shibaura-it.ac.jp/lms/task",
                                         deadline: ""
                                     });
-                                    setTimeout(function(){
-
-                                    },1000);
                                 }
                             }
                             console.log("課題一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));

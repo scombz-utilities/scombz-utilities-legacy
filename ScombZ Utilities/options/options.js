@@ -31,6 +31,7 @@ function save_options() {
     var deadlinemode = document.getElementById('deadlinemode').value;
     var notepadMode = document.getElementById('notepadMode').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
+    var darkmode = document.getElementById('darkmode').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -61,6 +62,7 @@ function save_options() {
         deadlinemode : deadlinemode,
         notepadMode : notepadMode,
         maxTaskDisplay : maxTaskDisplay,
+        darkmode : darkmode,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -105,6 +107,7 @@ function save_options() {
         deadlinemode: 'relative-absoluteLong',
         notepadMode: true,
         maxTaskDisplay: 15,
+        darkmode : 'relative',
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -141,6 +144,7 @@ function save_options() {
         document.getElementById('deadlinemode').value = items.deadlinemode;
         document.getElementById('notepadMode').checked = items.notepadMode;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
+        document.getElementById('darkmode').value = items.darkmode;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
