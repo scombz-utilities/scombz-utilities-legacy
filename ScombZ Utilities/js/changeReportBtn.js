@@ -50,6 +50,15 @@ function changeReportBtn(){
         .time-select-btn{
             padding:2px 10px;
         }
+        #confirm_dialog{
+            min-height:90px !important;
+        }
+        #confirm_dialog .block-popup{
+            padding-bottom:none !important;
+        }
+        .ui-dialog-buttonset.commonDialogButtonArea{
+            transform:translateX(6px);
+        }
         </style>
         `);
     const $submitBtnArea = document.querySelector('.block-under-area-btn');

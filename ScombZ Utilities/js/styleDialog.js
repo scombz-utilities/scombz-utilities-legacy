@@ -8,6 +8,7 @@ function styleDialog(){
         const $progressDialog = document.querySelector('[aria-describedby="progress_dialog"]');
         const $notificationDialog = document.querySelector('[aria-describedby="info_detail_view2"]');
         const $courseDialog = document.querySelector('[aria-describedby="info_detail_view"]');
+        const $virusDialog = document.querySelector('[aria-describedby="ui-id-1"]');
 
         const $widgetOverlay = document.getElementsByClassName('ui-widget-overlay')[0];
 
@@ -43,6 +44,7 @@ function styleDialog(){
             }, { once: true });
             styleadd();
         }
+
     });
 
     const config = {

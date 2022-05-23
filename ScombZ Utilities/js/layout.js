@@ -276,6 +276,21 @@ function removeName(){
         });
     }
 }
+//名前をクリックして表示を消す
+function clickHideName(){
+    "use strict";
+    const $loginViewName = document.querySelector(".login-view-name.bold-txt");
+    if($loginViewName){
+        $loginViewName.insertAdjacentHTML("beforeend",`<style>.name-hidden{opacity:0;}</style>`);
+        $loginViewName.addEventListener("click", function(){
+            if($loginViewName.classList.contains("name-hidden")){
+                $loginViewName.classList.remove("name-hidden");
+            }else{
+                $loginViewName.classList.add("name-hidden");
+            }
+        });
+    }
+}
 //ページ上部にある固定ヘッダのキモい影を直す
 function fixHeadShadow(){
     if(document.getElementById("page_head")){
