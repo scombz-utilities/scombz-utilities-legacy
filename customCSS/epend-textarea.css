@@ -1,0 +1,5 @@
+/* 記述欄広げられるように */
+.textarea-add-box{
+resize: vertical;
+height: 70px;
+}

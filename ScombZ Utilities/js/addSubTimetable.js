@@ -363,6 +363,9 @@ function displayTaskListsOnGrayLayer(){
                     font-size:12px;
                     padding:2px;
                     width:fit-content;
+                    white-space: nowrap; 
+                    overflow: hidden; 
+                    text-overflow: ellipsis;
                 }
                 div.subk-link{
                     padding:2px 2px 0px 2px;

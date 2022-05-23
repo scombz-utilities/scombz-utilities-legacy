@@ -39,6 +39,15 @@ function styleExam(){
                 font-size:110%;
                 border:1px solid #ccc;
             }
+            #confirm_dialog{
+                min-height:90px !important;
+            }
+            #confirm_dialog .block-popup{
+                padding-bottom:none !important;
+            }
+            .ui-dialog-buttonset.commonDialogButtonArea{
+                transform:translateX(6px);
+            }
             </style>
             `);
             const $submitBtnArea = document.querySelector('.block-under-area-btn');
