@@ -57,7 +57,7 @@ function displaySyllabusError(){
     'use strict';
     if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
         const $courseTitle = document.querySelector('.course-title-txt');
-        $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;">シラバス表示をするには、<a href="javascript:void(0);" id="link_to_extention_syll">拡張機能設定</a>から、学年と学部を設定してください。</span>`);
+        $courseTitle.parentNode.insertAdjacentHTML('beforeEnd',`<span style="color:red;padding: 12px 30px 10px 34px">シラバス表示をするには、<a href="javascript:void(0);" id="link_to_extention_syll">拡張機能設定</a>から、学年と学部を設定してください。</span>`);
         document.getElementById("link_to_extention_syll").addEventListener("click", function(){
             chrome.runtime.sendMessage({"action": "openOptionsPage"});
         });
