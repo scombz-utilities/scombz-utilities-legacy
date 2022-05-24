@@ -46,12 +46,15 @@ function displaySyllabus(year, fac) {
                     $courseNameStr +
                     ' ' +
                     $courseName.slice($courseName.search(/[０-９]|[0-9]/));
+                // eslint-disable-next-line new-cap
                 $courseNameStrEnc = EscapeEUCJP($courseNameStr);
             } else if (!$courseName.includes(' ')) {
                 $courseNameStr = `subject:"${$courseName}"`;
+                // eslint-disable-next-line new-cap
                 $courseNameStrEnc = `%2B${EscapeEUCJP($courseNameStr)}`;
             } else {
                 $courseNameStr = $courseName;
+                // eslint-disable-next-line new-cap
                 $courseNameStrEnc = EscapeEUCJP($courseNameStr);
             }
             console.log('授業検索名を決定しました[' + $courseNameStr + ']');
@@ -93,7 +96,7 @@ function specificCourse(courseName) {
     if (courseName.includes('ＷｒｉｔｉｎｇI')) {
         courseName = courseName.replace('ＷｒｉｔｉｎｇI', 'Ｗｒｉｔｉｎｇ I');
     }
-    if (courseName == 'Ｈ．Ｃ．インタラクション') {
+    if (courseName === 'Ｈ．Ｃ．インタラクション') {
         courseName = 'インタラクション';
     }
     return courseName;

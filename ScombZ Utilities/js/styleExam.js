@@ -57,7 +57,7 @@ function styleExam() {
                 '.block-under-area-btn'
             );
             $submitBtnArea.style.maxWidth = '450px';
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             if (document.querySelector('.page-directlink'))
@@ -128,7 +128,7 @@ function styleExam() {
                     window.onbeforeunload = null;
                 });
             }
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             if (document.querySelector('.page-directlink'))
@@ -153,7 +153,7 @@ function styleExam() {
         }
         // テスト提出確認画面
         if (
-            location.href ==
+            location.href ===
             'https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm'
         ) {
             console.log('テスト提出確認画面');
@@ -202,7 +202,7 @@ function styleExam() {
                 '.block-under-area-btn'
             );
             $submitBtnArea.style.maxWidth = '450px';
-            if ($submitBtnArea.childElementCount == 2) {
+            if ($submitBtnArea.childElementCount === 2) {
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
             const $confirmBtnList = document.querySelectorAll(
@@ -268,44 +268,44 @@ function styleExamImg() {
         document.body.clientWidth > 480
     ) {
         console.log('テスト画像改善を実行します');
-        const $exa_contsize =
+        const $exaContsize =
             document.getElementById('examQuestionSubblock') ||
             document.getElementById('pageContents');
-        const $exa_examImgList = document.querySelectorAll('.downloadFile');
-        const $exa_cheadList = document.querySelectorAll('.contents-header');
-        const $exa_img = document.querySelector('.exam-question-img');
-        const $exa_footer = document.getElementById('page_foot');
-        const $exa_timer = document.getElementById('examTimer');
-        if ($exa_footer) {
-            $exa_footer.style.visibility = 'hidden';
+        const $exaExamImgList = document.querySelectorAll('.downloadFile');
+        const $exaCheadList = document.querySelectorAll('.contents-header');
+        const $exaImg = document.querySelector('.exam-question-img');
+        const $exaFooter = document.getElementById('page_foot');
+        const $exaTimer = document.getElementById('examTimer');
+        if ($exaFooter) {
+            $exaFooter.style.visibility = 'hidden';
         }
 
-        for (const $exa_chead of $exa_cheadList) {
-            $exa_chead.style.width = '8%';
-            $exa_chead.style.background = '#f6f6ff';
+        for (const $exaChead of $exaCheadList) {
+            $exaChead.style.width = '8%';
+            $exaChead.style.background = '#f6f6ff';
         }
-        if ($exa_img) {
-            for (const $exa_examImg of $exa_examImgList) {
-                $exa_examImg.style.maxHeight = '100vh';
-                $exa_examImg.style.boxShadow = '0 0 1px #000000 ';
+        if ($exaImg) {
+            for (const $exaExamImg of $exaExamImgList) {
+                $exaExamImg.style.maxHeight = '100vh';
+                $exaExamImg.style.boxShadow = '0 0 1px #000000 ';
             }
-            $exa_examImgList[0].style.maxHeight = '95vh';
-            $exa_examImgList[0].style.maxWidth = '50vw';
-            $exa_examImgList[0].style.position = 'fixed';
-            $exa_examImgList[0].style.right = '1px';
-            $exa_examImgList[0].style.top = '5vh';
-            $exa_examImgList[0].style.boxShadow = '0 0 1px #000000 ';
-            if ($exa_contsize) {
-                $exa_contsize.style.width =
+            $exaExamImgList[0].style.maxHeight = '95vh';
+            $exaExamImgList[0].style.maxWidth = '50vw';
+            $exaExamImgList[0].style.position = 'fixed';
+            $exaExamImgList[0].style.right = '1px';
+            $exaExamImgList[0].style.top = '5vh';
+            $exaExamImgList[0].style.boxShadow = '0 0 1px #000000 ';
+            if ($exaContsize) {
+                $exaContsize.style.width =
                     document.body.clientWidth -
-                    $exa_examImgList[0].clientWidth -
+                    $exaExamImgList[0].clientWidth -
                     3 +
                     'px';
             }
-            if ($exa_timer) {
-                $exa_timer.style.width =
+            if ($exaTimer) {
+                $exaTimer.style.width =
                     document.body.clientWidth -
-                    $exa_examImgList[0].clientWidth +
+                    $exaExamImgList[0].clientWidth +
                     'px';
             }
         }

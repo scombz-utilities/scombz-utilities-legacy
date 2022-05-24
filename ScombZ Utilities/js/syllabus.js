@@ -1,6 +1,6 @@
 /* ScombZ Utilities */
 /* syllabus.js */
-function syllabusLoaded($settings_year, $settings_fac) {
+function syllabusLoaded($settingsYear, $settingsFac) {
     'use strict';
     if (
         location.href.includes('namazu') &&
@@ -109,13 +109,13 @@ function syllabusLoaded($settings_year, $settings_fac) {
                     const hitarea = document
                         .querySelector('.namazu-result-header')
                         .innerHTML.indexOf('<!-- HIT -->');
-                    const the_number_of_hit = Number(
+                    const theNumberOfHit = Number(
                         document
                             .querySelector('.namazu-result-header')
                             .innerHTML.slice(hitarea + 12, hitarea + 17)
                             .replace(/[^0-9]/g, '')
                     );
-                    for (let i = 0; i < 20 && i < the_number_of_hit + 1; i++) {
+                    for (let i = 0; i < 20 && i < theNumberOfHit + 1; i++) {
                         const link = $sylSubDDTag[22 + i * 2].innerHTML;
                         getDepartment(link, i + 1);
                     }
@@ -199,14 +199,14 @@ function syllabusLoaded($settings_year, $settings_fac) {
             console.log('redirect:' + $autoredirect);
         }
     } else if (
-        location.href.includes(`${$settings_year}/${$settings_fac}/`) &&
+        location.href.includes(`${$settingsYear}/${$settingsFac}/`) &&
         location.href.includes('?suggesting=true')
     ) {
         // もしかしてを…表示する
         // jQueryを使って実装
         $(function () {
             console.log('SUGGESTING');
-            const urlPrm = new Object();
+            const urlPrm = {};
             const urlSearch = location.search.substring(1).split('&');
             for (let i = 0; urlSearch[i]; i++) {
                 const kv = urlSearch[i].split('=');

@@ -61,7 +61,7 @@ function changeReportBtn() {
         );
         const $submitBtnArea = document.querySelector('.block-under-area-btn');
         $submitBtnArea.style.maxWidth = '450px';
-        if ($submitBtnArea.childElementCount == 2) {
+        if ($submitBtnArea.childElementCount === 2) {
             $submitBtnArea.firstElementChild.id =
                 $submitBtnArea.firstElementChild.id || 'back';
             $submitBtnArea.appendChild($submitBtnArea.children[0]);
@@ -89,7 +89,7 @@ function createTimeTempBtn() {
                 [10, 60, 120, 180, 300, 600, 1000]
             ][Number(items.timesBtnValue.slice(-1)) - 1];
             for (const $timeBox of $timeBoxes) {
-                if ($timeBox.type != 'hidden') {
+                if ($timeBox.type !== 'hidden') {
                     $timeBox.parentNode.parentNode.parentNode.insertAdjacentHTML(
                         'beforeEnd',
                         `

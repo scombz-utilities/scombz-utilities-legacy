@@ -3,7 +3,7 @@
 // ログアウト画面変更
 function changeLogout() {
     'use strict';
-    if (location.href == 'https://scombz.shibaura-it.ac.jp/logout') {
+    if (location.href === 'https://scombz.shibaura-it.ac.jp/logout') {
         console.log('ログアウト画面を変更します');
         window.addEventListener('load', function () {
             const $logoutMainContent = document.getElementById('logout');
@@ -79,7 +79,7 @@ function maxWidthOnSubjPage() {
             }
         );
     } else if (
-        location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable'
+        location.href === 'https://scombz.shibaura-it.ac.jp/lms/timetable'
     ) {
         console.log('LMSの最大横幅を変更します');
         chrome.storage.local.get(
@@ -118,7 +118,7 @@ function remomvePageTop() {
 }
 // 芝猫表示
 function topShibaneko() {
-    if (location.href == 'https://scombz.shibaura-it.ac.jp/login') {
+    if (location.href === 'https://scombz.shibaura-it.ac.jp/login') {
         const $topLogo = document.querySelector('.sitelogo');
         if ($topLogo) {
             console.log('にゃーん');
@@ -135,10 +135,10 @@ function topShibaneko() {
 function styleNowPeriod() {
     const $nowperiod = getNowPeriod();
     console.log('現在のコマ: ' + $nowperiod);
-    if ($nowperiod == -1) {
+    if ($nowperiod === -1) {
         return;
     }
-    if (location.href == 'https://scombz.shibaura-it.ac.jp/lms/timetable') {
+    if (location.href === 'https://scombz.shibaura-it.ac.jp/lms/timetable') {
         console.log('LMSの現在のコマを目立たせます');
         const $courseList = document.querySelectorAll(
             '.timetable-course-top-btn'
@@ -148,7 +148,7 @@ function styleNowPeriod() {
                 if (
                     $course.parentNode.parentNode.className.indexOf(
                         $yobicolNum + '-yobicol'
-                    ) != -1
+                    ) !== -1
                 ) {
                     if (
                         $yobicolNum * 10 +
@@ -158,7 +158,7 @@ function styleNowPeriod() {
                                         .firstElementChild.innerHTML
                                 )
                             ) -
-                            1 ==
+                            1 ===
                         $nowperiod
                     ) {
                         $course.classList.add('now-period');
@@ -235,19 +235,17 @@ function layoutHome() {
         `
         );
         // リンクをすべて表示する
-        const $school_link_list = document.getElementById('school_link_list');
-        if ($school_link_list) {
+        const $schoolLinkList = document.getElementById('school_link_list');
+        if ($schoolLinkList) {
             setTimeout(() => {
-                $school_link_list
-                    .querySelector('.portal-link-bottom a')
-                    .click();
+                $schoolLinkList.querySelector('.portal-link-bottom a').click();
             }, 300);
         }
         // カレンダーの下にリンク集を追加する
-        const $top_attention = document.getElementById('top_attention');
-        if ($top_attention) {
+        const $topAttention = document.getElementById('top_attention');
+        if ($topAttention) {
             console.log('注目コンテンツを取得しました');
-            $top_attention.insertAdjacentHTML(
+            $topAttention.insertAdjacentHTML(
                 'beforeBegin',
                 `
             <dl id="right-links" class="portal-subblock portal-subblock-dl-initial">
@@ -277,8 +275,8 @@ function layoutHome() {
                                 <a style="color: #231815;text-decoration: none;" href="#school_link_list">もっと見る</a>
                             </div>
                         </dd>
-                            
-                        
+
+
                     </dl>
             `
             );
