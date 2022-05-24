@@ -214,12 +214,15 @@ function displayNotepad(){
                 min-height:20px;
                 min-height:40px;
             }
+            .in-note-link{
+                color:#00F;
+            }
             </style>
             <div id="noteInputLayer" class="noteInputLayer notelayer"></div>
             <div class="noteInput notelayer">
             <h1>メモを追加</h1>
             <div class="noteInputTitle"><h4>タイトル</h4><input type="text" id="noteInputTitle" value="新規メモ"></div>
-            <div class="noteInputIndex"><h4>本文</h4><textarea id="noteInputIndex"></textarea></div>
+            <div class="noteInputIndex"><h4>本文</h4><textarea id="noteInputIndex">リンクを作れます 例:[[https://google.co.jp]]</textarea></div>
             <div class="noteSaveBtn"><input type="button" value="保存する" id="noteSaveBtn"></div>
             </div>
             `);
@@ -229,8 +232,16 @@ function displayNotepad(){
             //保存ボタンをクリックしたとき
             if(noteSaveBtn){
                 noteSaveBtn.addEventListener('click',function(){
-                    let noteInputTitleDataEsc = document.getElementById("noteInputTitle").value.replace(/"|<|>/g,' ').replace("\n","<br>");
-                    let noteInputIndexDataEsc = document.getElementById("noteInputIndex").value.replace(/"|<|>/g,' ').replace("\n","<br>");
+                    function escapeNotepad(input){
+                        let data = input.replace(/"|<|>/g,' ').replace("\n","<br>");
+                        while( data.includes("[[") && data.includes("]]") ){
+                            const url = data.slice(data.indexOf("[[")+2 , data.indexOf("]]") );
+                            data = data.replace("[[",`<a href="${url}" target="_blank" rel="noopener noreferrer" class="in-note-link">`).replace("]]","</a>");
+                        }
+                        return data;
+                    };
+                    let noteInputTitleDataEsc = escapeNotepad(document.getElementById("noteInputTitle").value);
+                    let noteInputIndexDataEsc = escapeNotepad(document.getElementById("noteInputIndex").value);
                     const newNote = {
                         title: noteInputTitleDataEsc,
                         index: noteInputIndexDataEsc
