@@ -162,6 +162,9 @@ function styleSidemenu(){
             height:53px;
             padding:17px 40px 12px 81px;
         }
+        a.control-menu-colomn:hover{
+            background-color: #66666609;
+        }
     </style>
     `);
     //LMSページ飛び出る問題
