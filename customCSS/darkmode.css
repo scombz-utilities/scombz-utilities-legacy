@@ -213,8 +213,8 @@ a.SubTimetable:hover{
     background-color: rgb(24, 26, 27);
 }
 .result-list:nth-child(2n) {
-    background-color: rgb(24, 36, 27);
-}
+    background-color: rgb(31, 34, 35);
+ }
 .portal-subblock-list-main a,.portal-subblock-list-sub {
     color: rgb(214, 211, 205);
     text-decoration-color: initial;
