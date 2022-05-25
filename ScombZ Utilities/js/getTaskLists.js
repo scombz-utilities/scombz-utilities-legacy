@@ -110,7 +110,7 @@ function getTasksByAdjax($$reacquisitionMin){
                         }
                     );
                 });
-            },200);
+            },100);
         }
     });
     return;

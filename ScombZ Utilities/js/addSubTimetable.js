@@ -24,10 +24,11 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version,$$reacquisiti
         chrome.storage.local.get({
             TaskGetTime: 0
         },function(items){
-            if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60  || ((location.href == "https://scombz.shibaura-it.ac.jp/lms/course/report/submission" || location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?complete") &&  document.querySelector(".contents-detail.contents-complete")) )){
+            if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60  || (location.href == "https://scombz.shibaura-it.ac.jp/lms/course/report/submission" &&  document.querySelector(".contents-detail.contents-complete")) || (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?complete")&&  document.querySelector(".contents-detail.contents-complete")) ){
                 setTimeout(function(){
+                    console.log("遅延表示設定");
                     displayTaskListsOnGrayLayer();
-                },1200);
+                },1500);
             }else{
             displayTaskListsOnGrayLayer();
             }
