@@ -18,8 +18,8 @@ function styleSidemenu(){
             height:100%;
             position:fixed;
             z-index:11;
-            background:#000000;
-            opacity:0.5;
+            background:#0007;
+            opacity:1;
             visibility:visible;
             transition:opacity 300ms;
             }
@@ -28,10 +28,9 @@ function styleSidemenu(){
             height:100%;
             position:fixed;
             z-index:11;
-            background:#000000;
+            background:#0007;
             opacity:0;
             visibility:hidden;
-
         }
         .page-main .usFooter{
             position:fixed;
