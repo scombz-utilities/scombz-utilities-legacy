@@ -159,7 +159,7 @@ function displaySubTimetable($$version){
             </style>
             <div class="subtimetableBody">
             <div class="subtimetableBodyCulm">
-            <table class="SubTimetable">
+            <table  id = "SubTimetableid" class="SubTimetable">
                 <thead>
                     <tr>
                         <th class="SubTimetable"></th>
