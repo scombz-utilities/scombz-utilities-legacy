@@ -41,7 +41,8 @@
                 "js/oldScomb.js",
                 "js/getTaskLists.js",
                 "js/supportFunctions.js",
-                "js/notepad.js"
+                "js/notepad.js",
+                "js/adjustTimetable.js"
             ]
         }
     ],
