@@ -1,4 +1,4 @@
-/* ScombZ Darkmode CSS v0.1 */
+/* ScombZ Darkmode CSS v0.2 */
 /* styled by うだい */
 /*背景、全体設定*/
 :root{
@@ -458,4 +458,7 @@ div.result_list_content .result_list_line:nth-of-type(2n+1) {
 .large-timer-number,.small-timer-number {
     background-color: #111;
     color:#999;
+}
+.input-box{
+    color :#eee;
 }
