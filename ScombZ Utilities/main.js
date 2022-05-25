@@ -34,8 +34,14 @@
             layoutHome: true,           //HOMEのレイアウト
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
-            darkmode: 'relative'        //ダークモード
-        
+            darkmode: 'relative',       //ダークモード
+            adjustTimetableData:{       // LMSの調整
+                eraseSat: false,        // 土曜日を消す
+                erase6: false,          // 6限を消す
+                erase7: false,          // 7限を消す
+                dispClassroom: false,   // 講師名表示を教室表示にする
+                timetableCentering: false // 時間割のセンタリング 
+            }
     }
     /* ローディング画面 */
     onLoading();
@@ -149,6 +155,8 @@
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
                 }
+                //LMSの調整
+                adjustTimetable(items.adjustTimetableData, items.addSubTimetable);
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //カスタムCSSの適用

@@ -32,6 +32,11 @@ function save_options() {
     var notepadMode = document.getElementById('notepadMode').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
+    var eraseSat = document.getElementById('eraseSat').checked;
+    var erase6 = document.getElementById('erase6').checked;
+    var erase7 = document.getElementById('erase7').checked;
+    var dispClassroom = document.getElementById('dispClassroom').checked;
+    var timetableCentering = document.getElementById('timetableCentering').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -63,6 +68,13 @@ function save_options() {
         notepadMode : notepadMode,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
+        adjustTimetableData : {
+            eraseSat : eraseSat,
+            erase6 : erase6,
+            erase7 : erase7,
+            dispClassroom : dispClassroom,
+            timetableCentering : timetableCentering
+        },
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -108,6 +120,13 @@ function save_options() {
         notepadMode: true,
         maxTaskDisplay: 15,
         darkmode : 'relative',
+        adjustTimetableData : {
+            eraseSat : false,
+            erase6: false,
+            erase7: false,
+            dispClassroom : false,
+            timetableCentering : false
+        },
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -145,6 +164,11 @@ function save_options() {
         document.getElementById('notepadMode').checked = items.notepadMode;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
+        document.getElementById('eraseSat').checked = items.adjustTimetableData.eraseSat;
+        document.getElementById('erase6').checked = items.adjustTimetableData.erase6;
+        document.getElementById('erase7').checked = items.adjustTimetableData.erase7;
+        document.getElementById('dispClassroom').checked = items.adjustTimetableData.dispClassroom;
+        document.getElementById('timetableCentering').checked = items.adjustTimetableData.timetableCentering;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
