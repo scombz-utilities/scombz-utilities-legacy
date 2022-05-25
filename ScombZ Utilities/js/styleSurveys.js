@@ -40,6 +40,9 @@ function styleSurveys(){
                 font-size:110%;
                 border:1px solid #ccc;
             }
+            .textarea-add-box{
+                resize: vertical;
+            }
             </style>
             `);
             $submitBtnArea.style.maxWidth = "450px";
