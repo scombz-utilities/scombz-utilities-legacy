@@ -295,11 +295,15 @@ function clickHideName(){
 }
 //ページ上部にある固定ヘッダのキモい影を直す
 function fixHeadShadow(){
-    if(document.getElementById("page_head")){
-        document.getElementById("page_head").style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
-    }
-    if(document.getElementById("examTimer")){
-        document.getElementById("examTimer").style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
+    const $headIdList=[
+        'page_head',
+        'examTimer',
+        'survey_timer'
+    ];
+    for (const $headId of $headIdList) {
+        if(document.getElementById($headId)){
+            document.getElementById($headId).style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
+        }
     }
     return;
 }
