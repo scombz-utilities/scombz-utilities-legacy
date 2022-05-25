@@ -30,6 +30,7 @@ function save_options() {
     var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
     var deadlinemode = document.getElementById('deadlinemode').value;
     var notepadMode = document.getElementById('notepadMode').checked;
+    var ddsubmission = document.getElementById('ddsubmission').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
     chrome.storage.local.set({
@@ -61,6 +62,7 @@ function save_options() {
         fixHeadShadow : fixHeadShadow,
         deadlinemode : deadlinemode,
         notepadMode : notepadMode,
+        ddsubmission : ddsubmission,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
         maxWidthPx:{
@@ -106,6 +108,7 @@ function save_options() {
         fixHeadShadow: true,
         deadlinemode: 'relative-absoluteLong',
         notepadMode: true,
+        ddsubmission: true,
         maxTaskDisplay: 15,
         darkmode : 'relative',
         maxWidthPx:{
@@ -143,6 +146,7 @@ function save_options() {
         document.getElementById('fixHeadShadow').checked = items.fixHeadShadow;
         document.getElementById('deadlinemode').value = items.deadlinemode;
         document.getElementById('notepadMode').checked = items.notepadMode;
+        document.getElementById('ddsubmission').checked = items.ddsubmission;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
     });

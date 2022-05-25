@@ -798,3 +798,15 @@ function darkmodeLayout(mode){
     }
     return;
 }
+//D&Dで課題を出す
+function ddsub(){
+    "use strict";
+    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+        console.log("ドラッグ&ドロップに変更します");
+        document.getElementById("isDragAndDrop").setAttribute("value","true");
+        document.getElementById("toDragAndDrop").classList.add("contents-hidden");
+        document.getElementById("toSelectFile").classList.remove("contents-hidden");
+        document.getElementById("report").classList.add("contents-hidden");
+        document.getElementById("report_dad").classList.remove("contents-hidden");
+    }
+}
