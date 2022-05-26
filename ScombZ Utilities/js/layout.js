@@ -332,7 +332,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.1 */
+        /* ScombZ Darkmode CSS v0.2 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -547,7 +547,7 @@ function darkmodeLayout(mode){
         background-color: rgb(24, 26, 27);
         }
         .result-list:nth-child(2n) {
-        background-color: rgb(24, 36, 27);
+        background-color: rgb(31, 34, 35);
         }
         .portal-subblock-list-main a,.portal-subblock-list-sub {
         color: rgb(214, 211, 205);
@@ -589,7 +589,7 @@ function darkmodeLayout(mode){
         color: rgb(101, 225, 127);
         }
         .portal-info-tab-name {
-        background-color: rgb(35, 29, 17);
+        background-color: rgb(78, 77, 73);
         }
         .portal-subblock-title {
         font-weight: bold;
@@ -601,7 +601,7 @@ function darkmodeLayout(mode){
         border-bottom-color: rgb(44, 111, 73);
         }
         .portal-info-tab-select {
-        background-color: rgb(60, 48, 28);
+        background-color: rgb(114, 92, 44);
         }
         .portal-subblock-link-main-a {
         color: rgb(214, 211, 205);
@@ -793,6 +793,10 @@ function darkmodeLayout(mode){
         background-color: #111;
         color:#999;
         }
+        .input-box{
+            color :#eee;
+        }
+        
             `;
         if(mode === 'relative'){
             darkmode = "@media (prefers-color-scheme: dark) {\n" + darkmode + "}";
