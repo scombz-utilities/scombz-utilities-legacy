@@ -34,7 +34,7 @@
             layoutHome: true,           //HOMEのレイアウト
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
-            ddsubmission: true,         //D&Dで課題提出
+            ddSubmission: false,        //D&Dで課題提出
             darkmode: 'relative'        //ダークモード
         
     }
@@ -151,8 +151,8 @@
                     notepad(items.tasklistDisplay);
                 }
                 //D&Dで課題提出
-                if(items.ddsubmission === true){
-                    ddsub();
+                if(items.ddSubmission === true){
+                    ddSub();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
