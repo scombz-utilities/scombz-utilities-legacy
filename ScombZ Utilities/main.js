@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.11';          //バージョン
+    const $$version = '3.7.0';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -35,7 +35,8 @@
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
             ddSubmission: false,        //D&Dで課題提出
-            darkmode: 'relative'        //ダークモード
+            darkmode: 'relative',       //ダークモード
+            remomveDirectLink: true     //ダイレクトリンクを消す
         
     }
     /* ローディング画面 */
@@ -97,6 +98,7 @@
                 //テストのスタイル変更
                 if(items.styleExamBtn === true){
                     styleExam();
+                    styleSurveys();
                 }
                 if(items.styleExamImg === true){
                     styleExamImg();
@@ -154,12 +156,16 @@
                 if(items.ddSubmission === true){
                     ddSub();
                 }
+                //ダイレクトリンクを消す
+                if(items.remomveDirectLink === true){
+                    remomveDirectLink();
+                }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
-                //カスタムCSSの適用
-                customizeCSS();
                 //クリックして名前隠す
                 clickHideName();
+                //カスタムCSSの適用
+                customizeCSS();
                 console.log('すべての機能の実行が完了しました');
             }
         });

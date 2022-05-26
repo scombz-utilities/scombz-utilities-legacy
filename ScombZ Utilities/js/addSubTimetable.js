@@ -24,10 +24,11 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version,$$reacquisiti
         chrome.storage.local.get({
             TaskGetTime: 0
         },function(items){
-            if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60 ){
+            if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60  || (location.href == "https://scombz.shibaura-it.ac.jp/lms/course/report/submission" &&  document.querySelector(".contents-detail.contents-complete")) || (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?complete")&&  document.querySelector(".contents-detail.contents-complete")) ){
                 setTimeout(function(){
+                    console.log("遅延表示設定");
                     displayTaskListsOnGrayLayer();
-                },1300);
+                },1500);
             }else{
             displayTaskListsOnGrayLayer();
             }
@@ -242,17 +243,19 @@ function displayTaskListsOnGrayLayer(){
     chrome.storage.local.get({
         TaskGetTime: 1,
         tasklistData: [],
+        surveyListData: [],
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
         maxTaskDisplay: 15
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
-            
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
             //JSONファイル展開
             console.log(decodeURIComponent(items.tasklistData));
             const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
+            console.log(decodeURIComponent(items.surveyListData));
+            const $surveyListObj = JSON.parse(decodeURIComponent(items.surveyListData));
             //JSONから生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
             let timetableHeight = 5;
@@ -267,13 +270,52 @@ function displayTaskListsOnGrayLayer(){
             }
             //メイン生成部分
             let kadaiListHTML=``;
+            let surveysCount = 0;
+            //アンケート一覧
+            let deadline='XXXX/XX/XX XX:XX:XX';
+            for(surveysCount = 0 ; $surveyListObj[surveysCount] && surveysCount < items.maxTaskDisplay/2 ; surveysCount++){
+                //絶対表示
+                deadline = $surveyListObj[surveysCount].deadline;
+                if(items.deadlinemode.includes('absoluteShort'))
+                    deadline = $surveyListObj[surveysCount].deadline.slice(6,-3);
+                //相対表示
+                if(items.deadlinemode.includes('relative') && $surveyListObj[surveysCount].deadline != "" ){
+                    if(items.deadlinemode == 'relative'){
+                        const nowUnix = Date.now();
+                        const relativeDeadline = (Number(Date.parse($surveyListObj[surveysCount].deadline)) - Number(nowUnix))/60000;
+                        if(relativeDeadline < 120){
+                            deadline = '残り約'+Math.floor(relativeDeadline)+'分';
+                        }else if(relativeDeadline < 60*24){
+                            deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
+                        }else{
+                            deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
+                        }
+                    }else{
+                        const nowUnix = Date.now();
+                        const relativeDeadline = (Number(Date.parse($surveyListObj[surveysCount].deadline)) - Number(nowUnix))/60000;
+                        if(relativeDeadline < 120){
+                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
+                        }else if(relativeDeadline < 60*24){
+                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
+                        }else{
+                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
+                        }
+                    }
+                }
+                kadaiListHTML += `
+                <div class="subk-line">
+                    <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${$surveyListObj[surveysCount].url}">${$surveyListObj[surveysCount].course}</a></div></div>
+                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$surveyListObj[surveysCount].url}"> ${$surveyListObj[surveysCount].title}</a></div></div>
+                    <div class="subk-deadline">${deadline}</div>
+                </div>`;
+            }
+            //課題・テスト一覧
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
-                let deadline='XXXX/XX/XX XX:XX:XX';
-                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay ;i++){
+                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay - surveysCount ;i++){
                     if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
-                        kadaiListHTML=`<div class="subk-line">未提出課題は存在しません。</div>`;
+                        kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
                         break;
                     }
                     if($tasklistObj[i].data === null)continue;

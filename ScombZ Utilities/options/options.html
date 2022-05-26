@@ -24,7 +24,7 @@
     <div role="main" class="main">
         <div id="home">
             <div class="home-content">
-                <img src="./scombZ.png" class="logo"/>
+                <img src="./scombZ.svg" class="logo"/>
                 <p class="intro">ScombZ Utilities設定へようこそ!</p>
             </div>
         </div>
@@ -187,10 +187,10 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>テストのスタイルの変更</h3>
+                <h3>テスト・アンケートのスタイルの変更</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>
                 <div class="explains">
-                    レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>そして、テストは1分ごとに自動的に保存されるようになり、Ctrl (Command) + Sキーでも保存ができるようになります。
+                    レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>そして、テストは1分ごとに自動的に保存されるようになり、Ctrl (Command) + Sキーでも保存ができるようになります。<br>アンケート画面においては、ボタンがユーザビリティが考えられた物に変更されよくなります。
                 </div>
             </div>
             <div class="setting-column">
@@ -290,6 +290,13 @@
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pageTopBtn"><label class="ItemBox-CheckBox-Label" for="pageTopBtn"></label>
                 <div class="explains">
                     常に画面右下にある「トップへ」というボタンを非表示にします。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>ダイレクトリンクを消す</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="remomveDirectLink"><label class="ItemBox-CheckBox-Label" for="remomveDirectLink"></label>
+                <div class="explains">
+                    画面左下にある「このページへのダイレクトリンク」というボックスを非表示にします。
                 </div>
             </div>
             <div class="setting-column">
@@ -488,7 +495,12 @@
             <h1 class="subtitle">バグ報告・寄付</h1>
             <hr>
             <p>バグを発見した場合は、<a href="https://github.com/yudai1204/ScombZ-Utilities/issues" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">GitHubからissuを送る</a>か、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeahBs8kcBB2dVmVA54KIIOxa4DKUE8v4a1E30ncawd9W4vjg/viewform?usp=sf_link" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">Googleフォーム</a>にお知らせください。</p>
-            <p>この拡張機能はすべての機能を無料でご利用いただけます。</p>
+            <p>この拡張機能はすべての機能を無料でご利用いただけますが、開発・維持に費用がかかります。<br>もしご厚意で寄付してくれる方がいたら、<a href="https://ofuse.me/yudai1204" target="_blank" rel="noopener noreferrer" style="color:#000;text-decoration: underline;">こちら</a>から寄付していただけるとありがたいです。</p>
+            <a data-ofuse-widget-button href="https://ofuse.me/o?uid=47892" data-ofuse-id="47892" data-ofuse-color="blue-green" data-ofuse-style="rectangle">OFUSEで応援を送る</a><script async src="./ofuse_widget.js" charset="utf-8"></script>
+            <p>↓寄付リンクをスマホに送る↓<br>
+                <!--メール-->
+                <a href="https://mail.google.com/mail/u/0/?to&su=ScombZ+Utilities&body=寄付:+https://ofuse.me/yudai1204&bcc&cc&fs=1&tf=cm" target="_blank" rel="noopener noreferrer" style="color:#000;text-decoration: underline;">Gmailを開く</a>
+            </p>
         </div>
         <div id="infomation">
             <hr>

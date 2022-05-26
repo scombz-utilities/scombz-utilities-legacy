@@ -33,6 +33,7 @@ function save_options() {
     var ddSubmission = document.getElementById('ddSubmission').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
+    var remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -65,6 +66,7 @@ function save_options() {
         ddSubmission : ddSubmission,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
+        remomveDirectLink : remomveDirectLink,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -111,6 +113,7 @@ function save_options() {
         ddSubmission: false,
         maxTaskDisplay: 15,
         darkmode : 'relative',
+        remomveDirectLink : true,
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -149,6 +152,7 @@ function save_options() {
         document.getElementById('ddSubmission').checked = items.ddSubmission;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
+        document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);

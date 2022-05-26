@@ -18,8 +18,8 @@ function styleSidemenu(){
             height:100%;
             position:fixed;
             z-index:11;
-            background:#000000;
-            opacity:0.5;
+            background:#0007;
+            opacity:1;
             visibility:visible;
             transition:opacity 300ms;
             }
@@ -28,10 +28,9 @@ function styleSidemenu(){
             height:100%;
             position:fixed;
             z-index:11;
-            background:#000000;
+            background:#0007;
             opacity:0;
             visibility:hidden;
-
         }
         .page-main .usFooter{
             position:fixed;
@@ -161,6 +160,9 @@ function styleSidemenu(){
         .sidemenu-pull{
             height:53px;
             padding:17px 40px 12px 81px;
+        }
+        a.control-menu-colomn:hover{
+            background-color: #66666609;
         }
     </style>
     `);
