@@ -315,7 +315,7 @@ function displayTaskListsOnGrayLayer(){
             }else{
                 for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay - surveysCount ;i++){
                     if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
-                        kadaiListHTML=`<div class="subk-line">未提出課題は存在しません。</div>`;
+                        kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
                         break;
                     }
                     if($tasklistObj[i].data === null)continue;
