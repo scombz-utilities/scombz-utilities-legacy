@@ -94,6 +94,14 @@ function remomvePageTop(){
     }
     return;
 }
+//ダイレクトリンク
+function remomveDirectLink(){
+    const $directLink = document.querySelector('.page-directlink');
+    if($directLink){
+        $directLink.remove();
+    }
+    return;
+}
 //芝猫表示
 function topShibaneko(){
     if(location.href=="https://scombz.shibaura-it.ac.jp/login"){

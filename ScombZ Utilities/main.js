@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.14';          //バージョン
+    const $$version = '3.7.0';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -34,7 +34,8 @@
             layoutHome: true,           //HOMEのレイアウト
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
-            darkmode: 'relative'        //ダークモード
+            darkmode: 'relative',       //ダークモード
+            remomveDirectLink: true     //ダイレクトリンクを消す
         
     }
     /* ローディング画面 */
@@ -149,6 +150,10 @@
                 //メモ機能
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
+                }
+                //ダイレクトリンクを消す
+                if(items.remomveDirectLink === true){
+                    remomveDirectLink();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

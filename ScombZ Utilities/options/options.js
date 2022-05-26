@@ -32,6 +32,7 @@ function save_options() {
     var notepadMode = document.getElementById('notepadMode').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
+    var remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -63,6 +64,7 @@ function save_options() {
         notepadMode : notepadMode,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
+        remomveDirectLink : remomveDirectLink,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -108,6 +110,7 @@ function save_options() {
         notepadMode: true,
         maxTaskDisplay: 15,
         darkmode : 'relative',
+        remomveDirectLink : true,
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -145,6 +148,7 @@ function save_options() {
         document.getElementById('notepadMode').checked = items.notepadMode;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
+        document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
