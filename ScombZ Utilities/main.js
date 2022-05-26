@@ -34,6 +34,7 @@
             layoutHome: true,           //HOMEのレイアウト
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
+            ddSubmission: false,        //D&Dで課題提出
             darkmode: 'relative',       //ダークモード
             remomveDirectLink: true     //ダイレクトリンクを消す
         
@@ -150,6 +151,10 @@
                 //メモ機能
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
+                }
+                //D&Dで課題提出
+                if(items.ddSubmission === true){
+                    ddSub();
                 }
                 //ダイレクトリンクを消す
                 if(items.remomveDirectLink === true){

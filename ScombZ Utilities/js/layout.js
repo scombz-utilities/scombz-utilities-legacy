@@ -814,3 +814,17 @@ function darkmodeLayout(mode){
     }
     return;
 }
+//D&Dで課題を出す
+function ddSub(){
+    "use strict";
+    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+
+        console.log("ドラッグ&ドロップに変更します");
+        let DragAndDrop = document.getElementById("toDragAndDrop");
+        if (DragAndDrop){
+            setTimeout(function(){
+                DragAndDrop.click();
+            },300)
+        }
+    }
+}
