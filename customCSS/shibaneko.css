@@ -5,6 +5,7 @@
     background-position: center center;
   	background-size: cover;
     background-attachment:fixed;
+    /* 画像データはdataURLにすることでロードを高速化できます */
     background-image:url(https://raw.githubusercontent.com/yudai1204/imagefiles/main/FTBGFG1VUAAY4KK.jpg);
     background-color:#EDF3F7AA;
     background-blend-mode:lighten;
