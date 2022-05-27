@@ -340,7 +340,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.2 */
+        /* ScombZ Darkmode CSS v0.3 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -804,7 +804,15 @@ function darkmodeLayout(mode){
         .input-box{
             color :#eee;
         }
-        
+        .portal-subblock-bottom-a,.portal-survey-content-part-left,.portal-survey-content-right{
+            color:#c4c5c5;
+        }
+        .ItemBox-CheckBox-Label{
+            background-color:#000 !important;
+        }
+        .ItemBox-CheckBox-Input:checked+.ItemBox-CheckBox-Label {
+            background: #1b449f !important;
+        }
             `;
         if(mode === 'relative'){
             darkmode = "@media (prefers-color-scheme: dark) {\n" + darkmode + "}";
