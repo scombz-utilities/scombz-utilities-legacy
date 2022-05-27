@@ -31,6 +31,7 @@ function save_options() {
     var deadlinemode = document.getElementById('deadlinemode').value;
     var notepadMode = document.getElementById('notepadMode').checked;
     var ddSubmission = document.getElementById('ddSubmission').checked;
+    var updateClear = document.getElementById('updateClear').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
     var remomveDirectLink = document.getElementById('remomveDirectLink').checked;
@@ -64,6 +65,7 @@ function save_options() {
         deadlinemode : deadlinemode,
         notepadMode : notepadMode,
         ddSubmission : ddSubmission,
+        updateClear : updateClear,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
         remomveDirectLink : remomveDirectLink,
@@ -111,6 +113,7 @@ function save_options() {
         deadlinemode: 'relative-absoluteLong',
         notepadMode: true,
         ddSubmission: false,
+        updateClear: false,
         maxTaskDisplay: 15,
         darkmode : 'relative',
         remomveDirectLink : true,
@@ -150,6 +153,7 @@ function save_options() {
         document.getElementById('deadlinemode').value = items.deadlinemode;
         document.getElementById('notepadMode').checked = items.notepadMode;
         document.getElementById('ddSubmission').checked = items.ddSubmission;
+        document.getElementById('updateClear').checked = items.updateClear;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
         document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;

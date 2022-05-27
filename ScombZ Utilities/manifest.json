@@ -42,7 +42,8 @@
                 "js/getTaskLists.js",
                 "js/supportFunctions.js",
                 "js/notepad.js",
-                "js/styleSurveys.js"
+                "js/styleSurveys.js",
+                "js/clearButton.js"
             ]
         }
     ],
