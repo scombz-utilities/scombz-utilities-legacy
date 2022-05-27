@@ -18,3 +18,6 @@ ScombZのダークモードのスタイルシートです。3.6.10以降に搭�
 ### Glassmorphism.css
 ScombZをグラスモーフィズム化(Windows 11のようなデザイン)にします<br>
 作者: 天雲
+### neko-neko-neko-dark.css
+darkmode.cssとshibaneko.cssとneko-button.cssとGlassmorphism.cssを合体させました。
+作者: うだい
