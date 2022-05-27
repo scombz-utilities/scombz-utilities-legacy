@@ -1,0 +1,53 @@
+#pageMain {
+    background-image: radial-gradient(ellipse at 0px 0px, #e5faff, transparent);
+}
+
+#pageMain {
+    background-position: right top;
+  	background-size: cover;
+    background-attachment:fixed;
+    background-image:url(https://raw.githubusercontent.com/yudai1204/imagefiles/main/24ZbuPyg.jpg);
+    background-color:#EDF3F799;
+    background-blend-mode:lighten;
+}
+.login-view,body{
+    background-color:#fff0;
+}
+#top_calendar, 
+.portal-subblock,
+#page_head{
+    backdrop-filter: blur(10px);
+    background-image: linear-gradient(180deg, #e8ebf078, #ffffff94);
+    background-color: transparent;
+}
+.div-table-cell{
+    backdrop-filter: blur(5px);
+    background-color:#efe1;
+}
+
+.portal-subblock {
+    box-shadow: 0 4px 12px #738ca766;
+    border-radius: 10px;
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-bottom: solid 1px #c4c4c4;
+}
+
+.portal-right {
+    top: 165px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px #0004;
+}
+
+.result-list:nth-child(2n) {
+    background-color: #faf8f480;
+}
+
+.result-list:nth-child(2n-1) {
+    background-color: #FFF8;
+}
+
+.portal-info-tab-name {
+    background: #f5f2eb80;
+}
