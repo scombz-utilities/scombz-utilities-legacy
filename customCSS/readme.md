@@ -1,7 +1,7 @@
 ## カスタムCSS一覧
 ### shibaneko.css
-背景を芝猫にします。
-[dataURL](https://hi0a.com/demo/-js/img-base64-datauri/)を使って画像を文字列に変換して読みこんでいます。<br>
+背景を芝猫にします。画像データはURL部分ですが
+[dataURL](https://hi0a.com/demo/-js/img-base64-datauri/)を使って画像を文字列に変換して読みこむことでも同じ処理ができます。<br>
 作者:うだい
 ### darkmode.css
 ScombZのダークモードのスタイルシートです。3.6.10以降に搭載されているダークモードと同じスクリプトです。<br>
