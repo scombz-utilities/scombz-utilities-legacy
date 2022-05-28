@@ -36,8 +36,14 @@
             notepadMode: true,          //メモモード
             ddSubmission: false,        //D&Dで課題提出
             darkmode: 'relative',       //ダークモード
-            remomveDirectLink: true     //ダイレクトリンクを消す
-        
+            remomveDirectLink: true,    //ダイレクトリンクを消す
+            adjustTimetableData:{       // LMSの調整
+                eraseSat: false,        // 土曜日を消す
+                erase6: false,          // 6限を消す
+                erase7: false,          // 7限を消す
+                dispClassroom: false,   // 講師名表示を教室表示にする
+                timetableCentering: false // 時間割のセンタリング 
+            }
     }
     /* ローディング画面 */
     onLoading();
@@ -152,6 +158,8 @@
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
                 }
+                //LMSの調整
+                adjustTimetable(items.adjustTimetableData, items.addSubTimetable);
                 //D&Dで課題提出
                 if(items.ddSubmission === true){
                     ddSub();

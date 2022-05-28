@@ -42,6 +42,7 @@
                 "js/getTaskLists.js",
                 "js/supportFunctions.js",
                 "js/notepad.js",
+                "js/adjustTimetable.js",
                 "js/styleSurveys.js"
             ]
         }
