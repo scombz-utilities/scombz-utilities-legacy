@@ -4,7 +4,7 @@
 
 function adjustTimetable(data, addSubTimetable){
     'use strict';
-    var addcss = '<style type="text/css">';
+    let addcss = '<style type="text/css">';
 
     if(data.eraseSat === true){
         const sats = Array.from(document.getElementsByClassName('6-yobicol'));
@@ -24,6 +24,7 @@ function adjustTimetable(data, addSubTimetable){
         `;
     }
     
+    // TODO CSSで丸めをする
     // 教室名表示　20文字を超えたら丸める
     if(data.dispClassroom === true){
         const TableCellDetail = Array.from(document.getElementsByClassName('div-table-cell-detail'));
@@ -45,9 +46,9 @@ function adjustTimetable(data, addSubTimetable){
 
     if(addSubTimetable === true){
         const existingTimetable = setInterval(function(){
-            if(document.getElementById('SubTimetableid')){
+            if(document.getElementById('subTimetable')){
                 clearInterval(existingTimetable);
-                const Timetablerows = Array.from(document.getElementById('SubTimetableid').rows);
+                const Timetablerows = Array.from(document.getElementById('subTimetable').rows);
                 if(data.erase6) Timetablerows[6].remove();
                 if(data.erase7) Timetablerows[7].remove();
             }
