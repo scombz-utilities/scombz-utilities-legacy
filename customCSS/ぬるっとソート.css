@@ -1,0 +1,8 @@
+.sortmark:after,.up-sortmark:after {
+    display:inline-block;
+    content: "▽";
+    transition: transform 300ms;
+}
+.up-sortmark:after{
+    transform: rotate(-180deg);
+}

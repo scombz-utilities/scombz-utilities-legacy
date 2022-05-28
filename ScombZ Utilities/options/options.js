@@ -30,13 +30,15 @@ function save_options() {
     var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
     var deadlinemode = document.getElementById('deadlinemode').value;
     var notepadMode = document.getElementById('notepadMode').checked;
+    var ddSubmission = document.getElementById('ddSubmission').checked;
     var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     var darkmode = document.getElementById('darkmode').value;
     var eraseSat = document.getElementById('eraseSat').checked;
     var erase6 = document.getElementById('erase6').checked;
     var erase7 = document.getElementById('erase7').checked;
     var dispClassroom = document.getElementById('dispClassroom').checked;
-    var timetableCentering = document.getElementById('timetableCentering').checked;
+    var timetableCentering = document.getElementById('timetableCentering').check;
+    var remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -66,6 +68,7 @@ function save_options() {
         fixHeadShadow : fixHeadShadow,
         deadlinemode : deadlinemode,
         notepadMode : notepadMode,
+        ddSubmission : ddSubmission,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
         adjustTimetableData : {
@@ -75,6 +78,7 @@ function save_options() {
             dispClassroom : dispClassroom,
             timetableCentering : timetableCentering
         },
+        remomveDirectLink : remomveDirectLink,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth
@@ -118,6 +122,7 @@ function save_options() {
         fixHeadShadow: true,
         deadlinemode: 'relative-absoluteLong',
         notepadMode: true,
+        ddSubmission: false,
         maxTaskDisplay: 15,
         darkmode : 'relative',
         adjustTimetableData : {
@@ -127,6 +132,7 @@ function save_options() {
             dispClassroom : false,
             timetableCentering : false
         },
+        remomveDirectLink : true,
         maxWidthPx:{
             subj: 1280,
             lms: 1280
@@ -162,6 +168,7 @@ function save_options() {
         document.getElementById('fixHeadShadow').checked = items.fixHeadShadow;
         document.getElementById('deadlinemode').value = items.deadlinemode;
         document.getElementById('notepadMode').checked = items.notepadMode;
+        document.getElementById('ddSubmission').checked = items.ddSubmission;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
         document.getElementById('eraseSat').checked = items.adjustTimetableData.eraseSat;
@@ -169,6 +176,7 @@ function save_options() {
         document.getElementById('erase7').checked = items.adjustTimetableData.erase7;
         document.getElementById('dispClassroom').checked = items.adjustTimetableData.dispClassroom;
         document.getElementById('timetableCentering').checked = items.adjustTimetableData.timetableCentering;
+        document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);

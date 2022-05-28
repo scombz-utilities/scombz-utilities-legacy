@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.6.10';          //バージョン
+    const $$version = '3.7.2';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -34,7 +34,9 @@
             layoutHome: true,           //HOMEのレイアウト
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
+            ddSubmission: false,        //D&Dで課題提出
             darkmode: 'relative',       //ダークモード
+            remomveDirectLink: true,    //ダイレクトリンクを消す
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
@@ -102,6 +104,7 @@
                 //テストのスタイル変更
                 if(items.styleExamBtn === true){
                     styleExam();
+                    styleSurveys();
                 }
                 if(items.styleExamImg === true){
                     styleExamImg();
@@ -157,8 +160,18 @@
                 }
                 //LMSの調整
                 adjustTimetable(items.adjustTimetableData, items.addSubTimetable);
+                //D&Dで課題提出
+                if(items.ddSubmission === true){
+                    ddSub();
+                }
+                //ダイレクトリンクを消す
+                if(items.remomveDirectLink === true){
+                    remomveDirectLink();
+                }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
+                //クリックして名前隠す
+                clickHideName();
                 //カスタムCSSの適用
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');

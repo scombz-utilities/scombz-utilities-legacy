@@ -16,7 +16,7 @@
             <li><a href="#settings">基本設定</a></li>
             <li><a href="#advancedSettings">詳細設定</a></li>
             <li><a href="./customcss.html">カスタムCSS</a></li>
-            <li><a href="#form">バグ報告・寄付</a></li>
+            <li><a href="#form">バグ報告・お問い合わせ・寄付</a></li>
             <li><a href="#infomation">拡張機能情報</a></li>
         </ul>
     </div>
@@ -24,7 +24,7 @@
     <div role="main" class="main">
         <div id="home">
             <div class="home-content">
-                <img src="./scombZ.png" class="logo"/>
+                <img src="./scombZ.svg" class="logo"/>
                 <p class="intro">ScombZ Utilities設定へようこそ!</p>
             </div>
         </div>
@@ -159,7 +159,6 @@
                     <!-- ↓↓最初隠したいコンテンツ↓↓ -->
                     <div class="wraped-content">
                         <div style="text-align:center;">
-                            <p class="imgexp">before<br>
                             <img src="./imgs/notepad.png"></p>
                         </div>
                     </div>
@@ -187,10 +186,10 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>テストのスタイルの変更</h3>
+                <h3>テスト・アンケートのスタイルの変更</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>
                 <div class="explains">
-                    レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>そして、テストは1分ごとに自動的に保存されるようになり、Ctrl (Command) + Sキーでも保存ができるようになります。
+                    レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>そして、テストは1分ごとに自動的に保存されるようになり、Ctrl (Command) + Sキーでも保存ができるようになります。<br>アンケート画面においては、ボタンがユーザビリティが考えられた物に変更されよくなります。
                 </div>
             </div>
             <div class="setting-column">
@@ -293,10 +292,24 @@
                 </div>
             </div>
             <div class="setting-column">
+                <h3>ダイレクトリンクを消す</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="remomveDirectLink"><label class="ItemBox-CheckBox-Label" for="remomveDirectLink"></label>
+                <div class="explains">
+                    画面左下にある「このページへのダイレクトリンク」というボックスを非表示にします。
+                </div>
+            </div>
+            <div class="setting-column">
                 <h3>LMSで現在のコマを目立たせる</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleNowPeriod"><label class="ItemBox-CheckBox-Label" for="styleNowPeriod"></label>
                 <div class="explains">
                     LMSページで現在授業中の授業を少し目立たせます。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>課題を提出する方式を最初からドラッグ&ドロップにする</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="ddSubmission"><label class="ItemBox-CheckBox-Label" for="ddSubmission"></label>
+                <div class="explains">
+                    課題提出画面の成果物提出欄をクリックなしでドラッグ&ドロップにします。
                 </div>
             </div>
             <div class="setting-column">
@@ -519,8 +532,15 @@
             <hr>
             <h1 class="subtitle">バグ報告・寄付</h1>
             <hr>
-            <p>バグを発見した場合は、<a href="https://github.com/yudai1204/ScombZ-Utilities/issues" style="color:#000;text-decoration: underline;">GitHubからissuを送る</a>か、udai1204h@gmail.comにお知らせください。</p>
-            <p>この拡張機能はすべての機能を無料でご利用いただけます。</p>
+            <h3>バグ報告・お問い合わせ</h3>
+            <p>バグを発見した場合は、<a href="https://github.com/yudai1204/ScombZ-Utilities/issues" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">GitHubからissuを送る</a>か、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeahBs8kcBB2dVmVA54KIIOxa4DKUE8v4a1E30ncawd9W4vjg/viewform?usp=sf_link" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">Googleフォーム</a>にお知らせください。<br>お問い合わせ、質問の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeahBs8kcBB2dVmVA54KIIOxa4DKUE8v4a1E30ncawd9W4vjg/viewform?usp=sf_link" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">Googleフォーム</a>か、<a class="links" href="https://twitter.com/yudai1204">うだい</a>宛までTwitter DMをご利用ください。</p>
+            <h3>寄付</h3>
+            <p>この拡張機能はすべての機能を無料でご利用いただけますが、開発・維持に費用がかかります。<br>もしご厚意で寄付してくれる方がいたら、<a href="https://ofuse.me/yudai1204" target="_blank" rel="noopener noreferrer" style="color:#000;text-decoration: underline;">こちら</a>から寄付していただけるとありがたいです。</p>
+            <a data-ofuse-widget-button href="https://ofuse.me/o?uid=47892" data-ofuse-id="47892" data-ofuse-color="blue-green" data-ofuse-style="rectangle">OFUSEで応援を送る</a><script async src="./ofuse_widget.js" charset="utf-8"></script>
+            <p>↓寄付リンクをスマホに送る↓<br>
+                <!--メール-->
+                <a href="https://mail.google.com/mail/u/0/?to&su=ScombZ+Utilities&body=寄付:+https://ofuse.me/yudai1204&bcc&cc&fs=1&tf=cm" target="_blank" rel="noopener noreferrer" style="color:#000;text-decoration: underline;">Gmailを開く</a>
+            </p>
         </div>
         <div id="infomation">
             <hr>
@@ -530,7 +550,7 @@
             <p>この拡張機能は、ScombZのユーザビリティの向上を目的としたオープンソースプロジェクトです。</p>
             <p><a class="links" href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja">Chrome Web Store</a></p>
             <p><a class="links" href="https://github.com/yudai1204/ScombZ-Utilities">GitHub</a></p>
-            <p>仕様ライブラリ : 
+            <p>使用ライブラリ : 
                 <ul style="margin-left:40px;margin-bottom: 5px;">
                 <li>encording.js</li>
                 <li>jQuery</li>
@@ -538,7 +558,7 @@
                 </ul>
             </p>
             <p>制作 : <a class="links" href="https://twitter.com/yudai1204">うだい</a></p>
-            <p>共同制作 : <a class="links" href="https://twitter.com/naname_eis">さか</a> <a class="links" href="https://twitter.com/usr_3_14">さばみそ</a></p>
+            <p>共同制作 : <a class="links" href="https://twitter.com/naname_eis">さか</a> <a class="links" href="https://twitter.com/usr_3_14">さばみそ</a> <a class="links" href="https://twitter.com/to_ku_me">とくめいっ！</a></p>
             <p>アイコン作成 : <a class="links" href="https://twitter.com/373Alpswater">Miuye</a></p>
             <p>開発協力 : <a class="links" href="https://twitter.com/Amgm_256">天雲</a></p>
         </div>
