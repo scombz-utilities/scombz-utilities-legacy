@@ -305,7 +305,7 @@ function displayTaskListsOnGrayLayer(){
                 kadaiListHTML += `
                 <div class="subk-line">
                     <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${$surveyListObj[surveysCount].url}">${$surveyListObj[surveysCount].course}</a></div></div>
-                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$surveyListObj[surveysCount].url}"> ${$surveyListObj[surveysCount].title}</a></div></div>
+                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$surveyListObj[surveysCount].url+'#questionnaire'}"> ${$surveyListObj[surveysCount].title}</a></div></div>
                     <div class="subk-deadline">${deadline}</div>
                 </div>`;
             }
