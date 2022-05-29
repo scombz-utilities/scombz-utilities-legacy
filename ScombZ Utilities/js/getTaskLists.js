@@ -125,7 +125,7 @@ function getTasksByAdjax($$reacquisitionMin){
 function insertSurveyBtnOnSubj(){
     if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
         const $courseTitle = document.querySelector('.course-title-txt');
-        if($courseTitle){
+        if($courseTitle && !document.getElementById("noticeSurvey")){
             console.log('授業別ページを検出しました\nアンケート取得是非を挿入します');
             const $nameInt = $courseTitle.innerHTML.indexOf(' ', $courseTitle.innerHTML.indexOf(' ') + 2);
             const $courseName = $courseTitle.innerHTML.slice($nameInt+1);
