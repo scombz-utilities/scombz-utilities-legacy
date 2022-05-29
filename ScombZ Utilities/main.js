@@ -3,7 +3,7 @@
 (function(){
     'use strict';
     /*  定数  */
-    const $$version = '3.8.0';          //バージョン
+    const $$version = '3.8.1';          //バージョン
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
@@ -100,6 +100,7 @@
                 //課題一覧取得
                 if( items.tasklistDisplay === true ){
                 getTaskLists($$reacquisitionMin);
+                surveyLinkScroll();
                 };
                 //テストのスタイル変更
                 if(items.styleExamBtn === true){
