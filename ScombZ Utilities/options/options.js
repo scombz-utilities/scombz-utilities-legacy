@@ -31,7 +31,7 @@ function save_options() {
     var deadlinemode = document.getElementById('deadlinemode').value;
     var notepadMode = document.getElementById('notepadMode').checked;
     var ddSubmission = document.getElementById('ddSubmission').checked;
-    var maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
+    var maxTaskDisplay = Number(document.getElementById('maxTaskDisplay').value) + 1;
     var darkmode = document.getElementById('darkmode').value;
     var eraseSat = document.getElementById('eraseSat').checked;
     var erase6 = document.getElementById('erase6').checked;
