@@ -24,3 +24,11 @@ function getNowPeriod(){
         }
         return -1;
 }
+//課題一覧のアンケートからリンクしたときにアンケートまでスクロールしてくれるようにする関数
+function surveyLinkScroll() {
+    if (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=") && location.href.includes("questionnaire")){
+        setTimeout(function(){
+            window.location.href = ("#questionnaire");
+        },300);
+    }
+}
