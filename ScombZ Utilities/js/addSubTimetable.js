@@ -247,7 +247,7 @@ function displayTaskListsOnGrayLayer(){
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
-        maxTaskDisplay: 15
+        maxTaskDisplay: 16
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -273,7 +273,7 @@ function displayTaskListsOnGrayLayer(){
             let surveysCount = 0;
             //アンケート一覧
             let deadline='XXXX/XX/XX XX:XX:XX';
-            for(surveysCount = 0 ; $surveyListObj[surveysCount] && surveysCount < items.maxTaskDisplay/2 ; surveysCount++){
+            for(surveysCount = 0 ; $surveyListObj[surveysCount] && surveysCount < (items.maxTaskDisplay+1)/2 ; surveysCount++){
                 //絶対表示
                 deadline = $surveyListObj[surveysCount].deadline+':00';
                 if(items.deadlinemode.includes('absoluteShort'))
@@ -313,7 +313,7 @@ function displayTaskListsOnGrayLayer(){
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
-                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay - surveysCount ;i++){
+                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 - surveysCount ;i++){
                     if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
                         kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
                         break;

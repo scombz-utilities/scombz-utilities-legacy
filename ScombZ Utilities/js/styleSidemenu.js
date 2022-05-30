@@ -180,13 +180,16 @@ function styleSidemenu(){
         }
     }
     //ヘッダ中心にアイコンを表示 ヘッダをクリックで一番上へ
-    const $pageHead = document.getElementById('page_head');
-    if($pageHead){
-        $pageHead.insertAdjacentHTML('afterBegin',`<a href="javascript:void(0);" onclick='javascript:window.scrollTo({ top: 0, behavior: "smooth" });' class="pagetop-head"></a>`);
-        $pageHead.insertAdjacentHTML('beforeEnd',`
-        <a href="/portal/home" id="pagetop-head-logo"><div class="mainmenu-head-logo"><img src="/sitelogo" class="scombz-icon" alt="Top"></div></a>
-        `);
-    }
+    chrome.storage.local.get({
+        headLinkTo: "/portal/home"
+    },function(items){
+        const $pageHead = document.getElementById('page_head');
+        if($pageHead){
+            $pageHead.insertAdjacentHTML('beforeEnd',`
+            <a href="${items.headLinkTo}" id="pagetop-head-logo"><div class="mainmenu-head-logo"><img src="/sitelogo" class="scombz-icon" alt="Top"></div></a>
+            `);
+        }
+    });
     //サイドメニューの開閉ボタンを変える
     const $closeButton = document.getElementById('sidemenuClose');
     if($closeButton){

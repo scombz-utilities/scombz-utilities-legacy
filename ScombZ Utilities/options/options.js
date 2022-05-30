@@ -1,44 +1,45 @@
 // Saves options to chrome.storage
 function save_options() {
-    var year = document.getElementById('year').value;
-    var fac = document.getElementById('fac').value;
-    var login_auto = document.getElementById('login_auto').checked;
-    var adfs_auto = document.getElementById('adfs_auto').checked;
-    var menu_exit_auto = document.getElementById('menu_exit_auto').checked;
-    var submenu = document.getElementById('submenu').checked;
-    var examBtn = document.getElementById('exam_btn').checked;
-    var examImg = document.getElementById('exam_img').checked;
-    var additional_lms = document.getElementById('additional_lms').checked;
-    var changeReportBtn = document.getElementById('changeReportBtn').checked;
-    var styleDialog = document.getElementById('styleDialog').checked;
-    var syllBtn = document.getElementById('syll_btn').checked;
-    var hideCompletedReports = document.getElementById('hideCompletedReports').checked;
-    var changeLogout = document.getElementById('changeLogout').checked;
-    var setMaxWidth = document.getElementById('setMaxWidth').checked;
-    var pageTopBtn = document.getElementById('pageTopBtn').checked;
-    var mouseDown = document.getElementById('mouseDown').checked;
-    var tasklistDisplay = document.getElementById('tasklistDisplay').checked;
-    var styleNowPeriod = document.getElementById('styleNowPeriod').checked;
-    var displayName = document.getElementById('displayName').checked;
-    var subjWidth = document.getElementById('subjWidth').value;
-    var lmsWidth = document.getElementById('lmsWidth').value;
-    var layoutHome = document.getElementById('layoutHome').checked;
-    var nickname = document.getElementById('nickname').value;
-    var timesBtnValue = document.getElementById('timesBtnValue').value;
-    var sliderBarMax = document.getElementById('sliderBarMax').value;
-    var tasklistTranslate = document.getElementById('tasklistTranslate').value;
-    var fixHeadShadow = document.getElementById('fixHeadShadow').checked;
-    var deadlinemode = document.getElementById('deadlinemode').value;
-    var notepadMode = document.getElementById('notepadMode').checked;
-    var ddSubmission = document.getElementById('ddSubmission').checked;
-    var maxTaskDisplay = Number(document.getElementById('maxTaskDisplay').value) + 1;
-    var darkmode = document.getElementById('darkmode').value;
-    var eraseSat = document.getElementById('eraseSat').checked;
-    var erase6 = document.getElementById('erase6').checked;
-    var erase7 = document.getElementById('erase7').checked;
-    var dispClassroom = document.getElementById('dispClassroom').checked;
-    var timetableCentering = document.getElementById('timetableCentering').check;
-    var remomveDirectLink = document.getElementById('remomveDirectLink').checked;
+    const year = document.getElementById('year').value;
+    const fac = document.getElementById('fac').value;
+    const login_auto = document.getElementById('login_auto').checked;
+    const adfs_auto = document.getElementById('adfs_auto').checked;
+    const menu_exit_auto = document.getElementById('menu_exit_auto').checked;
+    const submenu = document.getElementById('submenu').checked;
+    const examBtn = document.getElementById('exam_btn').checked;
+    const examImg = document.getElementById('exam_img').checked;
+    const additional_lms = document.getElementById('additional_lms').checked;
+    const changeReportBtn = document.getElementById('changeReportBtn').checked;
+    const styleDialog = document.getElementById('styleDialog').checked;
+    const syllBtn = document.getElementById('syll_btn').checked;
+    const hideCompletedReports = document.getElementById('hideCompletedReports').checked;
+    const changeLogout = document.getElementById('changeLogout').checked;
+    const setMaxWidth = document.getElementById('setMaxWidth').checked;
+    const pageTopBtn = document.getElementById('pageTopBtn').checked;
+    const mouseDown = document.getElementById('mouseDown').checked;
+    const tasklistDisplay = document.getElementById('tasklistDisplay').checked;
+    const styleNowPeriod = document.getElementById('styleNowPeriod').checked;
+    const displayName = document.getElementById('displayName').checked;
+    const subjWidth = document.getElementById('subjWidth').value;
+    const lmsWidth = document.getElementById('lmsWidth').value;
+    const layoutHome = document.getElementById('layoutHome').checked;
+    const nickname = document.getElementById('nickname').value;
+    const timesBtnValue = document.getElementById('timesBtnValue').value;
+    const sliderBarMax = document.getElementById('sliderBarMax').value;
+    const tasklistTranslate = document.getElementById('tasklistTranslate').value;
+    const fixHeadShadow = document.getElementById('fixHeadShadow').checked;
+    const deadlinemode = document.getElementById('deadlinemode').value;
+    const notepadMode = document.getElementById('notepadMode').checked;
+    const ddSubmission = document.getElementById('ddSubmission').checked;
+    const maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
+    const darkmode = document.getElementById('darkmode').value;
+    const eraseSat = document.getElementById('eraseSat').checked;
+    const erase6 = document.getElementById('erase6').checked;
+    const erase7 = document.getElementById('erase7').checked;
+    const dispClassroom = document.getElementById('dispClassroom').checked;
+    const timetableCentering = document.getElementById('timetableCentering').checked;
+    const remomveDirectLink = document.getElementById('remomveDirectLink').checked;
+    const headLinkTo = document.getElementById('headLinkTo').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -71,6 +72,7 @@ function save_options() {
         ddSubmission : ddSubmission,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
+        headLinkTo : headLinkTo,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -125,6 +127,7 @@ function save_options() {
         ddSubmission: false,
         maxTaskDisplay: 15,
         darkmode : 'relative',
+        headLinkTo: "/portal/home",
         adjustTimetableData : {
             eraseSat : false,
             erase6: false,
@@ -177,6 +180,7 @@ function save_options() {
         document.getElementById('dispClassroom').checked = items.adjustTimetableData.dispClassroom;
         document.getElementById('timetableCentering').checked = items.adjustTimetableData.timetableCentering;
         document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
+        document.getElementById('headLinkTo').value = items.headLinkTo;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
