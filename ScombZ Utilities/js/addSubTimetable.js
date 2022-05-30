@@ -275,9 +275,9 @@ function displayTaskListsOnGrayLayer(){
             let deadline='XXXX/XX/XX XX:XX:XX';
             for(surveysCount = 0 ; $surveyListObj[surveysCount] && surveysCount < items.maxTaskDisplay/2 ; surveysCount++){
                 //絶対表示
-                deadline = $surveyListObj[surveysCount].deadline;
+                deadline = $surveyListObj[surveysCount].deadline+':00';
                 if(items.deadlinemode.includes('absoluteShort'))
-                    deadline = $surveyListObj[surveysCount].deadline.slice(6,-3);
+                    deadline = $surveyListObj[surveysCount].deadline.slice(6);
                 //相対表示
                 if(items.deadlinemode.includes('relative') && $surveyListObj[surveysCount].deadline != "" ){
                     if(items.deadlinemode == 'relative'){
