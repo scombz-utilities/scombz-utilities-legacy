@@ -74,7 +74,7 @@ $(function(){
     $("#ctrl_btn_clear").click(function(){
         console.log("更新通知削除ボタンがクリックされました");
         let postData="";
-        let updateinfoId;
+        let updateInfoId;
         if (document.querySelectorAll(".ctrl_menu_notification > li > a").length > 1){
 
             $.get("https://scombz.shibaura-it.ac.jp/updateinfo",
@@ -85,10 +85,10 @@ $(function(){
 
                 postData += "_csrf="+data.querySelector('input[name="_csrf"]').value;
                 postData += '&_method='+data.querySelector('input[name="_method"]').value
-                updateinfoId = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
+                updateInfoId = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
 
-                for(let i=0;i<updateinfoId.length;i++){
-                    postData+="&deleteUpdateInfoList="+updateinfoId[i].value;
+                for(let i=0;i<updateInfoId.length;i++){
+                    postData+="&deleteUpdateInfoList="+updateInfoId[i].value;
                 }
                 console.log(postData)
 
