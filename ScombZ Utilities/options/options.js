@@ -207,3 +207,5 @@ function save_options() {
             },1000);
         });
     }
+//バージョンの挿入
+        document.getElementById("version").insertAdjacentHTML("beforeEnd",` ver${chrome.runtime.getManifest().version}`);
