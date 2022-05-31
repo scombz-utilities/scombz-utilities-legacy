@@ -16,10 +16,8 @@ function updateClear(){
 
         var button_link = document.createElement("a");
         button_link.className = "btn-header-info btnControl";
-        button_link.setAttribute("onclick","");                 
-        //普通のではvoid(0)で別指定、ここに指定しても実際には読み取られてないのでエラーが出る
-        button_link.className = "btn-header-info btnControl";
-        button_link.id = "ctrl_btn_notification";
+        button_link.id = "ctrl_btn_clear";
+        button_link.href = "javascript:void(0);"
 
         var button_span = document.createElement("span");
         button_span.className = "header-new-icon";
@@ -30,7 +28,22 @@ function updateClear(){
         button_image.alt = "通知削除";
         button_image.className = "header-img";
 
-        button.className = "header-notification";
+        button.className = "header-clear";
+
+        button_ul.insertAdjacentHTML('beforeEnd',`
+        <style>
+        .header-clear {
+            margin-right: 10px;
+            float: left;
+            margin-top: 5px;
+            margin-left: 13px;
+        }
+        
+        .header-clear > a > .header-new-icon{
+            background-color: transparent;
+        }
+        </style>
+        `);
 
         button_link.appendChild(button_span);
         button_link.appendChild(button_image);
@@ -42,3 +55,8 @@ function updateClear(){
 }
 
 
+$(function(){
+    $("#ctrl_btn_clear").click(function(){
+
+    })
+})
