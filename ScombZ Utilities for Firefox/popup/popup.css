@@ -1,0 +1,145 @@
+*{
+    margin:0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#mainbody{
+    margin :0;
+    width: 350px;
+    overflow:hidden;
+}
+.popuplogo{
+    display:block;
+    margin :0 auto;
+    margin-bottom: 8px;
+    width:240px;
+}
+h1{
+    text-align: center;
+}
+.announcement{
+    font-size:85%;
+    text-decoration: none;
+    color: #000;
+}
+.footer-link{
+    color: #000;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color:#ddd;
+    width: 100%;
+    height:40px;
+    margin: 0;
+}
+.settings{
+    width:330px;
+    margin: 0 auto;
+    padding:10px;
+}
+h1{
+    margin-bottom:15px;
+}
+#go-to-options{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1.0;
+}
+#go-to-options:hover{
+    opacity: 0.85;
+    cursor: pointer;
+}
+
+#weekdayTabsContainer{
+    display: flex;
+    justify-content: space-around;
+}
+#weekdayTabsContainer .weekday-tab{
+    width: calc(100% / 6);
+    text-align: center;
+}
+.weekday-tab.active{
+    font-weight: bold;
+    cursor: default;
+    border-bottom: 2px gray solid;
+}
+.weekday-tab:not(.active){
+    cursor: pointer;
+    color: gray;
+    border-bottom: 1px lightgray solid;
+}
+.weekday-tab:not(.active):hover{
+    color: inherit;
+    border-bottom: 1px gray solid;
+}
+#timetable{
+    width: 100%;
+}
+.timetable-row{
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    border-bottom: 1px lightgray solid;
+}
+.timetable-row.intensive-subjects{
+    margin-top: 12px;
+    border-top: 1px lightgray solid;
+}
+.timetable-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80px;
+    margin-right: 12px;
+}
+.time-term{
+    font-size: x-small;
+    color: gray;
+    white-space: nowrap;
+}
+.subjects-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.subject{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.subject-name{
+    display: flex;
+}
+.subject-name a{
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.subject-name a:hover{
+    text-decoration: underline;
+}
+.subject-classroom{
+    color: gray;
+    padding-left: 12px;
+    display: -webkit-box;
+    width: auto;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+}
+.subject-classroom:hover{
+    -webkit-line-clamp: unset;
+}
