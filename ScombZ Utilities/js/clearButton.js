@@ -4,11 +4,7 @@
 
 function updateClear(){
     'use strict';
-    //裏で全部読み込む→重い
-    //POSTっぽいことする？→正しく処理が行われるかわからない
-    //いつ起動する？→ボタンを確認して起動？
 
-    
     let buttonUl = document.getElementsByClassName("page-head-notification-area clearfix")[0];
     if (buttonUl){
         console.log("更新通知を削除するボタン追加");
@@ -19,11 +15,13 @@ function updateClear(){
         buttonLink.id = "ctrl_btn_clear";
         buttonLink.href = "javascript:void(0);"
 
-        let buttonSpan = document.createElement("span");
-        buttonSpan.className = "header-new-icon";
+        var buttonSpan = document.createElement("span");
+        buttonSpan.className = "header-icon-space";
 
         buttonLink.appendChild(buttonSpan);
-        buttonLink.insertAdjacentHTML("beforeEnd",`<svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="opacity: 1;" xml:space="preserve" class="header-img" title="更新削除" alt="更新削除">
+        buttonLink.insertAdjacentHTML("beforeEnd",`
+        <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="opacity: 1;" xml:space="preserve" class="header-img">
+        <title>通知削除</title>
         <style type="text/css">
             .st0{fill:#4B4B4B;}
         </style>
@@ -45,25 +43,47 @@ function updateClear(){
 
         button.className = "header-clear";
 
-        buttonUl.insertAdjacentHTML('beforeEnd',`
+        buttonUl.insertAdjacentHTML('beforeBegin',`
         <style>
         .header-clear {
             margin-right: 10px;
             float: left;
             margin-top: 5px;
-            margin-left: 13px;
+            margin-left: 10px;
         }
         
-        .header-clear > a > .header-new-icon{
+        .header-icon-space {
             background-color: transparent;
+            width: 13px;
+            height: 13px;
+            display: inline-block;
+            position: relative;
+            top: -21px;
+            left: 40px;
+            border-radius: 50%;
+            border: white solid 2px;
         }
         </style>
         `);
 
-        
-        
         button.appendChild(buttonLink);
         buttonUl.appendChild(button);
+        //ボタン追加終了
+
+        //ボタン部分のレイアウト調整
+        //透明の赤丸を入れている
+        let headerButton = document.getElementsByClassName("btn-header-info btnControl");
+        for (let i=0;i<headerButton.length;i++){
+            if (headerButton[i].getElementsByTagName("span").length == 0){
+
+                buttonSpan = document.createElement("span");
+                buttonSpan.className = "header-icon-space";
+                headerButton[i].insertBefore(buttonSpan,headerButton[i].getElementsByClassName("header-img")[0])
+            }
+        }
+        
+        
+
 
     }
     
