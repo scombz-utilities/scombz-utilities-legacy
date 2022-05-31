@@ -118,6 +118,7 @@ $(function(){
                 })
 
             })
+            location.reload(true);
         }else{
             console.log("通知はありませんでした")
         }
