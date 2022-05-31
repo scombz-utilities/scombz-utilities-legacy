@@ -1,0 +1,56 @@
+{
+    "manifest_version":2 ,
+    "name": "ScombZ Utilities",
+    "version": "3.8.3",
+    "description": "ScombZをカスタムする拡張機能",
+    "icons": { 
+        "48":  "icons/icon48.png",
+        "128": "icons/icon128.png" 
+    },
+    "browser_action":{
+        "default_title":"ScombZ Utilities",
+        "default_popup":"popup/popup.html"
+    },
+    "background":{
+        "scripts": ["js/background.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
+            "all_frames": true,
+            "run_at": "document_start",
+            "js": [
+                "js/adfs.js",
+                "js/syllabus.js",
+                "main.js",
+                "lib/encoding/encoding.min.js",
+                "lib/jquery/jquery-3.6.0.min.js",
+                "js/clickLogin.js",
+                "js/addSubTimetable.js",
+                "js/changeReportBtn.js",
+                "js/eucjp.js",
+                "js/exitSidemenu.js",
+                "js/hideCompletedReports.js",
+                "js/styleDialog.js",
+                "js/styleExam.js",
+                "js/styleSidemenu.js",
+                "js/syllBtn.js",
+                "js/layout.js",
+                "js/mouseEvents.js",
+                "js/oldScomb.js",
+                "js/getTaskLists.js",
+                "js/supportFunctions.js",
+                "js/notepad.js",
+                "js/adjustTimetable.js",
+                "js/styleSurveys.js"
+            ]
+        }
+    ],
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab":true
+    },
+    "permissions":[
+        "storage"
+    ]
+}
