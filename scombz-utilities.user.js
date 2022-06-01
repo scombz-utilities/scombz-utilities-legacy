@@ -8,6 +8,8 @@
 // @match        https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*
 // @match        http://syllabus.sic.shibaura-it.ac.jp/*
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
+// @updateURL    https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js
+// @downloadURL  https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js
 // @grant        none
 // ==/UserScript==
 const $$version = '2.5.9';
