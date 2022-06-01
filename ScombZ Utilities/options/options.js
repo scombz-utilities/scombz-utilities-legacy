@@ -211,5 +211,44 @@ function save_options() {
             },1000);
         });
     }
-//バージョンの挿入
+    //バージョンの挿入
         document.getElementById("version").insertAdjacentHTML("beforeEnd",` ver${chrome.runtime.getManifest().version}`);
+    //デモ時間割
+    document.getElementById("erase7").addEventListener("change", function(){
+        ttErase7();
+    });
+    document.getElementById("erase6").addEventListener("change", function(){
+        ttErase6();
+    });
+    document.getElementById("eraseSat").addEventListener("change", function(){
+        ttEraseSat();
+    });
+    ttErase7();
+    ttErase6();
+    ttEraseSat();
+    //functions
+    function ttErase7(){
+        if(document.getElementById("erase7").checked){
+            document.getElementsByClassName("tttr")[6].classList.add("hiddens");
+        }else{
+            document.getElementsByClassName("tttr")[6].classList.remove("hiddens");
+        }
+    }
+    function ttErase6(){
+        if(document.getElementById("erase6").checked){
+            document.getElementsByClassName("tttr")[5].classList.add("hiddens");
+        }else{
+            document.getElementsByClassName("tttr")[5].classList.remove("hiddens");
+        }
+    }
+    function ttEraseSat(){
+        if(document.getElementById("eraseSat").checked){
+            for(const ttSat of document.getElementsByClassName("ttSat")){
+                ttSat.classList.add("hiddens");
+            }
+        }else{
+            for(const ttSat of document.getElementsByClassName("ttSat")){
+                ttSat.classList.remove("hiddens");
+            }
+        }
+    }

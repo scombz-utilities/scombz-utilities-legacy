@@ -413,3 +413,61 @@ select,input[type="number"],input[type="text"]{
     margin:4px 0 5px 3px;
     padding:3px;
 }
+.graylayer{
+    width:calc(50% - 20px);
+    min-width: 625px;
+    height: 50vh;
+    min-height: 400px;
+    background-image: url(./imgs/demo-background.png);
+    background-position: top left;
+    background-size: cover;
+    border: 1px solid #aaa;
+    box-shadow: 0 0 8px #aaa;
+}   
+.blur-demo{
+    width:100%;
+    height:100%;
+    backdrop-filter: blur(2px);
+}
+.ttColumn{
+    display: inline-block;
+    width:calc((35vw - 160px) / 7);
+    min-width:calc(440px / 7) ;
+    height:2vh;
+    min-height:16px;
+    background:#EDF3F7;
+    border: 1px solid #ccc;
+}
+.tttr{
+    height:calc(2vh + 2px);
+}
+.ttth{
+    height:1.2vh;
+    padding-bottom: 3px;
+}
+.ttth .ttColumn{
+    height:1.2vh;
+    background:#bea87b;
+}
+#timetableDemo{
+    float: right;
+    margin-right: 5px;
+    margin-top:5px;
+    background-color:rgba(255,255,255,0.5);
+    padding:1px;
+}
+.ttPeriod{
+    display: inline-block;
+    width:calc(10vw / 7);
+    min-width:calc(100px / 7) ;
+    height:2vh;
+    min-height:16px;
+    background:#ec9c93;
+    border: 1px solid #ccc;
+}
+.ttth .ttPeriod{
+    height:1.2vh;
+}
+.hiddens{
+    display:none;
+}
