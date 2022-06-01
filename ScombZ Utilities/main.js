@@ -35,6 +35,7 @@
             fixHeadShadow: true,        //キモイヘッダの影なおす
             notepadMode: true,          //メモモード
             ddSubmission: false,        //D&Dで課題提出
+            updateClear: false,         //通知を削除するボタン
             darkmode: 'relative',       //ダークモード
             remomveDirectLink: true,    //ダイレクトリンクを消す
             adjustTimetableData:{       // LMSの調整
@@ -164,6 +165,10 @@
                 //D&Dで課題提出
                 if(items.ddSubmission === true){
                     ddSub();
+                }
+                //通知を削除するボタン
+                if(items.updateClear === true){
+                    updateClear();
                 }
                 //ダイレクトリンクを消す
                 if(items.remomveDirectLink === true){
