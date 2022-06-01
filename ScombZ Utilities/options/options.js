@@ -31,6 +31,7 @@ function save_options() {
     const deadlinemode = document.getElementById('deadlinemode').value;
     const notepadMode = document.getElementById('notepadMode').checked;
     const ddSubmission = document.getElementById('ddSubmission').checked;
+    const updateClear = document.getElementById('updateClear').checked;
     const maxTaskDisplay = document.getElementById('maxTaskDisplay').value;
     const darkmode = document.getElementById('darkmode').value;
     const eraseSat = document.getElementById('eraseSat').checked;
@@ -70,6 +71,7 @@ function save_options() {
         deadlinemode : deadlinemode,
         notepadMode : notepadMode,
         ddSubmission : ddSubmission,
+        updateClear : updateClear,
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
         headLinkTo : headLinkTo,
@@ -125,6 +127,7 @@ function save_options() {
         deadlinemode: 'relative-absoluteLong',
         notepadMode: true,
         ddSubmission: false,
+        updateClear: false,
         maxTaskDisplay: 15,
         darkmode : 'relative',
         headLinkTo: "/portal/home",
@@ -172,6 +175,7 @@ function save_options() {
         document.getElementById('deadlinemode').value = items.deadlinemode;
         document.getElementById('notepadMode').checked = items.notepadMode;
         document.getElementById('ddSubmission').checked = items.ddSubmission;
+        document.getElementById('updateClear').checked = items.updateClear;
         document.getElementById('maxTaskDisplay').value = items.maxTaskDisplay;
         document.getElementById('darkmode').value = items.darkmode;
         document.getElementById('eraseSat').checked = items.adjustTimetableData.eraseSat;
