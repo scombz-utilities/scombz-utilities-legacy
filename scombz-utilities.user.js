@@ -3,7 +3,7 @@
 // @namespace    https://twitter.com/yudai1204
 // @version      2.5.9
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログインを改善します
-// @author       @yudai1204 , @to_ku_me
+// @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
 // @match        https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*
 // @match        http://syllabus.sic.shibaura-it.ac.jp/*
