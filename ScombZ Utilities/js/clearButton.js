@@ -95,8 +95,7 @@ $(function(){
         console.log("更新通知削除ボタンがクリックされました");
         let postData="";
         let updateInfoId;
-        console.log(document.querySelectorAll("#ctrl_menu_notification > li").length);
-        if (document.querySelectorAll("#ctrl_menu_notification > li").length > 1){
+        if (document.querySelectorAll("#ctrl_menu_notification > li").length > 1 && window.confirm("通知を削除しますか？")) {
 
             $.get("https://scombz.shibaura-it.ac.jp/updateinfo",
             function(data){
@@ -116,12 +115,16 @@ $(function(){
                 $.post("https://scombz.shibaura-it.ac.jp/updateinfo",postData,
                 function(){
                     console.log("通知の削除に成功しました");
-                })
+                    let notifi = document.querySelectorAll("#ctrl_menu_notification > li");
+                    for (let i=0;i<notifi.length-1;i++){
+                        notifi[i].remove();
+                    }
+                    document.querySelector("#ctrl_btn_notification > span").className = "header-icon-space";
 
+                })
             })
-            location.reload(true);
         }else{
-            console.log("通知はありませんでした")
+            console.log("通知はありませんでした");
         }
         
     })
