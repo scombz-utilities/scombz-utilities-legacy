@@ -9,6 +9,7 @@
 #mainbody{
     margin :0;
     width: 350px;
+    overflow:hidden;
 }
 .popuplogo{
     display:block;
