@@ -19,8 +19,11 @@
         }
         else if(location.href.includes("mode=install")){
                 message = `
+                <div>
                 <h1>アップデートされました</h1>
-                <p>アップデート情報here</p>`;
+                <p>アップデート情報here</p>
+                </div>
+                `;
         }
         additionalModeArea.insertAdjacentHTML("afterbegin",message);
     }
