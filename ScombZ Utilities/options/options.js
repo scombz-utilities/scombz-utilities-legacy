@@ -265,3 +265,9 @@ function save_options() {
             )
         }
     });
+    //課題非表示リセット
+    document.getElementById("resetHiddenTasks").addEventListener("click",function(){
+        chrome.storage.local.remove('hiddenTasks',function(){
+            window.alert("非表示の課題をリセットしました");
+        });
+    });
