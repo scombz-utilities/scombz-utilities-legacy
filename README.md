@@ -1,13 +1,17 @@
-![License](https://img.shields.io/github/license/yudai1204/ScombZ-Utilities?style=flat-square)
-![Contributors](https://img.shields.io/github/contributors/yudai1204/ScombZ-Utilities?style=flat-square)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/iejnanaabfgocfjbnmhkfheghbkanibj?style=flat-square)
-![Users](https://img.shields.io/chrome-web-store/users/iejnanaabfgocfjbnmhkfheghbkanibj?style=flat-square)
+[![License](https://img.shields.io/github/license/yudai1204/ScombZ-Utilities?color=white&style=flat-square)](https://github.com/yudai1204/ScombZ-Utilities/blob/dev/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/yudai1204/ScombZ-Utilities?color=white&style=flat-square)](https://github.com/yudai1204/ScombZ-Utilities/graphs/contributors)
+![Version for Chrome](https://img.shields.io/chrome-web-store/v/iejnanaabfgocfjbnmhkfheghbkanibj?color=yellow&style=flat-square)
+![Chrome Users](https://img.shields.io/chrome-web-store/users/iejnanaabfgocfjbnmhkfheghbkanibj?color=yellow&style=flat-square)
+![Version for Firefox](https://img.shields.io/amo/v/scombz-utilities?color=red&style=flat-square)
+![Firefox Users](https://img.shields.io/amo/users/scombz-utilities?color=red&style=flat-square)
 
 # ScombZ Utilities
 
 使いにくい ScombZ のサイドメニューやテストを修正したり、ADFS ボタンの自動スキップができます。よりユーザビリティに優れた ScombZ を提供します。
 
-[![ScombZ Utilities を Chrome Web Store で手に入れよう](./chrome.png)](https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj)
+[![Chrome 版のリンク](./chrome.png)](https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj)
+
+[![Firefox 版のリンク](./firefox.png)](https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/)
 
 ## 開発者向け情報
 
