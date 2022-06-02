@@ -413,7 +413,7 @@ select,input[type="number"],input[type="text"]{
     margin:4px 0 5px 3px;
     padding:3px;
 }
-.graylayer{
+.ttgraylayer{
     width:calc(50% - 20px);
     min-width: 625px;
     height: 50vh;
@@ -469,5 +469,19 @@ select,input[type="number"],input[type="text"]{
     height:1.2vh;
 }
 .hiddens{
-    display:none;
+    display:none !important;
+}
+#init{
+    background-color: #f66;
+    border: #f00 solid 1px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    margin: 10px;
+    cursor : pointer;
+}
+#init:hover{
+    background-color: #d44;
 }

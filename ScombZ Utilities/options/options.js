@@ -1,3 +1,50 @@
+const defaultOptions = {
+    year : null,
+    fac : null,
+    clickLoginBtn: true,
+    adfsSkip: true,
+    exitSidemenu: true,
+    styleSidemenu: true,
+    styleExamBtn: true,
+    styleExamImg: false,
+    addSubTimetable: true,
+    changeReportBtn: true,
+    styleDialog: true,
+    hideCompletedReports: true,
+    syllBtn: true,
+    changeLogout: true,
+    setMaxWidth: true,
+    pageTopBtn : true,
+    mouseDown: true,
+    tasklistDisplay: true,
+    styleNowPeriod: true,
+    displayName: false,
+    layoutHome:true,
+    nickname: '',
+    timesBtnValue:'mode1',
+    sliderBarMax: 600,
+    tasklistTranslate: 0,
+    fixHeadShadow: true,
+    deadlinemode: 'relative-absoluteLong',
+    notepadMode: true,
+    ddSubmission: false,
+    updateClear: false,
+    maxTaskDisplay: 15,
+    darkmode : 'relative',
+    headLinkTo: "/portal/home",
+    adjustTimetableData : {
+        eraseSat : false,
+        erase6: false,
+        erase7: false,
+        dispClassroom : false,
+        timetableCentering : false
+    },
+    remomveDirectLink : true,
+    maxWidthPx:{
+        subj: 1280,
+        lms: 1280
+    }
+};
 // Saves options to chrome.storage
 function save_options() {
     const year = document.getElementById('year').value;
@@ -97,53 +144,7 @@ function save_options() {
     // stored in chrome.storage.
     function restore_options() {
     // Use default value color = 'red' and likesColor = true.
-    chrome.storage.local.get({
-        year : 'null',
-        fac : 'null',
-        clickLoginBtn: true,
-        adfsSkip: true,
-        exitSidemenu: true,
-        styleSidemenu: true,
-        styleExamBtn: true,
-        styleExamImg: false,
-        addSubTimetable: true,
-        changeReportBtn: true,
-        styleDialog: true,
-        hideCompletedReports: true,
-        syllBtn: true,
-        changeLogout: true,
-        setMaxWidth: true,
-        pageTopBtn : true,
-        mouseDown: true,
-        tasklistDisplay: true,
-        styleNowPeriod: true,
-        displayName: false,
-        layoutHome:true,
-        nickname: '',
-        timesBtnValue:'mode1',
-        sliderBarMax: 600,
-        tasklistTranslate: 0,
-        fixHeadShadow: true,
-        deadlinemode: 'relative-absoluteLong',
-        notepadMode: true,
-        ddSubmission: false,
-        updateClear: false,
-        maxTaskDisplay: 15,
-        darkmode : 'relative',
-        headLinkTo: "/portal/home",
-        adjustTimetableData : {
-            eraseSat : false,
-            erase6: false,
-            erase7: false,
-            dispClassroom : false,
-            timetableCentering : false
-        },
-        remomveDirectLink : true,
-        maxWidthPx:{
-            subj: 1280,
-            lms: 1280
-        }
-    }, function(items) {
+    chrome.storage.local.get(defaultOptions, function(items) {
         document.getElementById('year').value = items.year;
         document.getElementById('fac').value = items.fac;
         document.getElementById('login_auto').checked = items.clickLoginBtn;
@@ -252,3 +253,15 @@ function save_options() {
             }
         }
     }
+    //初期化
+    document.getElementById("init").addEventListener("click", function(){
+        if(window.confirm("本当に初期化しますか？\nこの操作は元に戻せません")){
+            chrome.storage.local.set(
+                defaultOptions,function(){
+                    chrome.storage.local.clear();
+                    window.alert("初期化しました");
+                    location.reload();
+                }
+            )
+        }
+    });
