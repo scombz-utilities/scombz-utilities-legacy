@@ -72,6 +72,7 @@
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
                 },300);
+                
                 //設定ボタンを追加
                 addExtensionSettingsBtn();
                 //帰ってきて芝猫
@@ -88,6 +89,7 @@
                 if(items.clickLoginBtn === true){
                     clickLoginBtn();
                 }
+                
                 //サイドメニューを閉じる
                 if(items.exitSidemenu === true){
                     exitSidemenu();
@@ -123,6 +125,7 @@
                 if(items.changeReportBtn === true){
                     changeReportBtn();
                 }
+                
                 //ログアウト画面の変更
                 if(items.changeLogout === true){
                     changeLogout();
@@ -135,6 +138,7 @@
                 if(items.pageTopBtn === true){
                     remomvePageTop();
                 }
+                
                 //ホイールクリックをできる機能
                 if(items.mouseDown === true){
                 mouseEvents();
@@ -160,12 +164,15 @@
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
                 }
+                
                 //LMSの調整
                 adjustTimetable(items.adjustTimetableData, items.addSubTimetable);
+                
                 //D&Dで課題提出
                 if(items.ddSubmission === true){
                     ddSub();
                 }
+                
                 //通知を削除するボタン
                 if(items.updateClear === true){
                     updateClear();
@@ -177,10 +184,13 @@
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す
+                
                 clickHideName();
                 //カスタムCSSの適用
+                
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
+                
             }
         });
     });

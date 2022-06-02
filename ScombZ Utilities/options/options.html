@@ -15,6 +15,7 @@
             <li><a href="#home">設定トップ</a></li>
             <li><a href="#settings">基本設定</a></li>
             <li><a href="#advancedSettings">詳細設定</a></li>
+            <li><a href="#initArea">初期化</a></li>
             <li><a href="./customcss.html">カスタムCSS</a></li>
             <li><a href="#form">バグ報告・お問い合わせ・寄付</a></li>
             <li><a href="#infomation">拡張機能情報</a></li>
@@ -414,7 +415,7 @@
             <h2>時間割設定</h2>
             時間割に関する設定です。<br>
             <div><h3>表示デモ</h3>
-                <div class="graylayer">
+                <div class="ttgraylayer">
                 <div class="blur-demo">
                     <div id="timetableDemo">
                         <div class="ttth"><div class="ttPeriod"></div><div class="ttColumn"></div><div class="ttColumn"></div><div class="ttColumn"></div><div class="ttColumn"></div><div class="ttColumn"></div><div class="ttColumn ttSat"></div></div>
@@ -581,6 +582,22 @@
                 </div>
                 <button type="button" class="saveBtn">保存する</button>
             </div>
+            <div class="setting-column">
+                <h3>非表示にした課題の再表示</h3>
+                <div class="explains">
+                    メニュー横課題一覧の中から、非表示にした課題のデータを初期化し、すべて再表示します。
+                </div>
+                <button type="button" id="resetHiddenTasks" class="inputbox">再表示</button>
+            </div>
+            <div class="setting-column" id="initArea">
+                <hr>
+                <h1 class="subtitle">設定の初期化</h1>
+                <hr>
+                <div class="explains" style="color:red">
+                    すべての設定を初期状態に戻します。<br>
+                </div>
+                <button type="button" id="init">初期化する</button>
+            </div>
         <div id="form">
             <hr>
             <h1 class="subtitle">バグ報告・寄付</h1>
@@ -620,6 +637,7 @@
         <div id="footer">
             <a href="https://scombz.shibaura-it.ac.jp/lms/timetable" target="_blank" rel="noopener noreferrer" class="footer-link">ScombZ</a> - <a href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
         </div>
+    </div>
     </div>
     </div>
     <script type="text/javascript" src="options.js"></script>

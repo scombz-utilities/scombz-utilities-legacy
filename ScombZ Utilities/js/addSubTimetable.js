@@ -247,7 +247,8 @@ function displayTaskListsOnGrayLayer(){
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
-        maxTaskDisplay: 16
+        maxTaskDisplay: 16,
+        hiddenTasks: []
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -270,10 +271,15 @@ function displayTaskListsOnGrayLayer(){
             }
             //メイン生成部分
             let kadaiListHTML=``;
-            let surveysCount = 0;
+            let surveysCount = 0 , skipCount = 0;
             //アンケート一覧
             let deadline='XXXX/XX/XX XX:XX:XX';
-            for(surveysCount = 0 ; $surveyListObj[surveysCount] && surveysCount < (items.maxTaskDisplay+1)/2 ; surveysCount++){
+            for(surveysCount = 0 , skipCount = 0; $surveyListObj[surveysCount] && surveysCount < (items.maxTaskDisplay+1)/2 + skipCount ; surveysCount++){
+                //非表示に設定されているものはスキップ
+                if(items.hiddenTasks.includes($surveyListObj[surveysCount].id)){
+                    skipCount++;
+                    continue;
+                }
                 //絶対表示
                 deadline = $surveyListObj[surveysCount].deadline+':00';
                 if(items.deadlinemode.includes('absoluteShort'))
@@ -306,14 +312,19 @@ function displayTaskListsOnGrayLayer(){
                 <div class="subk-line">
                     <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${$surveyListObj[surveysCount].url}">${$surveyListObj[surveysCount].course}</a></div></div>
                     <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$surveyListObj[surveysCount].url+'#questionnaire'}"> ${$surveyListObj[surveysCount].title}</a></div></div>
-                    <div class="subk-deadline">${deadline}</div>
+                    <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$surveyListObj[surveysCount].id}" href="javascript:void(0);"></a></div>
                 </div>`;
             }
             //課題・テスト一覧
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
-                for(let i=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 - surveysCount ;i++){
+                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 - surveysCount + skipCount -j;i++){
+                    //非表示に設定されているものはスキップ
+                    if(items.hiddenTasks.includes($tasklistObj[i].id)){
+                        j++;
+                        continue;
+                    }
                     if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
                         kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
                         break;
@@ -355,7 +366,7 @@ function displayTaskListsOnGrayLayer(){
                     <div class="subk-line">
                         <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${(subjlink)?`https://scombz.shibaura-it.ac.jp/lms/course?idnumber=`+subjlink:"javascript:void(0);"}">${$tasklistObj[i].course}</a></div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
-                        <div class="subk-deadline">${deadline}</div>
+                        <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>
                     </div>`;
                 }
             }
@@ -404,7 +415,7 @@ function displayTaskListsOnGrayLayer(){
                 .subk-subjname{
                     font-size:12px;
                     padding:2px;
-                    width:fit-content;
+                    width:100%;
                     white-space: nowrap; 
                     overflow: hidden; 
                     text-overflow: ellipsis;
@@ -412,10 +423,10 @@ function displayTaskListsOnGrayLayer(){
                 div.subk-link{
                     padding:2px 2px 0px 2px;
                     font-size:14px;
-                    margin-left:30px;
+                    margin-left:10px;
                     max-width:100%;
                     white-space: nowrap; 
-                    overflow: hidden; 
+                    overflow: hidden;
                     text-overflow: ellipsis; 
                 }
                 a.subk-link:hover{
@@ -437,7 +448,7 @@ function displayTaskListsOnGrayLayer(){
                 }
                 .subk-column:nth-child(3n+1){
                     width:30%;
-                    float:left
+                    float:left;
                 }
                 .subk-column:nth-child(3n+2){
                     min-width:160px;
@@ -456,12 +467,36 @@ function displayTaskListsOnGrayLayer(){
                     color: #222;
                     text-decoration: underline;
                 }
-                @media(max-width:1280px){
+                .subk-remove-btn{
+                    display: inline-block;
+                    float:right;
+                    width:15px;
+                    height:15px;
+                    margin-left:5px;
+                    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22_x32_%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22width%3A%2032px%3B%20height%3A%2032px%3B%20opacity%3A%201%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%09.st0%7Bfill%3A%234B4B4B%3B%7D%0A%3C%2Fstyle%3E%0A%3Cg%3E%0A%09%3Cpolygon%20class%3D%22st0%22%20points%3D%22512%2C52.535%20459.467%2C0.002%20256.002%2C203.462%2052.538%2C0.002%200%2C52.535%20203.47%2C256.005%200%2C459.465%20%0A%09%0952.533%2C511.998%20256.002%2C308.527%20459.467%2C511.998%20512%2C459.475%20308.536%2C256.005%20%09%22%20style%3D%22fill%3A%20rgb(24%2C%2024%2C%2024)%3B%22%3E%3C%2Fpolygon%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A');
+                    background-size:8px;
+                    background-repeat:no-repeat;
+                    background-position: center center;
+                    background-color:#faa6;
+                    background-blend-mode:lighten;
+                    visibility: hidden;
+                    border-radius:100px;
+                }
+                div.subk-line:hover .subk-remove-btn{
+                    visibility:visible;
+                }
+                .subk-deadline-time{
+                    display: inline-block;
+                }
+                @media(max-width:1080px){
                     .relative-deadline-time{
                         display:none;
                     }
                     .subk-column:nth-child(3n+2){
                         width:calc(70% - 160px);
+                    }
+                    .subk-remove-btn{
+                        display:none;
                     }
                 }
             </style>
@@ -472,12 +507,35 @@ function displayTaskListsOnGrayLayer(){
             </div>
             </div>
             `;
-            if(document.getElementById('pageMain'))
+            if(document.getElementById('pageMain')){
                 document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+            }
+            //課題一覧のリロード
             document.getElementById('reloadTasks').addEventListener("click",function(){
                 getTaskLists(0);
                 alert("更新結果を表示するにはページをリロードしてください");
             });
+            //削除ボタン
+            const rmBtns = document.getElementsByClassName("subk-remove-btn");
+            console.log(rmBtns.length);
+            for(const rmBtn of rmBtns){
+                rmBtn.addEventListener("click",function(){
+                    console.log("clicked");
+                    if(window.confirm("この項目を削除しますか？\n削除した項目は設定から復元できます")){
+                        chrome.storage.local.get({
+                            hiddenTasks: []
+                        },function(rmitem){
+                            const hiddenTasks = rmitem.hiddenTasks;
+                            hiddenTasks.push(rmBtn.getAttribute("data-value"));
+                            chrome.storage.local.set({hiddenTasks: hiddenTasks},
+                                function(){
+                                    rmBtn.parentNode.parentNode.remove();
+                            });
+                        });
+                    }
+                });
+            }
+            console.log(items.hiddenTasks);
         }
     });
 }
