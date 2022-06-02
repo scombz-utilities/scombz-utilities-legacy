@@ -164,6 +164,10 @@ function styleSidemenu(){
         a.control-menu-colomn:hover{
             background-color: #66666609;
         }
+        .header-notification{
+            min-width: 46.5px;
+            text-align: center;
+        }
     </style>
     `);
     //LMSページ飛び出る問題

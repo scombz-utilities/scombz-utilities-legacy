@@ -62,10 +62,12 @@ function changeReportBtn(){
         </style>
         `);
     const $submitBtnArea = document.querySelector('.block-under-area-btn');
-    $submitBtnArea.style.maxWidth = "450px";
-    if($submitBtnArea.childElementCount == 2){
-        $submitBtnArea.firstElementChild.id = $submitBtnArea.firstElementChild.id || "back";
-        $submitBtnArea.appendChild($submitBtnArea.children[0]);
+    if($submitBtnArea){
+        $submitBtnArea.style.maxWidth = "450px";
+        if($submitBtnArea.childElementCount == 2){
+            $submitBtnArea.firstElementChild.id = $submitBtnArea.firstElementChild.id || "back";
+            $submitBtnArea.appendChild($submitBtnArea.children[0]);
+        }
     }
     if(document.querySelector('.page-directlink'))
         document.querySelector('.page-directlink').remove();

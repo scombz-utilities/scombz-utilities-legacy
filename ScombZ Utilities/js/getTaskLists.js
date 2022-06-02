@@ -28,6 +28,7 @@ function getTasksOnTaskpage(){
             $taskObj.title    = $task.querySelector(".tasklist-title a:nth-child(1)").innerHTML;
             $taskObj.link     = $task.querySelector(".tasklist-title a:nth-child(1)").href;
             $taskObj.deadline = $task.querySelector(".tasklist-deadline .deadline").innerHTML;
+            $taskObj.id       =  $taskObj.link.includes('idnumber=') && $taskObj.link.slice($taskObj.link.indexOf('idnumber=')+9).replace(/&|Id=/g,'');
             if(!$taskObj.link.includes("https://scombz.shibaura-it.ac.jp")){
                 $taskObj.link = "https://scombz.shibaura-it.ac.jp" + $taskObj.link;
             }
@@ -76,6 +77,7 @@ function getTasksByAdjax($$reacquisitionMin){
                                 $taskObj.course   =  $(data).find(".result_list_line .course").eq(i).html();
                                 $taskObj.title    =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).html();
                                 $taskObj.link     =  $(data).find(".result_list_line .tasklist-title a").eq(i*2).attr('href');
+                                $taskObj.id       =  $taskObj.link.includes('idnumber=') && $taskObj.link.slice($taskObj.link.indexOf('idnumber=')+9).replace(/&|Id=/g,'');
                                 $taskObj.deadline =  $(data).find(".result_list_line .tasklist-deadline .deadline").eq(i).html();
                                 if(!$taskObj.link.includes("https://scombz.shibaura-it.ac.jp")){
                                     $taskObj.link = "https://scombz.shibaura-it.ac.jp" + $taskObj.link;
@@ -253,7 +255,7 @@ function getSurveysByAjax(){
                             $taskObj.title    =  $(data).find("#portalSurveysForm .result-list .survey-list-title .template-name").eq(i).html();
                             $taskObj.course   =  $(data).find("#portalSurveysForm .result-list .survey-list-address span").eq(i).html();
                             $taskObj.deadline =  $(data).find("#portalSurveysForm .result-list .survey-list-update").eq(i).find("span").eq(2).html();
-                            
+                            $taskObj.id       =  'survey' + $(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val();
                             $taskListsObj.push($taskObj);
                         }
                         console.log("アンケート一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
