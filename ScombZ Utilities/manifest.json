@@ -44,7 +44,8 @@
                 "js/notepad.js",
                 "js/adjustTimetable.js",
                 "js/styleSurveys.js",
-                "js/clearButton.js"
+                "js/clearButton.js",
+                "js/submissionBug.js"
             ]
         }
     ],

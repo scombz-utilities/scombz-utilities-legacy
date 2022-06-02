@@ -180,6 +180,8 @@
                 clickHideName();
                 //カスタムCSSの適用
                 customizeCSS();
+                //D&D状態での課題削除バグの修正
+                submissionBugFix();
                 console.log('すべての機能の実行が完了しました');
             }
         });
