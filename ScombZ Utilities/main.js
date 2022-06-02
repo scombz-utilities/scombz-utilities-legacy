@@ -174,14 +174,14 @@
                 if(items.remomveDirectLink === true){
                     remomveDirectLink();
                 }
+                //D&D状態での課題削除バグの修正
+                submissionBugFix();
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す
                 clickHideName();
                 //カスタムCSSの適用
                 customizeCSS();
-                //D&D状態での課題削除バグの修正
-                submissionBugFix();
                 console.log('すべての機能の実行が完了しました');
             }
         });
