@@ -14,5 +14,6 @@
                 <h1>アップデートされました</h1>
                 <p>アップデート情報here</p>`;
         }
+        additionalModeArea.insertAdjacentHTML("afterbegin",message);
     }
 })
