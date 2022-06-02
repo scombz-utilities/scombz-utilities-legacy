@@ -742,3 +742,28 @@ img.alignleft{margin:0 7px 2px 0;}
 	max-width: 960px;
 	padding: 15px;
 }
+#additionalModeArea > div{
+	margin: 15px 0;
+	padding: 10px;
+	border: 2px solid #ccc;
+}
+#additionalModeArea > div > h1{
+	font-size: 30px;
+	font-weight: bold;
+	margin : 5px;
+}
+#additionalModeArea > div > p:nth-child(2){
+	font-size: 16px;
+	font-weight: normal;
+	padding: 10px;
+}
+#additionalModeArea > div > div{
+	font-size: 20px;
+	font-weight: normal;
+	padding: 10px;
+}
+#additionalModeArea > div > div >ul{
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+}
