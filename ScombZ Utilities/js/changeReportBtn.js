@@ -40,7 +40,7 @@ function changeReportBtn(){
             border:1px solid #999;
             box-shadow:0 0 3px #888;
         }
-        .block-under-area .block-under-area-btn #submitButton,#report_submission_btn #report_submission_btn_{
+        .block-under-area .block-under-area-btn #submitButton,#report_submission_btn,#report_submission_btn_{
             color:#fff;
             background:#4892e0;
             font-weight:bold;
