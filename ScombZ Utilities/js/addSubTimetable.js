@@ -452,7 +452,7 @@ function displayTaskListsOnGrayLayer(){
                 }
                 .subk-column:nth-child(3n+2){
                     min-width:160px;
-                    width:calc(70% - 260px);
+                    width:calc(70% - 270px);
                 }
                 .relative-deadline-time{
                     font-size:80%;
