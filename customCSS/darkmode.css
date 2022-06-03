@@ -1,4 +1,4 @@
-/* ScombZ Darkmode CSS v0.3 */
+/* ScombZ Darkmode CSS v0.4 */
 /* styled by うだい */
 /*背景、全体設定*/
 :root{
@@ -470,4 +470,9 @@ div.result_list_content .result_list_line:nth-of-type(2n+1) {
 }
 .ItemBox-CheckBox-Input:checked+.ItemBox-CheckBox-Label {
     background: #1b449f !important;
+}
+.subk-remove-btn {
+     background-color: #0aa6 !important;
+     background-blend-mode: darken !important;
+     filter: invert(1);
 }
