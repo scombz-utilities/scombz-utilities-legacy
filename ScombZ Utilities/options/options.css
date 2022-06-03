@@ -392,7 +392,7 @@ h3 {
     color:#444;
     text-decoration: underline;
 }
-select,input[type="number"],input[type="text"],.inputbox{
+select,input[type="number"],input[type="text"]{
     width:250px;
     font-size:120%;
     padding:5px;
@@ -488,4 +488,8 @@ select,input[type="number"],input[type="text"],.inputbox{
 #hiddenTaskFrame{
     border: 1px solid black;
     width: 100%;
+}
+.inputbox{
+    margin: 10px 0px 15px 10px;
+    padding:5px 15px;
 }
