@@ -440,7 +440,6 @@ function displayTaskListsOnGrayLayer(){
                     margin-right:4px;
                     font-size:14px;
                     float:right;
-                    max-width:;
                 }
                 .subk-column{
                     margin:0;
