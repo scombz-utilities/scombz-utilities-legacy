@@ -489,3 +489,7 @@ select,input[type="number"],input[type="text"],.inputbox{
     border: 1px solid black;
     width: 100%;
 }
+.inputbox{
+    margin: 10px 0px 15px 10px;
+    padding:5px 15px;
+}
