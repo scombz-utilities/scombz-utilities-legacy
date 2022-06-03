@@ -340,7 +340,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.3 */
+        /* ScombZ Darkmode CSS v0.4 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -812,6 +812,11 @@ function darkmodeLayout(mode){
         }
         .ItemBox-CheckBox-Input:checked+.ItemBox-CheckBox-Label {
             background: #1b449f !important;
+        }
+        .subk-remove-btn {
+            background-color: #0aa6 !important;
+            background-blend-mode: darken !important;
+            filter: invert(1);
         }
             `;
         if(mode === 'relative'){

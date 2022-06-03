@@ -16,5 +16,7 @@ function openOptionsPage(){
 }
 //インストール時
 chrome.runtime.onInstalled.addListener(({reason}) => {
-    chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}`});
+    if(reason === 'install' || reason === 'update'){
+        chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}`});
+    }
 });

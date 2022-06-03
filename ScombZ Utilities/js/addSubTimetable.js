@@ -440,6 +440,7 @@ function displayTaskListsOnGrayLayer(){
                     margin-right:4px;
                     font-size:14px;
                     float:right;
+                    max-width:;
                 }
                 .subk-column{
                     margin:0;
@@ -452,7 +453,7 @@ function displayTaskListsOnGrayLayer(){
                 }
                 .subk-column:nth-child(3n+2){
                     min-width:160px;
-                    width:calc(70% - 260px);
+                    width:calc(70% - 270px);
                 }
                 .relative-deadline-time{
                     font-size:80%;
