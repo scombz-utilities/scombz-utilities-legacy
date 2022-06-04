@@ -772,7 +772,28 @@ img.alignleft{margin:0 7px 2px 0;}
 	display: inline-block;
 	margin-right:.6em
 }
-#updateContents{
-	float: left;
+#updateContents {
+    margin-top: -30px;
+}
+.browser-update-date{
+	margin: 10px 0 0 0;
+}
+.update-details {
+    margin-top: 30px;
+}
+.update-type {
+    color: #888;
+    font-size: 80%;
+    border: 1px solid #ddd;
+    width: fit-content;
+    padding: 2px 6px;
+    border-radius: 300px;
+}
+#updateContents h4 {
+    font-size: 120%;
+    margin-bottom: 6px;
+}
+#updates {
+    float: left;
     margin-top: 50px;
 }
