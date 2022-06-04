@@ -38,6 +38,7 @@
             updateClear: false,         //通知を削除するボタン
             darkmode: 'relative',       //ダークモード
             remomveDirectLink: true,    //ダイレクトリンクを消す
+            dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
@@ -182,7 +183,9 @@
                     remomveDirectLink();
                 }
                 //D&D状態での課題削除バグの修正
+                if(items.dadbugFix === true){
                 submissionBugFix();
+                }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す

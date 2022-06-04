@@ -32,6 +32,7 @@ const defaultOptions = {
     maxTaskDisplay: 15,
     darkmode : 'relative',
     headLinkTo: "/portal/home",
+    dadbugFix: true,
     adjustTimetableData : {
         eraseSat : false,
         erase6: false,
@@ -88,6 +89,7 @@ function save_options() {
     const timetableCentering = document.getElementById('timetableCentering').checked;
     const remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     const headLinkTo = document.getElementById('headLinkTo').value;
+    const dadbugFix = document.getElementById('dadbugFix').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -122,6 +124,7 @@ function save_options() {
         maxTaskDisplay : maxTaskDisplay,
         darkmode : darkmode,
         headLinkTo : headLinkTo,
+        dadbugFix : dadbugFix,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -186,6 +189,7 @@ function save_options() {
         document.getElementById('timetableCentering').checked = items.adjustTimetableData.timetableCentering;
         document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
         document.getElementById('headLinkTo').value = items.headLinkTo;
+        document.getElementById('dadbugFix').checked = items.dadbugFix;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
