@@ -767,3 +767,8 @@ img.alignleft{margin:0 7px 2px 0;}
 	font-weight: bold;
 	padding: 10px;
 }
+.browser-small-logo{
+	width:1.5em !important;
+	display: inline-block;
+	margin-right:.6em
+}
