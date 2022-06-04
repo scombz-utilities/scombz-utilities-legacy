@@ -75,61 +75,53 @@ function updateClear(){
         let headerButton = document.getElementsByClassName("btn-header-info btnControl");
         for (let i=0;i<headerButton.length;i++){
             if (headerButton[i].getElementsByTagName("span").length == 0){
-
                 buttonSpan = document.createElement("span");
                 buttonSpan.className = "header-icon-space";
                 headerButton[i].insertBefore(buttonSpan,headerButton[i].getElementsByClassName("header-img")[0])
             }
         }
-        
-        
-
-
     }
-    
-}
+    $(function(){
+        $("#ctrl_btn_clear").click(function(){
+            console.log("更新通知削除ボタンがクリックされました");
+            let postData="";
+            let updateInfoId;
+            if (document.querySelectorAll("#ctrl_menu_notification > li").length > 1 && window.confirm("通知を削除しますか？")) {
 
+                $.get("https://scombz.shibaura-it.ac.jp/updateinfo",
+                function(data){
+                    console.log("通知の取得に成功しました");
+                    const parser = new DOMParser();
+                    data = parser.parseFromString(data, 'text/html');
 
-$(function(){
-    $("#ctrl_btn_clear").click(function(){
-        console.log("更新通知削除ボタンがクリックされました");
-        let postData="";
-        let updateInfoId;
-        if (document.querySelectorAll("#ctrl_menu_notification > li").length > 1 && window.confirm("通知を削除しますか？")) {
+                    postData += "_csrf="+data.querySelector('input[name="_csrf"]').value;
+                    postData += '&_method='+data.querySelector('input[name="_method"]').value
+                    updateInfoId = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
 
-            $.get("https://scombz.shibaura-it.ac.jp/updateinfo",
-            function(data){
-                console.log("通知の取得に成功しました");
-                const parser = new DOMParser();
-                data = parser.parseFromString(data, 'text/html');
-
-                postData += "_csrf="+data.querySelector('input[name="_csrf"]').value;
-                postData += '&_method='+data.querySelector('input[name="_method"]').value
-                updateInfoId = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
-
-                for(let i=0;i<updateInfoId.length;i++){
-                    postData+="&deleteUpdateInfoList="+updateInfoId[i].value;
-                }
-                console.log(postData)
-
-                $.post("https://scombz.shibaura-it.ac.jp/updateinfo",postData,
-                function(){
-                    console.log("通知の削除に成功しました");
-                    let notifi = document.querySelectorAll("#ctrl_menu_notification > li");
-                    for (let i=0;i<notifi.length-1;i++){
-                        notifi[i].remove();
+                    for(let i=0;i<updateInfoId.length;i++){
+                        postData+="&deleteUpdateInfoList="+updateInfoId[i].value;
                     }
-                    document.querySelector("#ctrl_btn_notification > span").className = "header-icon-space";
+                    console.log(postData)
 
+                    $.post("https://scombz.shibaura-it.ac.jp/updateinfo",postData,
+                    function(){
+                        console.log("通知の削除に成功しました");
+                        let notifi = document.querySelectorAll("#ctrl_menu_notification > li");
+                        for (let i=0;i<notifi.length-1;i++){
+                            notifi[i].remove();
+                        }
+                        document.querySelector("#ctrl_btn_notification > span").className = "header-icon-space";
+
+                    })
                 })
-            })
-        }else{
-            console.log("通知はありませんでした");
-        }
-        
+            }else{
+                console.log("通知はありませんでした");
+            }
+            
+        })
     })
-})
-
+}
+//ScombZバグ修正 D&D時に課題削除できないバグを修正
 function submissionBugFix(){
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission") && 
     document.querySelectorAll("#toDragAndDrop").length == 1 && 
@@ -138,42 +130,39 @@ function submissionBugFix(){
         let reportBtn = document.querySelector("#report_submission_btn");
         reportBtn.style.display = "none";
         reportBtn.insertAdjacentHTML("beforebegin",`
-        <a id="report_submission_btn_" class="under-btn btn-txt btn-color">確認画面に進む</a>
+        <a id="report_submission_btn_bugfix" class="under-btn btn-txt btn-color">確認画面に進む</a>
         `)
     }
-}
 
-function dadFileAreaAddDiv(){
-    document.querySelector("#dad_file_area").insertAdjacentHTML("beforeEnd",`
-            <div style="display:none;" id="DaDfix">
-            <input type="file" class="fileSelectInput" name="uploadFiles" style="display : none;">
-            <input type="hidden" class="originalFileName" name="originalFileName" value="">
-            <input type="hidden" name="fileId" value="0">
-            <input type="hidden" name="rowCounter" value="1">
-            <input type="text" name="fileName" class="input input-box">
-            <input type="text" name="comment" class="input input-box"></div>`
-            );
-}
+    function dadFileAreaAddDiv(){
+        document.querySelector("#dad_file_area").insertAdjacentHTML("beforeEnd",`
+                <div style="display:none;" id="DaDfix">
+                <input type="file" class="fileSelectInput" name="uploadFiles" style="display : none;">
+                <input type="hidden" class="originalFileName" name="originalFileName" value="">
+                <input type="hidden" name="fileId" value="0">
+                <input type="hidden" name="rowCounter" value="1">
+                <input type="text" name="fileName" class="input input-box">
+                <input type="text" name="comment" class="input input-box"></div>`
+                );
+    }
 
-
-function DaDCheck() {
-    if (document.querySelector("#dad_file_area > div") == null){
-    dadFileAreaAddDiv();
-    }else{
-        let dadFix = document.querySelectorAll("#DaDfix");
-        if (dadFix.length != 1 || dadFix[0].id != "DaDfix"){
-            for (let i=0;i<dadFix.length;i++){
-                dadFix[i].remove();
+    function DaDCheck() {
+        if (document.querySelector("#dad_file_area > div") == null){
+        dadFileAreaAddDiv();
+        }else{
+            let dadFix = document.querySelectorAll("#DaDfix");
+            if (dadFix.length != 1 || dadFix[0].id != "DaDfix"){
+                for (let i=0;i<dadFix.length;i++){
+                    dadFix[i].remove();
+                }
             }
         }
+        document.querySelector("#report_submission_btn").click();
     }
-    document.querySelector("#report_submission_btn").click();
+
+    $(document).ready(function () {
+    $("#report_submission_btn_bugfix").click(function (){
+        console.log("変更されたボタンをクリック");
+        DaDCheck();});
+    })
 }
-
-
-$(document).ready(function () {
-$("#report_submission_btn_").click(function (){
-    console.log("変更されたボタンをクリック");
-    DaDCheck();});
-})
-
