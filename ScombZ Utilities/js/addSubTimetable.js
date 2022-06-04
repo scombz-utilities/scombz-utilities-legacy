@@ -257,7 +257,7 @@ function displayTaskListsOnGrayLayer(){
             const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
             console.log(decodeURIComponent(items.surveyListData));
             const $surveyListObj = JSON.parse(decodeURIComponent(items.surveyListData));
-            //JSONから生成
+            //JSONから表示高さ生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
             let timetableHeight = 5;
             let timetableminHeight = 0;
@@ -271,55 +271,30 @@ function displayTaskListsOnGrayLayer(){
             }
             //メイン生成部分
             let kadaiListHTML=``;
-            let surveysCount = 0 , skipCount = 0;
-            //アンケート一覧
-            let deadline='XXXX/XX/XX XX:XX:XX';
-            for(surveysCount = 0 , skipCount = 0; $surveyListObj[surveysCount] && surveysCount < (items.maxTaskDisplay+1)/2 + skipCount ; surveysCount++){
-                //非表示に設定されているものはスキップ
-                if(items.hiddenTasks.includes($surveyListObj[surveysCount].id)){
-                    skipCount++;
-                    continue;
-                }
-                //絶対表示
-                deadline = $surveyListObj[surveysCount].deadline+':00';
-                if(items.deadlinemode.includes('absoluteShort'))
-                    deadline = $surveyListObj[surveysCount].deadline.slice(6);
-                //相対表示
-                if(items.deadlinemode.includes('relative') && $surveyListObj[surveysCount].deadline != "" ){
-                    if(items.deadlinemode == 'relative'){
-                        const nowUnix = Date.now();
-                        const relativeDeadline = (Number(Date.parse($surveyListObj[surveysCount].deadline)) - Number(nowUnix))/60000;
-                        if(relativeDeadline < 120){
-                            deadline = '残り約'+Math.floor(relativeDeadline)+'分';
-                        }else if(relativeDeadline < 60*24){
-                            deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
-                        }else{
-                            deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
-                        }
-                    }else{
-                        const nowUnix = Date.now();
-                        const relativeDeadline = (Number(Date.parse($surveyListObj[surveysCount].deadline)) - Number(nowUnix))/60000;
-                        if(relativeDeadline < 120){
-                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
-                        }else if(relativeDeadline < 60*24){
-                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
-                        }else{
-                            deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
-                        }
+            //アンケート一覧と課題一覧を統合する
+            for(const $survey of $surveyListObj){
+                for(let i=0;;i++){
+                    //tasklistを読み切ったら最後に挿入して終了
+                    if(!$tasklistObj[i]){
+                        $tasklistObj.push($survey);
+                        break;
+                    }
+                    //tasklist内に挿入位置を発見したらそこに挿入して終了
+                    if( Number(Date.parse($survey.deadline)) < Number(Date.parse($tasklistObj[i].deadline)) ){
+                        console.log("SPLICED:"+i);
+                        $tasklistObj.splice(i,0,$survey);
+                        break;
                     }
                 }
-                kadaiListHTML += `
-                <div class="subk-line">
-                    <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${$surveyListObj[surveysCount].url}">${$surveyListObj[surveysCount].course}</a></div></div>
-                    <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$surveyListObj[surveysCount].url+'#questionnaire'}"> ${$surveyListObj[surveysCount].title}</a></div></div>
-                    <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$surveyListObj[surveysCount].id}" href="javascript:void(0);"></a></div>
-                </div>`;
+                
             }
-            //課題・テスト一覧
+            
+            //課題・テスト・アンケート一覧
+            let deadline='XXXX/XX/XX XX:XX:XX';
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
-                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 - surveysCount + skipCount -j;i++){
+                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 -j; i++){
                     //非表示に設定されているものはスキップ
                     if(items.hiddenTasks.includes($tasklistObj[i].id)){
                         j++;
@@ -331,7 +306,7 @@ function displayTaskListsOnGrayLayer(){
                     }
                     if($tasklistObj[i].data === null)continue;
                     //絶対表示
-                    deadline = $tasklistObj[i].deadline;
+                    deadline = ($tasklistObj[i].deadline.length > 17) ? $tasklistObj[i].deadline : $tasklistObj[i].deadline+":00";
                     if(items.deadlinemode.includes('absoluteShort'))
                         deadline = $tasklistObj[i].deadline.slice(6,-3);
                     //相対表示
@@ -358,14 +333,19 @@ function displayTaskListsOnGrayLayer(){
                             }
                         }
                     }
-                    let subjlink = $tasklistObj[i].link;
-                    if(subjlink){
-                        subjlink = (subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId'));
+                    //link生成
+                    let subjlink = $tasklistObj[i].link ,
+                        tasklink = $tasklistObj[i].link;
+                    if(subjlink === undefined) {
+                        subjlink = $tasklistObj[i].url;
+                        tasklink = subjlink+"#questionnaire";
+                    }else{
+                        subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber=" + (subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId'));
                     }
                     kadaiListHTML += `
                     <div class="subk-line">
-                        <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${(subjlink)?`https://scombz.shibaura-it.ac.jp/lms/course?idnumber=`+subjlink:"javascript:void(0);"}">${$tasklistObj[i].course}</a></div></div>
-                        <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${$tasklistObj[i].link}"> ${$tasklistObj[i].title}</a></div></div>
+                        <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${$tasklistObj[i].course}</a></div></div>
+                        <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"> ${$tasklistObj[i].title}</a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>
                     </div>`;
                 }
