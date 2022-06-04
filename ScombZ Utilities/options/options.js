@@ -33,6 +33,7 @@ const defaultOptions = {
     darkmode : 'relative',
     headLinkTo: "/portal/home",
     dadbugFix: true,
+    defaultInputName: 'AA00000_山田太郎',
     adjustTimetableData : {
         eraseSat : false,
         erase6: false,
@@ -90,6 +91,7 @@ function save_options() {
     const remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     const headLinkTo = document.getElementById('headLinkTo').value;
     const dadbugFix = document.getElementById('dadbugFix').checked;
+    const defaultInputName = document.getElementById('defaultInputName').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -125,6 +127,7 @@ function save_options() {
         darkmode : darkmode,
         headLinkTo : headLinkTo,
         dadbugFix : dadbugFix,
+        defaultInputName : defaultInputName,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -190,6 +193,7 @@ function save_options() {
         document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
         document.getElementById('headLinkTo').value = items.headLinkTo;
         document.getElementById('dadbugFix').checked = items.dadbugFix;
+        document.getElementById('defaultInputName').value = items.defaultInputName;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
