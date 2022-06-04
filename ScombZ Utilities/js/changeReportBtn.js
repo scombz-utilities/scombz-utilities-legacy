@@ -148,15 +148,13 @@ function createTimeTempBtn(){
 }
 //課題提出時名前自動入力
 function autoInputNameOnReport(){
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaa");
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission") && document.getElementById("toDragAndDrop") && document.getElementById("report_submission_btn")){
         chrome.storage.local.get({
             defaultInputName: "AA00000_山田太郎"
         },function(items){
             const $nameInputs = document.querySelectorAll('input[name="fileName"]');
-            console.log("自動入力ボタン挿入準備");
+            console.log("自動入力ボタンを挿入します");
             for(const $nameInput of $nameInputs){
-                console.log("自動入力ボタン挿入");
                 $nameInput.previousElementSibling.insertAdjacentHTML("beforeEnd",`
                 <input type="button" class="autoInputNameBtn" value="自動入力" onclick="javascript:this.parentNode.nextElementSibling.value='${items.defaultInputName}';"></input>
                 `);
