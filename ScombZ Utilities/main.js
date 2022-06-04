@@ -181,6 +181,8 @@
                 if(items.remomveDirectLink === true){
                     remomveDirectLink();
                 }
+                //D&D状態での課題削除バグの修正
+                submissionBugFix();
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す
