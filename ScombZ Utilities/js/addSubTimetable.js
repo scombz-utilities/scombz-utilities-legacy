@@ -340,7 +340,8 @@ function displayTaskListsOnGrayLayer(){
                         subjlink = $tasklistObj[i].url;
                         tasklink = subjlink+"#questionnaire";
                     }else{
-                        subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber=" + (subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId'));
+                        subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
+                        subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
                     }
                     kadaiListHTML += `
                     <div class="subk-line">
