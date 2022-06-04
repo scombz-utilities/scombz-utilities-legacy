@@ -195,7 +195,6 @@
                 
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
-                
             }
         });
     });
