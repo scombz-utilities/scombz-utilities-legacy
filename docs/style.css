@@ -772,3 +772,7 @@ img.alignleft{margin:0 7px 2px 0;}
 	display: inline-block;
 	margin-right:.6em
 }
+#updateContents{
+	float: left;
+    margin-top: 50px;
+}

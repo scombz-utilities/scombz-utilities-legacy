@@ -1,6 +1,6 @@
 const updateArea = document.getElementById("updateContents");
 if(updateArea){
-    $.getJSON("./updateData.json", (jsondata) => {
+    $.getJSON("updateData.json", (jsondata) => {
         let mainHtmlData = "";
         for(const versionData of jsondata){
             let subHtmlData = `
@@ -9,7 +9,8 @@ if(updateArea){
             <h3>Chrome版アップデート:${versionData.date.chrome}</h3>
             <h3>FireFox版アップデート:${versionData.date.firefox}</h3>
             `;
-            for(const contents of jsondata.contents){
+            for(let i=0;versionData.contents[i];i++){
+                const contents = versionData.contents[i];
                 subHtmlData += `
                 <div class = "update-details">
                     <div class="update-type">${contents.genre}</div>
