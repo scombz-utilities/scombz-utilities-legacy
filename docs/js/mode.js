@@ -20,32 +20,7 @@
         else if(location.href.includes("mode=update")){
             if(location.href.includes("version=")){
                 const version = location.href.slice(location.href.indexOf("version=")+8);
-                $.getJSON("updateData.json", (jsondata) => {
-                    let mainHtmlData = "";
-                    for(const versionData of jsondata){
-                        if(versionData.version !== version){
-                            continue;
-                        }
-                        let subHtmlData = `
-                        <div class="version-column">
-                        <h2>ver.${versionData.version}</h2>
-                        <h3 class="browser-update-date">Chrome版アップデート:${versionData.date.chrome}</h3>
-                        <h3 class="browser-update-date">FireFox版アップデート:${versionData.date.firefox}</h3>
-                        `;
-                        for(let i=0;versionData.contents[i];i++){
-                            const contents = versionData.contents[i];
-                            subHtmlData += `
-                            <div class="update-details">
-                                <div class="update-type">${contents.genre}</div>
-                                <h4>${contents.title}</h4>
-                                <p>${contents.explain}</p>
-                            </div>`;
-                        }
-                        subHtmlData += 'より詳細なアップデート情報は<a href="updates.html">こちら</a></div>';
-                        mainHtmlData += subHtmlData;
-                    }
-                    message = mainHtmlData;
-                });
+                window.location.href = `updates.html?version=${version}`;
             }else{
                 message = `
                 <div>

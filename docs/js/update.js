@@ -2,7 +2,12 @@ const updateArea = document.getElementById("updateContents");
 if(updateArea){
     $.getJSON("updateData.json", (jsondata) => {
         let mainHtmlData = "";
+        const urlVersion = location.href.includes("version=") && location.href.slice(location.href.indexOf("version=")+8);
+        let skip = true;
         for(const versionData of jsondata){
+            if(urlVersion && skip && urlVersion !== versionData.version){
+                skip = false;
+            }
             let subHtmlData = `
             <div class="version-column">
             <h2>ver.${versionData.version}</h2>
