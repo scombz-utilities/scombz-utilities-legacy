@@ -20,7 +20,10 @@
         else if(location.href.includes("mode=update")){
             if(location.href.includes("version=")){
                 const version = location.href.slice(location.href.indexOf("version=")+8);
-                window.location.href = `updates.html?version=${version}`;
+                message = `<div>
+                <h1>アップデートされました</h1>`
+                message += `<p>アップデート情報詳細は<a href="updates.html">こちら</a></p>
+                </div>`;
             }else{
                 message = `
                 <div>
