@@ -92,18 +92,13 @@
                 "genre":"else",
                 "title":"その他のアップデート",
                 "explain":"・公式サイトへのリンクを追加しました<br>・誤字を修正しました<br>・設定のスタイルを変更しました。"
-            },
-            {
-                "genre":"news",
-                "title":"FireFox版のリリース",
-                "explain":"Chromeだけで提供していた本拡張機能をFireFox向けにリリースしました。"
             }
         ]
     },
     {
         "version": "3.8.3",
         "date": {
-            "firefox": "Not Released",
+            "firefox": "2022/5/31",
             "chrome":"2022/6/1"
         },
         "contents":[
@@ -126,6 +121,11 @@
                 "genre":"newFunc",
                 "title":"時間割カスタマイズ",
                 "explain":"LMSと簡易時間割の表示を、土曜日の非表示、6限の非表示、7限の非表示、講師名を教室名に置き換える、文字センタリングでカスタムできるようになりました。"
+            },
+            {
+                "genre":"news",
+                "title":"FireFox版のリリース",
+                "explain":"Chromeだけで提供していた本拡張機能をFireFox向けにリリースしました。"
             }
         ]
     },
@@ -402,7 +402,7 @@
             {
                 "genre":"release",
                 "title":"拡張機能リリース",
-                "explain":"ユーザースクリプト向けに開発していた本拡張機能をChrome拡張機能に移植して公開しました"
+                "explain":"ユーザースクリプト向けに開発していた本拡張機能をChrome拡張機能に移植して公開しました。"
             }
         ]
     }
