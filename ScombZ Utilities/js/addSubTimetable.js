@@ -345,7 +345,7 @@ function displayTaskListsOnGrayLayer(){
                     kadaiListHTML += `
                     <div class="subk-line">
                         <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${$tasklistObj[i].course}</a></div></div>
-                        <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"> ${$tasklistObj[i].title}</a></div></div>
+                        <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>
                     </div>`;
                 }
@@ -409,11 +409,14 @@ function displayTaskListsOnGrayLayer(){
                     overflow: hidden;
                     text-overflow: ellipsis; 
                 }
-                a.subk-link:hover{
-                    background:rgba(0,0,100,0.1);
-                }
                 a.subk-link{
-                    color:#111;
+                    display: inline-block;
+                    min-width:80%;
+                    height:100%;
+                    color: #111;
+                }
+                a.subk-link:hover span.subk-link{
+                    background:rgba(0,0,100,0.1);
                 }
                 .subk-deadline{
                     margin-top:2px;
@@ -464,6 +467,9 @@ function displayTaskListsOnGrayLayer(){
                 }
                 div.subk-line:hover .subk-remove-btn{
                     visibility:visible;
+                }
+                .subk-remove-btn:hover{
+                    background-color:#f776;
                 }
                 .subk-deadline-time{
                     display: inline-block;
