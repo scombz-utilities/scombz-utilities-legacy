@@ -1,0 +1,13 @@
+{
+    "manifest_version":3 ,
+    "name": "ScombZ Utilities for UserScript",
+    "version": "0.1.0",
+    "content_scripts":[
+        {
+            "matches":["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
+            "js": [
+                "scombz-utilities.user.js"
+            ]
+        }
+    ]
+}
