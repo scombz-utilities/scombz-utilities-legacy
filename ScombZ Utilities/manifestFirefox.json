@@ -1,5 +1,5 @@
 {
-    "manifest_version":3 ,
+    "manifest_version":2 ,
     "name": "ScombZ Utilities",
     "version": "3.9.5",
     "description": "ScombZをカスタムする拡張機能",
@@ -7,14 +7,13 @@
         "48":  "icons/icon48.png",
         "128": "icons/icon128.png" 
     },
-    "action":{
+    "browser_action":{
         "default_title":"ScombZ Utilities",
         "default_popup":"popup/popup.html"
     },
     "background":{
-        "service_worker": "js/background.js"
+        "scripts": ["js/background.js"]
     },
-    "options_page":"options/options.html",
     "content_scripts": [
         {
             "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
@@ -48,6 +47,10 @@
             ]
         }
     ],
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab":true
+    },
     "permissions":[
         "storage"
     ]
