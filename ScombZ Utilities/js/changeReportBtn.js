@@ -61,6 +61,16 @@ function changeReportBtn(){
         .ui-dialog-buttonset.commonDialogButtonArea{
             transform:translateX(6px);
         }
+        .report-submission-area {
+            padding: 8px 6px 6px 20px;
+            border-radius: 10px;
+            margin: 5px;
+            width: calc(100% - 10px);
+            box-shadow: 0 0 3px #999;
+        }
+        .fileSelectName {
+            font-weight: bold;
+        }
         </style>
         `);
     const $submitBtnArea = document.querySelector('.block-under-area-btn');
