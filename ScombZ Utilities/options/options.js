@@ -44,7 +44,8 @@ const defaultOptions = {
     remomveDirectLink : true,
     maxWidthPx:{
         subj: 1280,
-        lms: 1280
+        lms: 1280,
+        task: 1280
     }
 };
 // Saves options to chrome.storage
@@ -71,6 +72,7 @@ function save_options() {
     const displayName = document.getElementById('displayName').checked;
     const subjWidth = document.getElementById('subjWidth').value;
     const lmsWidth = document.getElementById('lmsWidth').value;
+    const taskWidth = document.getElementById('taskWidth').value;
     const layoutHome = document.getElementById('layoutHome').checked;
     const nickname = document.getElementById('nickname').value;
     const timesBtnValue = document.getElementById('timesBtnValue').value;
@@ -138,7 +140,8 @@ function save_options() {
         remomveDirectLink : remomveDirectLink,
         maxWidthPx:{
             subj: subjWidth,
-            lms: lmsWidth
+            lms: lmsWidth,
+            task: taskWidth
         }
     }, function() {
         // Update status to let user know options were saved.
@@ -172,6 +175,7 @@ function save_options() {
         document.getElementById('styleNowPeriod').checked = items.styleNowPeriod;
         document.getElementById('subjWidth').value = items.maxWidthPx.subj;
         document.getElementById('lmsWidth').value = items.maxWidthPx.lms;
+        document.getElementById('taskWidth').value = items.maxWidthPx.task;
         document.getElementById('displayName').checked = items.displayName;
         document.getElementById('layoutHome').checked = items.layoutHome;
         document.getElementById('nickname').value = items.nickname;
