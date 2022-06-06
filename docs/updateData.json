@@ -1,5 +1,19 @@
 [
      {
+        "version": "3.9.5",
+        "date": {
+            "firefox": "2022/6/6",
+            "chrome":"Not yet"
+        },
+        "contents":[
+            {
+                "genre":"optimisation",
+                "title":"一定より先の課題の非表示",
+                "explain":"メニュー横課題一覧で、一定より先の課題を非表示にできる機能を追加しました。"
+            }
+        ]
+     },
+     {
         "version": "3.9.4",
         "date": {
             "firefox": "2022/6/6",
