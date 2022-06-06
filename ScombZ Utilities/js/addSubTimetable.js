@@ -248,7 +248,8 @@ function displayTaskListsOnGrayLayer(){
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
         maxTaskDisplay: 16,
-        hiddenTasks: []
+        hiddenTasks: [],
+        undisplayFutureTaskDays: 365
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -294,7 +295,12 @@ function displayTaskListsOnGrayLayer(){
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
+                const nowUnix = Date.now();
                 for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 -j; i++){
+                    //先の課題は表示しない
+                    if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+items.undisplayFutureTaskDays)){
+                        break;
+                    }
                     //非表示に設定されているものはスキップ
                     if(items.hiddenTasks.includes($tasklistObj[i].id)){
                         j++;
@@ -322,7 +328,6 @@ function displayTaskListsOnGrayLayer(){
                                 deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
                             }
                         }else{
-                            const nowUnix = Date.now();
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
                             if(relativeDeadline < 120){
                                 deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
