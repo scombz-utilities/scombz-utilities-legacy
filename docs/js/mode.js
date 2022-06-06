@@ -25,6 +25,7 @@ $.getJSON("updateData.json", (updateData) => {
                 const version = location.href.slice(location.href.indexOf("version=")+8);
                 message = `<div>
                 <h1>アップデートされました</h1>
+                <h2 style="font-size:20px;margin-bottom:18px;">今回適用されたアップデートは以下の通りです。</h2>
                 <h2 style="font-size:20px;margin-bottom:15px;">ScombZ Utilities ver.${version}</h2>
                 <ul style="margin-bottom:10px;">
                 `;
