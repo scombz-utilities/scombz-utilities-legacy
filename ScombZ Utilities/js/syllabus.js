@@ -97,7 +97,7 @@ function syllabusLoaded($settings_year , $settings_fac){
                         }
                         getDepResponse()
                             .then(data => {
-                                let gakkaID = (data.includes(`<div id="KamokuCD">`))?data.slice( data.indexOf(`<div id="KamokuCD">`)+19 , data.indexOf(`<div id="KamokuCD">`)+21 ):data.slice(0,-1);
+                                let gakkaID = (data.includes(`<div id="KamokuCD">`))?data.slice( data.indexOf(`<div id="KamokuCD">`)+19 , data.indexOf(`<div id="KamokuCD">`)+21 ):undefined;
                                 console.log({URL});
                                 console.log(cnt+": "+gakkaID);
                                 document.getElementsByTagName("dt")[12+cnt].insertAdjacentHTML('afterBegin',`<div class="gakkaname-area">${gakkaIDtoStr(gakkaID)}</div>`);
@@ -247,6 +247,9 @@ function gakkaIDtoStr(gakkaID) {
     }
     if(str.length < 2){
         str = '<div class="gakkaname">学科指定なし</div>';
+    }
+    if(gakkaID === undefined){
+        str = "";
     }
     return str;
 }
