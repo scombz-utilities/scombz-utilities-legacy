@@ -81,8 +81,11 @@ function syllabusLoaded($settings_year , $settings_fac){
                     //Ajax通信
                     const hitarea = document.querySelector(".namazu-result-header").innerHTML.indexOf("<!-- HIT -->");
                     const the_number_of_hit = Number(document.querySelector(".namazu-result-header").innerHTML.slice(hitarea+12 , hitarea+17).replace(/[^0-9]/g,''));
-                    for(let i = 0; i < 20 && i < the_number_of_hit+1 ; i++){
-                        let link = $sylSubDDTag[22+i*2].innerHTML;
+                    for(let i = 0; i < 20 && i < the_number_of_hit ; i++){
+                        let link = $sylSubDDTag[21+i*2].innerHTML;
+                        if(!link.includes("http")){
+                            link = $sylSubDDTag[22+i*2].innerHTML;
+                        }
                         getDepartment(link,i+1);
                     }
                     //Ajax関数定義
@@ -94,7 +97,8 @@ function syllabusLoaded($settings_year , $settings_fac){
                         }
                         getDepResponse()
                             .then(data => {
-                                let gakkaID = data.slice( data.indexOf(`<div id="KamokuCD">`)+19 , data.indexOf(`<div id="KamokuCD">`)+21 );
+                                let gakkaID = (data.includes(`<div id="KamokuCD">`))?data.slice( data.indexOf(`<div id="KamokuCD">`)+19 , data.indexOf(`<div id="KamokuCD">`)+21 ):data.slice(0,-1);
+                                console.log({URL});
                                 console.log(cnt+": "+gakkaID);
                                 document.getElementsByTagName("dt")[12+cnt].insertAdjacentHTML('afterBegin',`<div class="gakkaname-area">${gakkaIDtoStr(gakkaID)}</div>`);
                             })

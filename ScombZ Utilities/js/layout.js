@@ -84,6 +84,27 @@ function maxWidthOnSubjPage(){
             console.log(`最大横幅は${items.maxWidthPx.lms}pxに設定されました`);
         });
     }
+    else if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+        console.log('課題ページの最大横幅を変更します');
+        chrome.storage.local.get({
+            maxWidthPx:{
+                task: 1280
+            }
+        },function(items){
+            document.head.insertAdjacentHTML('beforeEnd',`
+            <style type="text/css">
+            #pageContents{
+                max-width: ${items.maxWidthPx.task}px;
+                margin: 0 auto;
+            }
+            .block{
+                margin: 40px 24px 0 34px;
+            }
+            </style>
+            `);
+            console.log(`最大横幅は${items.maxWidthPx.task}pxに設定されました`);
+        });
+    }
     return;
 }
 //ページトップボタン
