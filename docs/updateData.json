@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.9.6",
+        "date": {
+            "firefox": "2022/6/7",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "bugfix",
+                "title": "軽微なバグ修正",
+                "explain": "ドラッグ&ドロップ提出時に複数ファイルの境目がわかりやすくなっていないのを修正しました。"
+            }
+        ]
+    },
+    {
         "version": "3.9.5",
         "date": {
             "firefox": "2022/6/6",
