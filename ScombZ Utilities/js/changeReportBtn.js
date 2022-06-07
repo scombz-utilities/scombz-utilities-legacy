@@ -61,14 +61,14 @@ function changeReportBtn(){
         .ui-dialog-buttonset.commonDialogButtonArea{
             transform:translateX(6px);
         }
-        .report-submission-area {
+        .report-submission-area,.dadSubmissionBlock{
             padding: 8px 6px 6px 20px;
             border-radius: 10px;
             margin: 5px;
             width: calc(100% - 10px);
             box-shadow: 0 0 3px #999;
         }
-        .fileSelectName {
+        .fileSelectName,.dad_fileSelectName{
             font-weight: bold;
         }
         </style>
