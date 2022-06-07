@@ -189,10 +189,10 @@
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す
-                
                 clickHideName();
+                //カレンダー
+                exportCalender();
                 //カスタムCSSの適用
-                
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
             }

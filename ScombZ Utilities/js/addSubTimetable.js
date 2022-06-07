@@ -93,6 +93,10 @@ function getSubTimetable(){
             time:-2,
             name:"授業は存在しません"
         });
+        $timetableData.push({
+            termYear: Number(String(document.getElementById("nendo").querySelector("[selected]").value)),
+            termPhase: (document.getElementById("kikanCd").querySelector("[selected]").value === '10')?1:2
+        });
         console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
         chrome.storage.local.set({
             timetableData : encodeURIComponent(JSON.stringify($timetableData)),
