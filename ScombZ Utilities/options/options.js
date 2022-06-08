@@ -37,6 +37,7 @@ const defaultOptions = {
     undisplayFutureTaskDays: 365,
     exportIcs: true,
     attendance: 'none',
+    highlightDeadline: true,
     adjustTimetableData : {
         eraseSat : false,
         erase6: false,
@@ -100,6 +101,7 @@ function save_options() {
     const defaultInputName = document.getElementById('defaultInputName').value;
     const undisplayFutureTaskDays = document.getElementById('undisplayFutureTaskDays').value;
     const exportIcs = document.getElementById('exportIcs').checked;
+    const highlightDeadline = document.getElementById('highlightDeadline').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -139,6 +141,7 @@ function save_options() {
         defaultInputName : defaultInputName,
         undisplayFutureTaskDays : undisplayFutureTaskDays,
         exportIcs : exportIcs,
+        highlightDeadline : highlightDeadline,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -210,6 +213,7 @@ function save_options() {
         document.getElementById('defaultInputName').value = items.defaultInputName;
         document.getElementById('undisplayFutureTaskDays').value = items.undisplayFutureTaskDays;
         document.getElementById('exportIcs').checked = items.exportIcs;
+        document.getElementById('highlightDeadline').checked = items.highlightDeadline;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
