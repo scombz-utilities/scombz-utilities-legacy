@@ -253,7 +253,8 @@ function displayTaskListsOnGrayLayer(){
         deadlinemode: 'absolute-relative',
         maxTaskDisplay: 16,
         hiddenTasks: [],
-        undisplayFutureTaskDays: 365
+        undisplayFutureTaskDays: 365,
+        highlightDeadline : true
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -324,7 +325,7 @@ function displayTaskListsOnGrayLayer(){
                         if(items.deadlinemode == 'relative'){
                             const nowUnix = Date.now();
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 120){
+                            if(relativeDeadline < 180){
                                 deadline = '残り約'+Math.floor(relativeDeadline)+'分';
                             }else if(relativeDeadline < 60*24){
                                 deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
@@ -333,13 +334,28 @@ function displayTaskListsOnGrayLayer(){
                             }
                         }else{
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 120){
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
+                            if(relativeDeadline < 180){
+                                deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
                             }else if(relativeDeadline < 60*24){
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
+                                deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
                             }else{
-                                deadline = '<span class="relative-deadline-time">残り約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
+                                deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
                             }
+                        }
+                    }
+                    //近い時間の課題を目立たせる
+                    let highlightMark = "";
+                    if(items.highlightDeadline === true){
+                        highlightMark = "highlightMark";
+                        const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
+                        if(relativeDeadline < 60*24*12){
+                            highlightMark = 'today shorttime highlightMark';
+                        }else if(relativeDeadline < 60*24*15){
+                            highlightMark = 'today highlightMark';
+                        }else if(relativeDeadline < 60*24*20){
+                            highlightMark = 'a-few-days highlightMark';
+                        }else if(relativeDeadline < 60*24*30){
+                            highlightMark = 'a-week highlightMark';
                         }
                     }
                     //link生成
@@ -353,7 +369,7 @@ function displayTaskListsOnGrayLayer(){
                         subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
                     }
                     kadaiListHTML += `
-                    <div class="subk-line">
+                    <div class="subk-line ${highlightMark}">
                         <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${$tasklistObj[i].course}</a></div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>
@@ -450,7 +466,24 @@ function displayTaskListsOnGrayLayer(){
                 .relative-deadline-time{
                     font-size:80%;
                     margin-right:20px;
-                    color:red;
+                    color:#f00;
+                }
+                .highlightMark .relative-deadline-time{
+                    color:#999;
+                }
+                .today.highlightMark .relative-deadline-time,.today.highlightMark .subk-deadline-time{
+                    color:#f00;
+                    font-weight:bold;
+                    font-size: 91%;
+                }
+                .shorttime.highlightMark,.shorttime.highlightMark .subk-deadline-time{
+                    background-color:#faa;
+                }
+                .a-few-days.highlightMark .relative-deadline-time,.a-few-days.highlightMark .subk-deadline-time{
+                    color:#f22;
+                }
+                .a-week.highlightMark .relative-deadline-time{
+                    color:#666;
                 }
                 .subk-subjname-link{
                     color: #000;

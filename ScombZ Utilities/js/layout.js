@@ -361,7 +361,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.5 */
+        /* ScombZ Darkmode CSS v0.6 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -841,6 +841,24 @@ function darkmodeLayout(mode){
         }
         .examination-question-answer-input-box{
             color:#ddd;
+        }
+        .relative-deadline-time{
+            color:#a00 !important;
+        }
+        .highlightMark .relative-deadline-time{
+            color:#555 !important;
+        }
+        .today.highlightMark .relative-deadline-time,.today.highlightMark .subk-deadline-time{
+            color:#f00 !important;
+        }
+        .shorttime.highlightMark,.shorttime.highlightMark .subk-deadline-time{
+            background-color: rgb(100, 44, 45) !important;
+        }
+        .a-few-days.highlightMark .relative-deadline-time,.a-few-days.highlightMark .subk-deadline-time{
+            color:#e22 !important;
+        }
+        .a-week.highlightMark .relative-deadline-time{
+            color:#999 !important;
         }
             `;
         if(mode === 'relative'){
