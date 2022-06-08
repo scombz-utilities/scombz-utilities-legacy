@@ -1,3 +1,4 @@
+const defaultOptions = {
     year : null,
     fac : null,
     clickLoginBtn: true,
