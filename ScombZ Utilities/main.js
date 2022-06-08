@@ -1,3 +1,4 @@
+
 /* ScombZ Utilities */
 /* main.js */
 (function(){
@@ -39,6 +40,7 @@
             darkmode: 'relative',       //ダークモード
             remomveDirectLink: true,    //ダイレクトリンクを消す
             dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
+            attendance: 'none',         //出席記録を消す
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
@@ -185,6 +187,10 @@
                 //D&D状態での課題削除バグの修正
                 if(items.dadbugFix === true){
                 submissionBugFix();
+                }
+                //出席表示の削除
+                if(items.attendance !== 'none'){
+                    attendanceRemove(items.attendance);
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

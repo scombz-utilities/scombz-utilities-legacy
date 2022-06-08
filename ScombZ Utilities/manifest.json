@@ -46,6 +46,7 @@
                 "js/adjustTimetable.js",
                 "js/styleSurveys.js",
                 "js/clearButton.js",
+                "js/attendance.js",
                 "js/exportCalender.js"
             ]
         }
