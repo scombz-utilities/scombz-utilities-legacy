@@ -45,7 +45,9 @@
                 erase7: false,          // 7限を消す
                 dispClassroom: false,   // 講師名表示を教室表示にする
                 timetableCentering: false // 時間割のセンタリング 
-            }
+            },
+            attendance: 'none'
+            
     }
     /* ローディング画面 */
     onLoading();
@@ -184,7 +186,11 @@
                 }
                 //D&D状態での課題削除バグの修正
                 if(items.dadbugFix === true){
-                submissionBugFix();
+                    submissionBugFix();
+                }
+                //出席表示の削除
+                if(items.attendance !== 'none'){
+                    attendanceRemove(items.attendance);
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
