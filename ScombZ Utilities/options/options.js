@@ -1,4 +1,3 @@
-const defaultOptions = {
     year : null,
     fac : null,
     clickLoginBtn: true,
@@ -33,9 +32,10 @@ const defaultOptions = {
     darkmode : 'relative',
     headLinkTo: "/portal/home",
     dadbugFix: true,
-    attendance: 'none',
     defaultInputName: 'AA00000_山田太郎',
     undisplayFutureTaskDays: 365,
+    exportIcs: true,
+    attendance: 'none',
     adjustTimetableData : {
         eraseSat : false,
         erase6: false,
@@ -98,6 +98,7 @@ function save_options() {
     const attendance = document.getElementById('attendance').value;
     const defaultInputName = document.getElementById('defaultInputName').value;
     const undisplayFutureTaskDays = document.getElementById('undisplayFutureTaskDays').value;
+    const exportIcs = document.getElementById('exportIcs').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -136,6 +137,7 @@ function save_options() {
         attendance : attendance,
         defaultInputName : defaultInputName,
         undisplayFutureTaskDays : undisplayFutureTaskDays,
+        exportIcs : exportIcs,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -206,6 +208,7 @@ function save_options() {
         document.getElementById('attendance').value = items.attendance;
         document.getElementById('defaultInputName').value = items.defaultInputName;
         document.getElementById('undisplayFutureTaskDays').value = items.undisplayFutureTaskDays;
+        document.getElementById('exportIcs').checked = items.exportIcs;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);

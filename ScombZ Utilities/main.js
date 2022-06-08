@@ -1,3 +1,4 @@
+
 /* ScombZ Utilities */
 /* main.js */
 (function(){
@@ -39,15 +40,14 @@
             darkmode: 'relative',       //ダークモード
             remomveDirectLink: true,    //ダイレクトリンクを消す
             dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
+            attendance: 'none',         //出席記録を消す
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
                 erase7: false,          // 7限を消す
                 dispClassroom: false,   // 講師名表示を教室表示にする
                 timetableCentering: false // 時間割のセンタリング 
-            },
-            attendance: 'none'
-            
+            }
     }
     /* ローディング画面 */
     onLoading();
@@ -186,7 +186,7 @@
                 }
                 //D&D状態での課題削除バグの修正
                 if(items.dadbugFix === true){
-                    submissionBugFix();
+                submissionBugFix();
                 }
                 //出席表示の削除
                 if(items.attendance !== 'none'){
@@ -195,10 +195,10 @@
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
                 //クリックして名前隠す
-                
                 clickHideName();
+                //カレンダー
+                exportCalender();
                 //カスタムCSSの適用
-                
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
             }

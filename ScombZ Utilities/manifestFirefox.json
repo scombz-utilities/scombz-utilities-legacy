@@ -1,7 +1,7 @@
 {
     "manifest_version":2 ,
     "name": "ScombZ Utilities",
-    "version": "3.9.5",
+    "version": "3.10.0",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -25,6 +25,7 @@
                 "main.js",
                 "lib/encoding/encoding.min.js",
                 "lib/jquery/jquery-3.6.0.min.js",
+                "lib/icsjs/ics.js",
                 "js/clickLogin.js",
                 "js/addSubTimetable.js",
                 "js/changeReportBtn.js",
@@ -43,7 +44,8 @@
                 "js/notepad.js",
                 "js/adjustTimetable.js",
                 "js/styleSurveys.js",
-                "js/clearButton.js"
+                "js/clearButton.js",
+                "js/exportCalender.js"
             ]
         }
     ],
@@ -53,5 +55,6 @@
     },
     "permissions":[
         "storage"
-    ]
+    ],
+    "web_accessible_resources": ["gcal/*"]
 }
