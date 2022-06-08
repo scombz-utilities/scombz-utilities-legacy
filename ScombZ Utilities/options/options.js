@@ -35,6 +35,7 @@ const defaultOptions = {
     dadbugFix: true,
     defaultInputName: 'AA00000_山田太郎',
     undisplayFutureTaskDays: 365,
+    exportIcs: true,
     adjustTimetableData : {
         eraseSat : false,
         erase6: false,
@@ -96,6 +97,7 @@ function save_options() {
     const dadbugFix = document.getElementById('dadbugFix').checked;
     const defaultInputName = document.getElementById('defaultInputName').value;
     const undisplayFutureTaskDays = document.getElementById('undisplayFutureTaskDays').value;
+    const exportIcs = document.getElementById('exportIcs').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -133,6 +135,7 @@ function save_options() {
         dadbugFix : dadbugFix,
         defaultInputName : defaultInputName,
         undisplayFutureTaskDays : undisplayFutureTaskDays,
+        exportIcs : exportIcs,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -202,6 +205,7 @@ function save_options() {
         document.getElementById('dadbugFix').checked = items.dadbugFix;
         document.getElementById('defaultInputName').value = items.defaultInputName;
         document.getElementById('undisplayFutureTaskDays').value = items.undisplayFutureTaskDays;
+        document.getElementById('exportIcs').checked = items.exportIcs;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
