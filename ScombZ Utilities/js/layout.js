@@ -225,7 +225,7 @@ function layoutHome(){
         //学年歴ボタンを作る
         const $exportGoogleBtn = document.querySelector(".portal-calendar-event-export.calendar_ics_download");
         if($exportGoogleBtn){
-            $exportGoogleBtn.insertAdjacentHTML("afterEnd",`<a class="portal-calendar-event-export-a" href="https://www.shibaura-it.ac.jp/campus_life/school_calendar/" target="_blank" rel="noopener noreferrer">学年歴を見る</a>`);
+            $exportGoogleBtn.insertAdjacentHTML("afterEnd",`<a class="portal-calendar-event-add-a" href="https://www.shibaura-it.ac.jp/campus_life/school_calendar/" target="_blank" rel="noopener noreferrer" style="border-top: 1px dotted #FFF;">学年歴を見る</a>`);
         }
         //カレンダーの下にリンク集を追加する
         const $top_attention = document.getElementById("top_attention");
@@ -361,7 +361,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.4 */
+        /* ScombZ Darkmode CSS v0.5 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -838,6 +838,9 @@ function darkmodeLayout(mode){
             background-color: #0aa6 !important;
             background-blend-mode: darken !important;
             filter: invert(1);
+        }
+        .examination-question-answer-input-box{
+            color:#ddd;
         }
             `;
         if(mode === 'relative'){
