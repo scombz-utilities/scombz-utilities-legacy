@@ -348,13 +348,13 @@ function displayTaskListsOnGrayLayer(){
                     if(items.highlightDeadline === true){
                         highlightMark = "highlightMark";
                         const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                        if(relativeDeadline < 60*24*12){
+                        if(relativeDeadline < 60*6){
                             highlightMark = 'today shorttime highlightMark';
-                        }else if(relativeDeadline < 60*24*15){
+                        }else if(relativeDeadline < 60*24){
                             highlightMark = 'today highlightMark';
-                        }else if(relativeDeadline < 60*24*20){
+                        }else if(relativeDeadline < 60*24*3){
                             highlightMark = 'a-few-days highlightMark';
-                        }else if(relativeDeadline < 60*24*30){
+                        }else if(relativeDeadline < 60*24*7){
                             highlightMark = 'a-week highlightMark';
                         }
                     }
