@@ -1,5 +1,29 @@
 [
     {
+        "version": "3.10.0",
+        "date": {
+            "firefox": "2022/6/8",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "カレンダーエクスポート",
+                "explain": "LMSデータと、学年歴データをカレンダー形式でエクスポートできるようになりました。"
+            }
+            ,{
+                "genre": "bugfix",
+                "title": "ダークモードのスタイリング",
+                "explain": "テスト画面で文字が見にくいバグを修正しました。"
+            }
+            ,{
+                "genre": "newFunc",
+                "title": "出席記録削除",
+                "explain": "出席記録を非表示にする機能を追加しました。"
+            }
+        ]
+    },
+    {
         "version": "3.9.6",
         "date": {
             "firefox": "2022/6/7",
