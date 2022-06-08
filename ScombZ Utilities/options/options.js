@@ -33,6 +33,7 @@ const defaultOptions = {
     darkmode : 'relative',
     headLinkTo: "/portal/home",
     dadbugFix: true,
+    attendance: 'none',
     defaultInputName: 'AA00000_山田太郎',
     undisplayFutureTaskDays: 365,
     adjustTimetableData : {
@@ -94,6 +95,7 @@ function save_options() {
     const remomveDirectLink = document.getElementById('remomveDirectLink').checked;
     const headLinkTo = document.getElementById('headLinkTo').value;
     const dadbugFix = document.getElementById('dadbugFix').checked;
+    const attendance = document.getElementById('attendance').value;
     const defaultInputName = document.getElementById('defaultInputName').value;
     const undisplayFutureTaskDays = document.getElementById('undisplayFutureTaskDays').value;
     chrome.storage.local.set({
@@ -131,6 +133,7 @@ function save_options() {
         darkmode : darkmode,
         headLinkTo : headLinkTo,
         dadbugFix : dadbugFix,
+        attendance : attendance,
         defaultInputName : defaultInputName,
         undisplayFutureTaskDays : undisplayFutureTaskDays,
         adjustTimetableData : {
@@ -200,6 +203,7 @@ function save_options() {
         document.getElementById('remomveDirectLink').checked = items.remomveDirectLink;
         document.getElementById('headLinkTo').value = items.headLinkTo;
         document.getElementById('dadbugFix').checked = items.dadbugFix;
+        document.getElementById('attendance').value = items.attendance;
         document.getElementById('defaultInputName').value = items.defaultInputName;
         document.getElementById('undisplayFutureTaskDays').value = items.undisplayFutureTaskDays;
     });
