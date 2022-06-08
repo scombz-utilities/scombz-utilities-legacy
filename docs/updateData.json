@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.10.1",
+        "date": {
+            "firefox": "2022/6/9",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "課題ハイライト",
+                "explain": "課題一覧を、提出期限で色をつけて目立たせるようにしました。"
+            }
+        ]
+    },
+    {
         "version": "3.10.0",
         "date": {
             "firefox": "2022/6/8",
