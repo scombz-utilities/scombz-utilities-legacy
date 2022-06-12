@@ -248,6 +248,7 @@ function displayTaskListsOnGrayLayer(){
         TaskGetTime: 1,
         tasklistData: [],
         surveyListData: [],
+        manualTasklist: [],
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
@@ -279,6 +280,9 @@ function displayTaskListsOnGrayLayer(){
             let kadaiListHTML=``;
             //アンケート一覧と課題一覧を統合する
             for(const $survey of $surveyListObj){
+                if(Number(Date.parse($survey.deadline)) < Number(Date.now())){
+                    continue;
+                }
                 for(let i=0;;i++){
                     //tasklistを読み切ったら最後に挿入して終了
                     if(!$tasklistObj[i]){
@@ -294,7 +298,25 @@ function displayTaskListsOnGrayLayer(){
                 }
                 
             }
-            
+            //自作課題一覧を統合する
+            for(const $manTask of items.manualTasklist){
+                if(Number(Date.parse($manTask.deadline)) < Number(Date.now())){
+                    continue;
+                }
+                for(let i=0;;i++){
+                    //tasklistを読み切ったら最後に挿入して終了
+                    if(!$tasklistObj[i]){
+                        $tasklistObj.push($manTask);
+                        break;
+                    }
+                    //tasklist内に挿入位置を発見したらそこに挿入して終了
+                    if( Number(Date.parse($manTask.deadline)) < Number(Date.parse($tasklistObj[i].deadline)) ){
+                        console.log("SPLICED:"+i);
+                        $tasklistObj.splice(i,0,$manTask);
+                        break;
+                    }
+                }
+            }
             //課題・テスト・アンケート一覧
             let deadline='XXXX/XX/XX XX:XX:XX';
             if(!$tasklistObj[0]){
@@ -325,7 +347,9 @@ function displayTaskListsOnGrayLayer(){
                         if(items.deadlinemode == 'relative'){
                             const nowUnix = Date.now();
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 180){
+                            if(relativeDeadline < 0){
+                                deadline = "期限切れ";
+                            }else if(relativeDeadline < 180){
                                 deadline = '残り約'+Math.floor(relativeDeadline)+'分';
                             }else if(relativeDeadline < 60*24){
                                 deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
@@ -334,7 +358,9 @@ function displayTaskListsOnGrayLayer(){
                             }
                         }else{
                             const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                            if(relativeDeadline < 180){
+                            if(relativeDeadline < 0){
+                                deadline = "期限切れ";
+                            }else if(relativeDeadline < 180){
                                 deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
                             }else if(relativeDeadline < 60*24){
                                 deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
@@ -348,7 +374,7 @@ function displayTaskListsOnGrayLayer(){
                     if(items.highlightDeadline === true){
                         highlightMark = "highlightMark";
                         const relativeDeadline = (Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000;
-                        if(relativeDeadline < 60*6){
+                        if(relativeDeadline < 60*12){
                             highlightMark = 'today shorttime highlightMark';
                         }else if(relativeDeadline < 60*24){
                             highlightMark = 'today highlightMark';
@@ -359,14 +385,20 @@ function displayTaskListsOnGrayLayer(){
                         }
                     }
                     //link生成
-                    let subjlink = $tasklistObj[i].link ,
-                        tasklink = $tasklistObj[i].link;
-                    if(subjlink === undefined) {
-                        subjlink = $tasklistObj[i].url;
-                        tasklink = subjlink+"#questionnaire";
+                    let subjlink = "",tasklink = "";
+                    if($tasklistObj[i].id.includes("manual")){
+                        subjlink = ($tasklistObj[i].subjlink.includes("http")) ? $tasklistObj[i].subjlink : "https://"+$tasklistObj[i].subjlink;
+                        tasklink = ($tasklistObj[i].tasklink.includes("http")) ? $tasklistObj[i].tasklink : "https://"+$tasklistObj[i].tasklink;
                     }else{
-                        subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
-                        subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
+                        subjlink = $tasklistObj[i].link;
+                        tasklink = $tasklistObj[i].link;
+                        if(subjlink === undefined) {
+                            subjlink = $tasklistObj[i].url;
+                            tasklink = subjlink+"#questionnaire";
+                        }else{
+                            subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
+                            subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
+                        }
                     }
                     kadaiListHTML += `
                     <div class="subk-line ${highlightMark}">
@@ -388,12 +420,28 @@ function displayTaskListsOnGrayLayer(){
                     min-width: 550px;
                     padding: 2px;
                 }
+                #add-task-manual{
+                    display:inline-block;
+                    font-weight: bold;
+                    font-size:90%;
+                    text-decoration:underline;
+                    color:#222;
+                    margin-left:10px;
+                }
+                #add-task-manual:hover{
+                    background-color:#7773;
+                }
                 .task-get-time{
+                    display:inline-block;
                     font-weight: normal;
                     font-size: 80%;
-                    float:right;
                     text-decoration:none;
                     color:#222;
+                }
+                .subk-head-right-contents{
+                    display: inline-block;
+                    float:right;
+                    margin-top:-2px;
                 }
                 .subk-box{
                     margin:0;
@@ -483,7 +531,7 @@ function displayTaskListsOnGrayLayer(){
                     color:#f22;
                 }
                 .a-week.highlightMark .relative-deadline-time{
-                    color:#666;
+                    color:#333;
                 }
                 .subk-subjname-link{
                     color: #000;
@@ -531,14 +579,130 @@ function displayTaskListsOnGrayLayer(){
             </style>
             <div class="subtimetableBody" id="subTaskList">
             <div class="subk-box">
-                <div class="subk-head">課題一覧<a class="task-get-time" id="reloadTasks" href="javascript:void(0);">最終更新:${lastgettime}</a></div>
+                <div class="subk-head">
+                課題一覧
+                    <div class="subk-head-right-contents">
+                        <a class="task-get-time" id="reloadTasks" href="javascript:void(0);">最終更新:${lastgettime}</a>
+                        <a id="add-task-manual" href="javascript:void(0);">追加</a>
+                    </div>
+                </div>
                 ${kadaiListHTML}
             </div>
             </div>
             `;
+            const manualAddTaskLayerHTML=`
+            <style>
+                #manAddtaskSelectBackground{
+                    width: 100%;
+                    height: 100%;
+                    position: fixed;
+                    z-index: 120;
+                    background: #0007;
+                    top: 0;
+                    left: 0;
+                    display:none;
+                }
+                #manAddtaskSelectLayer{
+                    position: fixed;
+                    width: 80%;
+                    height: 70vh;
+                    background-color:#fff;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateY(-50%) translateX(-50%);
+                    z-index: 125;
+                    text-align:center;
+                    padding:30px;
+                    display:none;
+                }
+                .manadd-column{
+                    box-shadow: 0 0 3px #777;
+                    border-radius: 10px;
+                    padding:10px;
+                    margin:10px;
+                    text-align:left;
+                }
+                .manadd-column > div{
+                    display: block;
+                    margin:10px;
+                }
+                .manadd-column > div > input[type="text"]{
+                    width:100%;
+                }
+                .manadd-column-name{
+                    margin-right:10px;
+                    display:inline-block;
+                    width:120px;
+                }
+                
+            </style>
+            <div id="manAddtaskSelectBackground"></div>
+            <div id="manAddtaskSelectLayer">
+                <h1>課題手動追加</h1>
+                <form onsubmit="return false;">
+                <div class="manadd-column">
+                    <div><span class="manadd-column-name">科目名</span><input type="text" id="manAddtaskSubjname" required></div>
+                    <div><span class="manadd-column-name">科目リンク</span><input type="text" id="manAddtaskSubjlink" required></div>
+                </div>
+                <div class="manadd-column">
+                    <div><span class="manadd-column-name">課題タイトル</span><input type="text" id="manAddtaskTaskname" required></div>
+                    <div><span class="manadd-column-name">課題リンク</span><input type="text" id="manAddtaskTasklink" required></div>
+                </div>
+                <div class="manadd-column">
+                    <span class="manadd-column-name">締め切り</span>
+                    <input type="date" id="manAddtaskDeadlineDate" required>
+                    <input type="time" id="manAddtaskDeadlineTime" required>
+                </div>
+                <div>
+                    <button id="manAddtaskConfirm" type="submit">追加する</button>
+                    <button onclick="javascript:document.getElementById('manAddtaskSelectBackground').click();">キャンセル</button>
+                </div>
+                </form>
+            </div>
+            </div>
+            `;
             if(document.getElementById('pageMain')){
-                document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML);
+                document.getElementById('pageMain').insertAdjacentHTML('beforeend',kadaiHTML+manualAddTaskLayerHTML);
             }
+            //手動追加
+            document.getElementById("add-task-manual").addEventListener("click",function(){
+                document.getElementById("manAddtaskSelectBackground").style.display = "block";
+                document.getElementById("manAddtaskSelectLayer").style.display = "block";
+            });
+            document.getElementById("manAddtaskSelectBackground").addEventListener("click",function(){
+                document.getElementById("manAddtaskSelectBackground").style.display = "none";
+                document.getElementById("manAddtaskSelectLayer").style.display = "none";
+            });
+            document.getElementById("manAddtaskConfirm").addEventListener("click",function(){
+                const manSubjname = document.getElementById("manAddtaskSubjname").value;
+                const manSubjlink = document.getElementById("manAddtaskSubjlink").value;
+                const manTaskname = document.getElementById("manAddtaskTaskname").value;
+                const manTasklink = document.getElementById("manAddtaskTasklink").value;
+                const manTaskdate = document.getElementById("manAddtaskDeadlineDate").value.replace(/-/g,"/");
+                const manTasktime = document.getElementById("manAddtaskDeadlineTime").value;
+                if(manSubjname && manSubjlink && manTaskname && manTasklink && manTaskdate && manTasktime){
+                    chrome.storage.local.get({
+                        manualTasklist: []
+                    },function(items){
+                        const manualTasklist = items.manualTasklist;
+                        const nowTasklist = {
+                            "course": manSubjname,
+                            "title": manTaskname,
+                            "tasklink": manTasklink,
+                            "subjlink": manSubjlink,
+                            "id": "manual"+String(Date.now()),
+                            "deadline": `${manTaskdate} ${manTasktime}`
+                        };
+                        manualTasklist.push(nowTasklist);
+                        chrome.storage.local.set({
+                            manualTasklist: manualTasklist
+                        },function(){
+                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
+                            document.getElementById('manAddtaskSelectBackground').click();
+                        });
+                    });
+                }
+            });
             //課題一覧のリロード
             document.getElementById('reloadTasks').addEventListener("click",function(){
                 getTaskLists(0);
@@ -565,6 +729,21 @@ function displayTaskListsOnGrayLayer(){
                 });
             }
             console.log(items.hiddenTasks);
+            //一定以上期間が過ぎた自作課題を削除
+            {
+                const removedManualTasklist = [];
+                for(const manTask of items.manualTasklist){
+                    if( Number(Date.parse(manTask.deadline)) >= Number(Date.now()) ){
+                        removedManualTasklist.push(manTask);
+                    }
+                }
+                chrome.storage.local.set({
+                    manualTasklist: removedManualTasklist
+                },function(){
+                    if(removedManualTasklist.length != items.manualTasklist.length)
+                    console.log("=========manual list has updated.=========");
+                });
+            }
         }
     });
 }
