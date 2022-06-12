@@ -697,7 +697,7 @@ function displayTaskListsOnGrayLayer(){
                         chrome.storage.local.set({
                             manualTasklist: manualTasklist
                         },function(){
-                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。aaa");
+                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
                             document.getElementById('manAddtaskSelectBackground').click();
                             //FireFoxのみ(?)バグが発生するので対策
                             if(window.navigator.userAgent.toLowerCase().indexOf("firefox") != -1){
