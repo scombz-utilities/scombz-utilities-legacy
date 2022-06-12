@@ -697,8 +697,21 @@ function displayTaskListsOnGrayLayer(){
                         chrome.storage.local.set({
                             manualTasklist: manualTasklist
                         },function(){
-                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
+                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。aaa");
                             document.getElementById('manAddtaskSelectBackground').click();
+                            //FireFoxのみ(?)バグが発生するので対策
+                            if(window.navigator.userAgent.toLowerCase().indexOf("firefox") != -1){
+                                console.log("FIREFOX BUGFIX");
+                                setTimeout(function(){
+                                    const widgetlayer = document.querySelector(".ui-widget-overlay");
+                                    const widgetcontent = document.querySelector(".ui-widget-content");
+                                    if(widgetlayer && widgetcontent){
+                                        console.log("widget true");
+                                        widgetlayer.remove();
+                                        widgetcontent.remove();
+                                    }
+                                },100);
+                            }
                         });
                     });
                 }
