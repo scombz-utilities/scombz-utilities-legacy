@@ -1,5 +1,29 @@
 [
     {
+        "version": "3.10.2",
+        "date": {
+            "firefox": "2022/6/13",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "自作課題追加",
+                "explain": "課題一覧に、自作の課題を追加できるようになりました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "ハイライト時間変更",
+                "explain": "課題一覧でのハイライトで、背景色が赤色になるのを6時間から12時間に変更しました。"
+            },
+            {
+                "genre": "bugfix",
+                "title": "課題表示限界",
+                "explain": "課題一覧で、終了しているはずの課題が表示される問題を修正しました。"
+            }
+        ]
+    },
+    {
         "version": "3.10.1",
         "date": {
             "firefox": "2022/6/9",

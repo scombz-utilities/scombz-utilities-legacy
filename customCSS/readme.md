@@ -24,3 +24,6 @@ darkmode.cssとshibaneko.cssとneko-button.cssとGlassmorphism.cssを合体さ�
 ### power.css
 パワー！！！！！！！！！！！！！！！！！！！！！！！！！！！！<br>
 作者: うだい
+### remove-print-button.css
+お知らせ等のダイアログに出てくる、「印刷」ボタンを非表示にします。<br>
+作者: うだい
