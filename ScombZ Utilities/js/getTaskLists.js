@@ -254,8 +254,10 @@ function getSurveysByAjax(){
                             const $taskObj = {};
                             $taskObj.title    =  $(data).find("#portalSurveysForm .result-list .survey-list-title .template-name").eq(i).html();
                             $taskObj.course   =  $(data).find("#portalSurveysForm .result-list .survey-list-address span").eq(i).html();
+                            $taskObj.startline=  $(data).find("#portalSurveysForm .result-list .survey-list-update").eq(i).find("span").eq(0).html();
                             $taskObj.deadline =  $(data).find("#portalSurveysForm .result-list .survey-list-update").eq(i).find("span").eq(2).html();
                             $taskObj.id       =  'survey' + $(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val();
+                            $taskObj.suvurl   =  `https://scombz.shibaura-it.ac.jp/lms/course/surveys/take?surveyId=${$(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val()}${($(data).find("#portalSurveysForm .result-list #listIdnumber").eq(i))?"&idnumber="+$(data).find("#portalSurveysForm .result-list #listIdnumber").eq(i).val():""}`;
                             $taskListsObj.push($taskObj);
                         }
                         console.log("アンケート一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));

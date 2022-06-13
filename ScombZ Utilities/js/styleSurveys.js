@@ -54,3 +54,71 @@ function styleSurveys(){
         }
     }
 }
+pastSurvey();
+//アンケート一覧に過去のアンケートを追加
+function pastSurvey(){
+    if(location.href === "https://scombz.shibaura-it.ac.jp/portal/surveys/list"){
+        chrome.storage.local.get({
+            
+        },function(items){
+            const pastSurveyList = `
+            <div
+                class="result-list contents-display-flex-exchange-sp contents-display-flex-padding-sp template-list-sp">
+                <input type="hidden" value="20000826" id="listSurveyId">
+                <input type="hidden" value="" id="listIdnumber">
+                <div class="survey-list-title title-text-height">
+                    <span class="template-name">Report of Covid-19-positive case</span>
+                </div>
+                <div class="survey-list-update">
+                    <span>2022/04/25 08:00</span>
+                    <span>～</span>
+                    <span>2023/03/31 22:00</span>
+                </div>
+                <div class="survey-list-resultdate">
+                </div>
+                <div class="survey-list-address">
+                    <span>学生・教職員健康相談室</span>
+                </div>
+            </div>
+            `;
+            const insertPastSurvery = setInterval(
+                function(){
+                    const insertingNode = document.getElementById("surveylist").parentNode.parentNode.parentNode;
+                    if(insertingNode){
+                        clearInterval(insertPastSurvery);
+                        insertingNode.insertAdjacentHTML("afterEnd",
+                            `
+                            <div class="block flex clearfix">
+                                <div class="block-title survey-color block-cube">
+                                    <div class="block-title-txt cube-block-title-txt course-top-icon survey-icon">アンケート一覧</div>
+                                </div>
+                                <div class="block-contents">
+                                    <div class="contents-detail">
+                                        <div>
+                                            <div>
+                                                <div
+                                                    class="contents-list contents-display-flex contents-tag contents-header-txt sp-contents-hidden">
+                                                    <div class="survey-list-title bold-txt">アンケートタイトル</div>
+                                                    <div class="survey-list-update bold-txt">アンケート期間・期限</div>
+                                                    <div class="survey-list-resultdate bold-txt">結果公開期間</div>
+                                                    <div class="survey-list-address bold-txt">登録部署</div>
+                                                    <div class="survey-list-btn bold-txt">操作</div>
+                                                </div>
+                                                <form>
+                                                    <div class="contents-list">
+                                                        ${pastSurveyList}
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `);
+                        console.log("過去アンケート挿入完了");
+                    }
+                }
+            ,300);
+        });
+    }
+}

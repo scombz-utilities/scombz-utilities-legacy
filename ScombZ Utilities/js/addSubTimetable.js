@@ -394,7 +394,7 @@ function displayTaskListsOnGrayLayer(){
                         tasklink = $tasklistObj[i].link;
                         if(subjlink === undefined) {
                             subjlink = $tasklistObj[i].url;
-                            tasklink = subjlink+"#questionnaire";
+                            tasklink = $tasklistObj[i].suvurl || subjlink+"#questionnaire";
                         }else{
                             subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
                             subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
