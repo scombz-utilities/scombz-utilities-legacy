@@ -325,7 +325,7 @@ function displayTaskListsOnGrayLayer(){
                 const nowUnix = Date.now();
                 for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 -j; i++){
                     //先の課題は表示しない
-                    if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+items.undisplayFutureTaskDays)){
+                    if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(items.undisplayFutureTaskDays))){
                         break;
                     }
                     //非表示に設定されているものはスキップ
@@ -699,6 +699,14 @@ function displayTaskListsOnGrayLayer(){
                         },function(){
                             window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
                             document.getElementById('manAddtaskSelectBackground').click();
+                            //入力欄初期化
+                            document.getElementById("manAddtaskSubjname").value
+                            = document.getElementById("manAddtaskSubjlink").value
+                            = document.getElementById("manAddtaskTaskname").value
+                            = document.getElementById("manAddtaskTasklink").value
+                            = document.getElementById("manAddtaskDeadlineDate").value
+                            = document.getElementById("manAddtaskDeadlineTime").value
+                            = null;
                             //FireFoxのみ(?)バグが発生するので対策
                             if(window.navigator.userAgent.toLowerCase().indexOf("firefox") != -1){
                                 console.log("FIREFOX BUGFIX");

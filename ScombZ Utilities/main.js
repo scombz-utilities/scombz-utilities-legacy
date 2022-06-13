@@ -68,6 +68,10 @@
                 //シラバスだったらsyllabus.jsに飛ばす
                 syllabusLoaded(items.year , items.fac);
             }
+            if(location.hostname == "yudai1204.github.io"){
+                //公式サイトだったらhomepage.jsに飛ばす
+                homepageLoaded();
+            }
             if(location.hostname == 'scombz.shibaura-it.ac.jp'){
                 //デバッグ用 itemsをログ出力
                 console.log(items);

@@ -860,6 +860,12 @@ function darkmodeLayout(mode){
         .a-week.highlightMark .relative-deadline-time{
             color:#999 !important;
         }
+        .task-get-time,#add-task-manual{
+            color:#ccc !important;
+        }
+        #manAddtaskSelectLayer{
+            background-color:#333 !important;
+        }
             `;
         if(mode === 'relative'){
             darkmode = "@media (prefers-color-scheme: dark) {\n" + darkmode + "}";
