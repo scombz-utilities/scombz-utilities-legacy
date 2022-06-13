@@ -1,4 +1,4 @@
-/* ScombZ Darkmode CSS v0.6 */
+/* ScombZ Darkmode CSS v0.7 */
 /* styled by うだい */
 /*背景、全体設定*/
 :root{
@@ -472,9 +472,9 @@ div.result_list_content .result_list_line:nth-of-type(2n+1) {
     background: #1b449f !important;
 }
 .subk-remove-btn {
-     background-color: #0aa6 !important;
-     background-blend-mode: darken !important;
-     filter: invert(1);
+    background-color: #0aa6 !important;
+    background-blend-mode: darken !important;
+    filter: invert(1);
 }
 .examination-question-answer-input-box{
     color:#ddd;
@@ -497,4 +497,10 @@ div.result_list_content .result_list_line:nth-of-type(2n+1) {
 }
 .a-week.highlightMark .relative-deadline-time{
     color:#999 !important;
+}
+.task-get-time,#add-task-manual{
+    color:#ccc !important;
+}
+#manAddtaskSelectLayer{
+    background-color:#333 !important;
 }
