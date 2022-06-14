@@ -41,6 +41,7 @@
             remomveDirectLink: true,    //ダイレクトリンクを消す
             dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
             attendance: 'none',         //出席記録を消す
+            pastSurvey: true,           //過去のアンケート    
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
@@ -195,6 +196,10 @@
                 //出席表示の削除
                 if(items.attendance !== 'none'){
                     attendanceRemove(items.attendance);
+                }
+                //アンケートに過去のアンケートを表示
+                if(items.pastSurvey === true){
+                    pastSurvey();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
