@@ -54,33 +54,40 @@ function styleSurveys(){
         }
     }
 }
-pastSurvey();
 //アンケート一覧に過去のアンケートを追加
 function pastSurvey(){
     if(location.href === "https://scombz.shibaura-it.ac.jp/portal/surveys/list"){
         chrome.storage.local.get({
-            
+            pastSurveyList: []
         },function(items){
-            const pastSurveyList = `
-            <div
-                class="result-list contents-display-flex-exchange-sp contents-display-flex-padding-sp template-list-sp">
-                <input type="hidden" value="20000826" id="listSurveyId">
-                <input type="hidden" value="" id="listIdnumber">
-                <div class="survey-list-title title-text-height">
-                    <span class="template-name">Report of Covid-19-positive case</span>
-                </div>
-                <div class="survey-list-update">
-                    <span>2022/04/25 08:00</span>
-                    <span>～</span>
-                    <span>2023/03/31 22:00</span>
-                </div>
-                <div class="survey-list-resultdate">
-                </div>
-                <div class="survey-list-address">
-                    <span>学生・教職員健康相談室</span>
-                </div>
-            </div>
+
+            let pastSurveyList = `
+            <style>
+            .past-survey-list-link{
+                color:#777
+            }
+            </style>
             `;
+            for(const pastSurvey of items.pastSurveyList){
+                pastSurveyList += `
+                <div
+                    class="result-list contents-display-flex-exchange-sp contents-display-flex-padding-sp template-list-sp">
+                    <div class="survey-list-title title-text-height">
+                        <a href="${pastSurvey.suvurl}" class="past-survey-list-link"><span class="template-name">${pastSurvey.title}</span></a>
+                    </div>
+                    <div class="survey-list-update">
+                        <span>${pastSurvey.startline}</span>
+                        <span>～</span>
+                        <span>${pastSurvey.deadline}</span>
+                    </div>
+                    <div class="survey-list-resultdate">
+                    </div>
+                    <div class="survey-list-address">
+                        <span>${pastSurvey.course}</span>
+                    </div>
+                </div>
+                `;
+            }
             const insertPastSurvery = setInterval(
                 function(){
                     const insertingNode = document.getElementById("surveylist").parentNode.parentNode.parentNode;
@@ -90,7 +97,7 @@ function pastSurvey(){
                             `
                             <div class="block flex clearfix">
                                 <div class="block-title survey-color block-cube">
-                                    <div class="block-title-txt cube-block-title-txt course-top-icon survey-icon">アンケート一覧</div>
+                                    <div class="block-title-txt cube-block-title-txt course-top-icon survey-icon">過去のアンケート一覧</div>
                                 </div>
                                 <div class="block-contents">
                                     <div class="contents-detail">
@@ -102,7 +109,7 @@ function pastSurvey(){
                                                     <div class="survey-list-update bold-txt">アンケート期間・期限</div>
                                                     <div class="survey-list-resultdate bold-txt">結果公開期間</div>
                                                     <div class="survey-list-address bold-txt">登録部署</div>
-                                                    <div class="survey-list-btn bold-txt">操作</div>
+                                                    <div class="survey-list-btn bold-txt"></div>
                                                 </div>
                                                 <form>
                                                     <div class="contents-list">

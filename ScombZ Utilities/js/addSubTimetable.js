@@ -262,7 +262,6 @@ function displayTaskListsOnGrayLayer(){
             //JSONファイル展開
             console.log(decodeURIComponent(items.tasklistData));
             const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
-            console.log(decodeURIComponent(items.surveyListData));
             const $surveyListObj = JSON.parse(decodeURIComponent(items.surveyListData));
             //JSONから表示高さ生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
