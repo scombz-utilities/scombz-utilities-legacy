@@ -249,18 +249,26 @@ function getSurveysByAjax(){
                     function(data) {
                         console.log("アンケート一覧ページAjax読み込み成功");
                         const $taskListsObj = [];
-                        
+                        const $pastSurveyList = [];
                         for (let i = 0 ; $(data).find("#portalSurveysForm .result-list").eq(i).html() ; i++){
                             const $taskObj = {};
                             $taskObj.title    =  $(data).find("#portalSurveysForm .result-list .survey-list-title .template-name").eq(i).html();
                             $taskObj.course   =  $(data).find("#portalSurveysForm .result-list .survey-list-address span").eq(i).html();
+                            $taskObj.startline=  $(data).find("#portalSurveysForm .result-list .survey-list-update").eq(i).find("span").eq(0).html();
                             $taskObj.deadline =  $(data).find("#portalSurveysForm .result-list .survey-list-update").eq(i).find("span").eq(2).html();
                             $taskObj.id       =  'survey' + $(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val();
+                            if(Number($(data).find("#portalSurveysForm .result-list #listIdnumber").eq(i).val().length) > 3){
+                                $taskObj.suvurl   =  `https://scombz.shibaura-it.ac.jp/lms/course/surveys/take?surveyId=${$(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val()}${"&idnumber="+$(data).find("#portalSurveysForm .result-list #listIdnumber").eq(i).val()}`;
+                            }else{
+                                $taskObj.suvurl   =  `https://scombz.shibaura-it.ac.jp/portal/surveys/take?surveyId=${$(data).find("#portalSurveysForm .result-list #listSurveyId").eq(i).val()}`;
+                            }
                             $taskListsObj.push($taskObj);
+                            $pastSurveyList.push($taskObj);
                         }
                         console.log("アンケート一覧をAjaxで取得しました: \n"+JSON.stringify($taskListsObj));
                         //アンケート取得設定でオンになっているもののみに絞り込む
                         chrome.storage.local.get({
+                            pastSurveyList: [],
                             noticeSurvey:[
                                 {
                                     name : "ScombZ Utilities",
@@ -269,6 +277,27 @@ function getSurveysByAjax(){
                                 }
                             ]
                         },function(items){
+                            //過去のデータ
+                            const oldPastSurveyList = items.pastSurveyList;
+                            for(const $taskObj of $taskListsObj){
+                                if(!oldPastSurveyList[0]){
+                                    oldPastSurveyList.push($taskObj);
+                                    continue;
+                                }
+                                let flag = false;
+                                for(const oldPastSurvey of oldPastSurveyList){
+                                    if(oldPastSurvey.id == $taskObj.id){
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if(flag === false){
+                                    oldPastSurveyList.push($taskObj);
+                                }
+                            }
+                            while(oldPastSurveyList.length > 100){   //100件を超えた過去のデータは破棄
+                                oldPastSurveyList.shift();
+                            }
                             //readableSubjectsにオンになっている科目名をいれる
                             const readableSubjects = [];
                             const $surveyList = [];
@@ -291,9 +320,11 @@ function getSurveysByAjax(){
                             }
                             //chrome.storageに保存
                             console.log("アンケート一覧から取得した、オンになっている科目のアンケート");
+                            console.log(JSON.stringify($surveyList));
                             console.log($surveyList);
                             chrome.storage.local.set({
-                                surveyListData : encodeURIComponent(JSON.stringify($surveyList))
+                                surveyListData : encodeURIComponent(JSON.stringify($surveyList)),
+                                pastSurveyList : oldPastSurveyList
                             },function(){
                                 console.log('アンケート一覧をChromeLocalStorageに保存しました');
                                 }

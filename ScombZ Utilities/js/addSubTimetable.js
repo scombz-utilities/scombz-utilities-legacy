@@ -262,7 +262,6 @@ function displayTaskListsOnGrayLayer(){
             //JSONファイル展開
             console.log(decodeURIComponent(items.tasklistData));
             const $tasklistObj = JSON.parse(decodeURIComponent(items.tasklistData));
-            console.log(decodeURIComponent(items.surveyListData));
             const $surveyListObj = JSON.parse(decodeURIComponent(items.surveyListData));
             //JSONから表示高さ生成
             const $subTimetable = document.getElementsByClassName("subtimetableBody");
@@ -394,7 +393,7 @@ function displayTaskListsOnGrayLayer(){
                         tasklink = $tasklistObj[i].link;
                         if(subjlink === undefined) {
                             subjlink = $tasklistObj[i].url;
-                            tasklink = subjlink+"#questionnaire";
+                            tasklink = $tasklistObj[i].suvurl || subjlink+"#questionnaire";
                         }else{
                             subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
                             subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;

@@ -37,6 +37,7 @@ const defaultOptions = {
     undisplayFutureTaskDays: 365,
     exportIcs: true,
     attendance: 'none',
+    pastSurvey: true,
     highlightDeadline: true,
     adjustTimetableData : {
         eraseSat : false,
@@ -102,6 +103,7 @@ function save_options() {
     const undisplayFutureTaskDays = document.getElementById('undisplayFutureTaskDays').value;
     const exportIcs = document.getElementById('exportIcs').checked;
     const highlightDeadline = document.getElementById('highlightDeadline').checked;
+    const pastSurvey = document.getElementById('pastSurvey').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -142,6 +144,7 @@ function save_options() {
         undisplayFutureTaskDays : undisplayFutureTaskDays,
         exportIcs : exportIcs,
         highlightDeadline : highlightDeadline,
+        pastSurvey : pastSurvey,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -214,6 +217,7 @@ function save_options() {
         document.getElementById('undisplayFutureTaskDays').value = items.undisplayFutureTaskDays;
         document.getElementById('exportIcs').checked = items.exportIcs;
         document.getElementById('highlightDeadline').checked = items.highlightDeadline;
+        document.getElementById('pastSurvey').checked = items.pastSurvey;
     });
     }
     document.addEventListener('DOMContentLoaded', restore_options);
