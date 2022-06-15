@@ -207,6 +207,8 @@
                 clickHideName();
                 //カレンダー
                 exportCalender();
+                //お知らせ適用
+                getNews();
                 //カスタムCSSの適用
                 customizeCSS();
                 console.log('すべての機能の実行が完了しました');
