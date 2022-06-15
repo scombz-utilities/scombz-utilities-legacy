@@ -4,5 +4,11 @@
         "title":"TEST NEWS",
         "content":"This is test.",
         "link":"https://github.io/yudai1204/ScombZ-Utilities"
+    },
+    {
+        "id":1,
+        "title":"アップデート",
+        "content":"ver.3.11.1にアップデートされました。",
+        "link":"https://yudai1204.github.io/ScombZ-Utilities/updates.html"
     }
 ]
