@@ -251,6 +251,10 @@ function getSurveysByAjax(){
                         const $taskListsObj = [];
                         const $pastSurveyList = [];
                         for (let i = 0 ; $(data).find("#portalSurveysForm .result-list").eq(i).html() ; i++){
+                            if($(data).find("#portalSurveysForm .result-list .survey-list-title").eq(i).find(".portal-surveys-status-end-color").length > 0){
+                                console.log("SKIPPED->"+$(data).find("#portalSurveysForm .result-list .survey-list-title").eq(i).find(".template-name").html());
+                                continue;
+                            }
                             const $taskObj = {};
                             $taskObj.title    =  $(data).find("#portalSurveysForm .result-list .survey-list-title .template-name").eq(i).html();
                             $taskObj.course   =  $(data).find("#portalSurveysForm .result-list .survey-list-address span").eq(i).html();
