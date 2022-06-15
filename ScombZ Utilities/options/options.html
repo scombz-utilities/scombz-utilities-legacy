@@ -516,7 +516,59 @@
                     </div>
                     <!-- ↑↑最初隠したいコンテンツ ↑↑-->
                 </div>
-            </div>       
+            </div>
+
+            <hr>
+            <h2>科目ページ設定</h2>
+            科目ページのレイアウトに関する設定です。<br>
+            <div class="setting-column">
+                <h3>科目ページ要素入れ替え</h3>
+                <div class="explains">
+                    科目ページに存在する「担当教員へのメッセージ」「お知らせ」「課題」「教材」「テスト」「ディスカッション」「出席」の各要素を自由に入れ替えします。<br>
+                    存在しない要素がある場合はその要素を抜いた状態での並び替えが行われます。
+                </div>
+                <ul id="subjectList">
+                </ul>
+                <div id="subjectListNum"  style="display: none;"></div>
+            </div>
+            <div class="setting-column">
+                <h3>教材の順番を統一</h3>
+                <div class="explains">
+                    科目によって初回が一番上だったり最新回が一番上だったりする教材の順番を統一します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">一番上にする回<br></span>
+                    <select id="materialTop">
+                        <option value="none">使用しない</option>
+                        <option value="first">初回</option>
+                        <option value="last">最新回</option>
+                        </select>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>使わない教材を非表示</h3>
+                <div class="explains">
+                    教材要素にある様々なものを非表示にします<br>非表示にする者がある場合、一次的に再表示するボタンも追加します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">非表示対象<br></span>
+                    <select id="materialHide">
+                        <option value="none">全て表示</option>
+                        <option value="new">最新回以外</option>
+                        <option value="all">全ての回</option>
+                        </select>
+                </div>
+                <!-- ここに画像 -->
+            </div>
+            <div class="setting-column">
+                <h3>操作可能な課題のみ表示</h3>
+                <input class="ItemBox-CheckBox-Input"  type="checkbox" id="reportHide"><label class="ItemBox-CheckBox-Label" for="reportHide"></label>
+                <div class="explains">
+                    削除も追加もできなくなった課題を非表示にします。<br>
+                    また、一次的に再表示するボタンも追加します。
+                </div>
+            </div>    
+
             <hr>
             <h2>実験的な設定</h2>
             バグが確認されているか、バグになる可能性が高い設定です。<br>

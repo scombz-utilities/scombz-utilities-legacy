@@ -48,7 +48,11 @@
                 erase7: false,          // 7限を消す
                 dispClassroom: false,   // 講師名表示を教室表示にする
                 timetableCentering: false // 時間割のセンタリング 
-            }
+            },
+            subjectList : '1234567',//要素の並び替え
+            materialTop : 'none',   //教材の位置
+            materialHide : 'none',  //教材を閉じる
+            reportHide : false      //課題を非表示
     }
     /* ローディング画面 */
     onLoading();
@@ -200,6 +204,22 @@
                 //アンケートに過去のアンケートを表示
                 if(items.pastSurvey === true){
                     pastSurvey();
+                }
+                //科目ページの要素並び替え
+                if(items.subjectList !== '1234567'){
+                    subjectListOrder(items.subjectList);
+                }
+                //教材の位置
+                if(items.materialTop !== 'none'){
+                    materialTopSet(items.materialTop);
+                }
+                //教材の非表示
+                if(items.materialHide !== 'none'){
+                    hideMaterial(items.materialHide);
+                }
+                //課題の非表示
+                if(items.materialHide === true){
+                    hideReport();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

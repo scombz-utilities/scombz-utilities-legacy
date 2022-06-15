@@ -72,12 +72,12 @@ function updateClear(){
 
         //ボタン部分のレイアウト調整
         //透明の赤丸を入れている
-        let headerButton = document.getElementsByClassName("btn-header-info btnControl");
-        for (let i=0;i<headerButton.length;i++){
-            if (headerButton[i].getElementsByTagName("span").length == 0){
+        let headerButtons = document.getElementsByClassName("btn-header-info btnControl");
+        for (let headerButton of headerButtons){
+            if (headerButton.getElementsByTagName("span").length == 0){
                 buttonSpan = document.createElement("span");
                 buttonSpan.className = "header-icon-space";
-                headerButton[i].insertBefore(buttonSpan,headerButton[i].getElementsByClassName("header-img")[0])
+                headerButton.insertBefore(buttonSpan,headerButton.getElementsByClassName("header-img")[0])
             }
         }
     }
@@ -96,10 +96,10 @@ function updateClear(){
 
                     postData += "_csrf="+data.querySelector('input[name="_csrf"]').value;
                     postData += '&_method='+data.querySelector('input[name="_method"]').value
-                    updateInfoId = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
+                    updateInfoIds = data.querySelectorAll('input[name="deleteUpdateInfoList"]');
 
-                    for(let i=0;i<updateInfoId.length;i++){
-                        postData+="&deleteUpdateInfoList="+updateInfoId[i].value;
+                    for(let updateInfoId of updateInfoIds){
+                        postData+="&deleteUpdateInfoList="+updateInfoId.value;
                     }
                     console.log(postData)
 
@@ -152,8 +152,8 @@ function submissionBugFix(){
         }else{
             let dadFix = document.querySelectorAll("#DaDfix");
             if (dadFix.length != 1 || dadFix[0].id != "DaDfix"){
-                for (let i=0;i<dadFix.length;i++){
-                    dadFix[i].remove();
+                for (let i of dadFix){
+                    i.remove();
                 }
             }
         }
