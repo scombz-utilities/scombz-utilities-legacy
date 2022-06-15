@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.11.1",
+        "date": {
+            "firefox": "2022/6/15",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "Utilitiesからのお知らせ表示機能",
+                "explain": "Utilitiesからのお知らせを、ScombZのホーム・LMSに表示するようにしました。"
+            }
+        ]
+    },
+    {
         "version": "3.11.0",
         "date": {
             "firefox": "2022/6/14",

@@ -1,7 +1,7 @@
 {
     "manifest_version":3 ,
     "name": "ScombZ Utilities",
-    "version": "3.11.0",
+    "version": "3.11.1",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -48,12 +48,16 @@
                 "js/styleSurveys.js",
                 "js/clearButton.js",
                 "js/attendance.js",
-                "js/exportCalender.js"
+                "js/exportCalender.js",
+                "js/getnews.js"
             ]
         }
     ],
     "permissions":[
         "storage"
+    ],
+    "host_permissions": [
+        "https://yudai1204.github.io/"
     ],
     "web_accessible_resources": [{
         "resources": ["gcal/*"],
