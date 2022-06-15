@@ -8,7 +8,7 @@ function attendanceRemove(item){
         if (item === 'only'){
             console.log("※表示の場合出席を削除");
             let attendanceKome = document.querySelector("#attendance > div.block-contents > div > div:nth-child(3) > div:nth-child(1) > div.course-view-attendance-status > label");
-            if (attendanceKome != null){
+            if (attendanceKome){
                 if (attendanceKome.textContent == "※"){
                     let attendance = document.querySelector("#attendance");
                     attendance.remove();
@@ -17,7 +17,7 @@ function attendanceRemove(item){
         }else if (item === 'all'){
             console.log("無条件で出席を削除")
             let attendance = document.querySelector("#attendance");
-            if (attendance != null){
+            if (attendance){
                 attendance.remove();
             }
         }
