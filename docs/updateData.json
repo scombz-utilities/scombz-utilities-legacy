@@ -10,6 +10,25 @@
                 "genre": "newFunc",
                 "title": "Utilitiesからのお知らせ表示機能",
                 "explain": "Utilitiesからのお知らせを、ScombZのホーム・LMSに表示するようにしました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "回答したアンケートの非表示",
+                "explain": "回答済みのアンケートを再表示されないようにしました。"
+            }
+        ]
+    },
+    {
+        "version": "3.11.1",
+        "date": {
+            "firefox": "2022/6/15",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "Utilitiesからのお知らせ表示機能",
+                "explain": "Utilitiesからのお知らせを、ScombZのホーム・LMSに表示するようにしました。"
             }
         ]
     },
