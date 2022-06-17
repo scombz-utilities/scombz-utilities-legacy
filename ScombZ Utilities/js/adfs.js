@@ -4,12 +4,15 @@
 function adfsLoaded(){
     'use strict';
         if (document.domain == 'adfs.sic.shibaura-it.ac.jp'){
-            console.log("ADFSをスキップします");
             const $adfsButton = document.getElementById("continueButton");
-            if ($adfsButton) {
+            const $adfsPin = document.getElementById("pin");
+
+            // ADFSの2段階認証が無効な場合（$adfsPinがnullで存在しない時）にスキップする
+            if (!$adfsPin && $adfsButton) {
+              console.log("ADFSをスキップします");
                 $adfsButton.click();
+                console.log("ADFSをスキップしました");
             }
-            console.log("ADFSをスキップしました");
         }
     return;
 }
