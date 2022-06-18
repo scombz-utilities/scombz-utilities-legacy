@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.11.2",
+        "date": {
+            "firefox": "2022/6/19",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "optimisation",
+                "title": "ADFS二段階認証修正",
+                "explain": "ADFSで二段階認証をオンにしているユーザー向けに、ワンタイムパスワード入力時はスキップボタンを押さないようにしました。"
+            }
+        ]
+    },
+    {
         "version": "3.11.1",
         "date": {
             "firefox": "2022/6/15",
