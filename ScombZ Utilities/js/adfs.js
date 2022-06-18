@@ -6,14 +6,16 @@ function adfsLoaded(){
         if (document.domain == 'adfs.sic.shibaura-it.ac.jp'){
             const $adfsButton = document.getElementById("continueButton");
             const $adfsPin = document.getElementById("pin");
-
-            // ADFSの2段階認証が無効な場合にだけスキップを実行する
-            if ($adfsPin ?? $adfsButton) {
+            const $hasAdfsButton = $adfsButton !== null;
+            const $requiresPin = $hasAdfsButton && $adfsPin !==null;
+            if ($requiresPin) {
+                console.log("ADFSの2段階認証が有効なため、スキップしません");
+            } else if ($hasAdfsButton) {
                 console.log("ADFSをスキップします");
                 $adfsButton.click();
                 console.log("ADFSをスキップしました");
             } else {
-                console.log("ADFSの2段階認証が有効なため、スキップしません");
+                console.log("ADFSのエラーページであるため、スキップしません");
             }
         }
     return;
