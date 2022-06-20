@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ScombZ-Utilities-for-UserScript
+// @name         ScombZ-Utilities-ORION
 // @namespace    https://twitter.com/yudai1204
 // @version      3.0.0
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログイン等を改善します
@@ -1138,7 +1138,7 @@ function displaySubTimetable($$version){
 
             document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
-            <p class="usFooter">ScombZ Utilities US版 ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p class="usFooter">ScombZ Utilities ORION ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             `+$subTimetable);
         }
     });
