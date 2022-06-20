@@ -1,7 +1,7 @@
 {
     "manifest_version":2,
     "name": "ScombZ Utilities ORION",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "content_scripts":[
         {
             "matches":["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
