@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities-ORION
 // @namespace    https://twitter.com/yudai1204
-// @version      3.0.0
+// @version      3.0.1
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログイン等を改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -108,7 +108,7 @@ function utlstorageSet(object,func){
 }
 
 /* ======================= メイン ======================= */
-const $$version = "1.0.0"; //バージョン
+const $$version = "3.0.1"; //バージョン
 const $$reacquisitionMin = 20;      //再取得までの時間(分)
     //初期設定ロード
     if(localStorage.getItem("scombzUtilities:settings") === null){
@@ -396,7 +396,7 @@ function utilitiesSettings(){
         settingsLayer.insertAdjacentHTML("afterBegin",`
         <div class="utilities-settings-body">
         <h1>ScombZ Utilities Settings</h1>
-        <p>詳細は<a href="https://yudai1204.github.io/ScombZ-Utilities/">公式サイト</a>へ</p>
+        <p>詳細は<a href="https://yudai1204.github.io/ScombZ-Utilities/settings.html">公式サイト</a>へ</p>
         <textarea id="utilitiesJsonArea">${jsondatastr}</textarea>
         <input type="button" value="INITIALIZE" class="utilities-settings-underbtn" id="utilitiesSettingsInitBtn">
         <input type="button" value="SAVE" class="utilities-settings-underbtn" id="utilitiesJsonSaveBtn">
@@ -4407,3 +4407,9 @@ function specificCourse(courseName) {
     }
     return courseName;
 }
+//インストール時
+chrome.runtime.onInstalled.addListener(({reason}) => {
+    if(reason === 'install'){
+        chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}&edition=orion`});
+    }
+});
