@@ -797,3 +797,20 @@ img.alignleft{margin:0 7px 2px 0;}
     float: left;
     margin-top: 50px;
 }
+.mokuji{
+	border-radius:10px;
+	padding: 10px;
+	border: 2px solid #ccc;
+	margin-bottom: 10px;
+}
+.h4{
+	font-weight: bold;
+	font-size:120%;
+	margin:10px 0;
+}
+.exp-img{
+	width:250px;
+	box-shadow: 0 0 5px #666;
+	margin-left:5px;
+	border-radius:10px;
+}

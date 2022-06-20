@@ -14,6 +14,7 @@ $.getJSON("updateData.json", (updateData) => {
                 <ul>
                     <li><a href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja" target="_blank" rel="noopener noreferrer">Chrome / Edge</a></li>
                     <li><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/"  target="_blank" rel="noopener noreferrer">FireFox</a></li>
+                    <li><a href="/smartphone.html"  target="_blank" rel="noopener noreferrer">iOS / iPadOS / Android</a></li>
                     <!--li>iOS / iPadOS</li-->
                 </ul>
             </div>
