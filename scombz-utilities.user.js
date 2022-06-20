@@ -108,7 +108,7 @@ function utlstorageSet(object,func){
 }
 
 /* ======================= メイン ======================= */
-const $$version = "1.0.0"; //バージョン
+const $$version = "3.0.0"; //バージョン
 const $$reacquisitionMin = 20;      //再取得までの時間(分)
     //初期設定ロード
     if(localStorage.getItem("scombzUtilities:settings") === null){
