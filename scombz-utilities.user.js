@@ -9,8 +9,8 @@
 // @match        http://syllabus.sic.shibaura-it.ac.jp/*
 // @match        https://scomb.shibaura-it.ac.jp/*
 // @icon         https://scombz.shibaura-it.ac.jp/favicon.ico
-// @updateURL    https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js
-// @downloadURL  https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js
+// @updateURL    https://raw.githubusercontent.com/yudai1204/ScombZ-Utilities/dev/scombz-utilities.user.js
+// @downloadURL  https://raw.githubusercontent.com/yudai1204/ScombZ-Utilities/dev/scombz-utilities.user.js
 // @grant        none
 // @license      MIT
 // ==/UserScript==
