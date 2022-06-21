@@ -49,10 +49,286 @@
 		</div>
 	</nav>
 <div id="pageMainBody">
-	<section class="content" id="smartphone">
-		<h3 class="heading">準備中</h3>
+	<section class="content" id="setting">
+		<style type="text/css">
+			#setting h4{
+				font-size:120%;
+				font-weight:bold;
+			}
+		</style>
 		<article class="post">
-			
+		<h3 class="heading">オプション設定</h3>
+			<p>JSON形式に従って記述してください。JSON形式の詳細は以下のサイトを参考にしてください。<br><a href="https://products.sint.co.jp/topsic/blog/json" target="_blank" rel="noopener noreferrer">JSONとは？データフォーマット（データ形式）について学ぼう！</a></p>
+			<div>
+				<h4>year</h4>
+				<p>
+					入学年度です。文字列もしくは整数で記入してください。<br><br>
+					例: 2021年度入学の場合<br>　"year": "2021"<br>　もしくは、<br>　"year": 2021
+				</p>
+			</div>
+			<div>
+				<h4>fac</h4>
+				<p>
+					学部です。文字列で、以下の書式(シラバス準拠)に従って記入してください。<br>
+					大学院 "din"<br>
+					建築学部 "arc"<br>
+					デザ工 "dsn"<br>
+					シス理 "sys"<br>
+					工学部 "ko1"<br><br>
+					例: 工学部の場合<br>　"fac": "ko1"
+				</p>
+			</div>
+			<div>
+				<h4>clickLoginBtn</h4>
+				<p>
+					ログインボタン自動クリック。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "clickLoginBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>adfsSkip</h4>
+				<p>
+					adfs二段階認証自動スキップ。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "adfsSkip": true
+				</p>
+			</div>
+			<div>
+				<h4>exitSidemenu</h4>
+				<p>
+					左メニューを自動で閉じます。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "exitSidemenu": true
+				</p>
+			</div>
+			<div>
+				<h4>styleSidemenu</h4>
+				<p>
+					左メニューのスタイル変更。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "clickLoginBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>styleExamBtn</h4>
+				<p>
+					テスト・アンケートのスタイルの変更。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "styleExamBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>styleExamImg</h4>
+				<p>
+					テストの画像スタイル変更(実験的)。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "styleExamImg": true
+				</p>
+			</div>
+			<div>
+				<h4>addSubTimetable</h4>
+				<p>
+					メニュー横の時間割表示。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "addSubTimetable": true
+				</p>
+			</div>
+			<div>
+				<h4>changeReportBtn</h4>
+				<p>
+					レポート提出ボタンの変更。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "changeReportBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>styleDialog</h4>
+				<p>
+					おしらせダイアログを大きくする。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "styleDialog": true
+				</p>
+			</div>
+			<div>
+				<h4>hideCompletedReports</h4>
+				<p>
+					完了したレポートをカレンダーに表示しない。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "hideCompletedReports": true
+				</p>
+			</div>
+			<div>
+				<h4>syllBtn</h4>
+				<p>
+					各科目にシラバスボタンの追加。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "syllBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>changeLogout</h4>
+				<p>
+					ログアウトボタンの変更。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "changeLogout": true
+				</p>
+			</div>
+			<div>
+				<h4>setMaxWidth</h4>
+				<p>
+					最大横幅を設定。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "setMaxWidth": true
+				</p>
+			</div>
+			<div>
+				<h4>pageTopBtn</h4>
+				<p>
+					トップへボタンを消す。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "pageTopBtn": true
+				</p>
+			</div>
+			<div>
+				<h4>mouseDown</h4>
+				<p>
+					ホイールクリックで新規タブで開けるようにする。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "mouseDown": true
+				</p>
+			</div>
+			<div>
+				<h4>tasklistDisplay</h4>
+				<p>
+					メニュー横の課題表示。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "tasklistDisplay": true
+				</p>
+			</div>
+			<div>
+				<h4>styleNowPeriod</h4>
+				<p>
+					LMSで現在のコマを目立たせる。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "styleNowPeriod": true
+				</p>
+			</div>
+			<div>
+				<h4>displayName</h4>
+				<p>
+					履修者名表示。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "displayName": true
+				</p>
+			</div>
+			<div>
+				<h4>layoutHome</h4>
+				<p>
+					ホーム画面のスタイル変更。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "layoutHome": true
+				</p>
+			</div>
+			<div>
+				<h4>nickname</h4>
+				<p>
+					ニックネームの設定。文字列型です。<br><br>
+					例: "nickname": "芝浦ミドリ"
+				</p>
+			</div>
+			<div>
+				<h4>timesBtnValue</h4>
+				<p>
+					作成時間簡易入力の設定。文字列型です。以下のモードから選択してください。<br>
+					"mode1" 10分,30分,60分,100分,200分,300分,600分<br>
+					"mode2" 10分,30分,60分,120分,180分,300分,600分<br>
+					"mode3" 10分,20分,30分,60分,90分,120分,180分<br>
+					"mode4" 10分,60分,120分,180分,300分,600分,1000分
+					<br><br>
+					例: "timesBtnValue": "mode1"
+				</p>
+			</div>
+			<div>
+				<h4>sliderBarMax</h4>
+				<p>
+					作成時間簡易入力の設定。整数型です。バーの最大値を入力してください。<br>
+					<br><br>
+					例: "sliderBarMax": 600
+				</p>
+			</div>
+			<div>
+				<h4>tasklistTranslate</h4>
+				<p>
+					課題一覧の位置調整。整数型です。バーの最大値を入力してください。
+					<br><br>
+					例: "tasklistTranslate": 0
+				</p>
+			</div>
+			<div>
+				<h4>fixHeadShadow</h4>
+				<p>
+					ページ上部にあるバナーのスタイル。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "fixHeadShadow": true
+				</p>
+			</div>
+			<div>
+				<h4>deadlinemode</h4>
+				<p>
+					課題一覧の表示方式。文字列型です。<br>
+					absoluteを含むと、絶対表記されます。relativeを含むと、相対表記されます。どちらも含まれると、両方表示されます。Long,Shortを含ませることで、絶対表示の長さを調整できます。
+					<br><br>
+					例: "deadlinemode": "absolute-relative"
+				</p>
+			</div>
+			<div>
+				<h4>notepadMode</h4>
+				<p>
+					ユーザーメモ。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "notepadMode": true
+				</p>
+			</div>
+			<div>
+				<h4>ddSubmission</h4>
+				<p>
+					課題ドラッグ&ドロップ提出。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "ddSubmission": true
+				</p>
+			</div>
+			<div>
+				<h4>headLinkTo</h4>
+				<p>
+					ページヘッダのScombZアイコンのリンク先。文字列型です。リンクを表記してください。<br><br>
+					例: "headLinkTo": "/portal/home"
+				</p>
+			</div>
+			<div>
+				<h4>updateClear</h4>
+				<p>
+					更新通知全削除ボタンを追加。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "updateClear": true
+				</p>
+			</div>
+			<div>
+				<h4>maxTaskDisplay</h4>
+				<p>
+					課題一覧の最大表示数。整数型です。<br><br>
+					例: "maxTaskDisplay": 16
+				</p>
+			</div>
+			<div>
+				<h4>darkmode</h4>
+				<p>
+					ダークモード。文字列型です。<br>
+					"relative" OSに合わせる<br>
+					"normal" ダークモードを適用しない<br>
+					"dark" ダークモード強制
+					<br><br>
+					例: "darkmode": "relative"
+				</p>
+			</div>
+			<div>
+				<h4>dadbugFix</h4>
+				<p>
+					課題削除できないバグの修正。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br><br>
+					例: "dadbugFix": true
+				</p>
+			</div>
+			<div>
+				<h4>defaultInputName</h4>
+				<p>
+					ファイル名の自動入力設定。文字列型です。<br><br>
+					例: "headLinkTo": "AA00000_山田太郎"
+				</p>
+			</div>
+			<div>
+				<h4>adjustTimetableData</h4>
+				<p>
+					時間割に関する設定。boolean型です。オンの場合はtrue、オフの場合はfalseと記入してください。<br>
+					オブジェクトであることに注意してください。
+				</p>
+			</div>
 		</article>
 	</section>
 </div>
