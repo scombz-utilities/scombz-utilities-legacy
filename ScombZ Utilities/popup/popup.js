@@ -45,7 +45,7 @@ function initPopupTimetable(){
             console.log('時間割情報が存在しません');
             return;
         }
-        const timetableData = JSON.parse(decodeURIComponent(item.timetableData));
+        const timetableData = item.timetableData;
         renderWeekTimetable(timetableData, (new Date()).getDay());
     });
     return;
