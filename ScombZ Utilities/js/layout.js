@@ -353,6 +353,75 @@ function customizeCSS(){
     });
     return;
 }
+//スマホ判定
+function androidCss(){
+    if ( /android/i.test(navigator.userAgent) && document.head) {
+        document.head.insertAdjacentHTML("beforeEnd",`
+        <style>
+        #pageMain{
+            overflow-x:hidden;
+            margin-top: 59px;
+            }
+            #page_head{
+            position: fixed;
+            }
+            .sidemenu-hide{
+            min-width:100vw;
+            }
+            .page-main #graylayer{
+            margin-top: -59px;
+            }
+            @media (max-width: 480px){
+                .page-main {
+                min-width:100vw;
+                }
+            }
+            @media (max-width:899px){
+                #subTimetable{
+                    display:none !important;
+                }
+                #subTaskList{
+                    margin:10px auto;
+                    display: block;
+                    opacity: 1;
+                    visibility: visible;
+                    min-width: 90% !important;
+                    box-shadow: 5px 5px 5px #c2c2c2;
+                }
+                .subk-column:nth-child(3n+1) {
+                    width: fit-content !important;
+                    display:block;
+                    padding:1px 2px;
+                    border:1px solid #ccc;
+                    border-radius:10px;
+                }
+                .subk-column:nth-child(3n+2) {
+                    width: 100% !important;
+                    display:block;
+                }
+                .subk-deadline{
+                    display: block;
+                    float:left !important;
+                    margin:4px 0 0 15px !important;
+                }
+                .relative-deadline-time{
+                    display:inline-block !important;
+                }
+                .subk-line{
+                    height:75px !important;
+                }
+                .manadd-column-name{
+                    display:block !important;
+                }
+                .block-title.block-cube{
+                    height:auto !important;
+                }
+            }
+            </style>
+        `);
+    }
+}
+
 //ダークモード
 function darkmodeLayout(mode){
     if(mode === 'normal'){

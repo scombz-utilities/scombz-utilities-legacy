@@ -503,3 +503,7 @@ select,input[type="number"],input[type="text"],.inputbox{
     color:#777;
     text-decoration: underline;
 }
+.id-explain{
+    font-size:13px;
+    color:#aaa;
+}

@@ -99,7 +99,7 @@ function getSubTimetable(){
         });
         console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
         chrome.storage.local.set({
-            timetableData : encodeURIComponent(JSON.stringify($timetableData)),
+            timetableData : $timetableData,
             specialSubj : futei
         },function(){
             console.log('ChromeLocalStorageに保存しました');
@@ -120,10 +120,9 @@ function displaySubTimetable($$version){
             console.log('時間割情報が存在しません');
             displayGrayLayer($$version);
         }else{
-            const $timetableDataStr = decodeURIComponent(item.timetableData);
-            console.log('ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします');
-            const $timetableData = JSON.parse($timetableDataStr);
-            console.log('JSONファイルを読み込みました'+$timetableDataStr);
+            console.log('ChromeLocalStrageのアクセスに成功しました');
+            const $timetableData = item.timetableData;
+            console.log('JSONファイルを読み込みました'+JSON.stringify($timetableData));
             let $subTimetable =`
             <style type="text/css">
                 .SubTimetable {
