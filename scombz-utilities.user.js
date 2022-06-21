@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities-for-UserScript
 // @namespace    https://twitter.com/yudai1204
-// @version      3.0.0
+// @version      3.0.
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログイン等を改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -43,7 +43,7 @@ const defaultOptions = {
     styleExamImg: false,
     addSubTimetable: true,
     changeReportBtn: true,
-    styleDialog: true,
+    styleDialog: false,
     hideCompletedReports: true,
     syllBtn: true,
     changeLogout: true,
@@ -108,7 +108,7 @@ function utlstorageSet(object,func){
 }
 
 /* ======================= メイン ======================= */
-const $$version = "3.0.0"; //バージョン
+const $$version = "3.0.1"; //バージョン
 const $$reacquisitionMin = 20;      //再取得までの時間(分)
     //初期設定ロード
     if(localStorage.getItem("scombzUtilities:settings") === null){
