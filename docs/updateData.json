@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.11.3",
+        "date": {
+            "firefox": "Not yet",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "設定項目名表示",
+                "explain": "設定に、オプションIDを併記するようにしました。"
+            }
+        ]
+    },
+    {
         "version": "3.11.2",
         "date": {
             "firefox": "2022/6/19",
