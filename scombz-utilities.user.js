@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities-for-UserScript
 // @namespace    https://twitter.com/yudai1204
-// @version      3.0.
+// @version      3.0.1
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログイン等を改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
