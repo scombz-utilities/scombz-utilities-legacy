@@ -85,7 +85,7 @@ function updateClear(){
         $("#ctrl_btn_clear").click(function(){
             console.log("更新通知削除ボタンがクリックされました");
             let postData="";
-            let updateInfoId;
+            let updateInfoIds;
             if (document.querySelectorAll("#ctrl_menu_notification > li").length > 1 && window.confirm("通知を削除しますか？")) {
 
                 $.get("https://scombz.shibaura-it.ac.jp/updateinfo",
