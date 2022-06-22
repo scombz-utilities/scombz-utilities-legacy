@@ -355,7 +355,7 @@ function customizeCSS(){
 }
 //スマホ判定
 function androidCss(){
-    if ( /android/i.test(navigator.userAgent) && document.head) {
+    if ( (/android/i.test(navigator.userAgent) || screen.width < 480)  && document.head) {
         document.head.insertAdjacentHTML("beforeEnd",`
         <style>
         #pageMain{

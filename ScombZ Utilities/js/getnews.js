@@ -27,7 +27,7 @@ function getNews(){
                     .utilities-news-box{
                         display:block;
                         width:300px;
-                        height:120px;
+                        height:160px;
                         background-color:#fff;
                         border:1px solid #000;
                         position:fixed;
@@ -53,10 +53,6 @@ function getNews(){
                     .utilities-news-remove:hover{
                         background-color:#daa;
                     }
-                    .utilities-news-box h3{
-                        font-size:14px;
-                        margin-bottom:5px;
-                    }
                     .utilities-news-box *{
                         margin:5px;
                         padding:0;
@@ -65,7 +61,6 @@ function getNews(){
                     <div class="utilities-news-box">
                     <div class="utilities-news-remove">×</div>
                     <div style="padding:3px 10px;">
-                    <h3>ScombZ Utilitiesからのお知らせ</h3>
                     <h4>${response[response.length-1].title}</h4>
                     <p>${response[response.length-1].content}</p>
                     <a href="${response[response.length-1].link}">詳細へ</a>

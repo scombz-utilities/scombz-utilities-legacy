@@ -1,7 +1,7 @@
 {
     "manifest_version":3 ,
     "name": "ScombZ Utilities",
-    "version": "3.11.3",
+    "version": "3.12.0",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -28,6 +28,7 @@
                 "lib/encoding/encoding.min.js",
                 "lib/jquery/jquery-3.6.0.min.js",
                 "lib/icsjs/ics.js",
+                "lib/marked/marked.min.js",
                 "js/clickLogin.js",
                 "js/addSubTimetable.js",
                 "js/changeReportBtn.js",

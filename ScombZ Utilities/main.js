@@ -170,6 +170,7 @@
                 //メモ機能
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
+                    addMarkdownToSubj();
                 }
                 
                 //LMSの調整

@@ -1,15 +1,24 @@
 [
     {
-        "version": "3.11.3",
+        "version": "3.12.0",
         "date": {
-            "firefox": "Not yet",
+            "firefox": "2022/6/22",
             "chrome": "Not yet"
         },
         "contents": [
             {
                 "genre": "newFunc",
+                "title": "科目ページメモ機能",
+                "explain": "科目別ページに、メモ機能を追加しました。マークダウン形式で記入できます。"
+            },{
+                "genre": "newFunc",
                 "title": "設定項目名表示",
                 "explain": "設定に、オプションIDを併記するようにしました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "スマホ版設定",
+                "explain": "スマホに導入したときに、表示をスマホに最適化するようにしました。"
             }
         ]
     },
@@ -17,7 +26,7 @@
         "version": "3.11.2",
         "date": {
             "firefox": "2022/6/19",
-            "chrome": "Not yet"
+            "chrome": "2022/6/21"
         },
         "contents": [
             {
