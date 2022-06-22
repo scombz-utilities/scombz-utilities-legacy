@@ -6,6 +6,7 @@
         {
             "matches":["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
             "js": [
+                "marked.min.js",
                 "jquery-3.6.0.min.js",
                 "scombz-utilities-orion.js"
             ]
