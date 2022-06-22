@@ -76,22 +76,25 @@ function hideReport(){
 function materialBlockCreate() {
     let materialOrder;
     let materialList = document.querySelectorAll("#materialList > div");
-
-    if (materialList[1].textContent == "教材資料"){
-        materialOrder = "first";
-    }else{
-        materialOrder = "last";
-    }
     let materialhtml=[];
     let materialListBlock=[];
-
+    let k=0;
     for (let i=0;i<materialList.length;i++){
         if (i==0){continue;}
         if (materialList[i].className == "contents-detail clearfix"){
+            if (materialList[i].textContent == "第1回(No.1)"){
+                k = materialListBlock.length+1;
+            }
             materialListBlock.push(materialhtml);
             materialhtml = [];
         }
         materialhtml.push(materialList[i]);
     }
+    if (k < materialListBlock.length/2){
+        materialOrder = "first";
+    }else{
+        materialOrder = "last";
+    }
+
     return materialOrder,materialListBlock;
 }
