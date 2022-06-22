@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScombZ-Utilities-ORION
 // @namespace    https://twitter.com/yudai1204
-// @version      3.0.1
+// @version      3.1.0
 // @description  より快適なScombZライフのために、サイドメニュー、テスト、ログイン等を改善します
 // @author       @yudai1204
 // @match        https://scombz.shibaura-it.ac.jp/*
@@ -218,6 +218,7 @@ const $$reacquisitionMin = 20;      //再取得までの時間(分)
             //メモ機能
             if(items.notepadMode === true){
                 notepad(items.tasklistDisplay);
+                addMarkdownToSubj();
             }
 
             //LMSの調整
@@ -4413,3 +4414,148 @@ chrome.runtime.onInstalled.addListener(({reason}) => {
         chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}&edition=orion`});
     }
 });
+//マークダウンメモ
+function addMarkdownToSubj(){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        // URLを取得
+        const pageurl = new URL(window.location.href);
+        const idnum = pageurl.searchParams.get('idnumber');
+        document.querySelector(".contents-title").insertAdjacentHTML("beforeBegin",
+        `
+        <style>
+            #mdNotepadAdd{
+                display: inline-block;
+                width: 1.2em;
+                height: 1.2em;
+                background-image: url(data:image/svg+xml;base64,PCEtLT94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPy0tPgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+Cgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9Il94MzFfMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0id2lkdGg6IDI1NnB4OyBoZWlnaHQ6IDI1NnB4OyBvcGFjaXR5OiAxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzM3NDE0OTt9Cjwvc3R5bGU+CjxnPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTQ1NS4yOTUsMjA3LjUxNnYtMC4yM2wtMzcuMzUxLDM3LjQwMnYyMTMuMjE0YzAsOC41ODItNy4yNSwxNS44MjQtMTUuODI4LDE1LjgyNEg1My4xNzYKCQljLTQuMjAzLDAtOC4xNjUtMS42OC0xMS4wODItNC42NTZjLTIuOTk2LTIuOTAyLTQuNzM4LTYuOTU0LTQuNzM4LTExLjE2OFYxMDguOTYxYzAtOC43MjYsNy4wOTgtMTUuODI4LDE1LjgyMS0xNS44MjhIMjY1LjU3CgkJbDIxLjgxNi0yMS43ODFsMTUuNTktMTUuNDA2aC0wLjE2MWwwLjE2MS0wLjE2aC0yNDkuOEMyMy44NTUsNTUuNzg2LDAsNzkuNjQxLDAsMTA4Ljk2MXYzNDguOTQxCgkJYzAsMTQuMTUyLDUuNTQ3LDI3LjQ4OCwxNS42NTYsMzcuNTk0YzkuOTg1LDEwLjA0NiwyMy4zMDksMTUuNTg2LDM3LjUyLDE1LjU4NmgzNDguOTRjMjkuMzI4LDAsNTMuMTc5LTIzLjg1OSw1My4xNzktNTMuMTc5CgkJVjMxMS4xOGwwLjExOC0xMDMuNzgxTDQ1NS4yOTUsMjA3LjUxNnoiPjwvcGF0aD4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MzAuODExLDMyLjYzM2MtMi4wOTQtMi4xMDItNC44NC0zLjE2NC03LjUyNy0zLjE2NGMtMi41MzEsMC4wMDQtNS4wMTksMC45MzgtNi45MDIsMi44MjFMMTM4LjQxNCwzMTAuMDk0CgkJTDc5Ljk3Myw0MjMuNjMyYy0xLjE4LDMuNzc0LDEuODk0LDcuNDc3LDUuNTY2LDcuNDc3YzAuNTM4LDAsMS4wOTgtMC4wODIsMS42NTYtMC4yNThMMjAwLjgsMzcyLjQ0OUw0NzguNzcyLDk0LjY0NQoJCWMzLjg5LTMuODksMy43MzgtMTAuMzUyLTAuMzM2LTE0LjQzTDQzMC44MTEsMzIuNjMzeiBNMTE2LjMxMiwzOTQuNDM3bDM2LjQwNi03MC43MjZsMjYuMzgyLDI2LjM2N2w4LjAzMSw4LjA5NGwtMzkuMjUsMjAuMTgKCQlMMTE2LjMxMiwzOTQuNDM3eiBNMTk5LjY1NiwzNDYuODA0bC0zNS41ODYtMzUuNTY2TDQyMy40MjksNTIuMDMybDM1LjU4NiwzNS41N2wtMjU3Ljg5LDI1Ny43MzRMMTk5LjY1NiwzNDYuODA0eiI+PC9wYXRoPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTUwNy4wNjUsMzkuNTc5bC0zMy43NTgtMzMuNzNjLTMuMjg1LTMuMjg5LTcuNTk0LTQuOTMtMTEuOTA2LTQuOTNjLTQuMzEyLDAtOC42MjUsMS42NDUtMTEuOTE0LDQuOTI2CgkJbC0xMS44MDEsMTEuNzkzdjAuMDA0bDAsMGwtMC4xMTgsMC4xMWw1Ny41ODIsNTcuNTQ2bDExLjkxNC0xMS45MDJDNTEzLjY0Nyw1Ni44MTcsNTEzLjY0Myw0Ni4xNTMsNTA3LjA2NSwzOS41Nzl6Ij48L3BhdGg+CjwvZz4KPC9zdmc+Cg==);
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin-left:1em;
+                margin-top:-0.1em;
+                float:left;
+                cursor:pointer;
+            }
+            #mdNotepadAdd:hover{
+                opacity:0.7;
+            }
+            #mdNotepadMd{
+                width: 100%;
+                height: auto;
+                min-height: 100px;
+                font-size: 15px;
+                resize: vertical;
+            }
+            .md-exp{
+                font-size: 12px;
+            }
+            .md-exp:nth-child(1) a{
+                color:#777;
+            }
+            #mdNotepadArea{
+                font-size:14px;
+                font-weight:normal;
+            }
+        </style>
+        <div class="contents-title">
+            <div class="contents-title-txt">
+                <div class="course-view-title-txt" style="min-height:1em;">
+                    <span style="float:left;">メモ</span><span id="mdNotepadAdd"></span>
+                </div>
+                <div id="mdNotepadArea"></div>
+            </div>
+        </div>
+        `
+        );
+        const mdNotepadArea = document.getElementById("mdNotepadArea");
+        loadSubjNotepad();
+        function loadSubjNotepad(){
+            utlstorageGet({
+                mdNotepadData : []
+            },function(items){
+                console.log(items.mdNotepadData);
+                while(mdNotepadArea.lastChild){
+                    mdNotepadArea.removeChild(mdNotepadArea.lastChild);
+                }
+                let mdvalue = "";
+                for(const mdNote of items.mdNotepadData){
+                    if(mdNote.id == idnum){
+                        mdvalue = mdNote.value;
+                        break;
+                    }
+                }
+                
+                mdNotepadArea.insertAdjacentHTML("beforeEnd",marked.parse(mdvalue));
+            });
+        }
+        //クリックイベント
+        document.getElementById("mdNotepadAdd").addEventListener("click",function(){
+            utlstorageGet({
+                mdNotepadData : []
+            },function(items){
+                while(mdNotepadArea.lastChild){
+                    mdNotepadArea.removeChild(mdNotepadArea.lastChild);
+                }
+                const mdNotepad = document.createElement("textarea");
+                mdNotepad.id = "mdNotepadMd";
+                let mdvalue = "";
+                for(const mdNote of items.mdNotepadData){
+                    if(mdNote.id == idnum){
+                        mdvalue = mdNote.value;
+                        break;
+                    }
+                }
+                mdNotepad.value = mdvalue;
+                mdNotepadArea.insertAdjacentHTML("beforeend",`
+                <div>
+                <p class="md-exp">
+                    <a href="https://qiita.com/kamorits/items/6f342da395ad57468ae3" target="_blank" rel="noopener noreferrer">マークダウン形式</a>で記入することができます。<br>色を付けたい場合は<a href="https://qiita.com/twipg/items/d8043cd4681a2780c160" target="_blank" rel="noopener noreferrer">こちら</a>を参考に。
+                </p>
+                </div>
+                `);
+                mdNotepadArea.appendChild(mdNotepad);
+                mdNotepadArea.insertAdjacentHTML("beforeend",`
+                    <div class="md-exp">
+                        <a id="mdSaveButton" class="btn btn-inline btn-file-margin btn-txt btn-color">保存する</a>
+                        <a id="mdCancelButton" class="btn btn-inline btn-file-margin btn-txt btn-color">キャンセル</a>
+                    </div>
+                `);
+                document.getElementById("mdSaveButton").addEventListener("click",function(){
+                    utlstorageGet({
+                        mdNotepadData : []
+                    },function(item){
+                        let mdNotepadDataNew = item.mdNotepadData;
+                        for(let i = 0; i < mdNotepadDataNew.length; i++){
+                            if(mdNotepadDataNew[i].id == idnum){
+                                mdNotepadDataNew[i].value = mdNotepad.value;
+                                break;
+                            }
+                            if( i === mdNotepadDataNew.length-1){
+                                mdNotepadDataNew.push({
+                                    id: idnum,
+                                    value: mdNotepad.value
+                                });
+                                break;
+                            }
+                        }
+                        if(mdNotepadDataNew.length === 0){
+                            mdNotepadDataNew.push({
+                                id: idnum,
+                                value: mdNotepad.value
+                            });
+                        }
+                        console.log(mdNotepadDataNew);
+                        utlstorageSet({
+                            mdNotepadData: mdNotepadDataNew
+                        },()=>{
+                            console.log("Saved");
+                            loadSubjNotepad();
+                        });
+                    })
+                });
+                document.getElementById("mdCancelButton").addEventListener("click",function(){
+                    loadSubjNotepad();
+                });
+            });
+        });
+    }
+}
