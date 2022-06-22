@@ -1,5 +1,24 @@
 [
     {
+        "version": "3.12.1",
+        "date": {
+            "firefox": "Not yet",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "optimisation",
+                "title": "アンケート提出課題更新",
+                "explain": "アンケート提出時に課題一覧を更新するようにしました。"
+            },
+            {
+                "genre": "style",
+                "title": "ダークモード",
+                "explain": "ダークモードのスタイリングを修正しました。"
+            }
+        ]
+    },
+    {
         "version": "3.12.0",
         "date": {
             "firefox": "2022/6/22",
