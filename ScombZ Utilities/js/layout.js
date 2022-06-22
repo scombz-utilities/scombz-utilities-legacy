@@ -430,7 +430,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.6 */
+        /* ScombZ Darkmode CSS v0.7 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -501,7 +501,7 @@ function darkmodeLayout(mode){
         /*サイドメニュー関連*/
 
         .sidemenu-logo > a > img{
-        filter: drop-shadow(0 0px 4px #fff);
+        filter: drop-shadow(0 0px 1px #fff) drop-shadow(0 0px 1px #aaa) drop-shadow(0 0px 1px #aaa);
         }
         .hamburger-icon .hamburger-line {
         background-color: #ecedea;
@@ -934,6 +934,15 @@ function darkmodeLayout(mode){
         }
         #manAddtaskSelectLayer{
             background-color:#333 !important;
+        }
+        #mdNotepadAdd{
+            filter: invert(0.8);
+        }
+        .header-clear .header-icon-space{
+            border-color: #303134 !important;
+        }
+        .now-period {
+            background: rgb(20 126 60) !important;
         }
             `;
         if(mode === 'relative'){

@@ -53,7 +53,15 @@ function styleSurveys(){
             }
         }
     }
+    //アンケート提出完了画面
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/surveys/take?complete")){
+        setTimeout(function(){
+            getSurveysByAjax();
+        },500);
+    }
 }
+
+
 //アンケート一覧に過去のアンケートを追加
 function pastSurvey(){
     if(location.href === "https://scombz.shibaura-it.ac.jp/portal/surveys/list"){
