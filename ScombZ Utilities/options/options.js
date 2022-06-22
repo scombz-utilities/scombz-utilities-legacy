@@ -330,8 +330,9 @@ function save_options() {
         `<li id="subjectElement3" draggable="true"><div class="list-radius">課題</div></li>`,
         `<li id="subjectElement4" draggable="true"><div class="list-radius">教材</div></li>`,
         `<li id="subjectElement5" draggable="true"><div class="list-radius">テスト</div></li>`,
-        `<li id="subjectElement6" draggable="true"><div class="list-radius">ディスカッション</div></li>`,
-        `<li id="subjectElement7" draggable="true"><div class="list-radius">出席</div></li>`
+        `<li id="subjectElement6" draggable="true"><div class="list-radius">アンケート</div></li>`,
+        `<li id="subjectElement7" draggable="true"><div class="list-radius">ディスカッション</div></li>`,
+        `<li id="subjectElement8" draggable="true"><div class="list-radius">出席</div></li>`
         ];
         let subjectsEnd = `<li style="display: none;"></li>`;
         let numbers = [...items];

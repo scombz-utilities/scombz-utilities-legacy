@@ -12,6 +12,7 @@ function subjectListOrder(items) {
         subjectdivs.push(document.getElementById("report"));
         subjectdivs.push(document.getElementById("courseContent"));
         subjectdivs.push(document.getElementById("examination"));
+        subjectdivs.push(document.getElementById("questionnaire"));
         subjectdivs.push(document.getElementById("discussion"));
         subjectdivs.push(document.getElementById("attendance"));
         let subjectheader = document.querySelector("#courseTopForm > div.course-header");
