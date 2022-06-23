@@ -233,6 +233,24 @@ function styleExam(){
                 getTaskLists(0);
             },500);
         }
+        if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/takeresult")){
+            document.head.insertAdjacentHTML("beforeEnd",`
+            <style>
+            .course-header .course-header-detail .contents-detail .hides{
+                opacity: 0;
+            }
+            </style>
+            `);
+            const contentsInputAreas = document.querySelectorAll(".course-header .course-header-detail .contents-detail .contents-input-area");
+            for(const contentsInputArea of contentsInputAreas){
+                contentsInputArea.addEventListener("click",function(){
+                    if(contentsInputArea.classList.contains("hides"))
+                        contentsInputArea.classList.remove("hides");
+                    else
+                        contentsInputArea.classList.add("hides");
+                });
+            }
+        }
     }
     return;
 }
