@@ -251,7 +251,7 @@ function displayTaskListsOnGrayLayer(){
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
-        maxTaskDisplay: 16,
+        maxTaskDisplay: 15,
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
         highlightDeadline : true
@@ -321,7 +321,7 @@ function displayTaskListsOnGrayLayer(){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 const nowUnix = Date.now();
-                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 -j; i++){
+                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay -j; i++){
                     //先の課題は表示しない
                     if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(items.undisplayFutureTaskDays))){
                         break;
