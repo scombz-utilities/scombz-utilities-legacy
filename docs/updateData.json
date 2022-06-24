@@ -2,7 +2,7 @@
     {
         "version": "3.12.1",
         "date": {
-            "firefox": "Not yet",
+            "firefox": "2022/6/25",
             "chrome": "Not yet"
         },
         "contents": [
@@ -15,6 +15,16 @@
                 "genre": "style",
                 "title": "ダークモード",
                 "explain": "ダークモードのスタイリングを修正しました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "自動調整機能",
+                "explain": "課題一覧の最大表示数を設定していない場合、自動で調整されるようになりました。"
+            },
+            {
+                "genre": "newFunc",
+                "title": "学番一時非表示",
+                "explain": "テスト結果閲覧画面で、学番をクリックすることで一時的に非表示にできるようになりました。"
             }
         ]
     },
@@ -22,7 +32,7 @@
         "version": "3.12.0",
         "date": {
             "firefox": "2022/6/22",
-            "chrome": "Not yet"
+            "chrome": "2022/6/24"
         },
         "contents": [
             {
