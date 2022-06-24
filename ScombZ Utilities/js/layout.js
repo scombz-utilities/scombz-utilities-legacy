@@ -353,6 +353,34 @@ function customizeCSS(){
     });
     return;
 }
+//課題一覧自動調整
+function adjustTasklistPos(){
+    chrome.storage.local.get({
+        tasklistTranslate : 0,
+        maxTaskDisplay : 15
+    },function(items){
+        if(items.tasklistTranslate == 0 && items.maxTaskDisplay == 15){
+            let max = 15;
+            if(screen.height < 700){
+                max = 3;
+            }
+            else if(screen.height < 801){
+                max = 6;
+            }
+            else if(screen.height < 950){
+                max = 10;
+            }
+            if(screen.height < 950){
+                chrome.storage.local.set({
+                    maxTaskDisplay : max
+                }
+                ,function(){
+                        alert("課題表示最大数を自動調整しました。");
+                });
+            }
+        }
+    })
+}
 //スマホ判定
 function androidCss(){
     if ( (/android/i.test(navigator.userAgent) || screen.width < 480)  && document.head) {
