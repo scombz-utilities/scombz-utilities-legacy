@@ -1,9 +1,75 @@
 [
     {
+        "version": "3.12.1",
+        "date": {
+            "firefox": "2022/6/25",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "optimisation",
+                "title": "アンケート提出課題更新",
+                "explain": "アンケート提出時に課題一覧を更新するようにしました。"
+            },
+            {
+                "genre": "style",
+                "title": "ダークモード",
+                "explain": "ダークモードのスタイリングを修正しました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "自動調整機能",
+                "explain": "課題一覧の最大表示数を設定していない場合、自動で調整されるようになりました。"
+            },
+            {
+                "genre": "newFunc",
+                "title": "学番一時非表示",
+                "explain": "テスト結果閲覧画面で、学番をクリックすることで一時的に非表示にできるようになりました。"
+            }
+        ]
+    },
+    {
+        "version": "3.12.0",
+        "date": {
+            "firefox": "2022/6/22",
+            "chrome": "2022/6/24"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "科目ページメモ機能",
+                "explain": "科目別ページに、メモ機能を追加しました。マークダウン形式で記入できます。"
+            },{
+                "genre": "newFunc",
+                "title": "設定項目名表示",
+                "explain": "設定に、オプションIDを併記するようにしました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "スマホ版設定",
+                "explain": "スマホに導入したときに、表示をスマホに最適化するようにしました。"
+            }
+        ]
+    },
+    {
+        "version": "3.11.2",
+        "date": {
+            "firefox": "2022/6/19",
+            "chrome": "2022/6/21"
+        },
+        "contents": [
+            {
+                "genre": "optimisation",
+                "title": "ADFS二段階認証修正",
+                "explain": "ADFSで二段階認証をオンにしているユーザー向けに、ワンタイムパスワード入力時はスキップボタンを押さないようにしました。"
+            }
+        ]
+    },
+    {
         "version": "3.11.1",
         "date": {
             "firefox": "2022/6/15",
-            "chrome": "Not yet"
+            "chrome": "2022/6/16"
         },
         "contents": [
             {
@@ -22,7 +88,7 @@
         "version": "3.11.0",
         "date": {
             "firefox": "2022/6/14",
-            "chrome": "Not yet"
+            "chrome": "2022/6/16"
         },
         "contents": [
             {
@@ -41,7 +107,7 @@
         "version": "3.10.3",
         "date": {
             "firefox": "2022/6/13",
-            "chrome": "Not yet"
+            "chrome": "2022/6/16"
         },
         "contents": [
             {

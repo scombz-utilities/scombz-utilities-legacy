@@ -2,7 +2,7 @@
 /* exitSidemenu.js */
 function exitSidemenu(){
     'use strict';
-    var $closeButton = document.getElementById('sidemenuClose');
+    const $closeButton = document.getElementById('sidemenuClose');
     if($closeButton){
         console.log('メニューを閉じます');
         //一時的にサイドメニューのtransitionを無効化する

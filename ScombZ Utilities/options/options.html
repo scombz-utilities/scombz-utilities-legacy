@@ -40,7 +40,7 @@
                 <h3>入学年度と学部の設定</h3>
                 <div class="explains">入学年度と、学部を設定してください。<br>この情報は、シラバスの絞り込みにのみ利用され、それ以外の目的には利用されません。</div>
                 <div class="input-box">
-                    <span class="switch-explain">入学年度<br></span>
+                    <span class="switch-explain">入学年度</span><br><span class="id-explain">year</span><br>
                     <select id="year">
                         <option value="null">設定してください</option>
                         <option value="2015">2015年度入学</option>
@@ -62,7 +62,7 @@
                     </select>
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">学部<br></span>
+                    <span class="switch-explain">学部</span><br><span class="id-explain">fac</span><br>
                     <select id="fac">
                         <option value="null">設定してください</option>
                         <option value="din">大学院</option>
@@ -74,22 +74,22 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ログインボタン自動クリック</h3>
+                <h3>ログインボタン自動クリック</h3><span class="id-explain">clickLoginBtn</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="login_auto"><label class="ItemBox-CheckBox-Label" for="login_auto"></label>
                 <div class="explains">「学生ログイン」ボタンを自動でクリックします。<br>ログイン状態でないときにアクセスすると、すぐにパスワード入力ダイアログが表示されます。</div>
             </div>
             <div class="setting-column">
-                <h3>ADFS自動クリック</h3>
+                <h3>ADFS自動クリック</h3><span class="id-explain">adfsSkip</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="adfs_auto"><label class="ItemBox-CheckBox-Label" for="adfs_auto"></label>
                 <div class="explains">ADFS二段階認証確認画面の次へボタンを自動でクリックします。<br>ログイン後、自動でScombZの画面に入れます。<br>※スマートフォンを利用した二段階認証を利用している方はご利用になれません。</div>
             </div>
             <div class="setting-column">
-                <h3>左メニューを自動で閉じる</h3>
+                <h3>左メニューを自動で閉じる</h3><span class="id-explain">exitSidemenu</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="menu_exit_auto"><label class="ItemBox-CheckBox-Label" for="menu_exit_auto"></label>
                 <div class="explains">ScombZの左側に表示されるサイドメニューを、常に閉じた状態でページ読み込みします。<br>メニューボタンを押すことで展開できます。<br>左メニュースタイル変更をオンにしている場合は、本項目もオンにすることが推奨されます。</div>
             </div>
             <div class="setting-column">
-                <h3>左メニューのスタイル変更</h3>
+                <h3>左メニューのスタイル変更</h3><span class="id-explain">styleSidemenu</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="submenu"><label class="ItemBox-CheckBox-Label" for="submenu"></label>
                 <div class="explains">ScombZの左側に表示されるサイドメニューを、ユーザビリティに配慮したスタイルに変更します。<br>表示だけでなく、グレーの部分をクリックすることによっても、メニューを閉じられるようになります。<br>
                     <div class="wrap">
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>メニュー横の時間割表示(※左メニュースタイル変更必須)</h3>
+                <h3>メニュー横の時間割表示(※左メニュースタイル変更必須)</h3><span class="id-explain">addSubTimetable</span>
                 <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="additional_lms"><label class="ItemBox-CheckBox-Label" for="additional_lms"></label>
                 <div class="explains">サイドメニュー展開時に、右のスペースに簡易的な時間割を表示します。<br>この時間割はLMS以外の画面でも展開できるため、科目ページに直接アクセスできます。<br>
@@ -130,7 +130,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>メニュー横の課題表示(※左メニュースタイル変更必須)</h3>
+                <h3>メニュー横の課題表示(※左メニュースタイル変更必須)</h3><span class="id-explain">tasklistDisplay</span>
                 <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="tasklistDisplay"><label class="ItemBox-CheckBox-Label" for="tasklistDisplay"></label>
                 <div class="explains">サイドメニュー展開時に、右のスペースに簡易的なテスト・課題一覧を表示します。<br>この課題一覧は、約20分毎に自動更新され、課題一覧ページに直接飛ぶか、最終更新時刻をクリックすることでも更新できます。<br>
@@ -151,11 +151,11 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ユーザーメモ(※左メニュースタイル変更必須)</h3>
-                <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
+                <h3>ユーザーメモ(※一部左メニュースタイル変更必須)</h3><span class="id-explain">notepadMode</span>
+                <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合一部の機能が自動的にオフになります。</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="notepadMode"><label class="ItemBox-CheckBox-Label" for="notepadMode"></label>
                 <div class="explains">
-                    メニュー横で、自分で追加できるメモを使えるようになります。
+                    メニュー横で、自分で追加できるメモを使えるようになります。<br>また、科目ページにメモを挿入できます。
                 </div>
                 <div class="wrap">
                     <label for="label11">▼詳細を見る</label>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ページヘッダのScombZアイコンのリンク先(※左メニュースタイル変更必須)</h3>
+                <h3>ページヘッダのScombZアイコンのリンク先(※左メニュースタイル変更必須)</h3><span class="id-explain">headLinkTo</span>
                 <span style="color:red;font-size: 13px;">※この設定は、左メニューのスタイル変更がオフの場合自動的にオフになります。</span><br>
                 <div class="explains">
                     ページヘッダの中央部にあるScombZアイコンのリンク先を変更します。
@@ -185,7 +185,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>レポート提出ボタンの変更</h3>
+                <h3>レポート提出ボタンの変更</h3><span class="id-explain">changeReportBtn</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeReportBtn"><label class="ItemBox-CheckBox-Label" for="changeReportBtn"></label>
                 <div class="explains">レポート提出画面に、制作時間の簡易入力ボタンを追加します。また、提出ボタンをユーザビリティに配慮した色や配置にします。<br>
                     <div class="wrap">
@@ -205,14 +205,14 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>テスト・アンケートのスタイルの変更</h3>
+                <h3>テスト・アンケートのスタイルの変更</h3><span class="id-explain">styleExamBtn</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_btn"><label class="ItemBox-CheckBox-Label" for="exam_btn"></label>
                 <div class="explains">
                     レポート提出画面と同様に、テスト確認画面や受験画面をユーザビリティに配慮した色や配置にします。<br>また、誤クリックによって入力したデータが消えることを防止するために、受験中では提出ボタン意外の遷移ボタンを押すと「このサイトを離れてもよろしいですか？」という警告を表示するようになります。<br>そして、テストは1分ごとに自動的に保存されるようになり、Ctrl (Command) + Sキーでも保存ができるようになります。<br>アンケート画面においては、ボタンがユーザビリティが考えられた物に変更されよくなります。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ホイールクリックで新規タブで開けるようにする</h3>
+                <h3>ホイールクリックで新規タブで開けるようにする</h3><span class="id-explain">mouseDown</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="mouseDown"><label class="ItemBox-CheckBox-Label" for="mouseDown"></label>
                 <div class="explains">
                     LMSや授業の添付ファイルなど、ホイールクリックや右クリックができないリンクを、通常のハイパーリンクと同様に、マウスのホイールボタンを押し下げたときに新規タブで開けるようになります。<br>
@@ -220,7 +220,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>完了したレポートをカレンダーに表示しない</h3>
+                <h3>完了したレポートをカレンダーに表示しない</h3><span class="id-explain">hideCompletedReports</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="hideCompletedReports"><label class="ItemBox-CheckBox-Label" for="hideCompletedReports"></label>
                 <div class="explains">ScombZのホーム画面に表示されるカレンダーにおいて、既に提出済みである課題を非表示にします。<br>
                     <div class="wrap">
@@ -240,7 +240,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>おしらせダイアログを大きくする</h3>
+                <h3>おしらせダイアログを大きくする</h3><span class="id-explain">styleDialog</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleDialog"><label class="ItemBox-CheckBox-Label" for="styleDialog"></label>
                 <div class="explains">ScombZのお知らせなどのダイアログを、ウィンドウのサイズまで拡張して見やすくします。<br>また、ダイアログの外をクリックすることでもダイアログを閉じられるようになります。<br>
                     <div class="wrap">
@@ -260,7 +260,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>各科目にシラバスボタンの追加</h3>
+                <h3>各科目にシラバスボタンの追加</h3><span class="id-explain">syllBtn</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="syll_btn"><label class="ItemBox-CheckBox-Label" for="syll_btn"></label>
                 <div class="explains">ScombZの各科目ページから、シラバスへ飛べるようにリンクを設置します。<br>このリンクは自動生成されたものであり、うまく授業のシラバスがみつからなかったり、違う科目の授業が開くことがあります。<br>
                     <div class="wrap">
@@ -277,7 +277,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ログアウトボタンの変更</h3>
+                <h3>ログアウトボタンの変更</h3><span class="id-explain">changeLogout</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="changeLogout"><label class="ItemBox-CheckBox-Label" for="changeLogout"></label>
                 <div class="explains">ログアウト画面を少しだけわかりやすくします。<br>
                     <div class="wrap">
@@ -297,56 +297,56 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>最大横幅を設定</h3>
+                <h3>最大横幅を設定</h3><span class="id-explain">setMaxWidth</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="setMaxWidth"><label class="ItemBox-CheckBox-Label" for="setMaxWidth"></label>
                 <div class="explains">
                     ウィンドウ幅が一定以上の時、各科目の詳細ページ、LMSページ、課題ページが横に広がりすぎるのを防止します。<br>最大幅はデフォルトで1280pxですが、詳細設定で変更できます。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>トップへボタンを消す</h3>
+                <h3>トップへボタンを消す</h3><span class="id-explain">pageTopBtn</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pageTopBtn"><label class="ItemBox-CheckBox-Label" for="pageTopBtn"></label>
                 <div class="explains">
                     常に画面右下にある「トップへ」というボタンを非表示にします。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ダイレクトリンクを消す</h3>
+                <h3>ダイレクトリンクを消す</h3><span class="id-explain">remomveDirectLink</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="remomveDirectLink"><label class="ItemBox-CheckBox-Label" for="remomveDirectLink"></label>
                 <div class="explains">
                     画面左下にある「このページへのダイレクトリンク」というボックスを非表示にします。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>LMSで現在のコマを目立たせる</h3>
+                <h3>LMSで現在のコマを目立たせる</h3><span class="id-explain">styleNowPeriod</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="styleNowPeriod"><label class="ItemBox-CheckBox-Label" for="styleNowPeriod"></label>
                 <div class="explains">
                     LMSページで現在授業中の授業を少し目立たせます。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>課題ドラッグ&ドロップ提出</h3>
+                <h3>課題ドラッグ&ドロップ提出</h3><span class="id-explain">ddSubmission</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="ddSubmission"><label class="ItemBox-CheckBox-Label" for="ddSubmission"></label>
                 <div class="explains">
                     課題提出画面の成果物提出欄をクリックなしで最初からドラッグ&ドロップにします。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>課題削除できないバグの修正</h3>
+                <h3>課題削除できないバグの修正</h3><span class="id-explain">dadbugFix</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="dadbugFix"><label class="ItemBox-CheckBox-Label" for="dadbugFix"></label>
                 <div class="explains">
                     課題提出画面の成果物提出を削除するとき、ドラッグ&ドロップ状態になっていると画面に何も表示されなくなり何もできなくなるという、ScombZ本体のバグを修正します。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>更新通知全削除ボタンを追加</h3>
+                <h3>更新通知全削除ボタンを追加</h3><span class="id-explain">updateClear</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="updateClear"><label class="ItemBox-CheckBox-Label" for="updateClear"></label>
                 <div class="explains">
                     ページ上部に表示されるバナーにある更新通知ボタンの右側に、全ての更新通知を一括で削除するボタンを追加します。<br>このボタンを押すことで、ユーザーは更新一覧画面に行くことなく通知を削除できます。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>出欠表示削除</h3>
+                <h3>出欠表示削除</h3><span class="id-explain">attendance</span>
                 <div class="explains">
                     科目ページの最下部にある出欠表示を削除します。<br>※表示のみを削除することも可能です。
                 </div>
@@ -360,7 +360,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ホーム画面のスタイル変更</h3>
+                <h3>ホーム画面のスタイル変更</h3><span class="id-explain">layoutHome</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="layoutHome"><label class="ItemBox-CheckBox-Label" for="layoutHome"></label>
                 <div class="explains">
                     ホーム画面の表示を変更します。<br>最大横幅(1280px変更不可)が適用され、重要リンク集が右カラムに表示されます。
@@ -381,7 +381,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ページ上部にあるバナーのスタイル</h3>
+                <h3>ページ上部にあるバナーのスタイル</h3><span class="id-explain">fixHeadShadow</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="fixHeadShadow"><label class="ItemBox-CheckBox-Label" for="fixHeadShadow"></label>
                 <div class="explains">
                     透明度がなく、不自然に見える影を修正します。
@@ -402,7 +402,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ダークモード</h3>
+                <h3>ダークモード</h3><span class="id-explain">darkmode</span>
                 <div class="explains">
                     ScombZ Utilitiesによって提供されるScombZのダークモードについて設定します。
                 </div>
@@ -428,21 +428,21 @@
                     </div>
             </div>
             <div class="setting-column">
-                <h3>カレンダーエクスポート</h3>
+                <h3>カレンダーエクスポート</h3><span class="id-explain">exportIcs</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exportIcs"><label class="ItemBox-CheckBox-Label" for="exportIcs"></label>
                 <div class="explains">
                     学年歴データをエクスポートする機能と、LMS時間割をカレンダーとしてエクスポートする機能を追加します。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>過去のアンケートの表示</h3>
+                <h3>過去のアンケートの表示</h3><span class="id-explain">pastSurvey</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="pastSurvey"><label class="ItemBox-CheckBox-Label" for="pastSurvey"></label>
                 <div class="explains">
                     アンケート一覧ページの下部に、過去のアンケート一覧を表示します。<br>このデータは拡張機能本体に累積されていくので、拡張機能導入より前のデータや、拡張機能が一度も読み取れなかったデータにはアクセスできません。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>履修者名表示</h3>
+                <h3>履修者名表示</h3><span class="id-explain">displayName</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="displayName"><label class="ItemBox-CheckBox-Label" for="displayName"></label>
                 <div class="explains">
                     ページ右上部に表示される履修者名の表示を変更します。<br>この設定をオンにすると、右上部に名前が表示されなくなります。<br>詳細設定から、表示名をニックネーム等に変更することもできます。
@@ -450,7 +450,7 @@
             </div>
 
             <hr>
-            <h2>時間割設定</h2>
+            <h2>時間割設定</h2><span class="id-explain">adjustTimetableData</span><br>
             時間割に関する設定です。<br>
             <div><h3>表示デモ</h3>
                 <div class="ttgraylayer">
@@ -469,35 +469,35 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>土曜日非表示</h3>
+                <h3>土曜日非表示</h3><span class="id-explain">eraseSat</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="eraseSat"><label class="ItemBox-CheckBox-Label" for="eraseSat"></label>
                 <div class="explains">
                     LMS画面・メニュー横時間割の両方からから土曜日の列を削除し、非表示にします。<br>土曜日授業がない場合におすすめです。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>6限非表示</h3>
+                <h3>6限非表示</h3><span class="id-explain">erase6</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="erase6"><label class="ItemBox-CheckBox-Label" for="erase6"></label>
                 <div class="explains">
                     LMS画面・メニュー横時間割の両方からから6限の行を削除し、非表示にします。<br>6限授業がない場合におすすめです。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>7限非表示</h3>
+                <h3>7限非表示</h3><span class="id-explain">erase7</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="erase7"><label class="ItemBox-CheckBox-Label" for="erase7"></label>
                 <div class="explains">
                     LMS画面・メニュー横時間割の両方からから7限の行を削除し、非表示にします。<br>6限授業がない場合におすすめです。
                 </div>
             </div>
             <div class="setting-column">
-                <h3>LMS教室表示</h3>
+                <h3>LMS教室表示</h3><span class="id-explain">dispClassroom</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="dispClassroom"><label class="ItemBox-CheckBox-Label" for="dispClassroom"></label>
                 <div class="explains">
                     LMS画面で、講義名の下に表示される講師名を削除し、教室表示に置き換えます。長すぎる教室名は途中までしか表示されませんが、変更前と同様に、ホバーするとすべての教室が確認できます。
                 </div>
             </div>            
             <div class="setting-column">
-                <h3>LMSセンタリング</h3>
+                <h3>LMSセンタリング</h3><span class="id-explain">timetableCentering</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="timetableCentering"><label class="ItemBox-CheckBox-Label" for="timetableCentering"></label>
                 <div class="explains">
                     時間割での講義・講師名(教室名)を中央寄せします。
@@ -610,7 +610,7 @@
             <h2>実験的な設定</h2>
             バグが確認されているか、バグになる可能性が高い設定です。<br>
             <div class="setting-column">
-                <h3>テストの画像スタイル変更(実験的)</h3>
+                <h3>テストの画像スタイル変更(実験的)</h3><span class="id-explain">styleExamImg</span>
                 <span style="color:red;font-size: 13px;">※この設定は実験的です。必要がない場合はオフにしてください</span><br>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="exam_img"><label class="ItemBox-CheckBox-Label" for="exam_img"></label>
                 <div class="explains">
@@ -624,26 +624,26 @@
             <h1 class="subtitle">詳細設定</h1>
             <hr>
             <div class="setting-column">
-                <h3>最大横幅の設定</h3>
+                <h3>最大横幅の設定</h3><span class="id-explain">maxWidthPx</span>
                 <div class="explains">
                     ウィンドウ幅が一定以上の時、各科目の詳細ページ、LMSページ、課題ページがここで設定した最大値以上に横に広がらなくなります。<br>デフォルトは1280pxです。
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">教科の詳細ページの横幅(px)<br></span>
+                    <span class="switch-explain">教科の詳細ページの横幅(px)<br></span><span class="id-explain">subj</span><br>
                     <input type="number" id="subjWidth">
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">LMSページの横幅(px)<br></span>
+                    <span class="switch-explain">LMSページの横幅(px)<br></span><span class="id-explain">lms</span><br>
                     <input type="number" id="lmsWidth">
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">課題ページの横幅(px)<br></span>
+                    <span class="switch-explain">課題ページの横幅(px)<br></span><span class="id-explain">task</span><br>
                     <input type="number" id="taskWidth">
                 </div>
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>ニックネームの設定</h3>
+                <h3>ニックネームの設定</h3><span class="id-explain">nickname</span>
                 <div class="explains">
                     ページ右上部に表示される履修者名の表示を変更します。
                 </div>
@@ -659,7 +659,7 @@
                     レポート提出時に、作成時間を簡易入力するためのボタン及びスライダーバーの値をカスタマイズします
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">ボタンの選択<br></span>
+                    <span class="switch-explain">ボタンの選択<br></span><span class="id-explain">timesBtnValue</span><br>
                     <select id="timesBtnValue" style="width:350px;">
                         <option value="mode1">10分,30分,60分,100分,200分,300分,600分</option>
                         <option value="mode2">10分,30分,60分,120分,180分,300分,600分</option>
@@ -668,13 +668,13 @@
                     </select>
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">スライダーバーの最大値(分)<br></span>
+                    <span class="switch-explain">スライダーバーの最大値(分)<br></span><span class="id-explain">sliderBarMax</span><br>
                     <input type="number" id="sliderBarMax">
                 </div>
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>課題一覧の位置調整</h3>
+                <h3>課題一覧の位置調整</h3><span class="id-explain">tasklistTranslate</span>
                 <div class="explains">
                     メニュー横の課題表示をオンにしていた場合表示される「課題一覧」の表示高さを調整します。<br>この値を大きくすると表示位置が下に移動し、小さくすると上に移動します。
                 </div>
@@ -685,7 +685,7 @@
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>課題一覧の表示方式</h3>
+                <h3>課題一覧の表示方式</h3><span class="id-explain">deadlinemode</span>
                 <div class="explains">
                     メニュー横の課題表示をオンにしていた場合表示される「課題一覧」の、提出期限の表示方式を選択します。
                 </div>
@@ -702,7 +702,7 @@
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>課題一覧の最大表示数</h3>
+                <h3>課題一覧の最大表示数</h3><span class="id-explain">maxTaskDisplay</span>
                 <div class="explains">
                     メニュー横の課題表示をオンにしていた場合表示される「課題一覧」の最大表示数を設定します。デフォルトで15ですが、お使いのPCの画面高さによってははみ出ると思うので、お好みで調整してください。<br />
                     ※この数を超える課題は、存在していても表示されません。課題がなくなったわけではないことに注意してください。
@@ -714,7 +714,7 @@
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>一定より先の課題を表示しない</h3>
+                <h3>一定より先の課題を表示しない</h3><span class="id-explain">undisplayFutureTaskDays</span>
                 <div class="explains">
                     メニュー横の課題表示をオンにしていた場合表示される「課題一覧」で、30日後などかなり先の課題を非表示にできます。ここでは表示する限度の日数を設定できます。<br />
                     ※この数を超える課題は、存在していても表示されません。課題がなくなったわけではないことに注意してください。
@@ -725,7 +725,7 @@
                 <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column">
-                <h3>課題一覧を提出期限でハイライトする</h3>
+                <h3>課題一覧を提出期限でハイライトする</h3><span class="id-explain">highlightDeadline</span>
                 <input class="ItemBox-CheckBox-Input"  type="checkbox" id="highlightDeadline"><label class="ItemBox-CheckBox-Label" for="highlightDeadline"></label>
                 <div class="explains">
                     メニュー横の課題表示をオンにしていた場合表示される「課題一覧」で、特に提出期限が近い課題を目立たせます。<br />
@@ -733,7 +733,7 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>ファイル名の自動入力設定</h3>
+                <h3>ファイル名の自動入力設定</h3><span class="id-explain">defaultInputName</span>
                 <div class="explains">
                     レポート提出時にファイル名自動入力ボタンを押した際に入力される文字列を変更します
                 </div>
@@ -788,6 +788,7 @@
                 <li>jQuery</li>
                 <li>CodeMirror</li>
                 <li>ics.js</li>
+                <li>marked.js</li>
                 </ul>
             </p>
             <p>制作 : <a class="links" href="https://twitter.com/yudai1204">うだい</a></p>

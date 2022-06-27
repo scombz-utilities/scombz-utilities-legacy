@@ -99,7 +99,7 @@ function getSubTimetable(){
         });
         console.log('LMSを取得しました\n\n'+JSON.stringify($timetableData));
         chrome.storage.local.set({
-            timetableData : encodeURIComponent(JSON.stringify($timetableData)),
+            timetableData : $timetableData,
             specialSubj : futei
         },function(){
             console.log('ChromeLocalStorageに保存しました');
@@ -120,10 +120,9 @@ function displaySubTimetable($$version){
             console.log('時間割情報が存在しません');
             displayGrayLayer($$version);
         }else{
-            const $timetableDataStr = decodeURIComponent(item.timetableData);
-            console.log('ChromeLocalStrageのアクセスに成功しました\nJSONファイルにparseします');
-            const $timetableData = JSON.parse($timetableDataStr);
-            console.log('JSONファイルを読み込みました'+$timetableDataStr);
+            console.log('ChromeLocalStrageのアクセスに成功しました');
+            const $timetableData = item.timetableData;
+            console.log('JSONファイルを読み込みました'+JSON.stringify($timetableData));
             let $subTimetable =`
             <style type="text/css">
                 .SubTimetable {
@@ -252,7 +251,7 @@ function displayTaskListsOnGrayLayer(){
         specialSubj: 0,
         tasklistTranslate: 0,
         deadlinemode: 'absolute-relative',
-        maxTaskDisplay: 16,
+        maxTaskDisplay: 15,
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
         highlightDeadline : true
@@ -322,7 +321,7 @@ function displayTaskListsOnGrayLayer(){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 const nowUnix = Date.now();
-                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay+1 -j; i++){
+                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay -j; i++){
                     //先の課題は表示しない
                     if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(items.undisplayFutureTaskDays))){
                         break;

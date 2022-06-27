@@ -1,13 +1,14 @@
 {
     "manifest_version":2,
     "name": "ScombZ Utilities ORION",
-    "version": "0.1.0",
+    "version": "3.1.0",
     "content_scripts":[
         {
             "matches":["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*"],
             "js": [
+                "marked.min.js",
                 "jquery-3.6.0.min.js",
-                "scombz-utilities.user.js"
+                "scombz-utilities-orion.js"
             ]
         }
     ]

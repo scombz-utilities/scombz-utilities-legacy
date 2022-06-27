@@ -102,7 +102,6 @@
                 if(items.clickLoginBtn === true){
                     clickLoginBtn();
                 }
-                
                 //サイドメニューを閉じる
                 if(items.exitSidemenu === true){
                     exitSidemenu();
@@ -176,6 +175,7 @@
                 //メモ機能
                 if(items.notepadMode === true){
                     notepad(items.tasklistDisplay);
+                    addMarkdownToSubj();
                 }
                 
                 //LMSの調整
@@ -236,6 +236,8 @@
                 getNews();
                 //カスタムCSSの適用
                 customizeCSS();
+                //スマホレイアウト適用
+                androidCss();
                 console.log('すべての機能の実行が完了しました');
             }
         });

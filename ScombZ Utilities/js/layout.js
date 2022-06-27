@@ -353,6 +353,103 @@ function customizeCSS(){
     });
     return;
 }
+//課題一覧自動調整
+function adjustTasklistPos(){
+    chrome.storage.local.get({
+        tasklistTranslate : 0,
+        maxTaskDisplay : 15
+    },function(items){
+        if(items.tasklistTranslate == 0 && items.maxTaskDisplay == 15){
+            let max = 15;
+            if(screen.height < 700){
+                max = 3;
+            }
+            else if(screen.height < 801){
+                max = 6;
+            }
+            else if(screen.height < 950){
+                max = 10;
+            }
+            if(screen.height < 950){
+                chrome.storage.local.set({
+                    maxTaskDisplay : max
+                }
+                ,function(){
+                        alert("課題表示最大数を自動調整しました。");
+                });
+            }
+        }
+    })
+}
+//スマホ判定
+function androidCss(){
+    if ( (/android/i.test(navigator.userAgent) || screen.width < 480)  && document.head) {
+        document.head.insertAdjacentHTML("beforeEnd",`
+        <style>
+        #pageMain{
+            overflow-x:hidden;
+            margin-top: 59px;
+            }
+            #page_head{
+            position: fixed;
+            }
+            .sidemenu-hide{
+            min-width:100vw;
+            }
+            .page-main #graylayer{
+            margin-top: -59px;
+            }
+            @media (max-width: 480px){
+                .page-main {
+                min-width:100vw;
+                }
+            }
+            @media (max-width:899px){
+                #subTimetable{
+                    display:none !important;
+                }
+                #subTaskList{
+                    margin:10px auto;
+                    display: block;
+                    opacity: 1;
+                    visibility: visible;
+                    min-width: 90% !important;
+                    box-shadow: 5px 5px 5px #c2c2c2;
+                }
+                .subk-column:nth-child(3n+1) {
+                    width: fit-content !important;
+                    display:block;
+                    padding:1px 2px;
+                    border:1px solid #ccc;
+                    border-radius:10px;
+                }
+                .subk-column:nth-child(3n+2) {
+                    width: 100% !important;
+                    display:block;
+                }
+                .subk-deadline{
+                    display: block;
+                    float:left !important;
+                    margin:4px 0 0 15px !important;
+                }
+                .relative-deadline-time{
+                    display:inline-block !important;
+                }
+                .subk-line{
+                    height:75px !important;
+                }
+                .manadd-column-name{
+                    display:block !important;
+                }
+                .block-title.block-cube{
+                    height:auto !important;
+                }
+            }
+            </style>
+        `);
+    }
+}
+
 //ダークモード
 function darkmodeLayout(mode){
     if(mode === 'normal'){
@@ -361,7 +458,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.6 */
+        /* ScombZ Darkmode CSS v0.7 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -432,7 +529,7 @@ function darkmodeLayout(mode){
         /*サイドメニュー関連*/
 
         .sidemenu-logo > a > img{
-        filter: drop-shadow(0 0px 4px #fff);
+        filter: drop-shadow(0 0px 1px #fff) drop-shadow(0 0px 1px #aaa) drop-shadow(0 0px 1px #aaa);
         }
         .hamburger-icon .hamburger-line {
         background-color: #ecedea;
@@ -865,6 +962,15 @@ function darkmodeLayout(mode){
         }
         #manAddtaskSelectLayer{
             background-color:#333 !important;
+        }
+        #mdNotepadAdd{
+            filter: invert(0.8);
+        }
+        .header-clear .header-icon-space{
+            border-color: #303134 !important;
+        }
+        .now-period {
+            background: rgb(20 126 60) !important;
         }
             `;
         if(mode === 'relative'){

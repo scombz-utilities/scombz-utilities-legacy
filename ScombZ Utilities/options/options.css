@@ -510,7 +510,6 @@ select,input[type="number"],input[type="text"],.inputbox{
     cursor:pointer;
 }
 
-
 #subjectList li div {
     padding: 0;
 	line-height:3em;
@@ -533,4 +532,10 @@ select,input[type="number"],input[type="text"],.inputbox{
     background: #fff;
     border-radius: 50%;
     margin-right: 8px;
+}
+
+.id-explain{
+    font-size:13px;
+    color:#aaa;
+
 }

@@ -56,6 +56,7 @@ function getTasksByAdjax($$reacquisitionMin){
         }else{
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}`);
             console.log("課題取得を開始します");
+            adjustTasklistPos();
             setTimeout(function(){
             //Ajax通信
             //jQueryを使って実装

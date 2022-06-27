@@ -4,5 +4,17 @@
         "title":"TEST NEWS",
         "content":"This is test.",
         "link":"https://yudai1204.github.io/ScombZ-Utilities/updates.html"
+    },
+    {
+        "id":1,
+        "title":"スマホ版プレリリースのお知らせ",
+        "content":"ScombZ Utilitiesの、iOS/iPadOS/Android向け<br>インストールガイドを公開しました！<br>(開発途中版です)",
+        "link":"https://yudai1204.github.io/ScombZ-Utilities/smartphone.html"
+    },
+    {
+        "id":2,
+        "title":"時間割表示バグについて",
+        "content":"ScombZ Utilities ver3.12.0での時間割の取得・表示システムの変更に伴い、一時的に時間割に何も表示されなくなることがありますが、LMS画面にアクセスすることでデータが更新され再表示されるようになります。ご迷惑をおかけしますが、よろしくお願いします。",
+        "link":"https://twitter.com/yudai1204/status/1540332014326652930"
     }
 ]
