@@ -50,7 +50,8 @@
                 "js/clearButton.js",
                 "js/attendance.js",
                 "js/exportCalender.js",
-                "js/getnews.js"
+                "js/getnews.js",
+                "js/layoutSubject.js"
             ]
         }
     ],
@@ -61,7 +62,7 @@
         "https://yudai1204.github.io/"
     ],
     "web_accessible_resources": [{
-        "resources": ["gcal/*"],
+        "resources": ["gcal/*","imgs/*"],
         "matches": ["<all_urls>"]
     }]
 }

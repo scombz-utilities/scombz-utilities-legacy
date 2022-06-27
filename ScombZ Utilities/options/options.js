@@ -51,7 +51,12 @@ const defaultOptions = {
         subj: 1280,
         lms: 1280,
         task: 1280
-    }
+    },
+    subjectList : "1234567",
+    materialTop : 'none',
+    materialHide : 'none',
+    reportHide : 'none',
+    testHide : 'none'
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -104,6 +109,11 @@ function save_options() {
     const exportIcs = document.getElementById('exportIcs').checked;
     const highlightDeadline = document.getElementById('highlightDeadline').checked;
     const pastSurvey = document.getElementById('pastSurvey').checked;
+    const subjectList = document.getElementById('subjectListNum').textContent;
+    const materialTop = document.getElementById('materialTop').value;
+    const materialHide = document.getElementById('materialHide').value;
+    const reportHide = document.getElementById('reportHide').value;
+    const testHide = document.getElementById('testHide').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -157,7 +167,13 @@ function save_options() {
             subj: subjWidth,
             lms: lmsWidth,
             task: taskWidth
-        }
+        },
+        subjectList : subjectList,
+        materialTop : materialTop,
+        materialHide : materialHide,
+        reportHide : reportHide,
+        testHide : testHide
+        
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -218,7 +234,14 @@ function save_options() {
         document.getElementById('exportIcs').checked = items.exportIcs;
         document.getElementById('highlightDeadline').checked = items.highlightDeadline;
         document.getElementById('pastSurvey').checked = items.pastSurvey;
+        document.getElementById('subjectListNum').textContent = items.subjectList;  
+        document.getElementById('materialTop').value = items.materialTop;
+        document.getElementById('materialHide').value = items.materialHide;
+        document.getElementById('reportHide').value = items.reportHide;
+        document.getElementById('testHide').value = items.testHide;
+        restoreSubject(items.subjectList);
     });
+    
     }
     document.addEventListener('DOMContentLoaded', restore_options);
     //チェックボックスが更新されたら保存
@@ -303,3 +326,66 @@ function save_options() {
             window.alert("非表示の課題をリセットしました");
         });
     });
+    //科目ページの要素並び替え
+    function restoreSubject(items) {
+        let subjects = [
+        `<li id="subjectElement1" draggable="true"><div class="list-radius">担当教員へのメッセージ</div></li>`,
+        `<li id="subjectElement2" draggable="true"><div class="list-radius">お知らせ</div></li>`,
+        `<li id="subjectElement3" draggable="true"><div class="list-radius">課題</div></li>`,
+        `<li id="subjectElement4" draggable="true"><div class="list-radius">教材</div></li>`,
+        `<li id="subjectElement5" draggable="true"><div class="list-radius">テスト</div></li>`,
+        `<li id="subjectElement6" draggable="true"><div class="list-radius">アンケート</div></li>`,
+        `<li id="subjectElement7" draggable="true"><div class="list-radius">ディスカッション</div></li>`,
+        `<li id="subjectElement8" draggable="true"><div class="list-radius">出席</div></li>`
+        ];
+        let subjectsEnd = `<li style="display: none;"></li>`;
+        let numbers = [...items];
+        let targetul = document.getElementById("subjectList");
+        for (const number of numbers){
+            targetul.insertAdjacentHTML('beforeend',subjects[Number(number)-1]);
+        }
+        targetul.insertAdjacentHTML('beforeend',subjectsEnd);
+
+        document.querySelectorAll('#subjectList li').forEach (elm => {
+            elm.ondragstart = function () {
+                event.dataTransfer.setData('text/plain', event.target.id);
+            };
+            elm.ondragover = function () {
+                event.preventDefault();
+                let rect = this.getBoundingClientRect();
+                if ((event.clientY - rect.top) < (this.clientHeight / 2)) {
+                    this.style.borderTop = '2px solid blue';
+                    this.style.borderBottom = '';
+                } else {
+                    this.style.borderTop = '';
+                    this.style.borderBottom = '2px solid blue';
+                }
+            };
+            elm.ondragleave = function () {
+                this.style.borderTop = '';
+                this.style.borderBottom = '';
+            };
+            elm.ondrop = function () {
+                event.preventDefault();
+                let id = event.dataTransfer.getData('text/plain');
+                let elm_drag = document.getElementById(id);
+        
+                let rect = this.getBoundingClientRect();
+                if ((event.clientY - rect.top) < (this.clientHeight / 2)) {
+                    this.parentNode.insertBefore(elm_drag, this);
+                } else {
+                    this.parentNode.insertBefore(elm_drag, this.nextSibling);
+                }
+                this.style.borderTop = '';
+                this.style.borderBottom = '';
+                let li = document.querySelectorAll("#subjectList li");
+                let num = document.querySelector("#subjectListNum");
+                num.textContent = "";
+                for (const textdiv of li){
+                    num.textContent+=textdiv.id.replace("subjectElement","");
+                }
+                save_options();
+            };
+        });
+
+    }
