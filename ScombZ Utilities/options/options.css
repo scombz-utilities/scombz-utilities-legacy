@@ -507,7 +507,10 @@ select,input[type="number"],input[type="text"],.inputbox{
     padding: 0;
     position: relative;
     list-style-type: none!important;
-    cursor:pointer;
+    cursor:grab;
+}
+#subjectList li:active{
+    cursor:grabbing;
 }
 
 #subjectList li div {
@@ -521,6 +524,9 @@ select,input[type="number"],input[type="text"],.inputbox{
     vertical-align: middle;
     color: #505050;
     border-radius: 15px 0px 0px 15px;/*左側の角丸く*/
+}
+#subjectList li:active div{
+    background: #95d0ff;
 }
 
 #subjectList li div:before{ 
