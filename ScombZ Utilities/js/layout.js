@@ -458,7 +458,7 @@ function darkmodeLayout(mode){
     }else{
         console.log("ダークモードを挿入します\nmode: ",mode);
         let darkmode = `
-        /* ScombZ Darkmode CSS v0.7 */
+        /* ScombZ Darkmode CSS v0.8 */
         /* styled by うだい */
         /*背景、全体設定*/
         :root{
@@ -971,6 +971,19 @@ function darkmodeLayout(mode){
         }
         .now-period {
             background: rgb(20 126 60) !important;
+        }
+        #materialList .contents-detail.clearfix{
+            border-bottom: 1px solid #444;
+        }
+        #materialList .contents-detail.clearfix:hover{
+            filter: brightness(106%);
+        }
+        .close-button,.open-button{
+            filter: invert(1);
+        }
+        .close-button:hover,.open-button:hover{
+            background-color:#0003;
+            background-blend-mode:darken;
         }
             `;
         if(mode === 'relative'){
