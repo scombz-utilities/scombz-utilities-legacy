@@ -71,9 +71,22 @@ function hideMaterial(items,materialTop) {
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
         setcss(cssPosition);
-    
-        if (materialTop !== 'none'){
+        
+        if (materialTop === true){
             materialOrder = materialTop;
+        }
+        if (items == "none"){
+            for (let i =0;i<materialListBlock.length;i++){
+                let materials = materialListBlock[i];
+                for (let material of materials){
+                    if (material.className == "contents-detail clearfix"){
+                        const materialButton = createButton("close-button",materials.slice(1),"material");
+                        material.querySelector("div").appendChild(materialButton);
+                        //materialButton.parentNode.parentNode.setAttribute('onclick', 'javascript:this.querySelector("#materialButton").click();');
+                    }
+                }
+            }
+            return
         }
         if (items == "new"){
             //新しいものだけ取得して別処理
@@ -96,6 +109,7 @@ function hideMaterial(items,materialTop) {
                 if (material.className == "contents-detail clearfix"){
                     let materialButton = createButton("open-button",materials.slice(1),"material");
                     material.querySelector("div").appendChild(materialButton);
+                    //materialButton.parentNode.parentNode.setAttribute('onclick', 'javascript:this.querySelector("#materialButton").click();');
                 }else{
                     material.classList.add("hide-material");
                 }
@@ -132,7 +146,12 @@ function hideReport(items){
         $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#reportList > div.contents-list.sortReportParent");
-        reportList.appendChild(buttonDiv);
+        const hides = cssPosition.getElementsByClassName("hide-material");
+        if(hides[0]){
+            reportList.insertBefore(buttonDiv, hides[0]);
+        }else{
+            reportList.appendChild(buttonDiv);
+        }
         console.log("ボタン作成")
 
 
@@ -165,7 +184,12 @@ function hideTest(items){
         $(buttonDiv).addClass("course-result-list contents-display-flex clearfix");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
-        reportList.appendChild(buttonDiv);
+        const hides = cssPosition.getElementsByClassName("hide-material");
+        if(hides[0]){
+            reportList.insertBefore(buttonDiv, hides[0]);
+        }else{
+            reportList.appendChild(buttonDiv);
+        }
         console.log("ボタン作成");
 
     }
@@ -176,38 +200,52 @@ function setcss(cssPosition){
     if ($(".hide-material").attr("display") != 'none'){
         cssPosition.insertAdjacentHTML("beforebegin",`
         <style>
-            .hide-material {
+            #materialList .hide-material,.should-hidden.hide-material{
                 display:none;
             }
             .open-button{
                 background-image: url(`+chrome.runtime.getURL("imgs/open_button.gif")+`);
             }
-            .open-button:hover{
-                background-image: url(`+chrome.runtime.getURL("imgs/open_button_hover.gif")+`);
-            }
             .close-button{
                 background-image: url(`+chrome.runtime.getURL("imgs/close_button.gif")+`);
             }
-            .close-button:hover{
-                background-image: url(`+chrome.runtime.getURL("imgs/close_button_hover.gif")+`);
+            .close-button:hover,.open-button:hover{
+                background-color:#fff3;
+                background-blend-mode:lighten;
             }
             #materialButton{
-    
-                PADDING-BOTTOM: 0px;
-                TEXT-INDENT: -9999px;
-                MARGIN: 0 -3px 0px 0px;
-                PADDING-LEFT: 0px;
-                WIDTH: 34px;
-                PADDING-RIGHT: 0px;
-                DISPLAY: block;
-                TOP: 4px;
-                RIGHT: 0px;
-                PADDING-TOP: 6px;
-                FLOAT: right;
+                padding-bottom: 0px;
+                text-indent: -9999px;
+                margin: 0 -3px 0px 0px;
+                padding-left: 0px;
+                width: 22px;
+                height: 22px;
+                padding-right: 0px;
+                display: block;
+                top: 4px;
+                right: 0px;
+                padding-top: 6px;
+                float: right;
                 background-repeat: no-repeat;
-            
+                background-size: cover;
             }
-        </style>
+            #materialList .contents-detail.clearfix{
+                border-bottom: 1px solid #ddd;
+            }
+            #materialList .contents-detail.clearfix:hover{
+                filter: brightness(92%);
+            }
+            .should-hidden{
+                width: calc(100% - 40px);
+                margin-right:0;
+                margin-left:auto;
+                border-left: 1px solid #ccc;
+            }
+            .course-result-list.contents-display-flex.sortReportBlock.clearfix > #materialButton{
+                margin: -5px 0 0  -10px;
+                float:left;
+            }
+            </style>
         `)
     }
 
@@ -223,7 +261,9 @@ function hideOver(materials,query){
         let timeEndDate = new Date(timeDate);
         let nowDate = Date.now();
         if (timeEndDate < nowDate){
-            $(material).addClass("hide-material");
+            $(material).addClass("hide-material should-hidden");
+        }else{
+            $(material).addClass("not-hide");
         }
     }
 }
@@ -235,7 +275,9 @@ function hideDoneReport(materials){
             break;
         }
         if ((check.textContent == "期限外提出" || check.textContent == "期限内提出")){
-            $(material).addClass("hide-material");
+            $(material).addClass("hide-material should-hidden");
+        }else{
+            $(material).addClass("not-hide");
         }
     }
 }
@@ -247,7 +289,9 @@ function hideEndReport(materials){
             break;
         }
         if (check.querySelector("div") == undefined){
-            $(material).addClass("hide-material");
+            $(material).addClass("hide-material should-hidden");
+        }else{
+            $(material).addClass("not-hide");
         }
     }
 }

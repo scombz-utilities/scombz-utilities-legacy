@@ -533,13 +533,13 @@
             </div>
             <div class="setting-column">
                 <h3>教材の順番を統一</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="materialTop"><label class="ItemBox-CheckBox-Label" for="materialTop"></label>
                 <div class="explains">
                     科目によって初回が一番上だったり最新回が一番上だったりする教材の順番を統一します。
                 </div>
                 <div class="input-box">
                     <span class="switch-explain">一番上にする回<br></span>
-                    <select id="materialTop">
-                        <option value="none">使用しない</option>
+                    <select id="materialTopDetail">
                         <option value="first">初回</option>
                         <option value="last">最新回</option>
                         </select>
@@ -547,14 +547,15 @@
             </div>
             <div class="setting-column">
                 <h3>使わない教材を非表示</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="materialHide"><label class="ItemBox-CheckBox-Label" for="materialHide"></label>
                 <div class="explains">
-                    教材要素にある様々なものを非表示にします。
-                    <br>非表示にする者がある場合、一次的に再表示するボタンも追加します。
+                    教材要素にある様々なものを非表示にできるようにします。
+                    <br>自動的に非表示にするものも選択できます。
                 </div>
                 <div class="input-box">
                     <span class="switch-explain">非表示対象<br></span>
-                    <select id="materialHide">
-                        <option value="none">全て表示</option>
+                    <select id="materialHideDetail">
+                        <option value="none">なし</option>
                         <option value="new">最新回以外</option>
                         <option value="all">全ての回</option>
                     </select>
@@ -576,14 +577,14 @@
             </div>
             <div class="setting-column">
                 <h3>締切過ぎ課題・提出済み課題・提出不可課題非表示</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="reportHide"><label class="ItemBox-CheckBox-Label" for="reportHide"></label>
                 <div class="explains">
                     提出期限を過ぎた課題・提出済み課題・期間外提出不可課題を非表示にします。<br>
                     また、一次的に再表示するボタンも追加します。
                 </div>
                 <div class="input-box">
-                    <span class="switch-explain">非表示対象<br></span>
-                    <select id="reportHide">
-                        <option value="none">全て表示</option>
+                    <span class="switch-explain">自動非表示対象<br></span>
+                    <select id="reportHideDetail">
                         <option value="over">期限越え</option>
                         <option value="done">提出済み</option>
                         <option value="end">期間外提出不可</option>
@@ -593,16 +594,10 @@
             </div>
             <div class="setting-column">
                 <h3>締切過ぎテスト非表示</h3>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="testHide"><label class="ItemBox-CheckBox-Label" for="testHide"></label>
                 <div class="explains">
                     提出期限を過ぎたテストを非表示にします。<br>
                     また、一次的に再表示するボタンも追加します。
-                </div>
-                <div class="input-box">
-                    <span class="switch-explain">非表示対象<br></span>
-                    <select id="testHide">
-                        <option value="none">全て表示</option>
-                        <option value="over">期限越え</option>
-                        </select>
                 </div>
             </div>   
 

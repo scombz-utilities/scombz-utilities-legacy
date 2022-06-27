@@ -53,10 +53,13 @@ const defaultOptions = {
         task: 1280
     },
     subjectList : "1234567",
-    materialTop : 'none',
-    materialHide : 'none',
-    reportHide : 'none',
-    testHide : 'none'
+    materialTop : false,
+    materialHide : true,
+    reportHide : true,
+    testHide : true,
+    materialTopDetail : 'first',
+    materialHideDetail : 'none',
+    reportHideDetail : 'all'
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -110,10 +113,13 @@ function save_options() {
     const highlightDeadline = document.getElementById('highlightDeadline').checked;
     const pastSurvey = document.getElementById('pastSurvey').checked;
     const subjectList = document.getElementById('subjectListNum').textContent;
-    const materialTop = document.getElementById('materialTop').value;
-    const materialHide = document.getElementById('materialHide').value;
-    const reportHide = document.getElementById('reportHide').value;
-    const testHide = document.getElementById('testHide').value;
+    const materialTop = document.getElementById('materialTop').checked;
+    const materialHide = document.getElementById('materialHide').checked;
+    const reportHide = document.getElementById('reportHide').checked;
+    const testHide = document.getElementById('testHide').checked;
+    const materialTopDetail = document.getElementById('materialTopDetail').value;
+    const materialHideDetail = document.getElementById('materialHideDetail').value;
+    const reportHideDetail = document.getElementById('reportHideDetail').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -172,8 +178,10 @@ function save_options() {
         materialTop : materialTop,
         materialHide : materialHide,
         reportHide : reportHide,
-        testHide : testHide
-        
+        testHide : testHide,
+        materialTopDetail : materialTopDetail,
+        materialHideDetail : materialHideDetail,
+        reportHideDetail : reportHideDetail
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -235,10 +243,13 @@ function save_options() {
         document.getElementById('highlightDeadline').checked = items.highlightDeadline;
         document.getElementById('pastSurvey').checked = items.pastSurvey;
         document.getElementById('subjectListNum').textContent = items.subjectList;  
-        document.getElementById('materialTop').value = items.materialTop;
-        document.getElementById('materialHide').value = items.materialHide;
-        document.getElementById('reportHide').value = items.reportHide;
-        document.getElementById('testHide').value = items.testHide;
+        document.getElementById('materialTop').checked = items.materialTop;
+        document.getElementById('materialHide').checked = items.materialHide;
+        document.getElementById('reportHide').checked = items.reportHide;
+        document.getElementById('testHide').checked = items.testHide;
+        document.getElementById('materialTopDetail').value = items.materialTopDetail;
+        document.getElementById('materialHideDetail').value = items.materialHideDetail;
+        document.getElementById('reportHideDetail').value = items.reportHideDetail;
         restoreSubject(items.subjectList);
     });
     
@@ -329,14 +340,14 @@ function save_options() {
     //科目ページの要素並び替え
     function restoreSubject(items) {
         let subjects = [
-        `<li id="subjectElement1" draggable="true"><div class="list-radius">担当教員へのメッセージ</div></li>`,
-        `<li id="subjectElement2" draggable="true"><div class="list-radius">お知らせ</div></li>`,
-        `<li id="subjectElement3" draggable="true"><div class="list-radius">課題</div></li>`,
-        `<li id="subjectElement4" draggable="true"><div class="list-radius">教材</div></li>`,
-        `<li id="subjectElement5" draggable="true"><div class="list-radius">テスト</div></li>`,
-        `<li id="subjectElement6" draggable="true"><div class="list-radius">アンケート</div></li>`,
-        `<li id="subjectElement7" draggable="true"><div class="list-radius">ディスカッション</div></li>`,
-        `<li id="subjectElement8" draggable="true"><div class="list-radius">出席</div></li>`
+        `<li id="subjectElement1" draggable="true"><div class="list-radius">1.担当教員へのメッセージ</div></li>`,
+        `<li id="subjectElement2" draggable="true"><div class="list-radius">2.お知らせ</div></li>`,
+        `<li id="subjectElement3" draggable="true"><div class="list-radius">3.課題</div></li>`,
+        `<li id="subjectElement4" draggable="true"><div class="list-radius">4.教材</div></li>`,
+        `<li id="subjectElement5" draggable="true"><div class="list-radius">5.テスト</div></li>`,
+        `<li id="subjectElement6" draggable="true"><div class="list-radius">6.アンケート</div></li>`,
+        `<li id="subjectElement7" draggable="true"><div class="list-radius">7.ディスカッション</div></li>`,
+        `<li id="subjectElement8" draggable="true"><div class="list-radius">8.出席</div></li>`
         ];
         let subjectsEnd = `<li style="display: none;"></li>`;
         let numbers = [...items];
@@ -387,5 +398,4 @@ function save_options() {
                 save_options();
             };
         });
-
     }

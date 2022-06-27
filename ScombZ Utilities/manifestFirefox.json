@@ -1,7 +1,7 @@
 {
     "manifest_version":2 ,
     "name": "ScombZ Utilities",
-    "version": "3.12.1",
+    "version": "3.13.0",
     "description": "ScombZをカスタムする拡張機能",
     "icons": { 
         "48":  "icons/icon48.png",
@@ -62,5 +62,5 @@
         "storage",
         "https://yudai1204.github.io/"
     ],
-    "web_accessible_resources": ["gcal/*"]
+    "web_accessible_resources": ["gcal/*","imgs/*"]
 }

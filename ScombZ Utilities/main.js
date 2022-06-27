@@ -49,11 +49,14 @@
                 dispClassroom: false,   // 講師名表示を教室表示にする
                 timetableCentering: false // 時間割のセンタリング 
             },
-            subjectList : '1234567',//要素の並び替え
-            materialTop : 'none',   //教材の位置
-            materialHide : 'none',  //教材を閉じる
-            reportHide : 'none',    //課題を非表示
-            testHide : 'none'       //テストを非表示
+            subjectList : '1234567',    //要素の並び替え
+            materialTop : false,        //教材の位置
+            materialHide : true,        //教材を閉じる
+            reportHide : true,          //課題を非表示
+            testHide : true,            //テストを非表示
+            materialTopDetail : 'first',
+            materialHideDetail : 'none',
+            reportHideDetail : 'all'
     }
     /* ローディング画面 */
     onLoading();
@@ -211,20 +214,20 @@
                     subjectListOrder(items.subjectList);
                 }
                 //教材の位置
-                if(items.materialTop !== 'none'){
-                    materialTopSet(items.materialTop);
+                if(items.materialTop === true){
+                    materialTopSet(items.materialTopDetail);
                 }
                 //教材の非表示
-                if(items.materialHide !== 'none'){
-                    hideMaterial(items.materialHide,items.materialTop);
+                if(items.materialHide === true){
+                    hideMaterial(items.materialHideDetail,items.materialTop);
                 }
                 //課題の非表示
-                if(items.reportHide !== 'none'){
-                    hideReport(items.reportHide);
+                if(items.reportHide === true){
+                    hideReport(items.reportHideDetail);
                 }
                 //テストの非表示
-                if(items.testHide !== 'none'){
-                    hideTest(items.testHide);
+                if(items.testHide === true){
+                    hideTest('over');
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

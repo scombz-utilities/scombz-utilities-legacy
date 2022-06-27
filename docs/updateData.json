@@ -1,5 +1,24 @@
 [
     {
+        "version": "3.13.0",
+        "date": {
+            "firefox": "2022/6/28",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "newFunc",
+                "title": "科目ページ内容の入れ替え",
+                "explain": "科目別ページにおいて、内容を自由に入れ替えできるようになりました。"
+            },
+            {
+                "genre": "newFunc",
+                "title": "一時非表示",
+                "explain": "教材、テスト、課題の一次非表示化、またそのためのボタンを追加しました。"
+            }
+        ]
+    },
+    {
         "version": "3.12.1",
         "date": {
             "firefox": "2022/6/25",
