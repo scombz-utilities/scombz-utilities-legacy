@@ -55,7 +55,8 @@ const defaultOptions = {
     subjectList : "1234567",
     materialTop : 'none',
     materialHide : 'none',
-    reportHide : false
+    reportHide : 'none',
+    testHide : 'none'
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -111,7 +112,8 @@ function save_options() {
     const subjectList = document.getElementById('subjectListNum').textContent;
     const materialTop = document.getElementById('materialTop').value;
     const materialHide = document.getElementById('materialHide').value;
-    const reportHide = document.getElementById('reportHide').checked;
+    const reportHide = document.getElementById('reportHide').value;
+    const testHide = document.getElementById('testHide').value;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -169,7 +171,8 @@ function save_options() {
         subjectList : subjectList,
         materialTop : materialTop,
         materialHide : materialHide,
-        reportHide : reportHide
+        reportHide : reportHide,
+        testHide : testHide
         
     }, function() {
         // Update status to let user know options were saved.
@@ -234,7 +237,8 @@ function save_options() {
         document.getElementById('subjectListNum').textContent = items.subjectList;  
         document.getElementById('materialTop').value = items.materialTop;
         document.getElementById('materialHide').value = items.materialHide;
-        document.getElementById('reportHide').checked = items.reportHide;
+        document.getElementById('reportHide').value = items.reportHide;
+        document.getElementById('testHide').value = items.testHide;
         restoreSubject(items.subjectList);
     });
     

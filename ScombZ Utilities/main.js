@@ -52,7 +52,8 @@
             subjectList : '1234567',//要素の並び替え
             materialTop : 'none',   //教材の位置
             materialHide : 'none',  //教材を閉じる
-            reportHide : false      //課題を非表示
+            reportHide : 'none',    //課題を非表示
+            testHide : 'none'       //テストを非表示
     }
     /* ローディング画面 */
     onLoading();
@@ -206,7 +207,7 @@
                     pastSurvey();
                 }
                 //科目ページの要素並び替え
-                if(items.subjectList !== '1234567'){
+                if(items.subjectList !== '12345678'){
                     subjectListOrder(items.subjectList);
                 }
                 //教材の位置
@@ -215,11 +216,15 @@
                 }
                 //教材の非表示
                 if(items.materialHide !== 'none'){
-                    hideMaterial(items.materialHide);
+                    hideMaterial(items.materialHide,items.materialTop);
                 }
                 //課題の非表示
-                if(items.materialHide === true){
-                    hideReport();
+                if(items.reportHide !== 'none'){
+                    hideReport(items.reportHide);
+                }
+                //テストの非表示
+                if(items.testHide !== 'none'){
+                    hideTest(items.testHide);
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

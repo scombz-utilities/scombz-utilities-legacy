@@ -61,7 +61,7 @@
         "https://yudai1204.github.io/"
     ],
     "web_accessible_resources": [{
-        "resources": ["gcal/*"],
+        "resources": ["gcal/*","imgs/*"],
         "matches": ["<all_urls>"]
     }]
 }

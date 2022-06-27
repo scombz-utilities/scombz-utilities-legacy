@@ -548,7 +548,8 @@
             <div class="setting-column">
                 <h3>使わない教材を非表示</h3>
                 <div class="explains">
-                    教材要素にある様々なものを非表示にします<br>非表示にする者がある場合、一次的に再表示するボタンも追加します。
+                    教材要素にある様々なものを非表示にします。
+                    <br>非表示にする者がある場合、一次的に再表示するボタンも追加します。
                 </div>
                 <div class="input-box">
                     <span class="switch-explain">非表示対象<br></span>
@@ -556,18 +557,54 @@
                         <option value="none">全て表示</option>
                         <option value="new">最新回以外</option>
                         <option value="all">全ての回</option>
-                        </select>
+                    </select>
                 </div>
-                <!-- ここに画像 -->
+                <div class="wrap">
+                    <label for="label14">▼詳細を見る</label>
+                    <input type="checkbox" id="label14" class="wrap-switch" />
+                    <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+                    <div class="wraped-content">
+                        <div style="text-align:center;">
+                            <p class="imgexp">非表示状態<br>
+                            <img src="./imgs/hide-button-before.png"></p>
+                            <p class="imgexp">表示状態<br>
+                            <img src="./imgs/hide-button-after.png"></p>
+                        </div>
+                    </div>
+                    <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+                </div>
             </div>
             <div class="setting-column">
-                <h3>操作可能な課題のみ表示</h3>
-                <input class="ItemBox-CheckBox-Input"  type="checkbox" id="reportHide"><label class="ItemBox-CheckBox-Label" for="reportHide"></label>
+                <h3>締切過ぎ課題・提出済み課題・提出不可課題非表示</h3>
                 <div class="explains">
-                    削除も追加もできなくなった課題を非表示にします。<br>
+                    提出期限を過ぎた課題・提出済み課題・期間外提出不可課題を非表示にします。<br>
                     また、一次的に再表示するボタンも追加します。
                 </div>
-            </div>    
+                <div class="input-box">
+                    <span class="switch-explain">非表示対象<br></span>
+                    <select id="reportHide">
+                        <option value="none">全て表示</option>
+                        <option value="over">期限越え</option>
+                        <option value="done">提出済み</option>
+                        <option value="end">期間外提出不可</option>
+                        <option value="all">提出が可能なもの以外</option>
+                        </select>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>締切過ぎテスト非表示</h3>
+                <div class="explains">
+                    提出期限を過ぎたテストを非表示にします。<br>
+                    また、一次的に再表示するボタンも追加します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">非表示対象<br></span>
+                    <select id="testHide">
+                        <option value="none">全て表示</option>
+                        <option value="over">期限越え</option>
+                        </select>
+                </div>
+            </div>   
 
             <hr>
             <h2>実験的な設定</h2>
