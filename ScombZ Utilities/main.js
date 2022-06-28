@@ -219,7 +219,7 @@
                 }
                 //教材の非表示
                 if(items.materialHide === true){
-                    hideMaterial(items.materialHideDetail,items.materialTop);
+                    hideMaterial(items.materialHideDetail,items.materialTopDetail);
                 }
                 //課題の非表示
                 if(items.reportHide === true){

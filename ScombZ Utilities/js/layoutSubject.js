@@ -72,7 +72,7 @@ function hideMaterial(items,materialTop) {
         let cssPosition = document.getElementById("materialList");
         setcss(cssPosition);
         
-        if (materialTop === true){
+        if (materialTop != 'none'){
             materialOrder = materialTop;
         }
         if (items == "none"){
