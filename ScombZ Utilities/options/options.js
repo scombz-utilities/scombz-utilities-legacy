@@ -55,8 +55,8 @@ const defaultOptions = {
     subjectList : "12345678",
     materialTop : false,
     materialHide : true,
-    reportHide : true,
-    testHide : true,
+    reportHide : false,
+    testHide : false,
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all'
