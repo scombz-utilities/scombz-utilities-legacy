@@ -52,7 +52,7 @@ const defaultOptions = {
         lms: 1280,
         task: 1280
     },
-    subjectList : "1234567",
+    subjectList : "12345678",
     materialTop : false,
     materialHide : true,
     reportHide : true,

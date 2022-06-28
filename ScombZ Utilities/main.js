@@ -49,7 +49,7 @@
                 dispClassroom: false,   // 講師名表示を教室表示にする
                 timetableCentering: false // 時間割のセンタリング 
             },
-            subjectList : '1234567',    //要素の並び替え
+            subjectList : '12345678',   //要素の並び替え
             materialTop : false,        //教材の位置
             materialHide : true,        //教材を閉じる
             reportHide : true,          //課題を非表示
@@ -219,7 +219,7 @@
                 }
                 //教材の非表示
                 if(items.materialHide === true){
-                    hideMaterial(items.materialHideDetail,items.materialTop);
+                    hideMaterial(items.materialHideDetail,items.materialTopDetail);
                 }
                 //課題の非表示
                 if(items.reportHide === true){
