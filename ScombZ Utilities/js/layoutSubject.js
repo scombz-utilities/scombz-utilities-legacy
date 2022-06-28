@@ -299,6 +299,9 @@ function setcss(cssPosition){
                 border-bottom: 1px solid #aaa0;
                 min-height:0px;
             }
+            .control-menu{
+                transform: translate(-30px,-50px);
+            }
             </style>
         `)
     }
