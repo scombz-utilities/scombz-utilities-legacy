@@ -164,9 +164,9 @@ function hideReport(items){
             hideDoneReport(materials);
             hideEndReport(materials);
         }
-        let buttonDiv = document.createElement("div");
+        let buttonDiv = document.createElement("span");
         let button = createButton("open-button",materials,"report");
-        $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix");
+        $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix close-button-div");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#reportList > div.contents-list.sortReportParent");
         
@@ -176,7 +176,8 @@ function hideReport(items){
         if(hides[0]){
             reportList.insertBefore(buttonDiv, hides[0]);
         }else{
-            reportList.appendChild(buttonDiv);
+            //全部非表示対象でないなら、そもそもボタンが必要ない
+            //reportList.appendChild(buttonDiv);
         }
         console.log("ボタン作成")
 
@@ -205,9 +206,9 @@ function hideTest(items){
             hideOver(materials,query);
             hideDoneTest(materials);
         }*/
-        let buttonDiv = document.createElement("div");
+        let buttonDiv = document.createElement("span");
         let button = createButton("open-button",materials,"test");
-        $(buttonDiv).addClass("course-result-list contents-display-flex clearfix");
+        $(buttonDiv).addClass("course-result-list contents-display-flex clearfix close-button-div");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
         
@@ -217,7 +218,8 @@ function hideTest(items){
         if(hides[0]){
             reportList.insertBefore(buttonDiv, hides[0]);
         }else{
-            reportList.appendChild(buttonDiv);
+            //全部非表示対象でないなら、そもそもボタンが必要ない
+            //reportList.appendChild(buttonDiv);
         }
         console.log("ボタン作成");
 
@@ -262,14 +264,40 @@ function setcss(cssPosition){
                 filter: brightness(92%);
             }
             .should-hidden{
-                width: calc(100% - 40px);
+                width: 100%;
                 margin-right:0;
-                margin-left:auto;
+                margin-left:40px;
                 border-left: 1px solid #ccc;
             }
-            .course-result-list.contents-display-flex.sortReportBlock.clearfix > #materialButton{
+            #reportList .course-result-list.should-hidden:nth-last-child(1),#examination .course-result-list.should-hidden:nth-last-child(1){
+                margin-bottom: -32px;
+            }
+            #reportList .course-result-list.should-hidden,#examination .course-result-list.should-hidden{
+                min-height:43px;
+            }
+            .should-hidden .course-view-report-name ,.should-hidden .course-view-examination-name{
+                margin-left: -40px;
+            }
+            .contents-list.sortReportParent,#examination > .block-contents{
+                overflow-x: hidden;
+            }
+            #examination > .block-contents > .contents-detail{
+                overflow:hidden;
+            }
+            .course-view-report-name,.course-view-examination-name{
+                margin-left: 22px;
+            }
+            .close-button-div > #materialButton{
                 margin: -5px 0 0  -10px;
                 float:left;
+            }
+            .course-result-list.should-hidden{
+                padding-left:42px;
+                transform:translateY(-32px);
+            }
+            span.close-button-div{
+                border-bottom: 1px solid #aaa0;
+                min-height:0px;
             }
             </style>
         `)
