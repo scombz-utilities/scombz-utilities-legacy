@@ -118,6 +118,29 @@ function hideMaterial(items,materialTop) {
     }
 }
 
+function sortMaterials(items,list){
+    console.log(items);
+    let re =[];
+    for (let material of items){
+        material.remove();
+    }
+    for (let material of items){
+        if (!(material.classList.contains("should-hidden"))){
+            re.push(material);
+        }
+    }
+    for (let material of items){
+        if ((material.classList.contains("should-hidden"))){
+            re.push(material);
+        }
+    }
+    for (let material of re){
+        list.appendChild(material);
+    }
+    return re;
+
+}
+
 //課題を一部非表示化
 function hideReport(items){
     'use strict';
@@ -146,6 +169,9 @@ function hideReport(items){
         $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#reportList > div.contents-list.sortReportParent");
+        
+        sortMaterials(materials,reportList);
+        
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             reportList.insertBefore(buttonDiv, hides[0]);
@@ -184,6 +210,9 @@ function hideTest(items){
         $(buttonDiv).addClass("course-result-list contents-display-flex clearfix");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
+        
+        sortMaterials(materials,reportList);
+        
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             reportList.insertBefore(buttonDiv, hides[0]);
@@ -228,9 +257,6 @@ function setcss(cssPosition){
                 float: right;
                 background-repeat: no-repeat;
                 background-size: cover;
-            }
-            #materialList .contents-detail.clearfix{
-                border-bottom: 1px solid #ddd;
             }
             #materialList .contents-detail.clearfix:hover{
                 filter: brightness(92%);
