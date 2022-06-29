@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.13.2",
+        "date": {
+            "firefox": "2022/6/29",
+            "chrome": "Not yet"
+        },
+        "contents": [
+            {
+                "genre": "bugfix",
+                "title": "バグ修正",
+                "explain": "新機能関連のバグを修正、また使用しなくなったファイルを削除しました。"
+            }
+        ]
+    },
+    {
         "version": "3.13.0",
         "date": {
             "firefox": "2022/6/28",
