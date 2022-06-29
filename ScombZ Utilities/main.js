@@ -52,8 +52,8 @@
             subjectList : '12345678',   //要素の並び替え
             materialTop : false,        //教材の位置
             materialHide : true,        //教材を閉じる
-            reportHide : true,          //課題を非表示
-            testHide : true,            //テストを非表示
+            reportHide : false,          //課題を非表示
+            testHide : false,            //テストを非表示
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
