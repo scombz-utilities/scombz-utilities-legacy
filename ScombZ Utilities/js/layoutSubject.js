@@ -370,8 +370,9 @@ function materialBlockCreate() {
     for (let i=0;i<materialList.length;i++){
         if (i==0){continue;}
         if (materialList[i].className == "contents-detail clearfix"){
-            if (materialList[i].textContent == "第1回(No.1)"){
+            if (materialList[i].textContent.trim() == "第1回(No.1)"){
                 k = materialListBlock.length+1;
+                console.log(materialListBlock.length);
             }
             materialListBlock.push(materialhtml);
             materialhtml = [];
