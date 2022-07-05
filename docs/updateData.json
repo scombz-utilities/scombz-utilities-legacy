@@ -15,6 +15,12 @@
                 "genre": "optimisation",
                 "title": "ADFS自動化",
                 "explain": "ADFSにワンタイムパスワードを設定している場合のユーザビリティを大幅に向上させました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "メモ削除確認",
+                "explain": "メモの削除時に確認画面を出すようにしました。"
+            
             }
         ]
     },

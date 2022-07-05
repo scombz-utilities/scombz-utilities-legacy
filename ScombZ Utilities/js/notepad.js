@@ -309,15 +309,18 @@ function displayNotepad(){
             for(let i = 0; i < memoList.length; i++){
                 memoList[i].addEventListener("click",function(){
                     //メモ削除時
-                    //非表示にする
-                    memoList[i].parentNode.style.display = "none";
-                    //chromeのデータを削除する
-                    newNotepadData.splice(i,1);
-                    chrome.storage.local.set({
-                        notepadData : newNotepadData
-                    },function(){
-                        console.log("削除完了");
-                    });
+                    //確認画面
+                    if(confirm("削除してもよろしいですか？")){
+                        //非表示にする
+                        memoList[i].parentNode.style.display = "none";
+                        //chromeのデータを削除する
+                        newNotepadData.splice(i,1);
+                        chrome.storage.local.set({
+                            notepadData : newNotepadData
+                        },function(){
+                            console.log("削除完了");
+                        });
+                    }
                 });
             }
         }
