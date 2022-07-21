@@ -16,7 +16,8 @@ const terms = [
     '13:20~15:00',
     '15:10~16:50',
     '17:00~18:40',
-    '18:50~20:30'
+    '18:50~20:30',
+    '20:40~22:20'
 ]
 
 const weekdays = [
@@ -39,37 +40,43 @@ function escapeHtml(str){
 
 function initPopupTimetable(){
     chrome.storage.local.get({
-        timetableData: null
+        timetableData: null,
+        adjustTimetableData: {},
     }, function(item){
         if(item.timetableData === null){
             console.log('時間割情報が存在しません');
             return;
         }
-        const timetableData = item.timetableData;
-        renderWeekTimetable(timetableData, (new Date()).getDay());
+        renderWeekTimetable(item, (new Date()).getDay());
     });
     return;
 }
 
-function renderWeekTimetable(timetableData, weekday){
+function renderWeekTimetable(utilsStorageData, weekday){
     if(weekday < 1 || 6 < weekday){
-        return renderWeekTimetable(timetableData, 1);
+        return renderWeekTimetable(utilsStorageData, 1);
     }
 
     const target = document.getElementById('timetable');
     target.innerHTML = '';
 
-    target.appendChild(_createWeekdayTabsElement(timetableData, weekday));
-    target.appendChild(_createTimetableElement(timetableData, weekday));
+    target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
+    target.appendChild(_createTimetableElement(utilsStorageData, weekday));
 
     return;
 }
 
 /* --- renderWeekTimetable()専用 --- */
-function _createWeekdayTabsElement(timetableData, weekday){
+function _createWeekdayTabsElement(utilsStorageData, weekday){
+    const options = {
+        eraseSat: utilsStorageData.adjustTimetableData.eraseSat,        
+    }
+
     let weekdayTabsContainer = document.createElement('div');
     weekdayTabsContainer.id = 'weekdayTabsContainer';
     for(let i = 1; i < 7; i++){
+        if (i === 6 && options.eraseSat) continue;
+
         let weekdayTabElement = document.createElement('div');
         weekdayTabElement.innerText = weekdays[i - 1];
         if(i === weekday){
@@ -77,7 +84,7 @@ function _createWeekdayTabsElement(timetableData, weekday){
         }else{
             weekdayTabElement.classList = 'weekday-tab';
             weekdayTabElement.addEventListener('click', function(){
-                renderWeekTimetable(timetableData, i);
+                renderWeekTimetable(utilsStorageData, i);
             });
         }
         weekdayTabsContainer.appendChild(weekdayTabElement);
@@ -85,8 +92,14 @@ function _createWeekdayTabsElement(timetableData, weekday){
     return weekdayTabsContainer;
 }
 
-function _createTimetableElement(timetableData, weekday){
-    let weekTimetableData = [[], [], [], [], [], []];
+function _createTimetableElement(utilsStorageData, weekday){
+    const timetableData = utilsStorageData.timetableData;
+    const options = {
+        erase6: utilsStorageData.adjustTimetableData.erase6,
+        erase7: utilsStorageData.adjustTimetableData.erase7,
+    }
+
+    let weekTimetableData = [[], [], [], [], [], [], []];
     let intensiveSubjectsData = [];
     for(let i = 0; i < timetableData.length; i++){
         if(timetableData[i].day === weekday){
@@ -99,7 +112,10 @@ function _createTimetableElement(timetableData, weekday){
     //  通常形態の科目
     let timetableElement = document.createElement('div');
     timetableElement.classList = 'timetable-body';
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < 7; i++){
+        if(i === 5 && options.erase6) continue;
+        if(i === 6 && options.erase7) continue;
+
         let rowElement = document.createElement('div');
         rowElement.classList = 'timetable-row';
         
