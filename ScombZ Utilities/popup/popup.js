@@ -59,6 +59,14 @@ function renderWeekTimetable(timetableData, weekday){
     const target = document.getElementById('timetable');
     target.innerHTML = '';
 
+    target.appendChild(_createWeekdayTabsElement(timetableData, weekday));
+    target.appendChild(_createTimetableElement(timetableData, weekday));
+
+    return;
+}
+
+/* --- renderWeekTimetable()専用 --- */
+function _createWeekdayTabsElement(timetableData, weekday){
     let weekdayTabsContainer = document.createElement('div');
     weekdayTabsContainer.id = 'weekdayTabsContainer';
     for(let i = 1; i < 7; i++){
@@ -74,8 +82,10 @@ function renderWeekTimetable(timetableData, weekday){
         }
         weekdayTabsContainer.appendChild(weekdayTabElement);
     }
-    target.appendChild(weekdayTabsContainer)
+    return weekdayTabsContainer;
+}
 
+function _createTimetableElement(timetableData, weekday){
     let weekTimetableData = [[], [], [], [], [], []];
     let intensiveSubjectsData = [];
     for(let i = 0; i < timetableData.length; i++){
@@ -86,6 +96,7 @@ function renderWeekTimetable(timetableData, weekday){
         }
     }
 
+    //  通常形態の科目
     let timetableElement = document.createElement('div');
     timetableElement.classList = 'timetable-body';
     for(let i = 0; i < 6; i++){
@@ -115,6 +126,7 @@ function renderWeekTimetable(timetableData, weekday){
         timetableElement.appendChild(rowElement);
     }
 
+    //  その他（曜日時間不定）の科目
     if(intensiveSubjectsData.length > 0){
         let rowElement = document.createElement('div');
         rowElement.classList = 'timetable-row intensive-subjects';
@@ -137,8 +149,8 @@ function renderWeekTimetable(timetableData, weekday){
         timetableElement.appendChild(rowElement);
     }
 
-    target.appendChild(timetableElement);
-    return;
+    return timetableElement;
 }
+/* --------------------------------- */
 
 initPopupTimetable();
