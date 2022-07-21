@@ -65,7 +65,7 @@ h1{
     justify-content: space-around;
 }
 #weekdayTabsContainer .weekday-tab{
-    width: calc(100% / 6);
+    width: 100%;
     text-align: center;
 }
 .weekday-tab.active{
