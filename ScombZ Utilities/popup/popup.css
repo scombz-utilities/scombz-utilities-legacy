@@ -8,7 +8,7 @@
 }
 #mainbody{
     margin :0;
-    width: 350px;
+    width: 380px;
     overflow:hidden;
 }
 .popuplogo{
@@ -39,7 +39,7 @@ h1{
     margin: 0;
 }
 .settings{
-    width:330px;
+    width:360px;
     margin: 0 auto;
     padding:10px;
 }
@@ -81,6 +81,21 @@ h1{
 .weekday-tab:not(.active):hover{
     color: inherit;
     border-bottom: 1px gray solid;
+}
+.weekday-tab.task-tab{
+    margin-left: 10px;
+    word-break: keep-all;
+}
+.task-tab .badge{
+    margin-left: 0.5em;
+    padding: 0 0.5em;
+    color: #ffffff;
+    background: gray;
+    border-radius: 1em;
+}
+.weekday-tab:not(.active):hover .badge{
+    color: #ffffff;
+    background: #000000;
 }
 #timetable{
     width: 100%;

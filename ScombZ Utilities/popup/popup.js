@@ -89,6 +89,18 @@ function _createWeekdayTabsElement(utilsStorageData, weekday){
         }
         weekdayTabsContainer.appendChild(weekdayTabElement);
     }
+
+    let taskTabElement = document.createElement('div');
+    taskTabElement.innerText = '課題';
+    taskTabElement.classList = 'weekday-tab task-tab';
+
+    let taskBadgeElement = document.createElement('span');
+    taskBadgeElement.innerText = '0';   //  TODO: 課題の個数を代入するようにする
+    taskBadgeElement.classList = 'badge';
+
+    taskTabElement.appendChild(taskBadgeElement);
+    weekdayTabsContainer.appendChild(taskTabElement);
+
     return weekdayTabsContainer;
 }
 
