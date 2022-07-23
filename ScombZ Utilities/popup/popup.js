@@ -115,12 +115,12 @@ function renderWeekTimetable(utilsStorageData, weekday){
     const target = document.getElementById('timetable');
     target.innerHTML = '';
 
-    if(1 <= weekday && weekday <= 6){
+    if(1 <= weekday && weekday <= (utilsStorageData.adjustTimetableData.eraseSat ? 5 : 6)){
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
         target.appendChild(_createTimetableElement(utilsStorageData, weekday));
         return;
     }else{
-        target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
+        target.appendChild(_createWeekdayTabsElement(utilsStorageData, 0));
         target.appendChild(_createTaskListElement(utilsStorageData));
         return;       
     }
