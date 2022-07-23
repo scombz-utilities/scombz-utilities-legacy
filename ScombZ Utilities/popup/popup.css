@@ -158,3 +158,45 @@ h1{
 .subject-classroom:hover{
     -webkit-line-clamp: unset;
 }
+.task-row{
+    min-height: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px 4px;
+    border-bottom: 1px lightgray solid;
+}
+.task-data{
+    display: flex;
+    align-items: baseline;
+}
+.task-subject-name{
+    margin-right: 10px;
+}
+.task-deadline{
+    color: gray;
+    font-size: x-small;
+}
+.relative-deadline-time{
+    margin-right: 10px;
+}
+.task-subject-name{
+    display: inline-block;
+    width: 100px;
+    color: #000;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.task-subject-name:hover{
+    text-decoration: underline;
+}
+.task-name{
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.task-name:hover{
+    text-decoration: underline;
+}

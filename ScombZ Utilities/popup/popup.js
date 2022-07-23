@@ -38,10 +38,69 @@ function escapeHtml(str){
         .replace(/`/g, '&#x60;')
 }
 
+function getMergedTaskList(utilsStorageData){
+    //  /js/addSubTimetable.jsから引用
+
+    const tasklistObj = JSON.parse(decodeURIComponent(utilsStorageData.tasklistData));
+    const surveyListObj = JSON.parse(decodeURIComponent(utilsStorageData.surveyListData));
+
+    //アンケート一覧と課題一覧を統合する
+    for(const survey of surveyListObj){
+        if(Number(Date.parse(survey.deadline)) < Number(Date.now())){
+            continue;
+        }
+        for(let i=0;;i++){
+            //tasklistを読み切ったら最後に挿入して終了
+            if(!tasklistObj[i]){
+                tasklistObj.push(survey);
+                break;
+            }
+            //tasklist内に挿入位置を発見したらそこに挿入して終了
+            if( Number(Date.parse(survey.deadline)) < Number(Date.parse(tasklistObj[i].deadline)) ){
+                console.log("SPLICED:"+i);
+                tasklistObj.splice(i,0,survey);
+                break;
+            }
+        }
+        
+    }
+
+    //自作課題一覧を統合する
+    for(const manTask of utilsStorageData.manualTasklist){
+        if(Number(Date.parse(manTask.deadline)) < Number(Date.now())){
+            continue;
+        }
+        for(let i=0;;i++){
+            //tasklistを読み切ったら最後に挿入して終了
+            if(!$tasklistObj[i]){
+                $tasklistObj.push(manTask);
+                break;
+            }
+            //tasklist内に挿入位置を発見したらそこに挿入して終了
+            if( Number(Date.parse(manTask.deadline)) < Number(Date.parse(tasklistObj[i].deadline)) ){
+                console.log("SPLICED:"+i);
+                $tasklistObj.splice(i,0,manTask);
+                break;
+            }
+        }
+    }
+
+    return tasklistObj;
+}
+
 function initPopupTimetable(){
     chrome.storage.local.get({
         timetableData: null,
         adjustTimetableData: {},
+        TaskGetTime: 1,
+        tasklistData: [],
+        surveyListData: [],
+        manualTasklist: [],
+        deadlinemode: 'absolute-relative',
+        maxTaskDisplay: 15,
+        hiddenTasks: [],
+        undisplayFutureTaskDays: 365,
+        highlightDeadline : true,
     }, function(item){
         if(item.timetableData === null){
             console.log('時間割情報が存在しません');
@@ -53,17 +112,18 @@ function initPopupTimetable(){
 }
 
 function renderWeekTimetable(utilsStorageData, weekday){
-    if(weekday < 1 || 6 < weekday){
-        return renderWeekTimetable(utilsStorageData, 1);
-    }
-
     const target = document.getElementById('timetable');
     target.innerHTML = '';
 
-    target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
-    target.appendChild(_createTimetableElement(utilsStorageData, weekday));
-
-    return;
+    if(1 <= weekday && weekday <= 6){
+        target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
+        target.appendChild(_createTimetableElement(utilsStorageData, weekday));
+        return;
+    }else{
+        target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
+        target.appendChild(_createTaskListElement(utilsStorageData));
+        return;       
+    }
 }
 
 /* --- renderWeekTimetable()専用 --- */
@@ -92,10 +152,13 @@ function _createWeekdayTabsElement(utilsStorageData, weekday){
 
     let taskTabElement = document.createElement('div');
     taskTabElement.innerText = '課題';
-    taskTabElement.classList = 'weekday-tab task-tab';
+    taskTabElement.classList = weekday === 0 ? 'weekday-tab task-tab active' : 'weekday-tab task-tab';
+    taskTabElement.addEventListener('click', function(){
+        renderWeekTimetable(utilsStorageData, 0);
+    });
 
     let taskBadgeElement = document.createElement('span');
-    taskBadgeElement.innerText = '0';   //  TODO: 課題の個数を代入するようにする
+    taskBadgeElement.innerText = getMergedTaskList(utilsStorageData).length;
     taskBadgeElement.classList = 'badge';
 
     taskTabElement.appendChild(taskBadgeElement);
@@ -178,6 +241,119 @@ function _createTimetableElement(utilsStorageData, weekday){
     }
 
     return timetableElement;
+}
+
+function _createTaskListElement(utilsStorageData){
+    const taskList = getMergedTaskList(utilsStorageData);
+    const nowUnix = Date.now();
+
+    let taskListElement = document.createElement('div');
+    taskListElement.classList = 'tasklist-body';
+    if(!taskList[0]){
+        taskListElement.innerHTML = '<span class="tasklist-msg">未提出課題は存在しないか、取得できません。</span>';
+        return taskListElement;
+    }
+
+    for(let i=0,j=0; taskList[i] && i<utilsStorageData.maxTaskDisplay -j; i++){
+        //先の課題は表示しない
+        if((Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays))){
+            break;
+        }
+        //非表示に設定されているものはスキップ
+        if(utilsStorageData.hiddenTasks.includes(taskList[i].id)){
+            j++;
+            continue;
+        }
+        if(taskList[i].data === null && !taskList[i+1]){
+            taskListElement.innerHTML = `<span class="tasklist-msg">未提出課題は存在しません。</span>`;
+            break;
+        }
+        if(taskList[i].data === null)continue;
+        //絶対表示
+        deadline = (taskList[i].deadline.length > 17) ? taskList[i].deadline : taskList[i].deadline+":00";
+        if(utilsStorageData.deadlinemode.includes('absoluteShort'))
+            deadline = taskList[i].deadline.slice(6,-3);
+        //相対表示
+        if(utilsStorageData.deadlinemode.includes('relative') && taskList[i].deadline != "" ){
+            if(utilsStorageData.deadlinemode == 'relative'){
+                const nowUnix = Date.now();
+                const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+                if(relativeDeadline < 0){
+                    deadline = "期限切れ";
+                }else if(relativeDeadline < 180){
+                    deadline = '残り約'+Math.floor(relativeDeadline)+'分';
+                }else if(relativeDeadline < 60*24){
+                    deadline = '残り約'+Math.floor(relativeDeadline/60)+'時間';
+                }else{
+                    deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
+                }
+            }else{
+                const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+                if(relativeDeadline < 0){
+                    deadline = "期限切れ";
+                }else if(relativeDeadline < 180){
+                    deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline)+'分</span>'+deadline;
+                }else if(relativeDeadline < 60*24){
+                    deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline/60)+'時間</span>'+deadline;
+                }else{
+                    deadline = '<span class="relative-deadline-time">残約'+Math.floor(relativeDeadline/(60*24))+'日</span>'+deadline;
+                }
+            }
+        }
+        //近い時間の課題を目立たせる
+        let highlightMark = "";
+        if(utilsStorageData.highlightDeadline === true){
+            highlightMark = "highlightMark";
+            const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+            if(relativeDeadline < 60*12){
+                highlightMark = 'today shorttime highlightMark';
+            }else if(relativeDeadline < 60*24){
+                highlightMark = 'today highlightMark';
+            }else if(relativeDeadline < 60*24*3){
+                highlightMark = 'a-few-days highlightMark';
+            }else if(relativeDeadline < 60*24*7){
+                highlightMark = 'a-week highlightMark';
+            }
+        }
+        //link生成
+        let subjlink = "",tasklink = "";
+        if(taskList[i].id.includes("manual")){
+            subjlink = (taskList[i].subjlink.includes("http")) ? taskList[i].subjlink : "https://"+taskList[i].subjlink;
+            tasklink = (taskList[i].tasklink.includes("http")) ? taskList[i].tasklink : "https://"+taskList[i].tasklink;
+        }else{
+            subjlink = taskList[i].link;
+            tasklink = taskList[i].link;
+            if(subjlink === undefined) {
+                subjlink = taskList[i].url;
+                tasklink = taskList[i].suvurl || subjlink+"#questionnaire";
+            }else{
+                subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
+                subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
+            }
+        }
+
+        let rowElement = document.createElement('div');
+        rowElement.classList = 'task-row';
+        rowElement.innerHTML = `
+            <div class='task-data'>
+                <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer">${taskList[i].course}</a>
+                <a class="task-name" href="${tasklink}" target="_blank" rel="noopener noreferrer">${taskList[i].title}</a>
+            </div>
+            <div class='task-data'><span class='task-deadline'>${deadline}</span></div>
+
+        `;
+
+        taskListElement.appendChild(rowElement);
+
+        // kadaiListHTML += `
+        // <div class="subk-line ${highlightMark}">
+        //     <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${taskList[i].course}</a></div></div>
+        //     <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${taskList[i].title}</span></a></div></div>
+        //     <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${taskList[i].id}" href="javascript:void(0);"></a></div>
+        // </div>`;
+    }
+
+    return taskListElement;
 }
 /* --------------------------------- */
 
