@@ -200,3 +200,9 @@ h1{
 .task-name:hover{
     text-decoration: underline;
 }
+.tasklist-msg{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 24px 0;
+}
