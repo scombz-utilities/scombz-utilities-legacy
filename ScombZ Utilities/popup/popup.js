@@ -88,6 +88,16 @@ function getMergedTaskList(utilsStorageData){
     return tasklistObj;
 }
 
+function removeHiddenTasks(tasklist, utilsStorageData){
+    let result = [];
+
+    tasklist.forEach(item => {
+        if(!utilsStorageData.hiddenTasks.includes(item.id) && item.data !== null) result.push(item);
+    });
+
+    return result;
+}
+
 function initPopupTimetable(){
     chrome.storage.local.get({
         timetableData: null,
@@ -158,7 +168,7 @@ function _createWeekdayTabsElement(utilsStorageData, weekday){
     });
 
     let taskBadgeElement = document.createElement('span');
-    taskBadgeElement.innerText = getMergedTaskList(utilsStorageData).length;
+    taskBadgeElement.innerText = removeHiddenTasks(getMergedTaskList(utilsStorageData), utilsStorageData).length;
     taskBadgeElement.classList = 'badge';
 
     taskTabElement.appendChild(taskBadgeElement);
