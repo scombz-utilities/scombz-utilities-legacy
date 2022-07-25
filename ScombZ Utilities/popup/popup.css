@@ -193,8 +193,12 @@ h1{
     text-decoration: underline;
 }
 .task-name{
+    display: inline-block;
+    width: 240px;
     color: #000;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 .task-name:hover{
