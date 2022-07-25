@@ -72,14 +72,14 @@ function getMergedTaskList(utilsStorageData){
         }
         for(let i=0;;i++){
             //tasklistを読み切ったら最後に挿入して終了
-            if(!$tasklistObj[i]){
-                $tasklistObj.push(manTask);
+            if(!tasklistObj[i]){
+                tasklistObj.push(manTask);
                 break;
             }
             //tasklist内に挿入位置を発見したらそこに挿入して終了
             if( Number(Date.parse(manTask.deadline)) < Number(Date.parse(tasklistObj[i].deadline)) ){
                 console.log("SPLICED:"+i);
-                $tasklistObj.splice(i,0,manTask);
+                tasklistObj.splice(i,0,manTask);
                 break;
             }
         }
