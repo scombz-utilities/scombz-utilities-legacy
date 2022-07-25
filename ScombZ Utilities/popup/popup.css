@@ -206,3 +206,19 @@ h1{
     text-align: center;
     margin: 24px 0;
 }
+.task-row.task-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 12px;
+    padding-bottom: 0;
+    margin-bottom: -4px;
+    border-bottom: none;
+}
+.task-get-time{
+    color: #000;
+    text-decoration: none;
+}
+.task-get-time:hover{
+    text-decoration: underline;
+}

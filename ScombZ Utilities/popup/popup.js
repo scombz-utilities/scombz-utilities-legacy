@@ -246,9 +246,11 @@ function _createTimetableElement(utilsStorageData, weekday){
 function _createTaskListElement(utilsStorageData){
     const taskList = getMergedTaskList(utilsStorageData);
     const nowUnix = Date.now();
+    const lastgettime =  `${new Date(utilsStorageData.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(utilsStorageData.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
 
     let taskListElement = document.createElement('div');
     taskListElement.classList = 'tasklist-body';
+
     if(!taskList[0]){
         taskListElement.innerHTML = '<span class="tasklist-msg">未提出課題は存在しないか、取得できません。</span>';
         return taskListElement;
@@ -352,6 +354,17 @@ function _createTaskListElement(utilsStorageData){
         //     <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${taskList[i].id}" href="javascript:void(0);"></a></div>
         // </div>`;
     }
+
+    let taskListFooterElement = document.createElement('div');
+    taskListFooterElement.classList = 'task-row task-footer';
+    
+    let taskLastGetTimeElement = document.createElement('a');
+    taskLastGetTimeElement.classList = 'task-get-time';
+    taskLastGetTimeElement.innerText = `最終更新:${lastgettime}`;
+    taskLastGetTimeElement.href = '#';
+
+    taskListFooterElement.appendChild(taskLastGetTimeElement);
+    taskListElement.appendChild(taskListFooterElement);
 
     return taskListElement;
 }
