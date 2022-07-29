@@ -266,7 +266,7 @@ function _createTaskListElement(utilsStorageData){
         return taskListElement;
     }
 
-    for(let i=0,j=0; taskList[i] && i<utilsStorageData.maxTaskDisplay -j; i++){
+    for(let i=0,j=0; taskList[i] && i<utilsStorageData.maxTaskDisplay +j; i++){
         //先の課題は表示しない
         if((Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays))){
             break;
