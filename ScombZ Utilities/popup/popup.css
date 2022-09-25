@@ -89,13 +89,18 @@ h1{
 .task-tab .badge{
     margin-left: 0.5em;
     padding: 0 0.5em;
-    color: #ffffff;
-    background: gray;
+    color: #222;
+    font-weight: 600;
+    background: rgba(0, 0, 0, .08);
     border-radius: 1em;
 }
 .weekday-tab:not(.active):hover .badge{
-    color: #ffffff;
-    background: #000000;
+    color: #000;
+    background: rgba(0, 0, 0, .1);
+}
+.task-tab.active .badge{
+    color: #000;
+    background: rgba(0, 0, 0, .1);
 }
 #timetable{
     width: 100%;
