@@ -10,6 +10,8 @@ function getTaskLists($$reacquisitionMin){
     }else{
         getTasksByAdjax($$reacquisitionMin);
     }
+    chrome.runtime.sendMessage({"action": "updateBadgeText"});
+
     return;
 }
 function getTasksOnTaskpage(){
