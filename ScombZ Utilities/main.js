@@ -54,6 +54,7 @@
             materialHide : true,        //教材を閉じる
             reportHide : false,          //課題を非表示
             testHide : false,            //テストを非表示
+            addTaskInPage : false,       //科目ページに課題追加機能
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
@@ -228,6 +229,10 @@
                 //テストの非表示
                 if(items.testHide === true){
                     hideTest('over');
+                }
+                //科目ページ内に課題追加機能
+                if(items.addTaskInPage === true){
+                    addTaskPage();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

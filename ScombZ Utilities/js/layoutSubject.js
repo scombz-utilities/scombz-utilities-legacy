@@ -8,6 +8,7 @@
 //教材を一部非表示
 //期限過ぎ課題を非表示
 //期限過ぎテストを非表示
+//課題手動追加を科目ページから呼び出す
 
 //要素並び替え
 function subjectListOrder(items) {
@@ -436,3 +437,13 @@ function createButton(className,materials,mode){
     return materialButton;
 }
 
+//課題手動追加を科目ページから呼び出す
+function addTaskPage() {
+    'use strict';
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        let cssPosition = document.getElementById("reportList");
+        if (!(cssPosition)){
+            return;
+        }
+    }
+}

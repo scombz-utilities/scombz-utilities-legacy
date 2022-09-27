@@ -59,7 +59,8 @@ const defaultOptions = {
     testHide : false,
     materialTopDetail : 'first',
     materialHideDetail : 'none',
-    reportHideDetail : 'all'
+    reportHideDetail : 'all',
+    addTaskInPage : false
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -120,6 +121,7 @@ function save_options() {
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
+    const addTaskInPage = document.getElementById('addTaskInPage').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -181,7 +183,8 @@ function save_options() {
         testHide : testHide,
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
-        reportHideDetail : reportHideDetail
+        reportHideDetail : reportHideDetail,
+        addTaskInPage : addTaskInPage
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -250,6 +253,7 @@ function save_options() {
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
+        document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         restoreSubject(items.subjectList);
     });
     
