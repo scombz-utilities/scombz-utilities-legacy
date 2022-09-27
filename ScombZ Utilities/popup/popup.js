@@ -345,7 +345,7 @@ function _createTaskListElement(utilsStorageData){
         }
 
         let rowElement = document.createElement('div');
-        rowElement.classList = 'task-row';
+        rowElement.classList = `task-row ${highlightMark}`;
         rowElement.innerHTML = `
             <div class='task-data'>
                 <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer">${taskList[i].course}</a>

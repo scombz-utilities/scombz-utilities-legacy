@@ -182,6 +182,16 @@ h1{
     color: gray;
     font-size: x-small;
 }
+.today.highlightMark .task-deadline{
+    color: #f00;
+    font-weight: bold;
+}
+.shorttime.highlightMark{
+    background: #fbb;
+}
+.a-few-days.highlightMark .task-deadline{
+    color: #f22;
+}
 .relative-deadline-time{
     margin-right: 10px;
 }
