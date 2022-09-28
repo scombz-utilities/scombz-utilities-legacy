@@ -119,7 +119,16 @@ function updateBadgeText() {
         manualTasklist: [],
         hiddenTasks: [],
     }, function(items) {
-        let c = removeHiddenTasks(getMergedTaskList(items), items).length;
-        chrome.action.setBadgeText({ text: c >= 1 ? c.toString() : "" });
+        let t = removeHiddenTasks(getMergedTaskList(items), items);
+
+        if(t.length > 0){
+            const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
+            if(rd < 60*24){
+                chrome.action.setBadgeBackgroundColor({ color: "#ee3333" });
+            }else{
+                chrome.action.setBadgeBackgroundColor({ color: "" });
+            }
+        }
+        chrome.action.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });
     });
 }
