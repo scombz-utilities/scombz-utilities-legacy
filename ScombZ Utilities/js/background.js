@@ -126,7 +126,7 @@ function updateBadgeText() {
             if(rd < 60*24){
                 chrome.action.setBadgeBackgroundColor({ color: "#ee3333" });
             }else{
-                chrome.action.setBadgeBackgroundColor({ color: "" });
+                chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
             }
         }
         chrome.action.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });
