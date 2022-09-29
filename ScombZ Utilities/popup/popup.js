@@ -118,6 +118,7 @@ function initPopupTimetable(){
         }
         renderWeekTimetable(item, (new Date()).getDay());
     });
+    chrome.runtime.sendMessage({"action": "updateBadgeText"});
     return;
 }
 
