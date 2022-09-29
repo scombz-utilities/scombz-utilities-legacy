@@ -29,6 +29,12 @@ chrome.runtime.onInstalled.addListener(({reason}) => {
         chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}&version=${chrome.runtime.getManifest().version}`});
     }
 });
+
+//  起動時
+chrome.runtime.onStartup.addListener(() => {
+    updateBadgeText();
+});
+
 //getJson
 function getJson(message,sender,sendResponse){
     fetch(message.endpoint, {
