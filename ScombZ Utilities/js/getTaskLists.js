@@ -10,7 +10,6 @@ function getTaskLists($$reacquisitionMin){
     }else{
         getTasksByAdjax($$reacquisitionMin);
     }
-    chrome.runtime.sendMessage({"action": "updateBadgeText"});
 
     return;
 }
@@ -41,6 +40,7 @@ function getTasksOnTaskpage(){
             tasklistData : encodeURIComponent(JSON.stringify($taskListsObj))
         },function(){
             console.log('課題一覧をChromeLocalStorageに保存しました');
+            chrome.runtime.sendMessage({"action": "updateBadgeText"});
             }
         );
     }
@@ -55,6 +55,7 @@ function getTasksByAdjax($$reacquisitionMin){
     },function(item){
         if(Number(item.TaskGetTime) + $$reacquisitionMin*1000*60 > Number($nowUnix) || location.href.includes("https://scombz.shibaura-it.ac.jp/login")){
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}\n${$$reacquisitionMin}分経過していないため、再取得をスキップします`);
+            chrome.runtime.sendMessage({"action": "updateBadgeText"});
         }else{
             console.log(`前回日時: ${new Date(item.TaskGetTime).toLocaleString()}\n現在日時: ${new Date($nowUnix).toLocaleString()}`);
             console.log("課題取得を開始します");
@@ -334,6 +335,7 @@ function getSurveysByAjax(){
                                 pastSurveyList : oldPastSurveyList
                             },function(){
                                 console.log('アンケート一覧をChromeLocalStorageに保存しました');
+                                chrome.runtime.sendMessage({"action": "updateBadgeText"});
                                 }
                             );
                         });
