@@ -338,9 +338,10 @@ function displayTaskListsOnGrayLayer(){
                     if($tasklistObj[i].data === null)continue;
                     //絶対表示
                     deadline = ($tasklistObj[i].deadline.length > 17) ? $tasklistObj[i].deadline : $tasklistObj[i].deadline+":00";
-                    if(items.deadlinemode.includes('absoluteShort'))
+                    if(items.deadlinemode.includes('absoluteShort')){
                         deadline = $tasklistObj[i].deadline.slice(5,-3);
-                        if(deadline.slice(0,1) !== "1")deadline = deadline.slice(1);
+                        if(deadline.slice(0,1) === "0")deadline = deadline.slice(1);
+                    }
                     //相対表示
                     if(items.deadlinemode.includes('relative') && $tasklistObj[i].deadline != "" ){
                         if(items.deadlinemode == 'relative'){
