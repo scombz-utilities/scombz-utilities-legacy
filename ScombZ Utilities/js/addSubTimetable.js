@@ -319,7 +319,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                 }
             }
             //GASにpush
-            if(true || (gasOutput === true && gasURL.includes("https://script.google.com/macros/") && items.gasCal && items.gasTodo )){
+            if(gasOutput === true && gasURL.includes("https://script.google.com/macros/") && items.gasCal && items.gasTodo ){
                 setTimeout(function(){
                     const gasData = {
                         settings:{
