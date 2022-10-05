@@ -319,7 +319,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                 }
             }
             //GASにpush
-            if(gasOutput === true && gasURL.includes("https://script.google.com/macros/") && items.gasCal && items.gasTodo ){
+            if(items.gasURL.includes("script.google.com/macros/")){
                 setTimeout(function(){
                     const gasData = {
                         settings:{
@@ -348,7 +348,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                             console.log(response);
                         }
                     )
-                },5000);
+                },1000);
             }
             //課題・テスト・アンケート一覧
             let deadline='XXXX/XX/XX XX:XX:XX';
