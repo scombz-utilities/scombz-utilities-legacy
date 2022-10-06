@@ -920,7 +920,7 @@ function darkmodeLayout(mode){
         color:#999;
         }
         .input-box{
-            color :#eee;
+            color :#fff;
         }
         .portal-subblock-bottom-a,.portal-survey-content-part-left,.portal-survey-content-right{
             color:#c4c5c5;
