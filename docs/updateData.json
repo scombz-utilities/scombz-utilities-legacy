@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.14.0",
+        "date": {
+            "firefox": "Not Available",
+            "chrome": "Not Available"
+        },
+        "contents":[
+            {
+                "genre": "newFunc",
+                "title": "Google連携機能の追加",
+                "explain": "Googleカレンダー・Google ToDo(リマインダー)と連携し、課題・アンケートをScombZにログインしていない状態やスマートフォンで確認できるようになりました。詳細は<a href=\"gas.html\">こちら</a>"
+            }
+        ]
+    },
+    {
         "version": "3.13.3",
         "date": {
             "firefox": "2022/10/3",
