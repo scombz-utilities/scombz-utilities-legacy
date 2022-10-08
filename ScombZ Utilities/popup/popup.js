@@ -373,6 +373,44 @@ function _createTaskListElement(utilsStorageData){
     taskLastGetTimeElement.classList = 'task-get-time';
     taskLastGetTimeElement.innerText = `最終更新:${lastgettime}`;
     taskLastGetTimeElement.href = '#';
+    taskLastGetTimeElement.addEventListener("click", function(){
+        checkGetTime(10/60)   //  割と簡単にリクエストが送信できてしまうのでScombZの負荷防止のためにクールタイムを持たせています
+        .then(fetchTasks)
+        .then(res => { console.log("課題を取得しました: ", res); })
+        .then(() => wait(100))
+        .then(fetchSurveys)
+        .then(res => { console.log("アンケートを取得しました: ", res); })
+        .then(() => {chrome.runtime.sendMessage({"action": "updateBadgeText"})})
+        .then(() => {
+            chrome.storage.local.get({
+                adjustTimetableData: {},
+                TaskGetTime: 1,
+                tasklistData: [],
+                surveyListData: [],
+                manualTasklist: [],
+                deadlinemode: 'absolute-relative',
+                maxTaskDisplay: 15,
+                hiddenTasks: [],
+                undisplayFutureTaskDays: 365,
+                highlightDeadline : true,
+            }, function(item){
+                renderWeekTimetable(item, 0);
+            });
+        })
+        .catch(err => {
+            if (err.message === "Unauthorized") {
+                //  ログイン画面にリダイレクトされた場合、新しいタブで課題・テスト一覧を開く
+                let t = window.open("https://scombz.shibaura-it.ac.jp/lms/task", "_blank");
+                return;
+            }else if(err.message === "Please Wait"){
+                //  前回の取得から10秒が経過していない場合、メッセージを表示する
+                alert("再取得が可能になるまで少々お待ちください。");
+                return;
+            }
+
+            console.log(err);
+        });
+    }, false);
 
     taskListFooterElement.appendChild(taskLastGetTimeElement);
     taskListElement.appendChild(taskListFooterElement);
