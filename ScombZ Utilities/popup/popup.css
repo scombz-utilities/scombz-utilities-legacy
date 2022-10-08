@@ -227,12 +227,16 @@ h1{
 }
 .task-row.task-footer{
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
+    align-items: flex-end;
     min-height: 12px;
     padding-bottom: 0;
-    margin-bottom: -4px;
+    padding-right: 0;
+    margin-bottom: -6px;
     border-bottom: none;
+}
+.task-row.task-footer > *{
+    padding-right: 4px;
 }
 .task-get-time{
     color: #000;
@@ -244,4 +248,18 @@ h1{
 .task-get-time.active{
     opacity: 0.6;
     cursor: wait;
+}
+.task-footer-links{
+    margin-top: 2px;
+    padding-top: 4px;   
+    padding-left: 4px; 
+    border-top: 1px lightgray solid;
+
+}
+.task-footer-link{
+    color: #000;
+    text-decoration: none;
+}
+.task-footer-link:hover{
+    text-decoration: underline;
 }

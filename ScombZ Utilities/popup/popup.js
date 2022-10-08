@@ -368,6 +368,11 @@ function _createTaskListElement(utilsStorageData){
 
     let taskListFooterElement = document.createElement('div');
     taskListFooterElement.classList = 'task-row task-footer';
+
+    taskListFooterElement.innerHTML = 
+        `<div class="task-footer-links">
+            <a href="https://scombz.shibaura-it.ac.jp/lms/task" target="_blank" class="task-footer-link">課題･テスト一覧</a> - <a href="https://scombz.shibaura-it.ac.jp/portal/surveys/list" target="_blank" class="task-footer-link">アンケート</a>
+        </div>`;
     
     let taskLastGetTimeElement = document.createElement('a');
     taskLastGetTimeElement.classList = 'task-get-time';
