@@ -375,6 +375,10 @@ function _createTaskListElement(utilsStorageData){
     taskLastGetTimeElement.href = '#';
     taskLastGetTimeElement.addEventListener("click", function(){
         checkGetTime(10/60)   //  割と簡単にリクエストが送信できてしまうのでScombZの負荷防止のためにクールタイムを持たせています
+        .then(() => {
+            taskLastGetTimeElement.innerText = "データ取得中...";
+            taskLastGetTimeElement.classList += " active";
+        })
         .then(fetchTasks)
         .then(res => { console.log("課題を取得しました: ", res); })
         .then(() => wait(100))

@@ -238,6 +238,10 @@ h1{
     color: #000;
     text-decoration: none;
 }
-.task-get-time:hover{
+.task-get-time:not(.active):hover{
     text-decoration: underline;
+}
+.task-get-time.active{
+    opacity: 0.6;
+    cursor: wait;
 }
