@@ -379,14 +379,14 @@ function _createTaskListElement(utilsStorageData){
     taskLastGetTimeElement.innerText = `最終更新:${lastgettime}`;
     taskLastGetTimeElement.href = '#';
     taskLastGetTimeElement.addEventListener("click", function(){
-        checkGetTime(10/60)   //  割と簡単にリクエストが送信できてしまうのでScombZの負荷防止のためにクールタイムを持たせています
+        checkGetTime(5)   //  割と簡単にリクエストが送信できてしまうのでScombZの負荷防止のためにクールタイムを持たせています
         .then(() => {
             taskLastGetTimeElement.innerText = "データ取得中...";
             taskLastGetTimeElement.classList += " active";
         })
         .then(fetchTasks)
         .then(res => { console.log("課題を取得しました: ", res); })
-        .then(() => wait(100))
+        .then(() => wait(1000))
         .then(fetchSurveys)
         .then(res => { console.log("アンケートを取得しました: ", res); })
         .then(() => {chrome.runtime.sendMessage({"action": "updateBadgeText"})})
@@ -412,7 +412,7 @@ function _createTaskListElement(utilsStorageData){
                 let t = window.open("https://scombz.shibaura-it.ac.jp/lms/task", "_blank");
                 return;
             }else if(err.message === "Please Wait"){
-                //  前回の取得から10秒が経過していない場合、メッセージを表示する
+                //  前回の取得から十分な時間が経過していない場合、メッセージを表示する
                 alert("再取得が可能になるまで少々お待ちください。");
                 return;
             }
