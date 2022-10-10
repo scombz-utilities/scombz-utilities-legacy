@@ -223,7 +223,9 @@ h1{
     display: inline-block;
     width: 100%;
     text-align: center;
-    margin: 24px 0;
+    margin-bottom: -2px;
+    padding: 24px 0;
+    border-bottom: 1px lightgray solid;
 }
 .task-row.task-footer{
     display: flex;
