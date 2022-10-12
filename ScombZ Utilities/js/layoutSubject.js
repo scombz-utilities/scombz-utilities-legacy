@@ -431,7 +431,6 @@ function createButton(className,materials,mode){
         for (subjectContent of subjectContents){
             subjectContent.style.height = h+"px";
         }
-        console.log(h);
     })
 
     return materialButton;
@@ -441,9 +440,34 @@ function createButton(className,materials,mode){
 function addTaskPage() {
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        let cssPosition = document.getElementById("reportList");
+        let cssPosition = document.getElementById("report").getElementsByTagName("div")[0];
+        //要素あるかチェック
         if (!(cssPosition)){
             return;
         }
+
+        cssPosition.insertAdjacentHTML("afterbegin",`
+        <div class="block-title-btn">
+			<a class="btn btn-new btn-left" id="addTaskinSubject" href="javascript:void(0);"></a>
+		</div>
+        `);
+
+        let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ")[2];
+        
+        //追加ボタンを押したときに代入
+        $(function(){
+            $("#addTaskinSubject").click(function(){
+                document.getElementById("manAddtaskSubjname").value = subjectName;
+                document.getElementById("manAddtaskSubjlink").value = location.href;
+                let addTaskButton = document.getElementById("add-task-manual");
+                //エラー吐いてるけど動く？
+                addTaskButton.click();
+
+                
+            })
+        })
+
     }
+
 }
+
