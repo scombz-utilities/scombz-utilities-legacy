@@ -459,7 +459,7 @@ function addTaskPage() {
             $("#addTaskinSubject").click(function(){
                 document.getElementById("manAddtaskSubjname").value = subjectName;
                 document.getElementById("manAddtaskSubjlink").value = location.href;
-                //clickイベントコピペした
+                //clickイベントコピペした(addSubTimeTable.js)の//手動追加部分
                 document.getElementById("manAddtaskSelectBackground").style.display = "block";
                 document.getElementById("manAddtaskSelectLayer").style.display = "block";
 

@@ -653,7 +653,7 @@ function displayTaskListsOnGrayLayer(){
                 </div>
                 <div>
                     <button id="manAddtaskConfirm" type="submit">追加する</button>
-                    <button onclick="javascript:document.getElementById('manAddtaskSelectBackground').click();">キャンセル</button>
+                    <button type="button" onclick="javascript:document.getElementById('manAddtaskSelectBackground').click();">キャンセル</button>
                 </div>
                 </form>
             </div>
