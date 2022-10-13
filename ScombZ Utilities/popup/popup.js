@@ -256,6 +256,7 @@ function _createTimetableElement(utilsStorageData, weekday){
 
 function _createTaskListElement(utilsStorageData){
     const taskList = getMergedTaskList(utilsStorageData);
+    const existTaskList = removeHiddenTasks(taskList, utilsStorageData);
     const nowUnix = Date.now();
     const lastgettime =  `${new Date(utilsStorageData.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(utilsStorageData.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
     const maxTaskDisplay = utilsStorageData.popupOverflowMode === 'scroll' ? Infinity : 7;
@@ -271,31 +272,21 @@ function _createTaskListElement(utilsStorageData){
         return taskListElement;
     }
 
-    if(removeHiddenTasks(taskList, utilsStorageData).length > 0){
-        for(let i=0,j=0; taskList[i] && i<maxTaskDisplay +j; i++){
+    if(existTaskList.length > 0){
+        for(let i=0; i < existTaskList.length && i < maxTaskDisplay; i++){
             //先の課題は表示しない
-            if((Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays))){
+            if((Number(Date.parse(existTaskList[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays))){
                 break;
             }
-            //非表示に設定されているものはスキップ
-            if(utilsStorageData.hiddenTasks.includes(taskList[i].id)){
-                j++;
-                continue;
-            }
-            if(taskList[i].data === null && !taskList[i+1]){
-                taskListElement.innerHTML = `<span class="tasklist-msg">未提出課題は存在しません。</span>`;
-                break;
-            }
-            if(taskList[i].data === null)continue;
             //絶対表示
-            deadline = (taskList[i].deadline.length > 17) ? taskList[i].deadline : taskList[i].deadline+":00";
+            deadline = (existTaskList[i].deadline.length > 17) ? existTaskList[i].deadline : existTaskList[i].deadline+":00";
             if(utilsStorageData.deadlinemode.includes('absoluteShort'))
-                deadline = taskList[i].deadline.slice(6,-3);
+                deadline = existTaskList[i].deadline.slice(6,-3);
             //相対表示
-            if(utilsStorageData.deadlinemode.includes('relative') && taskList[i].deadline != "" ){
+            if(utilsStorageData.deadlinemode.includes('relative') && existTaskList[i].deadline != "" ){
                 if(utilsStorageData.deadlinemode == 'relative'){
                     const nowUnix = Date.now();
-                    const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+                    const relativeDeadline = (Number(Date.parse(existTaskList[i].deadline)) - Number(nowUnix))/60000;
                     if(relativeDeadline < 0){
                         deadline = "期限切れ";
                     }else if(relativeDeadline < 180){
@@ -306,7 +297,7 @@ function _createTaskListElement(utilsStorageData){
                         deadline = '残り約'+Math.floor(relativeDeadline/(60*24))+'日';
                     }
                 }else{
-                    const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+                    const relativeDeadline = (Number(Date.parse(existTaskList[i].deadline)) - Number(nowUnix))/60000;
                     if(relativeDeadline < 0){
                         deadline = "期限切れ";
                     }else if(relativeDeadline < 180){
@@ -322,7 +313,7 @@ function _createTaskListElement(utilsStorageData){
             let highlightMark = "";
             if(utilsStorageData.highlightDeadline === true){
                 highlightMark = "highlightMark";
-                const relativeDeadline = (Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000;
+                const relativeDeadline = (Number(Date.parse(existTaskList[i].deadline)) - Number(nowUnix))/60000;
                 if(relativeDeadline < 60*12){
                     highlightMark = 'today shorttime highlightMark';
                 }else if(relativeDeadline < 60*24){
@@ -335,15 +326,15 @@ function _createTaskListElement(utilsStorageData){
             }
             //link生成
             let subjlink = "",tasklink = "";
-            if(taskList[i].id.includes("manual")){
-                subjlink = (taskList[i].subjlink.includes("http")) ? taskList[i].subjlink : "https://"+taskList[i].subjlink;
-                tasklink = (taskList[i].tasklink.includes("http")) ? taskList[i].tasklink : "https://"+taskList[i].tasklink;
+            if(existTaskList[i].id.includes("manual")){
+                subjlink = (existTaskList[i].subjlink.includes("http")) ? existTaskList[i].subjlink : "https://"+existTaskList[i].subjlink;
+                tasklink = (existTaskList[i].tasklink.includes("http")) ? existTaskList[i].tasklink : "https://"+existTaskList[i].tasklink;
             }else{
-                subjlink = taskList[i].link;
-                tasklink = taskList[i].link;
+                subjlink = existTaskList[i].link;
+                tasklink = existTaskList[i].link;
                 if(subjlink === undefined) {
-                    subjlink = taskList[i].url;
-                    tasklink = taskList[i].suvurl || subjlink+"#questionnaire";
+                    subjlink = existTaskList[i].url;
+                    tasklink = existTaskList[i].suvurl || subjlink+"#questionnaire";
                 }else{
                     subjlink = String((subjlink.includes("/report/"))?subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&reportId')):subjlink.slice(subjlink.indexOf('idnumber=')+9,subjlink.indexOf('&examinationId')));
                     subjlink = "https://scombz.shibaura-it.ac.jp/lms/course?idnumber="+subjlink;
@@ -354,8 +345,8 @@ function _createTaskListElement(utilsStorageData){
             rowElement.classList = `task-row ${highlightMark}`;
             rowElement.innerHTML = `
                 <div class='task-data'>
-                    <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer">${taskList[i].course}</a>
-                    <a class="task-name" href="${tasklink}" target="_blank" rel="noopener noreferrer">${taskList[i].title}</a>
+                    <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer">${existTaskList[i].course}</a>
+                    <a class="task-name" href="${tasklink}" target="_blank" rel="noopener noreferrer">${existTaskList[i].title}</a>
                 </div>
                 <div class='task-data'><span class='task-deadline'>${deadline}</span></div>
 
@@ -371,7 +362,7 @@ function _createTaskListElement(utilsStorageData){
             // </div>`;
         }
 
-        if(taskList[maxTaskDisplay] && utilsStorageData.popupOverflowMode === 'hidden'){
+        if(removeHiddenTasks(taskList, utilsStorageData).length > maxTaskDisplay && utilsStorageData.popupOverflowMode === 'hidden'){
             let rowElement = document.createElement('div');
             rowElement.classList = `task-row task-row-small task-surplus`;
             rowElement.innerHTML = `
