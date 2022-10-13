@@ -107,7 +107,7 @@ function initPopupTimetable(){
         surveyListData: [],
         manualTasklist: [],
         deadlinemode: 'absolute-relative',
-        maxTaskDisplay: 15,
+        popupOverflowMode: 'hidden',
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
         highlightDeadline : true,
@@ -258,9 +258,13 @@ function _createTaskListElement(utilsStorageData){
     const taskList = getMergedTaskList(utilsStorageData);
     const nowUnix = Date.now();
     const lastgettime =  `${new Date(utilsStorageData.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(utilsStorageData.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
+    const maxTaskDisplay = utilsStorageData.popupOverflowMode === 'scroll' ? Infinity : 7;
+
+    let bodyElement = document.createElement('div');
+    bodyElement.classList = 'tasklist-body';
 
     let taskListElement = document.createElement('div');
-    taskListElement.classList = 'tasklist-body';
+    taskListElement.classList = 'task-list';
 
     if(!taskList[0]){
         taskListElement.innerHTML = '<span class="tasklist-msg">未提出課題は存在しないか、取得できません。</span>';
@@ -268,7 +272,7 @@ function _createTaskListElement(utilsStorageData){
     }
 
     if(removeHiddenTasks(taskList, utilsStorageData).length > 0){
-        for(let i=0,j=0; taskList[i] && i<utilsStorageData.maxTaskDisplay +j; i++){
+        for(let i=0,j=0; taskList[i] && i<maxTaskDisplay +j; i++){
             //先の課題は表示しない
             if((Number(Date.parse(taskList[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays))){
                 break;
@@ -366,6 +370,15 @@ function _createTaskListElement(utilsStorageData){
             //     <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${taskList[i].id}" href="javascript:void(0);"></a></div>
             // </div>`;
         }
+
+        if(taskList[maxTaskDisplay] && utilsStorageData.popupOverflowMode === 'hidden'){
+            let rowElement = document.createElement('div');
+            rowElement.classList = `task-row task-row-small task-surplus`;
+            rowElement.innerHTML = `
+                <div class='task-data'><a href='https://scombz.shibaura-it.ac.jp/lms/task' target='_blank' class='task-surplus-link'>...他${removeHiddenTasks(taskList, utilsStorageData).length - maxTaskDisplay}件</a></div>
+            `;
+            taskListElement.appendChild(rowElement);
+        }
     }else{
         taskListElement.innerHTML = `<span class="tasklist-msg">未提出課題は存在しません。</span>`;
     }
@@ -402,7 +415,7 @@ function _createTaskListElement(utilsStorageData){
                 surveyListData: [],
                 manualTasklist: [],
                 deadlinemode: 'absolute-relative',
-                maxTaskDisplay: 15,
+                popupOverflowMode: 'hidden',
                 hiddenTasks: [],
                 undisplayFutureTaskDays: 365,
                 highlightDeadline : true,
@@ -425,10 +438,12 @@ function _createTaskListElement(utilsStorageData){
         });
     }, false);
 
-    taskListFooterElement.appendChild(taskLastGetTimeElement);
-    taskListElement.appendChild(taskListFooterElement);
+    bodyElement.appendChild(taskListElement);
 
-    return taskListElement;
+    taskListFooterElement.appendChild(taskLastGetTimeElement);
+    bodyElement.appendChild(taskListFooterElement);
+
+    return bodyElement;
 }
 /* --------------------------------- */
 
