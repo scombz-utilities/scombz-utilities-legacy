@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="description" content="ScombZ Utilitiesは芝浦工業大学の学生ポータルサイトであるScombZを使いやすくする拡張機能です">
+	<title>Google連携設定 | ScombZ Utilities</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="stylesheet" type="text/css" media="all" href="style.css">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<!--[if lt IE 9]>
+	<script src="js/html5.js"></script>
+	<script src="js/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<script src="js/jquery3.4.1.min.js"></script>
+	<script src="js/script.js"></script>
+</head>
+
+<body>
+
+	<header id="header" role="banner">
+		<div class="logo">
+			<a href="index.html" title="ScombZ Utilities" rel="home">ScombZ Utilities</a>
+		</div>
+		<div class="info">
+			<p class="tel"><span><img src="./images/chrome.png" class="browser-small-logo">for Chrome:</span> <span><a href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja">Chrome Web Store</a></span></p>
+			<p class="tel"><span><img src="./images/edge.png" class="browser-small-logo">for Edge:</span> <span><a href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja">Chrome Web Store</a></span></p>
+			<p class="tel"><span><img src="./images/firefox.png" class="browser-small-logo">for FireFox:</span> <span><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/">FireFox ADD-ONS</a></span></p>
+			<p class="tel"><span><img src="./images/Apple.png" class="browser-small-logo">for iOS/iPadOS/Android:</span> <span><a href="/smartphone.html">ガイド</a></span></p>
+			<p class="open"></p>
+		</div>
+	</header>
+
+	<nav id="mainNav">
+		<div class="inner">
+			<a class="menu" id="menu"><span>MENU</span></a>
+			<div class="panel">
+				<ul>
+					<li><a></a></li>
+					<li><a href="index.html"><strong>トップページ</strong><span>Top</span></a></li>
+					<li><a href="index.html#install"><strong>インストール</strong><span>Install</span></a></li>
+					<li class="current-menu-item"><a href="updates.html"><strong>機能詳細・更新情報</strong><span>Update</span></a></li>
+					<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeahBs8kcBB2dVmVA54KIIOxa4DKUE8v4a1E30ncawd9W4vjg/viewform"><strong>お問い合わせ</strong><span>Contact</span></a></li>
+					<li><a></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+<div id="pageMainBody">
+	<section class="content" id="setting" style="padding-top:60px;">
+		<style type="text/css">
+			#setting h4{
+				font-size:120%;
+				font-weight:bold;
+			}
+			#setting > div > p > img {
+				max-width:500px;
+				box-shadow: 0 0 5px 5px #aaa;
+				margin: 10px;
+			}
+		</style>
+		<h3 class="heading">Google連携設定</h3>
+			<p>PCでScombZにログインするたびに、課題・アンケート情報が自動的にGoogleサービスに同期されるようになります。<br>
+				Googleカレンダー及びGoogle ToDo（リマインダー）に課題・アンケートが自動登録され、スマートフォンやその他デバイスで確認しやすくなります。</p>
+			<p>所要時間: 5~10分程度</p>
+			<div>
+				<h4>初期設定手順</h4>
+				<p>
+					<strong>Googleアカウントにログインした状態で</strong>
+					<a target="_blank" rel="noopener noreferrer" href="https://script.google.com/d/1j5L2DqscsUDOP-4Mvl1Op8wUbdf0rx4vsjxATu-aEXcB6yCVzX01E6My/edit?usp=sharing">こちらのGASテンプレート</a>
+					にアクセスします。<br>
+					画面左端にマウスカーソルを移動すると、メニューが開きます。iマークの「概要」をクリックします。<br>
+					<img src="./images/gas1.png"><br>
+					画面右上部に、↓画像のようなアイコンがあります。コピーアイコンをクリックしてください。<br>
+					<img src="./images/gas2.png"><br>
+					クリックすると画面左下に「コピーしています」というダイアログが表示されます。そのまましばらく待ちます。<br>
+					コピーが作成されて新しいタブで開かれたら、画面右上の青い「デプロイ」ボタンから、新しいデプロイを選択します。<br>
+					<img src="./images/gas3.png"><br>
+					歯車ボタンから、「ウェブアプリ」を選択します。下の画像を参考に、「次のユーザーとして実行:自分」「アクセスできるユーザー:全員」として選択し、デプロイします。<br>
+					<img src="./images/gas4.png"><br>
+					「このウェブ アプリケーションを使用するには、データへのアクセスを許可する必要があります。」と表示されたら、「アクセスを承認」をクリックしてください。<br>
+					ポップアップが開くので、Googleアカウントでログインします。(ポップアップが開かない場合はブラウザでブロックされている可能性があるので確認してください)<br>
+					次のような画面が表示された場合は、Advancedをクリックして、「Go to Copy of GASテンプレート (unsafe)」をクリックしてください。
+					<img src="./images/gas5.png"><br>
+					Allowをクリックします。<br>
+					<img src="./images/gas6.png"><br>
+					ポップアップが閉じて以下の画面のようになるので、下の「ウェブアプリ」の「URL」のコピーボタンを押してください。
+					<img src="./images/gas7.png"><br>
+					ScombZ Utilitiesの設定画面を開き、「Google連携設定」のURLの入力欄に、今コピーしたURLをペーストし、保存してください。<br>
+					<img src="./images/gas8.png"><br>
+					以上で初回設定は完了です。
+				</p>
+				<h4>利用方法・設定</h4>
+				<p>
+					URL入力欄に適当なURLが保存されていれば動作します。<br>
+					複数端末でScombZ Utilitiesを利用している場合、同じURLを入力してください。<br>
+					「Googleカレンダーと連携」にチェックが入っている場合、設定したPCでScombZにログインするたびに「課題」と「課題表示設定されたアンケート」がGoogleカレンダーの予定としてリンクされ、表示されるようになります。<br>
+					「Google ToDo」にチェックが入っている場合、設定したPCでScombZにログインするたびに「課題」と「課題表示設定されたアンケート」がGoogle ToDoのタスクとしてリンクされ、表示されるようになります。<br>
+					ただし、仕様上Google ToDoはAPIから時刻を設定できないため、日付のみが保存されます。そのため何時まで、という情報まで欲しい方は必ずGoogleカレンダーにもチェックを入れるようにしてください。
+					通常、Google ToDoで設定しておくだけでGoogleカレンダーにも表示されるため、基本的にはGoogle ToDoへのチェックのみで大丈夫です。<br>
+					Google ToDoモバイル版はAppStore、PlayStoreからダウンロード/インストールしてください。
+				</p>
+			</div>
+	</section>
+</div>
+	<footer id="footer">
+		<div class="inner">
+			<div class="menu">
+				<ul class="footnav">
+					<li><a target="_blank" rel="noopener noreferrer" href="index.html">ScombZ Utilities</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/yudai1204/ScombZ-Utilities">GitHub</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://scombz.shibaura-it.ac.jp">ScombZ</a></li>
+					<li><a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSeahBs8kcBB2dVmVA54KIIOxa4DKUE8v4a1E30ncawd9W4vjg/viewform">お問い合わせ</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+	<p id="copyright">Copyright(c) 2022 うだい All Rights Reserved. Design by <a href="http://f-tpl.com" target="_blank" rel="nofollow">http://f-tpl.com</a></p><!-- ←クレジット表記を外す場合はシリアルキーが必要です http://f-tpl.com/credit/ -->
+	<script src="js/update.js"></script>
+</body>
+</html>

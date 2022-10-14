@@ -60,7 +60,10 @@ const defaultOptions = {
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
-    addTaskInPage : false
+    addTaskInPage : false,
+    gasURL: "",
+    gasCal: false,
+    gasTodo: true
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -122,6 +125,9 @@ function save_options() {
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
+    const gasURL = document.getElementById('gasURL').value;
+    const gasCal = document.getElementById('gasCal').checked;
+    const gasTodo = document.getElementById('gasTodo').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -184,7 +190,10 @@ function save_options() {
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
         reportHideDetail : reportHideDetail,
-        addTaskInPage : addTaskInPage
+        addTaskInPage : addTaskInPage,
+        gasURL: gasURL,
+        gasCal: gasCal,
+        gasTodo : gasTodo
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -254,6 +263,9 @@ function save_options() {
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
         document.getElementById('addTaskInPage').checked = items.addTaskInPage;
+        document.getElementById('gasURL').value = items.gasURL;
+        document.getElementById('gasCal').checked = items.gasCal;
+        document.getElementById('gasTodo').checked = items.gasTodo;
         restoreSubject(items.subjectList);
     });
     

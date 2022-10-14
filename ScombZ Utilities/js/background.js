@@ -1,6 +1,7 @@
 /* ScombZ Utilities */
 /* background.js */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    console.log("message");
     switch (message.action) {
         //オプションページを開く
         case "openOptionsPage":
@@ -9,6 +10,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         //jsonをgetで取得
         case "getJson":
             getJson(message,sender,sendResponse);
+            break;
+        //postを送信
+        case "postGas":
+            postGas(message,sender,sendResponse);
             break;
         default:
             break;
@@ -46,4 +51,26 @@ function getJson(message,sender,sendResponse){
             "error":true
         });
     });
+}
+
+//fetch gas
+function postGas(message,sender,sendResponse){
+    console.log("gas");
+    const postparam =
+    {
+        "method": "POST",
+        "Content-Type": "application/json",
+        "body": JSON.stringify(message.sendData)
+    };
+    fetch(message.url, postparam)
+        .then(response => {
+            console.log(response);
+            return response.json();
+        })
+        .then(json => {
+            // レスポンス json の処理
+            console.log("OK");
+            console.log(json);
+            sendResponse(json);
+        })
 }
