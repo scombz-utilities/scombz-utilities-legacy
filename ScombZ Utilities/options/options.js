@@ -63,7 +63,10 @@ const defaultOptions = {
     testHide : false,
     materialTopDetail : 'first',
     materialHideDetail : 'none',
-    reportHideDetail : 'all'
+    reportHideDetail : 'all',
+    gasURL: "",
+    gasCal: false,
+    gasTodo: true
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -128,6 +131,9 @@ function save_options() {
     const popupBadge = document.getElementById('popupBadge').checked;
     const popupTasksTab = document.getElementById('popupTasksTab').checked;
     const popupTasksLinks = document.getElementById('popupTasksLinks').checked;
+    const gasURL = document.getElementById('gasURL').value;
+    const gasCal = document.getElementById('gasCal').checked;
+    const gasTodo = document.getElementById('gasTodo').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -193,7 +199,10 @@ function save_options() {
         testHide : testHide,
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
-        reportHideDetail : reportHideDetail
+        reportHideDetail : reportHideDetail,
+        gasURL: gasURL,
+        gasCal: gasCal,
+        gasTodo : gasTodo
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -266,6 +275,9 @@ function save_options() {
         document.getElementById('popupBadge').checked = items.popupBadge;
         document.getElementById('popupTasksTab').checked = items.popupTasksTab;
         document.getElementById('popupTasksLinks').checked = items.popupTasksLinks;
+        document.getElementById('gasURL').value = items.gasURL;
+        document.getElementById('gasCal').checked = items.gasCal;
+        document.getElementById('gasTodo').checked = items.gasTodo;
         restoreSubject(items.subjectList);
     });
     

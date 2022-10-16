@@ -15,6 +15,7 @@
             <li><a href="#home">設定トップ</a></li>
             <li><a href="#settings">基本設定</a></li>
             <li><a href="#advancedSettings">詳細設定</a></li>
+            <li><a href="#syncSettings">Google連携設定</a></li>
             <li><a href="#initArea">初期化</a></li>
             <li><a href="./customcss.html">カスタムCSS</a></li>
             <li><a href="#form">バグ報告・お問い合わせ・寄付</a></li>
@@ -797,6 +798,26 @@
                     メニュー横課題一覧の中から、非表示にした課題のデータを初期化し、すべて再表示します。
                 </div>
                 <button type="button" id="resetHiddenTasks" class="inputbox">再表示</button>
+            </div>
+            <div class="setting-column" id="syncSettings">
+                <hr>
+                <h1 class="subtitle">Google連携設定</h1>
+                <hr>
+                <div class="explains">
+                    PCでScombZにログインするたびに、課題・アンケート情報が自動的にGoogleサービスに同期されるようになります。<br>
+                    Googleカレンダー及びGoogle ToDo（リマインダー）に課題・アンケートが自動登録され、スマートフォンやその他デバイスで確認しやすくなります。<br>
+                    有効にするには初期設定が必要です。初期設定の手順は<a href="https://yudai1204.github.io/ScombZ-Utilities/gas.html" style="color:#000;text-decoration: underline;" target="_blank" rel="noopener noreferrer">こちら</a>(所要時間: 5~10分程度)<br>
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">URL<br></span>
+                    <input type="text" id="gasURL" placeholder="https://script.google.com/macros/s/....">
+                </div>
+                <div class="input-box" style="margin-top:20px">
+                    <span class="switch-explain">連携先サービス (URLが設定されていない場合、機能しません)<br></span>
+                    <input type="checkbox" id="gasCal"><label for="gasCal">Googleカレンダーと連携</label><br>
+                    <input type="checkbox" id="gasTodo"><label for="gasTodo">Google ToDoと連携 (既定)</label>
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
             </div>
             <div class="setting-column" id="initArea">
                 <hr>

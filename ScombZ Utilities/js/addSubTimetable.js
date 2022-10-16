@@ -27,10 +27,10 @@ function subTimetable($timetableDisplay,$tasklistDisplay,$$version,$$reacquisiti
             if(Number(Date.now()) > Number(items.TaskGetTime) + $$reacquisitionMin * 1000 * 60  || (location.href == "https://scombz.shibaura-it.ac.jp/lms/course/report/submission" &&  document.querySelector(".contents-detail.contents-complete")) || (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/examination/take?complete")&&  document.querySelector(".contents-detail.contents-complete")) ){
                 setTimeout(function(){
                     console.log("遅延表示設定");
-                    displayTaskListsOnGrayLayer();
+                    displayTaskListsOnGrayLayer(true);
                 },1500);
             }else{
-            displayTaskListsOnGrayLayer();
+            displayTaskListsOnGrayLayer(false);
             }
             console.log('メニュー横に課題を表示しました');
         });
@@ -242,7 +242,7 @@ function displayGrayLayer($$version){
     return;
 }
 //課題一覧の表示
-function displayTaskListsOnGrayLayer(){
+function displayTaskListsOnGrayLayer(gasOutput){
     chrome.storage.local.get({
         TaskGetTime: 1,
         tasklistData: [],
@@ -254,7 +254,10 @@ function displayTaskListsOnGrayLayer(){
         maxTaskDisplay: 15,
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
-        highlightDeadline : true
+        highlightDeadline : true,
+        gasCal: false,
+        gasTodo: true,
+        gasURL: ""
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -315,6 +318,38 @@ function displayTaskListsOnGrayLayer(){
                     }
                 }
             }
+            //GASにpush
+            if(items.gasURL.includes("script.google.com/macros/")){
+                setTimeout(function(){
+                    const gasData = {
+                        settings:{
+                            doCal: items.gasCal,
+                            doTask: items.gasTodo
+                        },
+                        data:[]
+                    };
+                    for(const data of $tasklistObj){
+                        gasData.data.push({
+                            id:data.id,
+                            limit: new Date(data.deadline).getTime(),
+                            title: data.title,
+                            subject: data.course,
+                            type: (data.id.includes("survey"))?"アンケート":"課題"
+                        });
+                    }
+                    console.log(gasData);
+                    chrome.runtime.sendMessage(
+                        {
+                            action: 'postGas',
+                            sendData: gasData,
+                            url:items.gasURL
+                        },
+                        (response) => {
+                            console.log(response);
+                        }
+                    )
+                },1000);
+            }
             //課題・テスト・アンケート一覧
             let deadline='XXXX/XX/XX XX:XX:XX';
             if(!$tasklistObj[0]){
@@ -338,8 +373,10 @@ function displayTaskListsOnGrayLayer(){
                     if($tasklistObj[i].data === null)continue;
                     //絶対表示
                     deadline = ($tasklistObj[i].deadline.length > 17) ? $tasklistObj[i].deadline : $tasklistObj[i].deadline+":00";
-                    if(items.deadlinemode.includes('absoluteShort'))
-                        deadline = $tasklistObj[i].deadline.slice(6,-3);
+                    if(items.deadlinemode.includes('absoluteShort')){
+                        deadline = $tasklistObj[i].deadline.slice(5,-3);
+                        if(deadline.slice(0,1) === "0")deadline = deadline.slice(1);
+                    }
                     //相対表示
                     if(items.deadlinemode.includes('relative') && $tasklistObj[i].deadline != "" ){
                         if(items.deadlinemode == 'relative'){

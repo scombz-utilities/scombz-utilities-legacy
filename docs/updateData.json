@@ -1,9 +1,37 @@
 [
     {
+        "version": "3.14.0",
+        "date": {
+            "firefox": "2022/10/7",
+            "chrome": "2022/10/9"
+        },
+        "contents":[
+            {
+                "genre": "newFunc",
+                "title": "Google連携機能の追加",
+                "explain": "Googleカレンダー・Google ToDo(リマインダー)と連携し、課題・アンケートをScombZにログインしていない状態やスマートフォンで確認できるようになりました。詳細は<a href=\"gas.html\">こちら</a>"
+            }
+        ]
+    },
+    {
+        "version": "3.13.3",
+        "date": {
+            "firefox": "2022/10/3",
+            "chrome": "2022/10/3"
+        },
+        "contents":[
+            {
+                "genre": "bugfix",
+                "title": "バグ修正",
+                "explain": "課題一覧の表示方式を「残り時間 + 月/日 時:分」または「月/日 時:分」にすると、月の十の桁が消えてしまう問題の修正"
+            }
+        ]
+    },
+    {
         "version": "3.13.2",
         "date": {
             "firefox": "2022/7/5",
-            "chrome": "Not yet"
+            "chrome": "2022/7/8"
         },
         "contents":[
             {
