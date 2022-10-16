@@ -602,6 +602,45 @@
             </div>   
 
             <hr>
+            <h2>ポップアップ設定</h2>
+            アドレスバー右の拡張機能アイコンをクリックした際に表示される、ポップアップに関する設定です。
+            <div class="setting-column">
+                <h3>「課題」タブの表示</h3><span class="id-explain">popupTasksTab</span>
+                <input class="ItemBox-CheckBox-Input" type="checkbox" id="popupTasksTab"><label class="ItemBox-CheckBox-Label" for="popupTasksTab"></label>
+                <div class="explains">
+                    ポップアップ内の曜日タブの横に「課題」タブを表示します。<br />
+                    「課題」タブでは未提出の課題を一覧形式で表示できます。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>課題タブ下部のリンクの表示</h3><span class="id-explain">popupTasksLinks</span>
+                <input class="ItemBox-CheckBox-Input" type="checkbox" id="popupTasksLinks"><label class="ItemBox-CheckBox-Label" for="popupTasksLinks"></label>
+                <div class="explains">
+                    課題タブの下部にScombZ「課題・テスト一覧」「アンケート一覧」へのリンクを表示します。
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>課題が多い場合の表示方式</h3><span class="id-explain">popupOverflowMode</span>
+                <div class="explains">
+                    「課題」タブの課題一覧で、8個目以降の課題の表示方式を選択します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">表示方式選択</span><br>
+                    <select id="popupOverflowMode">
+                        <option value="hidden">省略する</option>
+                        <option value="scroll">スクロールして表示する</option>
+                    </select>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>未提出課題数のバッジ表示</h3><span class="id-explain">popupBadge</span>
+                <input class="ItemBox-CheckBox-Input" type="checkbox" id="popupBadge"><label class="ItemBox-CheckBox-Label" for="popupBadge"></label>
+                <div class="explains">
+                    未提出の課題の個数をバッジに表示します。
+                </div>
+            </div>
+
+            <hr>
             <h2>実験的な設定</h2>
             バグが確認されているか、バグになる可能性が高い設定です。<br>
             <div class="setting-column">

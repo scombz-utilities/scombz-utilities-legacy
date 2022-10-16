@@ -124,7 +124,13 @@ function updateBadgeText() {
         surveyListData: [],
         manualTasklist: [],
         hiddenTasks: [],
+        popupBadge: true,
     }, function(items) {
+        if (!items.popupBadge) {
+            chrome.action.setBadgeText({ text: "" });
+            return;
+        }
+
         let t = removeHiddenTasks(getMergedTaskList(items), items);
 
         if(t.length > 0){

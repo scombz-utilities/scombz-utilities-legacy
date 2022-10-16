@@ -47,6 +47,10 @@ const defaultOptions = {
         timetableCentering : false
     },
     remomveDirectLink : true,
+    popupOverflowMode: 'hidden',
+    popupBadge: true,
+    popupTasksTab: true,
+    popupTasksLinks: true,
     maxWidthPx:{
         subj: 1280,
         lms: 1280,
@@ -120,6 +124,10 @@ function save_options() {
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
+    const popupOverflowMode = document.getElementById('popupOverflowMode').value;
+    const popupBadge = document.getElementById('popupBadge').checked;
+    const popupTasksTab = document.getElementById('popupTasksTab').checked;
+    const popupTasksLinks = document.getElementById('popupTasksLinks').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -169,6 +177,10 @@ function save_options() {
             timetableCentering : timetableCentering
         },
         remomveDirectLink : remomveDirectLink,
+        popupOverflowMode : popupOverflowMode,
+        popupBadge : popupBadge,
+        popupTasksTab : popupTasksTab,
+        popupTasksLinks : popupTasksLinks,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth,
@@ -250,6 +262,10 @@ function save_options() {
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
+        document.getElementById('popupOverflowMode').value = items.popupOverflowMode;
+        document.getElementById('popupBadge').checked = items.popupBadge;
+        document.getElementById('popupTasksTab').checked = items.popupTasksTab;
+        document.getElementById('popupTasksLinks').checked = items.popupTasksLinks;
         restoreSubject(items.subjectList);
     });
     

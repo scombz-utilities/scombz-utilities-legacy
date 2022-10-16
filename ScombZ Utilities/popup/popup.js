@@ -108,6 +108,8 @@ function initPopupTimetable(){
         manualTasklist: [],
         deadlinemode: 'absolute-relative',
         popupOverflowMode: 'hidden',
+        popupTasksTab: true,
+        popupTasksLinks: true,
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
         highlightDeadline : true,
@@ -130,10 +132,14 @@ function renderWeekTimetable(utilsStorageData, weekday){
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
         target.appendChild(_createTimetableElement(utilsStorageData, weekday));
         return;
-    }else{
+    }else if(utilsStorageData.popupTasksTab){
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, 0));
         target.appendChild(_createTaskListElement(utilsStorageData));
         return;       
+    }else{
+        target.appendChild(_createWeekdayTabsElement(utilsStorageData, 1));
+        target.appendChild(_createTimetableElement(utilsStorageData, 1));
+        return;        
     }
 }
 
@@ -161,19 +167,21 @@ function _createWeekdayTabsElement(utilsStorageData, weekday){
         weekdayTabsContainer.appendChild(weekdayTabElement);
     }
 
-    let taskTabElement = document.createElement('div');
-    taskTabElement.innerText = '課題';
-    taskTabElement.classList = weekday === 0 ? 'weekday-tab task-tab active' : 'weekday-tab task-tab';
-    taskTabElement.addEventListener('click', function(){
-        renderWeekTimetable(utilsStorageData, 0);
-    });
+    if(utilsStorageData.popupTasksTab){
+        let taskTabElement = document.createElement('div');
+        taskTabElement.innerText = '課題';
+        taskTabElement.classList = weekday === 0 ? 'weekday-tab task-tab active' : 'weekday-tab task-tab';
+        taskTabElement.addEventListener('click', function(){
+            renderWeekTimetable(utilsStorageData, 0);
+        });
 
-    let taskBadgeElement = document.createElement('span');
-    taskBadgeElement.innerText = removeHiddenTasks(getMergedTaskList(utilsStorageData), utilsStorageData).length;
-    taskBadgeElement.classList = 'badge';
+        let taskBadgeElement = document.createElement('span');
+        taskBadgeElement.innerText = removeHiddenTasks(getMergedTaskList(utilsStorageData), utilsStorageData).length;
+        taskBadgeElement.classList = 'badge';
 
-    taskTabElement.appendChild(taskBadgeElement);
-    weekdayTabsContainer.appendChild(taskTabElement);
+        taskTabElement.appendChild(taskBadgeElement);
+        weekdayTabsContainer.appendChild(taskTabElement);
+    }
 
     return weekdayTabsContainer;
 }
@@ -377,10 +385,12 @@ function _createTaskListElement(utilsStorageData){
     let taskListFooterElement = document.createElement('div');
     taskListFooterElement.classList = 'task-row task-footer';
 
-    taskListFooterElement.innerHTML = 
-        `<div class="task-footer-links">
-            <a href="https://scombz.shibaura-it.ac.jp/lms/task" target="_blank" class="task-footer-link">課題･テスト一覧</a> - <a href="https://scombz.shibaura-it.ac.jp/portal/surveys/list" target="_blank" class="task-footer-link">アンケート</a>
-        </div>`;
+    if(utilsStorageData.popupTasksLinks) {
+        taskListFooterElement.innerHTML = 
+            `<div class="task-footer-links">
+                <a href="https://scombz.shibaura-it.ac.jp/lms/task" target="_blank" class="task-footer-link">課題･テスト一覧</a> - <a href="https://scombz.shibaura-it.ac.jp/portal/surveys/list" target="_blank" class="task-footer-link">アンケート</a>
+            </div>`;
+    }
     
     let taskLastGetTimeElement = document.createElement('a');
     taskLastGetTimeElement.classList = 'task-get-time';
