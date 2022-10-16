@@ -89,13 +89,10 @@ function getMergedTaskList(utilsStorageData){
 }
 
 function removeHiddenTasks(tasklist, utilsStorageData){
-    let result = [];
-
-    tasklist.forEach(item => {
-        if(!utilsStorageData.hiddenTasks.includes(item.id) && item.data !== null) result.push(item);
-    });
-
-    return result;
+    return tasklist.filter(item => 
+        !utilsStorageData.hiddenTasks.includes(item.id)
+        && item.data !== null
+        && (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays)));
 }
 
 function initPopupTimetable(){
