@@ -129,14 +129,17 @@ function renderWeekTimetable(utilsStorageData, weekday){
     target.innerHTML = '';
 
     if(1 <= weekday && weekday <= (utilsStorageData.adjustTimetableData.eraseSat ? 5 : 6)){
+        //  平日（設定に応じて土曜日も含める）なら、その曜日の時間割を表示
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, weekday));
         target.appendChild(_createTimetableElement(utilsStorageData, weekday));
         return;
     }else if(utilsStorageData.popupTasksTab){
+        //  休日かつ課題タブが有効なら、課題一覧を表示
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, 0));
         target.appendChild(_createTaskListElement(utilsStorageData));
         return;       
     }else{
+        //  休日かつ課題タブが無効なら、月曜日の時間割を表示
         target.appendChild(_createWeekdayTabsElement(utilsStorageData, 1));
         target.appendChild(_createTimetableElement(utilsStorageData, 1));
         return;        
@@ -361,13 +364,6 @@ function _createTaskListElement(utilsStorageData){
             `;
 
             taskListElement.appendChild(rowElement);
-
-            // kadaiListHTML += `
-            // <div class="subk-line ${highlightMark}">
-            //     <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${taskList[i].course}</a></div></div>
-            //     <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${taskList[i].title}</span></a></div></div>
-            //     <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${taskList[i].id}" href="javascript:void(0);"></a></div>
-            // </div>`;
         }
 
         if(removeHiddenTasks(taskList, utilsStorageData).length > maxTaskDisplay && utilsStorageData.popupOverflowMode === 'hidden'){
