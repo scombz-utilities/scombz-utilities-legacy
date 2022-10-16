@@ -410,6 +410,8 @@ function _createTaskListElement(utilsStorageData){
                 manualTasklist: [],
                 deadlinemode: 'absolute-relative',
                 popupOverflowMode: 'hidden',
+                popupTasksTab: true,
+                popupTasksLinks: true,
                 hiddenTasks: [],
                 undisplayFutureTaskDays: 365,
                 highlightDeadline : true,
