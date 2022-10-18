@@ -129,22 +129,42 @@ function updateBadgeText() {
         undisplayFutureTaskDays: 365,
         popupBadge: true,
     }, function(items) {
-        if (!items.popupBadge) {
-            chrome.action.setBadgeText({ text: "" });
-            return;
-        }
-
-        let t = removeHiddenTasks(getMergedTaskList(items), items);
-
-        if(t.length > 0){
-            const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
-            if(rd < 60*24){
-                chrome.action.setBadgeBackgroundColor({ color: "#ee3333" });
-            }else{
-                chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
+        if(chrome.action){
+            if (!items.popupBadge) {
+                chrome.action.setBadgeText({ text: "" });
+                return;
             }
+
+            let t = removeHiddenTasks(getMergedTaskList(items), items);
+
+            if(t.length > 0){
+                const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
+                if(rd < 60*24){
+                    chrome.action.setBadgeBackgroundColor({ color: "#ee3333" });
+                }else{
+                    chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
+                }
+            }
+            chrome.action.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });
+        }else{
+            //  Firefoxなど、chrome.actionが使えない場合
+            if (!items.popupBadge) {
+                browser.browserAction.setBadgeText({ text: "" });
+                return;
+            }
+
+            let t = removeHiddenTasks(getMergedTaskList(items), items);
+
+            if(t.length > 0){
+                const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
+                if(rd < 60*24){
+                    browser.browserAction.setBadgeBackgroundColor({ color: "#ee3333" });
+                }else{
+                    browser.browserAction.setBadgeBackgroundColor({ color: "#1a73e8" });
+                }
+            }
+            browser.browserAction.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });            
         }
-        chrome.action.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });
     });
 }
 
