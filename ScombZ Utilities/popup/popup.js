@@ -403,6 +403,7 @@ function _createTaskListElement(utilsStorageData){
         .then(() => {chrome.runtime.sendMessage({"action": "updateBadgeText"})})
         .then(() => {
             chrome.storage.local.get({
+                timetableData: null,
                 adjustTimetableData: {},
                 TaskGetTime: 1,
                 tasklistData: [],
