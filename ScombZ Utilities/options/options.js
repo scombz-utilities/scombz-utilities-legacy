@@ -47,6 +47,10 @@ const defaultOptions = {
         timetableCentering : false
     },
     remomveDirectLink : true,
+    popupOverflowMode: 'hidden',
+    popupBadge: true,
+    popupTasksTab: true,
+    popupTasksLinks: true,
     maxWidthPx:{
         subj: 1280,
         lms: 1280,
@@ -123,6 +127,10 @@ function save_options() {
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
+    const popupOverflowMode = document.getElementById('popupOverflowMode').value;
+    const popupBadge = document.getElementById('popupBadge').checked;
+    const popupTasksTab = document.getElementById('popupTasksTab').checked;
+    const popupTasksLinks = document.getElementById('popupTasksLinks').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -175,6 +183,10 @@ function save_options() {
             timetableCentering : timetableCentering
         },
         remomveDirectLink : remomveDirectLink,
+        popupOverflowMode : popupOverflowMode,
+        popupBadge : popupBadge,
+        popupTasksTab : popupTasksTab,
+        popupTasksLinks : popupTasksLinks,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth,
@@ -259,6 +271,10 @@ function save_options() {
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
+        document.getElementById('popupOverflowMode').value = items.popupOverflowMode;
+        document.getElementById('popupBadge').checked = items.popupBadge;
+        document.getElementById('popupTasksTab').checked = items.popupTasksTab;
+        document.getElementById('popupTasksLinks').checked = items.popupTasksLinks;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;

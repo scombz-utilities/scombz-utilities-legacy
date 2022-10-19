@@ -8,7 +8,7 @@
 }
 #mainbody{
     margin :0;
-    width: 350px;
+    width: 380px;
     overflow:hidden;
 }
 .popuplogo{
@@ -39,7 +39,7 @@ h1{
     margin: 0;
 }
 .settings{
-    width:330px;
+    width:360px;
     margin: 0 auto;
     padding:10px;
 }
@@ -65,7 +65,7 @@ h1{
     justify-content: space-around;
 }
 #weekdayTabsContainer .weekday-tab{
-    width: calc(100% / 6);
+    width: 100%;
     text-align: center;
 }
 .weekday-tab.active{
@@ -81,6 +81,26 @@ h1{
 .weekday-tab:not(.active):hover{
     color: inherit;
     border-bottom: 1px gray solid;
+}
+.weekday-tab.task-tab{
+    margin-left: 10px;
+    word-break: keep-all;
+}
+.task-tab .badge{
+    margin-left: 0.5em;
+    padding: 0 0.5em;
+    color: #222;
+    font-weight: 600;
+    background: rgba(0, 0, 0, .08);
+    border-radius: 1em;
+}
+.weekday-tab:not(.active):hover .badge{
+    color: #000;
+    background: rgba(0, 0, 0, .1);
+}
+.task-tab.active .badge{
+    color: #000;
+    background: rgba(0, 0, 0, .1);
 }
 #timetable{
     width: 100%;
@@ -142,4 +162,122 @@ h1{
 }
 .subject-classroom:hover{
     -webkit-line-clamp: unset;
+}
+.task-list{
+    max-height: 380px;
+    overflow-y: auto;
+    border-bottom: 1px lightgray solid;
+}
+.task-row{
+    min-height: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px 4px;
+    border-bottom: 1px lightgray solid;
+}
+.task-row.task-row-small{
+    min-height: 0px;
+}
+.task-list .task-row:last-child{
+    border-bottom: none;
+}
+.task-data{
+    display: flex;
+    align-items: baseline;
+}
+.task-subject-name{
+    margin-right: 10px;
+}
+.task-deadline{
+    color: gray;
+    font-size: x-small;
+}
+.today.highlightMark .task-deadline{
+    color: #f00;
+    font-weight: bold;
+}
+.shorttime.highlightMark{
+    background: #fbb;
+}
+.a-few-days.highlightMark .task-deadline{
+    color: #f22;
+}
+.relative-deadline-time{
+    margin-right: 10px;
+}
+.task-subject-name{
+    display: inline-block;
+    width: 100px;
+    color: #000;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.task-subject-name:hover{
+    text-decoration: underline;
+}
+.task-name{
+    display: inline-block;
+    width: 240px;
+    color: #000;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.task-name:hover{
+    text-decoration: underline;
+}
+.tasklist-msg{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 24px 0;
+}
+.task-row.task-footer{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    min-height: 12px;
+    padding-bottom: 0;
+    padding-right: 0;
+    margin-bottom: -6px;
+    border-bottom: none;
+}
+.task-row.task-footer > *{
+    padding-right: 4px;
+}
+.task-get-time{
+    color: #000;
+    text-decoration: none;
+}
+.task-get-time:not(.active):hover{
+    text-decoration: underline;
+}
+.task-get-time.active{
+    opacity: 0.6;
+    cursor: wait;
+}
+.task-footer-links{
+    margin-top: 4px;
+    padding-top: 4px;   
+    padding-left: 4px; 
+    border-top: 1px lightgray solid;
+
+}
+.task-footer-link{
+    color: #000;
+    text-decoration: none;
+}
+.task-footer-link:hover{
+    text-decoration: underline;
+}
+.task-surplus-link{
+    color: gray;
+    text-decoration: none;
+}
+.task-surplus-link:hover{
+    text-decoration: underline;
 }
