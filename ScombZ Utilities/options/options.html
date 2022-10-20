@@ -654,6 +654,24 @@
                     未提出の課題の個数をバッジに表示します。
                 </div>
             </div>
+            <div class="setting-column">
+                <h3>一定より先の課題をバッジにカウントしない</h3><span class="id-explain">popupUncountFutureTaskDays</span>
+                <div class="explains">
+                    未提出の課題の個数をバッジに表示する機能で、2週間後など先の課題をカウントから除外できます。ここではカウントする限度の日数を設定できます。<br />
+                    ※この数を超える課題は、存在していても表示されません。課題がなくなったわけではないことに注意してください。
+                </div>
+                <div class="input-box">
+                    <input type="number" id="popupUncountFutureTaskDays">日以内のみカウントする
+                </div>
+                <button type="button" class="saveBtn">保存する</button>
+            </div>
+            <div class="setting-column">
+                <h3>カウントから除外した課題を暗くする</h3><span class="id-explain">popupDarkenUncountedTasks</span>
+                <input class="ItemBox-CheckBox-Input" type="checkbox" id="popupDarkenUncountedTasks"><label class="ItemBox-CheckBox-Label" for="popupDarkenUncountedTasks"></label>
+                <div class="explains">
+                    「一定より先の課題をバッジにカウントしない」設定でカウントから除外された課題の背景色を暗くします。
+                </div>
+            </div>
 
             <hr>
             <h2>実験的な設定</h2>

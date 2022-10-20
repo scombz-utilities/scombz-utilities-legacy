@@ -203,6 +203,9 @@ h1{
 .a-few-days.highlightMark .task-deadline{
     color: #f22;
 }
+.uncounted.highlightMark{
+    background: #f0f0f0;
+}
 .relative-deadline-time{
     margin-right: 10px;
 }

@@ -95,6 +95,11 @@ function removeHiddenTasks(tasklist, utilsStorageData){
         && (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays)));
 }
 
+function removeUncountTasks(tasklist, utilsStorageData){
+    return tasklist.filter(item => 
+        (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.popupUncountFutureTaskDays)));
+}
+
 function initPopupTimetable(){
     chrome.storage.local.get({
         timetableData: null,
@@ -109,6 +114,8 @@ function initPopupTimetable(){
         popupTasksLinks: true,
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
+        popupUncountFutureTaskDays: 365,
+        popupDarkenUncountedTasks: true,
         highlightDeadline : true,
     }, function(item){
         if(item.timetableData === null){
@@ -176,7 +183,7 @@ function _createWeekdayTabsElement(utilsStorageData, weekday){
         });
 
         let taskBadgeElement = document.createElement('span');
-        taskBadgeElement.innerText = removeHiddenTasks(getMergedTaskList(utilsStorageData), utilsStorageData).length;
+        taskBadgeElement.innerText = removeUncountTasks(removeHiddenTasks(getMergedTaskList(utilsStorageData), utilsStorageData), utilsStorageData).length;
         taskBadgeElement.classList = 'badge';
 
         taskTabElement.appendChild(taskBadgeElement);
@@ -331,6 +338,9 @@ function _createTaskListElement(utilsStorageData){
                 }else if(relativeDeadline < 60*24*7){
                     highlightMark = 'a-week highlightMark';
                 }
+                if(utilsStorageData.popupDarkenUncountedTasks && relativeDeadline >= 60*24*(1 + Number(utilsStorageData.popupUncountFutureTaskDays))){
+                    highlightMark = 'uncounted ' + highlightMark;
+                }
             }
             //link生成
             let subjlink = "",tasklink = "";
@@ -415,6 +425,8 @@ function _createTaskListElement(utilsStorageData){
                 popupTasksLinks: true,
                 hiddenTasks: [],
                 undisplayFutureTaskDays: 365,
+                popupUncountFutureTaskDays: 365,
+                popupDarkenUncountedTasks: true,
                 highlightDeadline : true,
             }, function(item){
                 renderWeekTimetable(item, 0);
