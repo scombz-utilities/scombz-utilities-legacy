@@ -10,5 +10,11 @@
         "title":"スマホ版プレリリースのお知らせ",
         "content":"ScombZ Utilitiesの、iOS/iPadOS/Android向け<br>インストールガイドを公開しました！<br>(開発途中版です)",
         "link":"https://yudai1204.github.io/ScombZ-Utilities/smartphone.html"
+    },
+    {
+        "id":2,
+        "title":"Google連携機能のバグについて",
+        "content":"Google連携機能で、同じ課題が何度も追加されてしまうバグに対するパッチを公開しました。<br><strong>このバグは自動で修正されないため、導入していただいている方は再度以下の初期設定に従ってGAS URLを設定しなおしてください。</strong>",
+        "link":"https://yudai1204.github.io/ScombZ-Utilities/gas.html"
     }
 ]
