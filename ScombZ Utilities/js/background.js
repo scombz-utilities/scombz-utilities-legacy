@@ -120,6 +120,11 @@ function removeHiddenTasks(tasklist, utilsStorageData){
         && (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays)));
 }
 
+function removeUncountTasks(tasklist, utilsStorageData){
+    return tasklist.filter(item => 
+        (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.popupUncountFutureTaskDays)));
+}
+
 function updateBadgeText() {
     chrome.storage.local.get({
         tasklistData: [],
@@ -127,6 +132,7 @@ function updateBadgeText() {
         manualTasklist: [],
         hiddenTasks: [],
         undisplayFutureTaskDays: 365,
+        popupUncountFutureTaskDays: 365,
         popupBadge: true,
     }, function(items) {
         if(chrome.action){
@@ -135,7 +141,7 @@ function updateBadgeText() {
                 return;
             }
 
-            let t = removeHiddenTasks(getMergedTaskList(items), items);
+            let t = removeUncountTasks(removeHiddenTasks(getMergedTaskList(items), items), items);
 
             if(t.length > 0){
                 const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
@@ -153,7 +159,7 @@ function updateBadgeText() {
                 return;
             }
 
-            let t = removeHiddenTasks(getMergedTaskList(items), items);
+            let t = removeUncountTasks(removeHiddenTasks(getMergedTaskList(items), items), items);
 
             if(t.length > 0){
                 const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;

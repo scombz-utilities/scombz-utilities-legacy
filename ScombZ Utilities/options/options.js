@@ -51,6 +51,8 @@ const defaultOptions = {
     popupBadge: true,
     popupTasksTab: true,
     popupTasksLinks: true,
+    popupUncountFutureTaskDays: 365,
+    popupDarkenUncountedTasks: true,
     maxWidthPx:{
         subj: 1280,
         lms: 1280,
@@ -131,6 +133,8 @@ function save_options() {
     const popupBadge = document.getElementById('popupBadge').checked;
     const popupTasksTab = document.getElementById('popupTasksTab').checked;
     const popupTasksLinks = document.getElementById('popupTasksLinks').checked;
+    const popupUncountFutureTaskDays = document.getElementById('popupUncountFutureTaskDays').value;
+    const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -187,6 +191,8 @@ function save_options() {
         popupBadge : popupBadge,
         popupTasksTab : popupTasksTab,
         popupTasksLinks : popupTasksLinks,
+        popupUncountFutureTaskDays : popupUncountFutureTaskDays,
+        popupDarkenUncountedTasks : popupDarkenUncountedTasks,
         maxWidthPx:{
             subj: subjWidth,
             lms: lmsWidth,
@@ -275,6 +281,8 @@ function save_options() {
         document.getElementById('popupBadge').checked = items.popupBadge;
         document.getElementById('popupTasksTab').checked = items.popupTasksTab;
         document.getElementById('popupTasksLinks').checked = items.popupTasksLinks;
+        document.getElementById('popupUncountFutureTaskDays').value = items.popupUncountFutureTaskDays;
+        document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
