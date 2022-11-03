@@ -277,6 +277,7 @@ function save_options() {
         document.getElementById('materialHide').checked = items.materialHide;
         document.getElementById('reportHide').checked = items.reportHide;
         document.getElementById('testHide').checked = items.testHide;
+        document.getElementById('modifyCoursePageTitle').checked = items.modifyCoursePageTitle;
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
