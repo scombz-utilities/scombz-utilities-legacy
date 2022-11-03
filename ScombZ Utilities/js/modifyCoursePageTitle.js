@@ -7,7 +7,7 @@ function modifyCoursePageTitle() {
     )
     if (isCourseTopPage && courseTitle) {
         // 科目名
-        const courseName = courseTitle.textContent.split(' ')[2]
+        const courseName = courseTitle.textContent.split(' ').at(-1)
 
         // 「科目名 - 科目トップ」のような表示にする
         document.title = `${courseName} - ${document.title}`
