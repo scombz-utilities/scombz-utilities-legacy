@@ -8,7 +8,7 @@
     const $$reacquisitionMin = 20;      //再取得までの時間(分)
     /*  定数ここまで  */
     console.log(`Welcome to ScombZ Utilities ver.${$$version}`);
-    
+
     /* 設定読み込み*/
     //初期状態（設定が保存されていない場合に適用される）
     const defaults = {
@@ -41,19 +41,20 @@
             remomveDirectLink: true,    //ダイレクトリンクを消す
             dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
             attendance: 'none',         //出席記録を消す
-            pastSurvey: true,           //過去のアンケート    
+            pastSurvey: true,           //過去のアンケート
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
                 erase7: false,          // 7限を消す
                 dispClassroom: false,   // 講師名表示を教室表示にする
-                timetableCentering: false // 時間割のセンタリング 
+                timetableCentering: false // 時間割のセンタリング
             },
             subjectList : '12345678',   //要素の並び替え
             materialTop : false,        //教材の位置
             materialHide : true,        //教材を閉じる
             reportHide : false,          //課題を非表示
             testHide : false,            //テストを非表示
+            modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
@@ -88,7 +89,7 @@
                 setTimeout(function(){
                     document.documentElement.style.visibility = '';
                 },300);
-                
+
                 //設定ボタンを追加
                 addExtensionSettingsBtn();
                 //帰ってきて芝猫
@@ -140,7 +141,7 @@
                 if(items.changeReportBtn === true){
                     changeReportBtn();
                 }
-                
+
                 //ログアウト画面の変更
                 if(items.changeLogout === true){
                     changeLogout();
@@ -153,7 +154,7 @@
                 if(items.pageTopBtn === true){
                     remomvePageTop();
                 }
-                
+
                 //ホイールクリックをできる機能
                 if(items.mouseDown === true){
                 mouseEvents();
@@ -180,15 +181,15 @@
                     notepad(items.tasklistDisplay);
                     addMarkdownToSubj();
                 }
-                
+
                 //LMSの調整
                 adjustTimetable(items.adjustTimetableData, items.addSubTimetable);
-                
+
                 //D&Dで課題提出
                 if(items.ddSubmission === true){
                     ddSub();
                 }
-                
+
                 //通知を削除するボタン
                 if(items.updateClear === true){
                     updateClear();
@@ -228,6 +229,10 @@
                 //テストの非表示
                 if(items.testHide === true){
                     hideTest('over');
+                }
+                //ページタイトルに科目名を追加する
+                if(items.modifyCoursePageTitle === true){
+                    modifyCoursePageTitle();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

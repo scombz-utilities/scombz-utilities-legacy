@@ -63,6 +63,7 @@ const defaultOptions = {
     materialHide : true,
     reportHide : false,
     testHide : false,
+    modifyCoursePageTitle: true,
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
@@ -126,6 +127,7 @@ function save_options() {
     const materialHide = document.getElementById('materialHide').checked;
     const reportHide = document.getElementById('reportHide').checked;
     const testHide = document.getElementById('testHide').checked;
+    const modifyCoursePageTitle = document.getElementById('modifyCoursePageTitle').checked;
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
@@ -203,6 +205,7 @@ function save_options() {
         materialHide : materialHide,
         reportHide : reportHide,
         testHide : testHide,
+        modifyCoursePageTitle: modifyCoursePageTitle,
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
         reportHideDetail : reportHideDetail,
@@ -214,7 +217,7 @@ function save_options() {
         console.log("settings changed");
     });
     }
-    
+
     // Restores select box and checkbox state using the preferences
     // stored in chrome.storage.
     function restore_options() {
@@ -269,11 +272,12 @@ function save_options() {
         document.getElementById('exportIcs').checked = items.exportIcs;
         document.getElementById('highlightDeadline').checked = items.highlightDeadline;
         document.getElementById('pastSurvey').checked = items.pastSurvey;
-        document.getElementById('subjectListNum').textContent = items.subjectList;  
+        document.getElementById('subjectListNum').textContent = items.subjectList;
         document.getElementById('materialTop').checked = items.materialTop;
         document.getElementById('materialHide').checked = items.materialHide;
         document.getElementById('reportHide').checked = items.reportHide;
         document.getElementById('testHide').checked = items.testHide;
+        document.getElementById('modifyCoursePageTitle').checked = items.modifyCoursePageTitle;
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
@@ -288,7 +292,7 @@ function save_options() {
         document.getElementById('gasTodo').checked = items.gasTodo;
         restoreSubject(items.subjectList);
     });
-    
+
     }
     document.addEventListener('DOMContentLoaded', restore_options);
     //チェックボックスが更新されたら保存
@@ -416,7 +420,7 @@ function save_options() {
                 event.preventDefault();
                 let id = event.dataTransfer.getData('text/plain');
                 let elm_drag = document.getElementById(id);
-        
+
                 let rect = this.getBoundingClientRect();
                 if ((event.clientY - rect.top) < (this.clientHeight / 2)) {
                     this.parentNode.insertBefore(elm_drag, this);
