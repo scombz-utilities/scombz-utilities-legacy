@@ -67,6 +67,7 @@ const defaultOptions = {
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
+    addTaskInPage : false,
     gasURL: "",
     gasCal: false,
     gasTodo: true
@@ -137,6 +138,7 @@ function save_options() {
     const popupTasksLinks = document.getElementById('popupTasksLinks').checked;
     const popupUncountFutureTaskDays = document.getElementById('popupUncountFutureTaskDays').value;
     const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
+    const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -209,6 +211,7 @@ function save_options() {
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
         reportHideDetail : reportHideDetail,
+        addTaskInPage : addTaskInPage,
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo
@@ -287,6 +290,7 @@ function save_options() {
         document.getElementById('popupTasksLinks').checked = items.popupTasksLinks;
         document.getElementById('popupUncountFutureTaskDays').value = items.popupUncountFutureTaskDays;
         document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
+        document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;

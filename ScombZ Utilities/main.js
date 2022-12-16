@@ -55,6 +55,7 @@
             reportHide : false,          //課題を非表示
             testHide : false,            //テストを非表示
             modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
+            addTaskInPage : false,       //科目ページに課題追加機能
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
@@ -233,6 +234,11 @@
                 //ページタイトルに科目名を追加する
                 if(items.modifyCoursePageTitle === true){
                     modifyCoursePageTitle();
+
+                }
+                //科目ページ内に課題追加機能
+                if(items.addTaskInPage === true){
+                    addTaskPage();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

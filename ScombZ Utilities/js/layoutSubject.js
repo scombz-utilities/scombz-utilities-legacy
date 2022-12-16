@@ -8,6 +8,7 @@
 //教材を一部非表示
 //期限過ぎ課題を非表示
 //期限過ぎテストを非表示
+//課題手動追加を科目ページから呼び出す
 
 //要素並び替え
 function subjectListOrder(items) {
@@ -430,9 +431,43 @@ function createButton(className,materials,mode){
         for (subjectContent of subjectContents){
             subjectContent.style.height = h+"px";
         }
-        console.log(h);
     })
 
     return materialButton;
+}
+
+//課題手動追加を科目ページから呼び出す
+function addTaskPage() {
+    'use strict';
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        let cssPosition = document.getElementById("report").getElementsByTagName("div")[0];
+        //要素あるかチェック
+        if (!(cssPosition)){
+            return;
+        }
+
+        cssPosition.insertAdjacentHTML("afterbegin",`
+        <div class="block-title-btn">
+			<a class="btn btn-new btn-left" id="addTaskinSubject" href="javascript:void(0);"></a>
+		</div>
+        `);
+
+        let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ").slice(2).join(" ");
+        alert(subjectName);
+        
+        //追加ボタンを押したときに代入
+        $(function(){
+            $("#addTaskinSubject").click(function(){
+                document.getElementById("manAddtaskSubjname").value = subjectName;
+                document.getElementById("manAddtaskSubjlink").value = location.href;
+                //clickイベントコピペした(addSubTimeTable.js)の//手動追加部分
+                document.getElementById("manAddtaskSelectBackground").style.display = "block";
+                document.getElementById("manAddtaskSelectLayer").style.display = "block";
+
+            })
+        })
+
+    }
+
 }
 
