@@ -11,6 +11,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         case "getJson":
             getJson(message,sender,sendResponse);
             break;
+        //  バッジを更新
+        case "updateBadgeText":
+            updateBadgeText();
+            break;
         //postを送信
         case "postGas":
             postGas(message,sender,sendResponse);
@@ -30,6 +34,12 @@ chrome.runtime.onInstalled.addListener(({reason}) => {
         chrome.tabs.create({url: `https://yudai1204.github.io/ScombZ-Utilities/?mode=${reason}&version=${chrome.runtime.getManifest().version}`});
     }
 });
+
+//  起動時
+chrome.runtime.onStartup.addListener(() => {
+    updateBadgeText();
+});
+
 //getJson
 function getJson(message,sender,sendResponse){
     fetch(message.endpoint, {
@@ -50,6 +60,117 @@ function getJson(message,sender,sendResponse){
             "reason":error,
             "error":true
         });
+    });
+}
+
+function getMergedTaskList(utilsStorageData){
+    //  /js/addSubTimetable.jsから引用
+
+    const tasklistObj = JSON.parse(decodeURIComponent(utilsStorageData.tasklistData));
+    const surveyListObj = JSON.parse(decodeURIComponent(utilsStorageData.surveyListData));
+
+    //アンケート一覧と課題一覧を統合する
+    for(const survey of surveyListObj){
+        if(Number(Date.parse(survey.deadline)) < Number(Date.now())){
+            continue;
+        }
+        for(let i=0;;i++){
+            //tasklistを読み切ったら最後に挿入して終了
+            if(!tasklistObj[i]){
+                tasklistObj.push(survey);
+                break;
+            }
+            //tasklist内に挿入位置を発見したらそこに挿入して終了
+            if( Number(Date.parse(survey.deadline)) < Number(Date.parse(tasklistObj[i].deadline)) ){
+                console.log("SPLICED:"+i);
+                tasklistObj.splice(i,0,survey);
+                break;
+            }
+        }
+        
+    }
+
+    //自作課題一覧を統合する
+    for(const manTask of utilsStorageData.manualTasklist){
+        if(Number(Date.parse(manTask.deadline)) < Number(Date.now())){
+            continue;
+        }
+        for(let i=0;;i++){
+            //tasklistを読み切ったら最後に挿入して終了
+            if(!tasklistObj[i]){
+                tasklistObj.push(manTask);
+                break;
+            }
+            //tasklist内に挿入位置を発見したらそこに挿入して終了
+            if( Number(Date.parse(manTask.deadline)) < Number(Date.parse(tasklistObj[i].deadline)) ){
+                console.log("SPLICED:"+i);
+                tasklistObj.splice(i,0,manTask);
+                break;
+            }
+        }
+    }
+
+    return tasklistObj;
+}
+
+function removeHiddenTasks(tasklist, utilsStorageData){
+    return tasklist.filter(item => 
+        !utilsStorageData.hiddenTasks.includes(item.id)
+        && item.data !== null
+        && (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.undisplayFutureTaskDays)));
+}
+
+function removeUncountTasks(tasklist, utilsStorageData){
+    return tasklist.filter(item => 
+        (Number(Date.parse(item.deadline)) - Number(Date.now()))/60000 <= 60*24*(1+Number(utilsStorageData.popupUncountFutureTaskDays)));
+}
+
+function updateBadgeText() {
+    chrome.storage.local.get({
+        tasklistData: [],
+        surveyListData: [],
+        manualTasklist: [],
+        hiddenTasks: [],
+        undisplayFutureTaskDays: 365,
+        popupUncountFutureTaskDays: 365,
+        popupBadge: true,
+    }, function(items) {
+        if(chrome.action){
+            if (!items.popupBadge) {
+                chrome.action.setBadgeText({ text: "" });
+                return;
+            }
+
+            let t = removeUncountTasks(removeHiddenTasks(getMergedTaskList(items), items), items);
+
+            if(t.length > 0){
+                const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
+                if(rd < 60*24){
+                    chrome.action.setBadgeBackgroundColor({ color: "#ee3333" });
+                }else{
+                    chrome.action.setBadgeBackgroundColor({ color: "#1a73e8" });
+                }
+            }
+            chrome.action.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });
+        }else{
+            //  Firefoxなど、chrome.actionが使えない場合
+            if (!items.popupBadge) {
+                browser.browserAction.setBadgeText({ text: "" });
+                return;
+            }
+
+            let t = removeUncountTasks(removeHiddenTasks(getMergedTaskList(items), items), items);
+
+            if(t.length > 0){
+                const rd = (Number(Date.parse(t[0].deadline)) - Number(Date.now()))/60000;
+                if(rd < 60*24){
+                    browser.browserAction.setBadgeBackgroundColor({ color: "#ee3333" });
+                }else{
+                    browser.browserAction.setBadgeBackgroundColor({ color: "#1a73e8" });
+                }
+            }
+            browser.browserAction.setBadgeText({ text: t.length >= 1 ? t.length.toString() : "" });            
+        }
     });
 }
 

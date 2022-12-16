@@ -1,11 +1,11 @@
 {
     "manifest_version":3 ,
     "name": "ScombZ Utilities",
-    "version": "3.14.0",
+    "version": "3.16.0",
     "description": "ScombZをカスタムする拡張機能",
-    "icons": { 
+    "icons": {
         "48":  "icons/icon48.png",
-        "128": "icons/icon128.png" 
+        "128": "icons/icon128.png"
     },
     "action":{
         "default_title":"ScombZ Utilities",
@@ -51,7 +51,8 @@
                 "js/attendance.js",
                 "js/exportCalender.js",
                 "js/getnews.js",
-                "js/layoutSubject.js"
+                "js/layoutSubject.js",
+                "js/modifyCoursePageTitle.js"
             ]
         }
     ],

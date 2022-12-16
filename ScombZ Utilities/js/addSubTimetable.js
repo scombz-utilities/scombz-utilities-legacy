@@ -329,6 +329,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         data:[]
                     };
                     for(const data of $tasklistObj){
+                        if(!data.id) continue;
                         gasData.data.push({
                             id:data.id,
                             limit: new Date(data.deadline).getTime(),
