@@ -71,7 +71,12 @@ function hideMaterial(items,materialTop) {
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
-        setcss(cssPosition);
+        if (cssPosition){
+            setcss(cssPosition);
+        }else{
+            return;
+        }
+        
         
         if (materialTop != 'none'){
             materialOrder = materialTop;
@@ -98,6 +103,8 @@ function hideMaterial(items,materialTop) {
             }
             else if (materialOrder == 'first'){
                 lastMaterial = materialListBlock.pop();
+            }else{
+                return;
             }
 
             let materialButton = createButton("close-button",lastMaterial.slice(1),"material");
