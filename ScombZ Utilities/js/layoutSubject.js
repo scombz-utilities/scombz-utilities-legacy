@@ -447,6 +447,9 @@ function createButton(className,materials,mode){
 function addTaskPage() {
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        if (!document.getElementById("report")){
+            return;
+        }
         let cssPosition = document.getElementById("report").getElementsByTagName("div")[0];
         //要素あるかチェック
         if (!(cssPosition)){
@@ -460,7 +463,6 @@ function addTaskPage() {
         `);
 
         let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ").slice(2).join(" ");
-        alert(subjectName);
         
         //追加ボタンを押したときに代入
         $(function(){
