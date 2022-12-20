@@ -453,7 +453,6 @@ function addTaskPage() {
         `);
 
         let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ").slice(2).join(" ");
-        alert(subjectName);
         
         //追加ボタンを押したときに代入
         $(function(){
