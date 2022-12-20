@@ -71,7 +71,12 @@ function hideMaterial(items,materialTop) {
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
-        setcss(cssPosition);
+        if (cssPosition){
+            setcss(cssPosition);
+        }else{
+            return;
+        }
+        
         
         if (materialTop != 'none'){
             materialOrder = materialTop;
@@ -98,6 +103,8 @@ function hideMaterial(items,materialTop) {
             }
             else if (materialOrder == 'first'){
                 lastMaterial = materialListBlock.pop();
+            }else{
+                return;
             }
 
             let materialButton = createButton("close-button",lastMaterial.slice(1),"material");
@@ -440,6 +447,9 @@ function createButton(className,materials,mode){
 function addTaskPage() {
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        if (!document.getElementById("report")){
+            return;
+        }
         let cssPosition = document.getElementById("report").getElementsByTagName("div")[0];
         //要素あるかチェック
         if (!(cssPosition)){
