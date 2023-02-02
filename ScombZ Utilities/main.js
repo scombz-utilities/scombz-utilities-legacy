@@ -252,6 +252,8 @@
                 customizeCSS();
                 //スマホレイアウト適用
                 androidCss();
+                //dev
+                autoEvaluation();
                 console.log('すべての機能の実行が完了しました');
             }
         });
