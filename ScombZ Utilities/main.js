@@ -42,6 +42,7 @@
             dadbugFix: true,            //ドラッグ&ドロップで提出できないバグを修正
             attendance: 'none',         //出席記録を消す
             pastSurvey: true,           //過去のアンケート
+            surveyListButton: true,     //「アンケート一覧に戻る」ボタン
             adjustTimetableData:{       // LMSの調整
                 eraseSat: false,        // 土曜日を消す
                 erase6: false,          // 6限を消す
@@ -210,6 +211,10 @@
                 //アンケートに過去のアンケートを表示
                 if(items.pastSurvey === true){
                     pastSurvey();
+                }
+                //アンケートの完了画面に「アンケート一覧に戻る」ボタンを表示する
+                if(items.surveyListButton === true){
+                    insertSurveyListButton();
                 }
                 //科目ページの要素並び替え
                 if(items.subjectList !== '12345678'){

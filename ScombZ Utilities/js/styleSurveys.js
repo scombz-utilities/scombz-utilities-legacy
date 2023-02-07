@@ -137,3 +137,31 @@ function pastSurvey(){
         });
     }
 }
+
+function insertSurveyListButton() {
+    // 「科目トップに戻る」ボタン
+    const backButton =
+        document.getElementById("backManagement") ??
+        document.querySelector(
+            "#surveysTakeForm > div.block-under-area > div > div > a"
+        );
+
+    // アンケート回答完了ページ等かを判定する
+    const isCompleted =
+        location.hostname === "scombz.shibaura-it.ac.jp" &&
+        location.pathname === "/lms/course/surveys/take" &&
+        backButton !== null;
+
+    if (isCompleted) {
+        // 「科目トップに戻る」ボタンを基に「アンケート一覧に戻る」ボタンを生成する
+        console.log("「アンケート一覧に戻る」ボタンを生成します")
+        const surveyListButton = backButton.cloneNode(true);
+        surveyListButton.id = "backSurveys";
+        surveyListButton.href = "/portal/surveys/list";
+        surveyListButton.textContent = "アンケート一覧に戻る";
+
+        // 「科目トップに戻る」ボタンの隣に「アンケート一覧に戻る」ボタンを追加する
+        backButton.after(surveyListButton);
+        console.log("「アンケート一覧に戻る」ボタンを追加しました")
+    }
+}
