@@ -214,7 +214,7 @@
                 }
                 //アンケートの完了画面に「アンケート一覧に戻る」ボタンを表示する
                 if(items.surveyListButton === true){
-                    insertSurveyListButton();
+                    addSurveyListButton();
                 }
                 //科目ページの要素並び替え
                 if(items.subjectList !== '12345678'){

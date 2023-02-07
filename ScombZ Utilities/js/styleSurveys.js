@@ -138,7 +138,7 @@ function pastSurvey(){
     }
 }
 
-function insertSurveyListButton() {
+function addSurveyListButton() {
     // 「科目トップに戻る」ボタン
     const backButton =
         document.getElementById("backManagement") ??
