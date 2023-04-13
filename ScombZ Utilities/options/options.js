@@ -446,3 +446,62 @@ function save_options() {
             };
         });
     }
+    //エクスポート
+    document.getElementById("export-json").addEventListener("click",function(){
+        chrome.storage.local.get(defaultOptions,function(items){
+            console.log(items);
+                //ファイル名の指定
+                const now = new Date();
+                let file_name   = `ScombZ_Utilities_${now.getMonth()+1}_${now.getDate()}_${now.getHours()}_${now.getMinutes()}.json`;
+
+                //CSVのバイナリデータを作る
+                let blob        = new Blob([JSON.stringify(items,null,"\t")], {type: "text/json"});
+                let uri         = URL.createObjectURL(blob);
+
+                //リンクタグを作る
+                let link        = document.createElement("a");
+                link.download   = file_name;
+                link.href       = uri;
+
+                //作ったリンクタグをクリックさせる
+                document.body.appendChild(link);
+                link.click();
+
+                //クリックしたら即リンクタグを消す
+                document.body.removeChild(link);
+                delete link;
+            
+        })
+    });
+    //インポート
+    {
+        let fileInput = document.getElementById('import-json');
+        let fileReader = new FileReader();
+
+        // ファイル変更時イベント
+        fileInput.onchange =  () => {
+            let file = fileInput.files[0];
+            fileReader.readAsText(file, "UTF-8");
+        };
+        // ファイル読み込み時
+        fileReader.onload = () => {
+            if(confirm("外部設定ファイルを読み込みますか？")){
+                try {
+                    console.log(fileReader.result);
+                    const readData = JSON.parse(fileReader.result);
+                    console.log(readData);
+                    chrome.storage.local.get(defaultOptions,function(items){
+                        const result = {...items, ...readData};
+                        console.log(result);
+                        chrome.storage.local.set(result,function(){
+                            alert("読み込みました。");
+                            location.reload();
+                        })
+                    });
+                } catch (e) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
