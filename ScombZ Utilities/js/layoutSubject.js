@@ -472,10 +472,17 @@ function addTaskPage() {
 }
 
 //科目ページとURLを自動入力するボタンを設置
-function autoInputButton(){
+function autoTaskInput(){
     'use strict'
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-
+        setTimeout(function(){
+        let buttonPositon = document.getElementById("manAddtaskSelectLayer");
+        //alert(buttonPositon);
+        if(!buttonPositon){
+            return;
+        }
+        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4)").insertAdjacentHTML("beforeend", ```<button type="button" onclick="javascript:subAutoInput();">自動入力</button>```);
+    },1000);
     }
 
 }
