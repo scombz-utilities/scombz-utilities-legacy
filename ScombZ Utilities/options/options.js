@@ -38,6 +38,7 @@ const defaultOptions = {
     exportIcs: true,
     attendance: 'none',
     pastSurvey: true,
+    addSurveyListButton: true,
     highlightDeadline: true,
     adjustTimetableData : {
         eraseSat : false,
@@ -123,6 +124,7 @@ function save_options() {
     const exportIcs = document.getElementById('exportIcs').checked;
     const highlightDeadline = document.getElementById('highlightDeadline').checked;
     const pastSurvey = document.getElementById('pastSurvey').checked;
+    const addSurveyListButton = document.getElementById('addSurveyListButton').checked;
     const subjectList = document.getElementById('subjectListNum').textContent;
     const materialTop = document.getElementById('materialTop').checked;
     const materialHide = document.getElementById('materialHide').checked;
@@ -183,6 +185,7 @@ function save_options() {
         exportIcs : exportIcs,
         highlightDeadline : highlightDeadline,
         pastSurvey : pastSurvey,
+        addSurveyListButton : addSurveyListButton,
         adjustTimetableData : {
             eraseSat : eraseSat,
             erase6 : erase6,
@@ -275,6 +278,7 @@ function save_options() {
         document.getElementById('exportIcs').checked = items.exportIcs;
         document.getElementById('highlightDeadline').checked = items.highlightDeadline;
         document.getElementById('pastSurvey').checked = items.pastSurvey;
+        document.getElementById('addSurveyListButton').checked = items.addSurveyListButton;
         document.getElementById('subjectListNum').textContent = items.subjectList;
         document.getElementById('materialTop').checked = items.materialTop;
         document.getElementById('materialHide').checked = items.materialHide;
@@ -467,7 +471,7 @@ function save_options() {
                 //クリックしたら即リンクタグを消す
                 document.body.removeChild(link);
                 delete link;
-            
+
         })
     });
     //インポート
