@@ -462,21 +462,44 @@ function addTaskPage() {
 		</div>
         `);
 
-        let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ").slice(2).join(" ");
-        
         //追加ボタンを押したときに代入
         $(function(){
-            $("#addTaskinSubject").click(function(){
-                document.getElementById("manAddtaskSubjname").value = subjectName;
-                document.getElementById("manAddtaskSubjlink").value = location.href;
-                //clickイベントコピペした(addSubTimeTable.js)の//手動追加部分
-                document.getElementById("manAddtaskSelectBackground").style.display = "block";
-                document.getElementById("manAddtaskSelectLayer").style.display = "block";
-
-            })
+            $("#addTaskinSubject").click(subAutoInput)
         })
 
     }
 
 }
 
+//科目ページとURLを自動入力するボタンを設置
+function autoTaskInput(){
+    'use strict'
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        setTimeout(function(){
+        let buttonPositon = document.getElementById("manAddtaskSelectLayer");
+        if(!buttonPositon){
+            return;
+        }
+        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin", 
+        `
+        <button type="button" id="subAutoInput">自動入力</button>
+        `
+        );
+        let autoInputButton = document.getElementById("subAutoInput");
+        autoInputButton.addEventListener("click", subAutoInput);
+
+    },1000);
+    }
+
+}
+
+//科目ページとURLを自作課題欄に入力する関数
+function subAutoInput(){
+    let subjectName = getCourseTitle();
+    document.getElementById("manAddtaskSubjname").value = subjectName;
+    document.getElementById("manAddtaskSubjlink").value = location.href;
+    //clickイベントコピペした(addSubTimeTable.js)の//手動追加部分
+    document.getElementById("manAddtaskSelectBackground").style.display = "block";
+    document.getElementById("manAddtaskSelectLayer").style.display = "block";
+
+}

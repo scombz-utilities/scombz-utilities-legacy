@@ -57,6 +57,7 @@
             testHide : false,            //テストを非表示
             modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
             addTaskInPage : false,       //科目ページに課題追加機能
+            autoTaskInput : false,       //自作課題に自動入力ボタン追加
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
@@ -244,6 +245,10 @@
                 //科目ページ内に課題追加機能
                 if(items.addTaskInPage === true){
                     addTaskPage();
+                }
+                //自作課題追加画面で自動入力
+                if(items.autoTaskInput === true){
+                    autoTaskInput();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

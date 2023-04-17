@@ -61,7 +61,6 @@ function updateClear(){
             top: -21px;
             left: 40px;
             border-radius: 50%;
-            border: white solid 2px;
         }
         </style>
         `);
