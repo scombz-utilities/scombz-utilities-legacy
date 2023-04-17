@@ -495,7 +495,7 @@ function autoTaskInput(){
 
 //科目ページとURLを自作課題欄に入力する関数
 function subAutoInput(){
-    let subjectName = document.getElementsByClassName("course-title-txt")[0].textContent.split(" ").slice(2).join(" ");
+    let subjectName = getCourseTitle();
     document.getElementById("manAddtaskSubjname").value = subjectName;
     document.getElementById("manAddtaskSubjlink").value = location.href;
     //clickイベントコピペした(addSubTimeTable.js)の//手動追加部分
