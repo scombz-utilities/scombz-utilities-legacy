@@ -477,18 +477,16 @@ function autoTaskInput(){
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
         setTimeout(function(){
         let buttonPositon = document.getElementById("manAddtaskSelectLayer");
-        //alert(buttonPositon);
         if(!buttonPositon){
             return;
         }
-        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4)").insertAdjacentHTML("beforeend", 
+        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin", 
         `
         <button type="button" id="subAutoInput">自動入力</button>
         `
         );
         let autoInputButton = document.getElementById("subAutoInput");
-        autoInputButton.addEventListener("click", 
-        subAutoInput);
+        autoInputButton.addEventListener("click", subAutoInput);
 
     },1000);
     }
