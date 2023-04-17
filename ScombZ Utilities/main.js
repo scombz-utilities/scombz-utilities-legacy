@@ -56,8 +56,8 @@
             reportHide : false,          //課題を非表示
             testHide : false,            //テストを非表示
             modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
-            addTaskInPage : false,       //科目ページに課題追加機能
-            autoTaskInput : false,       //自作課題に自動入力ボタン追加
+            addTaskInPage : true,       //科目ページに課題追加機能
+            autoTaskInput : true,       //自作課題に自動入力ボタン追加
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'

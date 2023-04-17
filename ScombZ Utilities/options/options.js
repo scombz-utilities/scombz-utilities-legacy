@@ -68,8 +68,8 @@ const defaultOptions = {
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
-    addTaskInPage : false,
-    autoTaskInput : false,
+    addTaskInPage : true,
+    autoTaskInput : true,
     gasURL: "",
     gasCal: false,
     gasTodo: true

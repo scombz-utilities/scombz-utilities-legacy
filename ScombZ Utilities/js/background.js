@@ -66,8 +66,8 @@ function getJson(message,sender,sendResponse){
 function getMergedTaskList(utilsStorageData){
     //  /js/addSubTimetable.jsから引用
 
-    const tasklistObj = JSON.parse(decodeURIComponent(utilsStorageData.tasklistData));
-    const surveyListObj = JSON.parse(decodeURIComponent(utilsStorageData.surveyListData));
+    const tasklistObj = (typeof utilsStorageData.tasklistData === 'string') ? JSON.parse(decodeURIComponent(utilsStorageData.tasklistData)) : [];
+    const surveyListObj =  (typeof utilsStorageData.surveyData === 'string') ? JSON.parse(decodeURIComponent(utilsStorageData.surveyListData)) : [];
 
     //アンケート一覧と課題一覧を統合する
     for(const survey of surveyListObj){
