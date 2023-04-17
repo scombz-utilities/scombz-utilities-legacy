@@ -481,7 +481,15 @@ function autoTaskInput(){
         if(!buttonPositon){
             return;
         }
-        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4)").insertAdjacentHTML("beforeend", ```<button type="button" onclick="javascript:subAutoInput();">自動入力</button>```);
+        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4)").insertAdjacentHTML("beforeend", 
+        `
+        <button type="button" id="subAutoInput">自動入力</button>
+        `
+        );
+        let autoInputButton = document.getElementById("subAutoInput");
+        autoInputButton.addEventListener("click", 
+        subAutoInput);
+
     },1000);
     }
 
