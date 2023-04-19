@@ -400,9 +400,6 @@ function materialBlockCreate() {
 
     materialListBlock.push(materialhtml);
     materialListBlock.shift();
-    console.log("デバッグ: ")
-    console.log(materialListBlock);
-    console.log(k);
 
     if (k <= materialListBlock.length/2){
         materialOrder = "first";
