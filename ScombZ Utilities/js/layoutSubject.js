@@ -47,6 +47,9 @@ function materialTopSet(items) {
         let materialList = document.querySelectorAll("#materialList > div");
         const firstmaterial = materialList[0];
         const materialListParent = document.getElementById("materialList");
+        if (!materialListParent) {
+            return ;
+        }
         let [materialOrder,materialListBlock] = materialBlockCreate();
         console.log("教材の順番並び替え: "+materialOrder)
         //求めるものと一緒か反対かだけを考えればよい
@@ -375,12 +378,14 @@ function materialBlockCreate() {
     let materialhtml=[];
     let materialListBlock=[];
     let k=0;
+    let No1Check = false;
     for (let i=0;i<materialList.length;i++){
         if (i==0){continue;}
         if (materialList[i].className == "contents-detail clearfix"){
-            if (materialList[i].textContent.trim() == "第1回(No.1)"){
-                k = materialListBlock.length+1;
-                console.log(materialListBlock.length);
+            if ((materialList[i].textContent.trim() == "第1回(No.1)")){
+                k = materialListBlock.length;
+                No1Check = true;
+                console.log("教材第1回(No.1)の場所: "+materialListBlock.length);
             }
             materialListBlock.push(materialhtml);
             materialhtml = [];
@@ -388,10 +393,15 @@ function materialBlockCreate() {
         materialhtml.push(materialList[i]);
     }
 
+    //第1回(No.1)がない場合
+    if (!No1Check){
+        //なんか動くのでここは要らない。動かなくなったら追加する
+    }
+
     materialListBlock.push(materialhtml);
     materialListBlock.shift();
 
-    if (k < materialListBlock.length/2){
+    if (k <= materialListBlock.length/2){
         materialOrder = "first";
     }else{
         materialOrder = "last";
