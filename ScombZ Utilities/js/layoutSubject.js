@@ -394,8 +394,8 @@ function materialBlockCreate() {
     }
 
     //第1回(No.1)がない場合
-    if (No1Check){
-        
+    if (!No1Check){
+        //なんか動くのでここは要らない。動かなくなったら追加する
     }
 
     materialListBlock.push(materialhtml);
