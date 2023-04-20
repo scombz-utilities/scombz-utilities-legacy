@@ -18,7 +18,7 @@
 
 function fakePage() {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission") 
+    if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course/report/submission") 
     ){
         alert(location.href);
         document.body = HTML_REPORT_BODY;
