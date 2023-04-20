@@ -58,6 +58,7 @@
             modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
             addTaskInPage : true,       //科目ページに課題追加機能
             autoTaskInput : true,       //自作課題に自動入力ボタン追加
+            fakePage : true,            //手動追加課題の偽ページ追加
             materialTopDetail : 'first',
             materialHideDetail : 'none',
             reportHideDetail : 'all'
@@ -249,6 +250,10 @@
                 //自作課題追加画面で自動入力
                 if(items.autoTaskInput === true){
                     autoTaskInput();
+                }
+                //手動追加課題の偽ページ追加
+                if(items.fakePage === true){
+                    fakePage();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
