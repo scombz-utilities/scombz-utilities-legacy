@@ -120,6 +120,7 @@ function displaySubTimetable($$version){
             console.log('時間割情報が存在しません');
             displayGrayLayer($$version);
         }else{
+            let quarterCount = 0;
             console.log('ChromeLocalStrageのアクセスに成功しました');
             const $timetableData = item.timetableData;
             console.log('JSONファイルを読み込みました'+JSON.stringify($timetableData));
@@ -186,6 +187,7 @@ function displaySubTimetable($$version){
                     if( $timetableData[num].day == j && $timetableData[num].time == i+1 ){
                         //2Q、4Qのことを考える
                         if( $timetableData[num+1].day == j && $timetableData[num+1].time == i+1 ){
+                            quarterCount++;
                             console.log('クォーター制授業を検出しました 曜日:'+j+' 時間:'+i);
                             $subjData = `
                             <a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;font-size:80%;height:calc(50% - 2px);min-height:30px;"><span class="subTimetable">${$timetableData[num].name}</span></a>
@@ -223,7 +225,9 @@ function displaySubTimetable($$version){
             }
             $subTimetable+=`</div>`;
             console.log('時間割の生成に成功しました\nコマ数:'+num);
-
+            chrome.storage.local.set({
+                quarterCount: quarterCount
+            });
             document.getElementById('pageMain').insertAdjacentHTML('beforeEnd',`
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
@@ -257,7 +261,8 @@ function displayTaskListsOnGrayLayer(gasOutput){
         highlightDeadline : true,
         gasCal: false,
         gasTodo: true,
-        gasURL: ""
+        gasURL: "",
+        quarterCount: 0
     },function(items){
         if(items.TaskGetTime && items.tasklistData){
             console.log("ChromeLocalStorageを読み込みました\n課題一覧を表示します");
@@ -275,6 +280,10 @@ function displayTaskListsOnGrayLayer(gasOutput){
                 if(Number(items.specialSubj) > 0){
                     timetableHeight += 10*Number(items.specialSubj);
                     timetableminHeight += 60*Number(items.specialSubj);
+                }
+                if(items.quarterCount > 0){
+                    timetableHeight += 2*items.quarterCount;
+                    timetableminHeight += 30*items.quarterCount;
                 }
             }
             //メイン生成部分
@@ -437,7 +446,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         }
                     }
                     kadaiListHTML += `
-                    <div class="subk-line ${highlightMark}">
+                    <div class="subk-line ${highlightMark}" title="${$tasklistObj[i].title}">
                         <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link" href="${subjlink}">${$tasklistObj[i].course}</a></div></div>
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>

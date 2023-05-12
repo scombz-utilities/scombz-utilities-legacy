@@ -103,7 +103,7 @@ function fetchSurveys(){
             const items = doc.querySelectorAll("#portalSurveysForm .result-list");
 
             for(let i = 0; i < items.length; i++){
-                if(items[i].getElementsByClassName(".portal-surveys-status-end-color").length > 0){
+                if(items[i].querySelectorAll(".portal-surveys-status-end-color").length > 0){
                     //  解答済はスキップ
                     continue;
                 }

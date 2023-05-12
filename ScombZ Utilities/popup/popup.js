@@ -363,8 +363,8 @@ function _createTaskListElement(utilsStorageData){
             rowElement.classList = `task-row ${highlightMark}`;
             rowElement.innerHTML = `
                 <div class='task-data'>
-                    <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer">${existTaskList[i].course}</a>
-                    <a class="task-name" href="${tasklink}" target="_blank" rel="noopener noreferrer">${existTaskList[i].title}</a>
+                    <a class="task-subject-name" href="${subjlink}" target="_blank" rel="noopener noreferrer" title="${existTaskList[i].course}">${existTaskList[i].course}</a>
+                    <a class="task-name" href="${tasklink}" target="_blank" rel="noopener noreferrer" title="${existTaskList[i].title}">${existTaskList[i].title}</a>
                 </div>
                 <div class='task-data'><span class='task-deadline'>${deadline}</span></div>
 
