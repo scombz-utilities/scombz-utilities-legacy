@@ -419,13 +419,19 @@ function hideDoneTest(materials) {
     for (let material of materials) {
         let doneCheck = material.querySelector('li > a');
         //受験する、再受験、結果表示の欄のうち、一番上のものを取得する
-        if (doneCheck.textContent != '受験する') {
+        if (doneCheck == null){
             $(material).removeClass('not-hide')
             $(material).addClass('hide-material should-hidden')
-        } else {
-            $(material).removeClass('hide-material should-hidden')
-            $(material).addClass('not-hide')
+        }else{
+            if (doneCheck.textContent != '受験する') {
+                $(material).removeClass('not-hide')
+                $(material).addClass('hide-material should-hidden')
+            } else {
+                $(material).removeClass('hide-material should-hidden')
+                $(material).addClass('not-hide')
+            }
         }
+
     }
 }
 
