@@ -52,8 +52,7 @@
                 "js/getnews.js",
                 "js/layoutSubject.js",
                 "js/modifyCoursePageTitle.js",
-                "js/autoEvaluation.js",
-                "js/fakePage.js"
+                "js/autoEvaluation.js"
             ]
         }
     ],
