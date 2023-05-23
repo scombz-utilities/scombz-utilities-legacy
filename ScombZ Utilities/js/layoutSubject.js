@@ -229,7 +229,7 @@ function hideTest(items){
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             let buttonDiv = document.querySelector("#examination > div.block-contents > div > div")
-            let button = createButton("open-button",materials,"report");
+            let button = createButton("open-button",materials,"test");
             buttonDiv.appendChild(button);
         }else{
             //全部非表示対象でないなら、そもそもボタンが必要ない
@@ -408,7 +408,7 @@ function createButton(className,materials,mode){
         frames = document.querySelectorAll("#reportList > div");
         subjectContents = document.querySelectorAll("#report > div");
     }else if (mode == "test"){
-        frames = document.querySelectorAll("#examination > div.block-contents > div");
+        frames = document.querySelectorAll("#examination > div.block-contents > div > div");
         subjectContents = document.querySelectorAll("#examination > div");
     }
 
