@@ -74,12 +74,11 @@ function hideMaterial(items,materialTop) {
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
-        if (cssPosition){
-            setcss(cssPosition);
-        }else{
+        if (!(cssPosition)){
             return;
         }
-        
+
+        setcss(cssPosition);
         
         if (materialTop != 'none'){
             materialOrder = materialTop;
@@ -129,12 +128,12 @@ function hideMaterial(items,materialTop) {
     }
 }
 
-function sortMaterials(items,list){
-    console.log(items);
+//div > 内容
+//という形で投げる
+function sortMaterials(item){
     let re =[];
-    for (let material of items){
-        material.remove();
-    }
+    let items = item.children;
+
     for (let material of items){
         if (!(material.classList.contains("should-hidden"))){
             re.push(material);
@@ -145,9 +144,14 @@ function sortMaterials(items,list){
             re.push(material);
         }
     }
-    for (let material of re){
-        list.appendChild(material);
+
+    for (let material of items){
+        material.remove();
     }
+    for (let material of re){
+        item.appendChild(material);
+    }
+
     return re;
 
 }
@@ -175,17 +179,14 @@ function hideReport(items){
             hideDoneReport(materials);
             hideEndReport(materials);
         }
-        let buttonDiv = document.createElement("span");
-        let button = createButton("open-button",materials,"report");
-        $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix close-button-div");
-        buttonDiv.appendChild(button);
-        let reportList = document.querySelector("#reportList > div.contents-list.sortReportParent");
-        
-        sortMaterials(materials,reportList);
+
+        sortMaterials(materials[0].parentNode);
         
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
-            reportList.insertBefore(buttonDiv, hides[0]);
+            let buttonDiv = document.querySelector("#reportList > div")
+            let button = createButton("open-button",materials,"report");
+            buttonDiv.appendChild(button);
         }else{
             //全部非表示対象でないなら、そもそもボタンが必要ない
             //reportList.appendChild(buttonDiv);
@@ -239,7 +240,7 @@ function hideTest(items){
 
 
 function setcss(cssPosition){
-    if ($(".hide-material").attr("display") != 'none'){
+    if ($(".hide-material").css("display") != 'none'){
         cssPosition.insertAdjacentHTML("beforebegin",`
         <style>
             #materialList .hide-material,.should-hidden.hide-material{
@@ -257,7 +258,6 @@ function setcss(cssPosition){
             }
             #materialButton{
                 padding-bottom: 0px;
-                text-indent: -9999px;
                 margin: 0 -3px 0px 0px;
                 padding-left: 0px;
                 width: 22px;
@@ -276,35 +276,11 @@ function setcss(cssPosition){
             }
             .should-hidden{
                 width: 100%;
-                margin-right:0;
-                margin-left:40px;
                 border-left: 1px solid #ccc;
-            }
-            #reportList .course-result-list.should-hidden:nth-last-child(1),#examination .course-result-list.should-hidden:nth-last-child(1){
-                margin-bottom: -32px;
-            }
-            #reportList .course-result-list.should-hidden,#examination .course-result-list.should-hidden{
-                min-height:43px;
-            }
-            .should-hidden .course-view-report-name ,.should-hidden .course-view-examination-name{
-                margin-left: -40px;
-            }
-            .contents-list.sortReportParent,#examination > .block-contents{
-                overflow-x: hidden;
-            }
-            #examination > .block-contents > .contents-detail{
-                overflow:hidden;
-            }
-            .course-view-report-name,.course-view-examination-name{
-                margin-left: 22px;
             }
             .close-button-div > #materialButton{
                 margin: -5px 0 0  -10px;
                 float:left;
-            }
-            .course-result-list.should-hidden{
-                padding-left:42px;
-                transform:translateY(-32px);
             }
             span.close-button-div{
                 border-bottom: 1px solid #aaa0;
@@ -312,6 +288,9 @@ function setcss(cssPosition){
             }
             .control-menu{
                 transform: translate(-30px,-50px);
+            }
+            .course-view-report-name{
+                width: 35%;
             }
             </style>
         `)
@@ -415,7 +394,6 @@ function createButton(className,materials,mode){
     materialButton.id = "materialButton";
     materialButton.className = className;
     materialButton.href = "javascript:void(0);";
-    materialButton.text = "詳細の表示/非表示";
     let frames,subjectContents;
 
     if (mode == "material"){
