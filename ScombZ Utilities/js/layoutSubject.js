@@ -191,7 +191,7 @@ function hideReport(items){
             //全部非表示対象でないなら、そもそもボタンが必要ない
             //reportList.appendChild(buttonDiv);
         }
-        console.log("ボタン作成")
+        console.log("課題非表示ボタン作成")
 
 
     }
@@ -223,17 +223,19 @@ function hideTest(items){
         $(buttonDiv).addClass("course-result-list contents-display-flex clearfix close-button-div");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
-        
-        sortMaterials(materials,reportList);
+
+        sortMaterials(materials[0].parentNode);
         
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
-            reportList.insertBefore(buttonDiv, hides[0]);
+            let buttonDiv = document.querySelector("#examination > div.block-contents > div > div")
+            let button = createButton("open-button",materials,"report");
+            buttonDiv.appendChild(button);
         }else{
             //全部非表示対象でないなら、そもそもボタンが必要ない
             //reportList.appendChild(buttonDiv);
         }
-        console.log("ボタン作成");
+        console.log("テスト非表示ボタン作成");
 
     }
 }
@@ -291,6 +293,9 @@ function setcss(cssPosition){
             }
             .course-view-report-name{
                 width: 35%;
+            }
+            .course-view-examination-name{
+                width: 40%;
             }
             </style>
         `)
