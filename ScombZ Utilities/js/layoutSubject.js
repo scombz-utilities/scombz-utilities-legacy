@@ -252,9 +252,64 @@ function setcss(cssPosition){
             }
             .close-button:hover,.open-button:hover{
                 background-color:#fff3;
-Expand Down
-Expand Up
-	@@ -314,202 +360,236 @@ function setcss(cssPosition){
+                background-blend-mode:lighten;
+            }
+            #materialButton{
+                padding-bottom: 0px;
+                text-indent: -9999px;
+                margin: 0 -3px 0px 0px;
+                padding-left: 0px;
+                width: 22px;
+                height: 22px;
+                padding-right: 0px;
+                display: block;
+                top: 4px;
+                right: 0px;
+                padding-top: 6px;
+                float: right;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #materialList .contents-detail.clearfix:hover{
+                filter: brightness(92%);
+            }
+            .should-hidden{
+                width: 100%;
+                margin-right:0;
+                margin-left:40px;
+                border-left: 1px solid #ccc;
+            }
+            #reportList .course-result-list.should-hidden:nth-last-child(1),#examination .course-result-list.should-hidden:nth-last-child(1){
+                margin-bottom: -32px;
+            }
+            #reportList .course-result-list.should-hidden,#examination .course-result-list.should-hidden{
+                min-height:43px;
+            }
+            .should-hidden .course-view-report-name ,.should-hidden .course-view-examination-name{
+                margin-left: -40px;
+            }
+            .contents-list.sortReportParent,#examination > .block-contents{
+                overflow-x: hidden;
+            }
+            #examination > .block-contents > .contents-detail{
+                overflow:hidden;
+            }
+            .course-view-report-name,.course-view-examination-name{
+                margin-left: 22px;
+            }
+            .close-button-div > #materialButton{
+                margin: -5px 0 0  -10px;
+                float:left;
+            }
+            .course-result-list.should-hidden{
+                padding-left:42px;
+                transform:translateY(-32px);
+            }
+            span.close-button-div{
+                border-bottom: 1px solid #aaa0;
+                min-height:0px;
+            }
+            .control-menu{
                 transform: translate(-30px,-50px);
             }
             </style>
