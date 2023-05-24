@@ -47,7 +47,7 @@ function han2Zenkaku($str) {
 }
 //LMSから情報を取得してJSON化する関数
 function getSubTimetable(){
-    //時間割じゃなくて5スケジュールだったら取得できないので取得しない
+    //時間割じゃなくてスケジュールだったら取得できないので取得しない
     if(!document.getElementById('displayMode1') || !document.getElementById('displayMode1').checked) {
         return;
     }
