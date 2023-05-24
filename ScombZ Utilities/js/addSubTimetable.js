@@ -47,7 +47,7 @@ function han2Zenkaku($str) {
 }
 //LMSから情報を取得してJSON化する関数
 function getSubTimetable(){
-    //時間割じゃなくてスケジュールだったら取得できないので取得しない
+    //時間割じゃなくて5スケジュールだったら取得できないので取得しない
     if(!document.getElementById('displayMode1') || !document.getElementById('displayMode1').checked) {
         return;
     }
@@ -114,7 +114,8 @@ function getSubTimetable(){
 function displaySubTimetable($$version){
     'use strict';
     chrome.storage.local.get({
-        timetableData : null
+        timetableData : null,
+        styleNowPeriod : null
     },function(item){
         if(item.timetableData == null){
             console.log('時間割情報が存在しません');
@@ -232,6 +233,22 @@ function displaySubTimetable($$version){
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             `+$subTimetable);
+            
+            if (item.styleNowPeriod === true){
+                //目立たせる
+                let nowPeriod = getNowPeriod();
+                //授業時間外
+                if (nowPeriod != -1){
+                    let nowDay = Math.floor(nowPeriod/10);
+                    let nowTime = nowPeriod%10;
+                    let nowSubject = document.querySelector("#subTimetable > tbody > tr:nth-child("+(nowTime+1)+") > td:nth-child("+(nowDay+1)+") > a")
+                    //履修なし
+                    if (nowSubject != null){
+                        nowSubject.parentNode.style.background = "#96c8ff";
+                    }
+                }
+            }
+
         }
     });
     return;
