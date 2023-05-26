@@ -36,6 +36,49 @@ function subjectListOrder(items) {
                 subjectheader.after(subjectdivs[Number(numbers[i])-1]);
             }
         }
+
+        //ScombZ 出席のエンター送信バグの修正
+        //form内にinput[type="text"]が1個しかないのが原因なため、見えないinputを追加する
+        //ただ、元々エンターで送信していたことを潰したくないため、ボタンを押したときと同じ処理を行う
+
+        //変更を検知
+        $("#attendances_send_set").on('DOMSubtreeModified propertychange',function(){
+
+            //ボタンがなかったら
+            if (!document.querySelector("#attendancesSendFakeButton")){
+                //ここで追加
+                let fakeButton = document.createElement("input");
+                fakeButton.type = "text";
+                fakeButton.style.display = "none";
+                fakeButton.id = "attendancesSendFakeButton";
+                document.querySelector("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area").appendChild(fakeButton);
+            }
+            
+            //エンターで送信する
+            $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
+                if (e.code == "Enter"){
+                    //以下はコピペ
+                    $.ajax({
+                        type : "POST",
+                        url : "\/lms\/course\/attendances\/send",
+                        data : new FormData($("#attendancesSendForm").get(0)),
+                        dataType : "html",
+                        cache: false,
+                        processData: false,
+                        contentType : false
+                    }).done(function(data) {
+                        $("#attendanceSend").parent().html(data);
+            
+                        if($("#attendanceSendComplete").length > 0){
+                            $(".attendance-send-btn").css("display","none");
+                        }
+                    });
+                    //ここまで
+                }
+
+            });
+            
+        })
     }
 }
 
