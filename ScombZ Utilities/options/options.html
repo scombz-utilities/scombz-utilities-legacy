@@ -613,11 +613,19 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>締切過ぎテスト非表示</h3>
+                <h3>締切過ぎテスト・受験済みテスト非表示</h3>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="testHide"><label class="ItemBox-CheckBox-Label" for="testHide"></label>
                 <div class="explains">
-                    提出期限を過ぎたテストを非表示にします。<br>
+                    提出期限を過ぎたテスト・受験済みテストを非表示にします。<br>
                     また、一次的に再表示するボタンも追加します。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">自動非表示対象<br></span>
+                    <select id="testHideDetail">
+                        <option value="over">期限越え</option>
+                        <option value="done">受験済み</option>
+                        <option value="all">受験が可能なもの以外</option>
+                        </select>
                 </div>
             </div>
             <div class="setting-column">
