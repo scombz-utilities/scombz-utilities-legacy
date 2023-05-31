@@ -642,6 +642,113 @@
                     このボタンを押すことで、現在閲覧している科目の科目名とURLを自動で入力します。
                 </div>
             </div>
+            <div class="setting-column">
+                <h3>手動追加課題の自動時間入力</h3><span class="id-explain">addTaskTimeButton</span>
+                <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="addTaskTimeButton"><label class="ItemBox-CheckBox-Label" for="addTaskTimeButton"></label>
+                <div class="container">
+                    <fieldset>
+                      <legend>時刻:</legend>
+                      <div class="checkbox-group">
+                        <input type="checkbox" id="time1" name="time" value="time1">
+                        <label for="time1">時刻1</label>
+                        <input type="checkbox" id="time2" name="time" value="time2">
+                        <label for="time2">時刻2</label>
+                        <input type="checkbox" id="time3" name="time" value="time3">
+                        <label for="time3">時刻3</label>
+                        <input type="checkbox" id="time4" name="time" value="time4">
+                        <label for="time4">時刻4</label>
+                        <input type="checkbox" id="time5" name="time" value="time5">
+                        <label for="time5">時刻5</label>
+                        <input type="checkbox" id="time6" name="time" value="time6">
+                        <label for="time6">時刻6</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  
+                  <div class="container">
+                    <fieldset>
+                      <legend>日付:</legend>
+                      <div class="checkbox-group">
+                        <input type="checkbox" id="date1" name="date" value="date1">
+                        <label for="date1">日付1</label>
+                        <input type="checkbox" id="date2" name="date" value="date2">
+                        <label for="date2">日付2</label>
+                        <input type="checkbox" id="date3" name="date" value="date3">
+                        <label for="date3">日付3</label>
+                        <input type="checkbox" id="date4" name="date" value="date4">
+                        <label for="date4">日付4</label>
+                        <input type="checkbox" id="date5" name="date" value="date5">
+                        <label for="date5">日付5</label>
+                        <input type="checkbox" id="date6" name="date" value="date6">
+                        <label for="date6">日付6</label>
+                      </div>
+                    </fieldset>
+                  </div>
+                <style>
+                    .container {
+  margin-bottom: 10px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  background-color: #c2f0c2;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: checkbox-label-anim 0.3s ease-in-out;
+}
+
+label:hover {
+  background-color: #a0d8a0;
+}
+
+@keyframes checkbox-label-anim {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+input[type="checkbox"]:checked + label {
+  background-color: #5ac25a;
+  color: white;
+}
+
+
+                </style>
+                <div class="explains">
+                    手動追加課題の入力画面において、「時間入力ボタン」が追加されます。<br>
+                    チェックマークを入れた
+                </div>
+            </div>
 
             <hr>
             <h2>ポップアップ設定</h2>

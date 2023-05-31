@@ -813,3 +813,8 @@ function displayTaskListsOnGrayLayer(gasOutput){
         }
     });
 }
+
+
+function addmanualTaskTimeButton(checkFlag){
+
+}
