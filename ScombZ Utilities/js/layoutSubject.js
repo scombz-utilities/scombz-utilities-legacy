@@ -43,7 +43,7 @@ function subjectListOrder(items) {
 function materialTopSet(items) {
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        
+
         let materialList = document.querySelectorAll("#materialList > div");
         const firstmaterial = materialList[0];
         const materialListParent = document.getElementById("materialList");
@@ -160,7 +160,7 @@ function sortMaterials(item){
 function hideReport(items){
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        
+
         let cssPosition = document.getElementById("reportList");
         if (!(cssPosition)){
             return;
@@ -209,15 +209,14 @@ function hideTest(items){
         let materials = document.querySelectorAll("#examination > div.block-contents > div > div:nth-child(2) > div");
         let query = "div.course-view-examination-period";
         setcss(cssPosition);
-        if (items === 'over'){
-            hideOver(materials,query);
+        if (items === 'over') {
+            hideOver(materials, query)
+        } else if (items === 'done') {
+            hideDoneTest(materials)
+        } else {
+            hideOver(materials, query)
+            hideDoneTest(materials)
         }
-        /*else if (items === 'done'){
-            hideDoneTest(materials);
-        }else{
-            hideOver(materials,query);
-            hideDoneTest(materials);
-        }*/
         let buttonDiv = document.createElement("span");
         let button = createButton("open-button",materials,"test");
         $(buttonDiv).addClass("course-result-list contents-display-flex clearfix close-button-div");
@@ -348,11 +347,26 @@ function hideEndReport(materials){
     }
 }
 //解答済みテスト削除
-/*
 function hideDoneTest(materials) {
+    for (let material of materials) {
+        let doneCheck = material.querySelector('li > a');
+        //受験する、再受験、結果表示の欄のうち、一番上のものを取得する
+        if (doneCheck == null){
+            $(material).removeClass('not-hide')
+            $(material).addClass('hide-material should-hidden')
+        }else{
+            if (doneCheck.textContent != '受験する') {
+                $(material).removeClass('not-hide')
+                $(material).addClass('hide-material should-hidden')
+            } else {
+                $(material).removeClass('hide-material should-hidden')
+                $(material).addClass('not-hide')
+            }
+        }
 
+    }
 }
-*/
+
 function materialBlockCreate() {
     //科目ページの第○回をひとまとめにして返す関数
     //Orderは「一番上が最新回か初回か」、
