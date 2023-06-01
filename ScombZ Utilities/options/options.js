@@ -71,6 +71,9 @@ const defaultOptions = {
     testHideDetail : 'all',
     addTaskInPage : true,
     autoTaskInput : true,
+    addTaskTimeButton : false,
+    addTaskTime : [true,false,false,false,false,true,false,true,false],
+    addTaskDate :[true,false,false,false,false,false,false,true,true],
     gasURL: "",
     gasCal: false,
     gasTodo: true
@@ -145,6 +148,9 @@ function save_options() {
     const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const autoTaskInput = document.getElementById('autoTaskInput').checked;
+    const addTaskTimeButton = document.getElementById('addTaskTimeButton').checked;
+    const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)));
+    const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)));
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -221,6 +227,9 @@ function save_options() {
         testHideDetail : testHideDetail,
         addTaskInPage : addTaskInPage,
         autoTaskInput : autoTaskInput,
+        addTaskTimeButton : addTaskTimeButton,
+        addTaskDate : addTaskDate,
+        addTaskTime : addTaskTime,
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo
@@ -303,6 +312,9 @@ function save_options() {
         document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
         document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         document.getElementById('autoTaskInput').checked = items.autoTaskInput;
+        document.getElementById('addTaskTimeButton').checked = items.addTaskTimeButton;
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-time'+(i+1)).checked = items.addTaskTime[i]);
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-date'+(i+1)).checked = items.addTaskDate[i]);
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;

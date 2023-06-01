@@ -500,6 +500,15 @@ function autoTaskInput(){
 
 }
 
+//時間を自動入力するボタンを設置
+function addTaskButton(addTaskTime, addTaskDate){
+    'use strict'
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+        setTimeout(function(){
+    },1000);
+    }
+}
+
 //科目ページとURLを自作課題欄に入力する関数
 function subAutoInput(){
     let subjectName = getCourseTitle();

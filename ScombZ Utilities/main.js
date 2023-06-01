@@ -55,13 +55,18 @@
             materialHide : true,        //教材を閉じる
             reportHide : false,          //課題を非表示
             testHide : false,            //テストを非表示
+            materialTopDetail : 'first', //教材の位置
+            materialHideDetail : 'none', //教材を隠す
+            reportHideDetail : 'all',    //何のレポートを隠すか
+            testHideDetail : 'all',     //何のテストを隠すか
             modifyCoursePageTitle: true, // 科目トップページに科目名を追加する
             addTaskInPage : true,       //科目ページに課題追加機能
             autoTaskInput : true,       //自作課題に自動入力ボタン追加
-            materialTopDetail : 'first',
-            materialHideDetail : 'none',
-            reportHideDetail : 'all',
-            testHideDetail : 'all'
+            addTaskTimeButton : false,   //自作課題に日付と時間を入力するボタン追加
+            addTaskTime : [true,false,false,false,false,true,false,true,false],
+            addTaskDate :[true,false,false,false,false,false,false,true,true]
+    
+
     }
     /* ローディング画面 */
     onLoading();
@@ -250,6 +255,9 @@
                 //自作課題追加画面で自動入力
                 if(items.autoTaskInput === true){
                     autoTaskInput();
+                }
+                if(items.addTaskTimeButton === true){
+                    addTaskButton(items.addTaskTime,items.addTaskDate);
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);
