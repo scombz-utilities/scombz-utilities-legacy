@@ -71,6 +71,7 @@ const defaultOptions = {
     testHideDetail : 'all',
     addTaskInPage : true,
     autoTaskInput : true,
+    enterAttendance : true,
     gasURL: "",
     gasCal: false,
     gasTodo: true
@@ -145,6 +146,7 @@ function save_options() {
     const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const autoTaskInput = document.getElementById('autoTaskInput').checked;
+    const enterAttendance = document.getElementById('enterAttendance').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -221,6 +223,7 @@ function save_options() {
         testHideDetail : testHideDetail,
         addTaskInPage : addTaskInPage,
         autoTaskInput : autoTaskInput,
+        enterAttendance : enterAttendance,
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo
@@ -303,6 +306,7 @@ function save_options() {
         document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
         document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         document.getElementById('autoTaskInput').checked = items.autoTaskInput;
+        document.getElementById('enterAttendance').checked = items.enterAttendance;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
