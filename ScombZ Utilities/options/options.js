@@ -68,6 +68,7 @@ const defaultOptions = {
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
+    testHideDetail : 'all',
     addTaskInPage : true,
     autoTaskInput : true,
     gasURL: "",
@@ -135,6 +136,7 @@ function save_options() {
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
+    const testHideDetail = document.getElementById('testHideDetail').value;
     const popupOverflowMode = document.getElementById('popupOverflowMode').value;
     const popupBadge = document.getElementById('popupBadge').checked;
     const popupTasksTab = document.getElementById('popupTasksTab').checked;
@@ -216,6 +218,7 @@ function save_options() {
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
         reportHideDetail : reportHideDetail,
+        testHideDetail : testHideDetail,
         addTaskInPage : addTaskInPage,
         autoTaskInput : autoTaskInput,
         gasURL: gasURL,
@@ -291,6 +294,7 @@ function save_options() {
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
+        document.getElementById('testHideDetail').value = items.testHideDetail;
         document.getElementById('popupOverflowMode').value = items.popupOverflowMode;
         document.getElementById('popupBadge').checked = items.popupBadge;
         document.getElementById('popupTasksTab').checked = items.popupTasksTab;

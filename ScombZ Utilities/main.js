@@ -60,7 +60,8 @@
             autoTaskInput : true,       //自作課題に自動入力ボタン追加
             materialTopDetail : 'first',
             materialHideDetail : 'none',
-            reportHideDetail : 'all'
+            reportHideDetail : 'all',
+            testHideDetail : 'all'
     }
     /* ローディング画面 */
     onLoading();
@@ -235,7 +236,7 @@
                 }
                 //テストの非表示
                 if(items.testHide === true){
-                    hideTest('over');
+                    hideTest(items.testHideDetail);
                 }
                 //ページタイトルに科目名を追加する
                 if(items.modifyCoursePageTitle === true){
