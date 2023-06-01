@@ -43,7 +43,7 @@ function subjectListOrder(items) {
 function materialTopSet(items) {
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        
+
         let materialList = document.querySelectorAll("#materialList > div");
         const firstmaterial = materialList[0];
         const materialListParent = document.getElementById("materialList");
@@ -74,12 +74,11 @@ function hideMaterial(items,materialTop) {
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
-        if (cssPosition){
-            setcss(cssPosition);
-        }else{
+        if (!(cssPosition)){
             return;
         }
-        
+
+        setcss(cssPosition);
         
         if (materialTop != 'none'){
             materialOrder = materialTop;
@@ -129,12 +128,12 @@ function hideMaterial(items,materialTop) {
     }
 }
 
-function sortMaterials(items,list){
-    console.log(items);
+//div > 内容
+//という形で投げる
+function sortMaterials(item){
     let re =[];
-    for (let material of items){
-        material.remove();
-    }
+    let items = item.children;
+
     for (let material of items){
         if (!(material.classList.contains("should-hidden"))){
             re.push(material);
@@ -145,9 +144,14 @@ function sortMaterials(items,list){
             re.push(material);
         }
     }
-    for (let material of re){
-        list.appendChild(material);
+
+    for (let material of items){
+        material.remove();
     }
+    for (let material of re){
+        item.appendChild(material);
+    }
+
     return re;
 
 }
@@ -156,7 +160,7 @@ function sortMaterials(items,list){
 function hideReport(items){
     'use strict';
     if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        
+
         let cssPosition = document.getElementById("reportList");
         if (!(cssPosition)){
             return;
@@ -175,22 +179,19 @@ function hideReport(items){
             hideDoneReport(materials);
             hideEndReport(materials);
         }
-        let buttonDiv = document.createElement("span");
-        let button = createButton("open-button",materials,"report");
-        $(buttonDiv).addClass("course-result-list contents-display-flex sortReportBlock clearfix close-button-div");
-        buttonDiv.appendChild(button);
-        let reportList = document.querySelector("#reportList > div.contents-list.sortReportParent");
-        
-        sortMaterials(materials,reportList);
+
+        sortMaterials(materials[0].parentNode);
         
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
-            reportList.insertBefore(buttonDiv, hides[0]);
+            let buttonDiv = document.querySelector("#reportList > div")
+            let button = createButton("open-button",materials,"report");
+            buttonDiv.appendChild(button);
         }else{
             //全部非表示対象でないなら、そもそもボタンが必要ない
             //reportList.appendChild(buttonDiv);
         }
-        console.log("ボタン作成")
+        console.log("課題非表示ボタン作成")
 
 
     }
@@ -208,38 +209,39 @@ function hideTest(items){
         let materials = document.querySelectorAll("#examination > div.block-contents > div > div:nth-child(2) > div");
         let query = "div.course-view-examination-period";
         setcss(cssPosition);
-        if (items === 'over'){
-            hideOver(materials,query);
+        if (items === 'over') {
+            hideOver(materials, query)
+        } else if (items === 'done') {
+            hideDoneTest(materials)
+        } else {
+            hideOver(materials, query)
+            hideDoneTest(materials)
         }
-        /*else if (items === 'done'){
-            hideDoneTest(materials);
-        }else{
-            hideOver(materials,query);
-            hideDoneTest(materials);
-        }*/
         let buttonDiv = document.createElement("span");
         let button = createButton("open-button",materials,"test");
         $(buttonDiv).addClass("course-result-list contents-display-flex clearfix close-button-div");
         buttonDiv.appendChild(button);
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
-        
-        sortMaterials(materials,reportList);
+
+        sortMaterials(materials[0].parentNode);
         
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
-            reportList.insertBefore(buttonDiv, hides[0]);
+            let buttonDiv = document.querySelector("#examination > div.block-contents > div > div")
+            let button = createButton("open-button",materials,"test");
+            buttonDiv.appendChild(button);
         }else{
             //全部非表示対象でないなら、そもそもボタンが必要ない
             //reportList.appendChild(buttonDiv);
         }
-        console.log("ボタン作成");
+        console.log("テスト非表示ボタン作成");
 
     }
 }
 
 
 function setcss(cssPosition){
-    if ($(".hide-material").attr("display") != 'none'){
+    if ($(".hide-material").css("display") != 'none'){
         cssPosition.insertAdjacentHTML("beforebegin",`
         <style>
             #materialList .hide-material,.should-hidden.hide-material{
@@ -257,7 +259,6 @@ function setcss(cssPosition){
             }
             #materialButton{
                 padding-bottom: 0px;
-                text-indent: -9999px;
                 margin: 0 -3px 0px 0px;
                 padding-left: 0px;
                 width: 22px;
@@ -276,35 +277,11 @@ function setcss(cssPosition){
             }
             .should-hidden{
                 width: 100%;
-                margin-right:0;
-                margin-left:40px;
                 border-left: 1px solid #ccc;
-            }
-            #reportList .course-result-list.should-hidden:nth-last-child(1),#examination .course-result-list.should-hidden:nth-last-child(1){
-                margin-bottom: -32px;
-            }
-            #reportList .course-result-list.should-hidden,#examination .course-result-list.should-hidden{
-                min-height:43px;
-            }
-            .should-hidden .course-view-report-name ,.should-hidden .course-view-examination-name{
-                margin-left: -40px;
-            }
-            .contents-list.sortReportParent,#examination > .block-contents{
-                overflow-x: hidden;
-            }
-            #examination > .block-contents > .contents-detail{
-                overflow:hidden;
-            }
-            .course-view-report-name,.course-view-examination-name{
-                margin-left: 22px;
             }
             .close-button-div > #materialButton{
                 margin: -5px 0 0  -10px;
                 float:left;
-            }
-            .course-result-list.should-hidden{
-                padding-left:42px;
-                transform:translateY(-32px);
             }
             span.close-button-div{
                 border-bottom: 1px solid #aaa0;
@@ -312,6 +289,12 @@ function setcss(cssPosition){
             }
             .control-menu{
                 transform: translate(-30px,-50px);
+            }
+            .course-view-report-name{
+                width: 35%;
+            }
+            .course-view-examination-name{
+                width: 40%;
             }
             </style>
         `)
@@ -364,11 +347,26 @@ function hideEndReport(materials){
     }
 }
 //解答済みテスト削除
-/*
 function hideDoneTest(materials) {
+    for (let material of materials) {
+        let doneCheck = material.querySelector('li > a');
+        //受験する、再受験、結果表示の欄のうち、一番上のものを取得する
+        if (doneCheck == null){
+            $(material).removeClass('not-hide')
+            $(material).addClass('hide-material should-hidden')
+        }else{
+            if (doneCheck.textContent != '受験する') {
+                $(material).removeClass('not-hide')
+                $(material).addClass('hide-material should-hidden')
+            } else {
+                $(material).removeClass('hide-material should-hidden')
+                $(material).addClass('not-hide')
+            }
+        }
 
+    }
 }
-*/
+
 function materialBlockCreate() {
     //科目ページの第○回をひとまとめにして返す関数
     //Orderは「一番上が最新回か初回か」、
@@ -415,7 +413,6 @@ function createButton(className,materials,mode){
     materialButton.id = "materialButton";
     materialButton.className = className;
     materialButton.href = "javascript:void(0);";
-    materialButton.text = "詳細の表示/非表示";
     let frames,subjectContents;
 
     if (mode == "material"){
@@ -425,7 +422,7 @@ function createButton(className,materials,mode){
         frames = document.querySelectorAll("#reportList > div");
         subjectContents = document.querySelectorAll("#report > div");
     }else if (mode == "test"){
-        frames = document.querySelectorAll("#examination > div.block-contents > div");
+        frames = document.querySelectorAll("#examination > div.block-contents > div > div");
         subjectContents = document.querySelectorAll("#examination > div");
     }
 
