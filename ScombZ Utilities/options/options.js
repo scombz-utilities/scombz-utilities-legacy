@@ -149,8 +149,8 @@ function save_options() {
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const autoTaskInput = document.getElementById('autoTaskInput').checked;
     const addTaskTimeButton = document.getElementById('addTaskTimeButton').checked;
-    const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)));
-    const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)));
+    const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)).checked);
+    const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)).checked);
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;

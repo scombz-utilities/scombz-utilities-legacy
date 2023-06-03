@@ -64,7 +64,7 @@
             autoTaskInput : true,       //自作課題に自動入力ボタン追加
             addTaskTimeButton : false,   //自作課題に日付と時間を入力するボタン追加
             addTaskTime : [true,false,false,false,false,true,false,true,false],
-            addTaskDate :[true,false,false,false,false,false,false,true,true]
+            addTaskDate : [true,false,false,false,false,false,false,true,true]
     
 
     }
@@ -256,6 +256,7 @@
                 if(items.autoTaskInput === true){
                     autoTaskInput();
                 }
+                //自作課題に時間を自動入力
                 if(items.addTaskTimeButton === true){
                     addTaskButton(items.addTaskTime,items.addTaskDate);
                 }
