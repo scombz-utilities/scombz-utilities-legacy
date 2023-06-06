@@ -45,3 +45,16 @@ function getCourseTitle(){
     const courseTitleItems = /(.+)\s([0-9]{2}[A-Z]{2}[0-9]{6})\s(.+)/.exec(courseTitle);
     return courseTitleItems[3];  //これが科目名
 }
+
+//次の曜日の日時を返してくれる関数
+//0~6=日～土
+function getNextDay(day){
+    
+    for (let i=0;i<7;i++){
+        let now = new Date();
+        now.setDate(now.getDate()+i);
+        if (now.getDay() == day){
+            return now;
+        }
+    }
+}

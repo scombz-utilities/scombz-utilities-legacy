@@ -70,8 +70,13 @@ const defaultOptions = {
     materialTopDetail : 'first',
     materialHideDetail : 'none',
     reportHideDetail : 'all',
+    testHideDetail : 'all',
     addTaskInPage : true,
     autoTaskInput : true,
+    addTaskTimeButton : false,
+    addTaskTime : [true,false,false,false,false,true,false,true,false],
+    addTaskDate :[true,false,false,false,false,false,false,true,true],
+    enterAttendance : true,
     gasURL: "",
     gasCal: false,
     gasTodo: true
@@ -137,6 +142,7 @@ function save_options() {
     const materialTopDetail = document.getElementById('materialTopDetail').value;
     const materialHideDetail = document.getElementById('materialHideDetail').value;
     const reportHideDetail = document.getElementById('reportHideDetail').value;
+    const testHideDetail = document.getElementById('testHideDetail').value;
     const popupOverflowMode = document.getElementById('popupOverflowMode').value;
     const popupBadge = document.getElementById('popupBadge').checked;
     const popupTasksTab = document.getElementById('popupTasksTab').checked;
@@ -145,6 +151,10 @@ function save_options() {
     const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const autoTaskInput = document.getElementById('autoTaskInput').checked;
+    const addTaskTimeButton = document.getElementById('addTaskTimeButton').checked;
+    const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)).checked);
+    const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)).checked);
+    const enterAttendance = document.getElementById('enterAttendance').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -218,8 +228,13 @@ function save_options() {
         materialTopDetail : materialTopDetail,
         materialHideDetail : materialHideDetail,
         reportHideDetail : reportHideDetail,
+        testHideDetail : testHideDetail,
         addTaskInPage : addTaskInPage,
         autoTaskInput : autoTaskInput,
+        addTaskTimeButton : addTaskTimeButton,
+        addTaskDate : addTaskDate,
+        addTaskTime : addTaskTime,
+        enterAttendance : enterAttendance,
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo
@@ -293,6 +308,7 @@ function save_options() {
         document.getElementById('materialTopDetail').value = items.materialTopDetail;
         document.getElementById('materialHideDetail').value = items.materialHideDetail;
         document.getElementById('reportHideDetail').value = items.reportHideDetail;
+        document.getElementById('testHideDetail').value = items.testHideDetail;
         document.getElementById('popupOverflowMode').value = items.popupOverflowMode;
         document.getElementById('popupBadge').checked = items.popupBadge;
         document.getElementById('popupTasksTab').checked = items.popupTasksTab;
@@ -301,6 +317,10 @@ function save_options() {
         document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
         document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         document.getElementById('autoTaskInput').checked = items.autoTaskInput;
+        document.getElementById('addTaskTimeButton').checked = items.addTaskTimeButton;
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-time'+(i+1)).checked = items.addTaskTime[i]);
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-date'+(i+1)).checked = items.addTaskDate[i]);
+        document.getElementById('enterAttendance').checked = items.enterAttendance;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
