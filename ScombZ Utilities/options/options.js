@@ -1,3 +1,5 @@
+import merge from 'deepmerge'
+
 const defaultOptions = {
     year : null,
     fac : null,
@@ -478,7 +480,7 @@ function save_options() {
 
                 //クリックしたら即リンクタグを消す
                 document.body.removeChild(link);
-                delete link;
+                link = null;
 
         })
     });
@@ -500,7 +502,7 @@ function save_options() {
                     const readData = JSON.parse(fileReader.result);
                     console.log(readData);
                     chrome.storage.local.get(IOOption,function(items){
-                        const result = {...items, ...readData};
+                        const result = merge(readData,items);
                         console.log(result);
                         chrome.storage.local.set(result,function(){
                             alert("読み込みました。");
