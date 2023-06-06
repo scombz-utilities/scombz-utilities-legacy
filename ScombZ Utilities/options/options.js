@@ -1,5 +1,3 @@
-import merge from 'deepmerge'
-
 const defaultOptions = {
     year : null,
     fac : null,
