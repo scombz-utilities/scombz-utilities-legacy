@@ -74,6 +74,7 @@ const defaultOptions = {
     addTaskTimeButton : false,
     addTaskTime : [true,false,false,false,false,true,false,true,false],
     addTaskDate :[true,false,false,false,false,false,false,true,true],
+    enterAttendance : true,
     gasURL: "",
     gasCal: false,
     gasTodo: true
@@ -151,6 +152,7 @@ function save_options() {
     const addTaskTimeButton = document.getElementById('addTaskTimeButton').checked;
     const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)).checked);
     const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)).checked);
+    const enterAttendance = document.getElementById('enterAttendance').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
@@ -230,6 +232,7 @@ function save_options() {
         addTaskTimeButton : addTaskTimeButton,
         addTaskDate : addTaskDate,
         addTaskTime : addTaskTime,
+        enterAttendance : enterAttendance,
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo
@@ -315,6 +318,7 @@ function save_options() {
         document.getElementById('addTaskTimeButton').checked = items.addTaskTimeButton;
         [...Array(9)].forEach((_, i) => document.getElementById('addTask-time'+(i+1)).checked = items.addTaskTime[i]);
         [...Array(9)].forEach((_, i) => document.getElementById('addTask-date'+(i+1)).checked = items.addTaskDate[i]);
+        document.getElementById('enterAttendance').checked = items.enterAttendance;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
