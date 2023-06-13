@@ -71,6 +71,9 @@ const defaultOptions = {
     testHideDetail : 'all',
     addTaskInPage : true,
     autoTaskInput : true,
+    addTaskTimeButton : false,
+    addTaskTime : [true,false,false,false,false,true,false,true,false],
+    addTaskDate :[true,false,false,false,false,false,false,true,true],
     enterAttendance : true,
     gasURL: "",
     gasCal: false,
@@ -146,6 +149,9 @@ function save_options() {
     const popupDarkenUncountedTasks = document.getElementById('popupDarkenUncountedTasks').checked;
     const addTaskInPage = document.getElementById('addTaskInPage').checked;
     const autoTaskInput = document.getElementById('autoTaskInput').checked;
+    const addTaskTimeButton = document.getElementById('addTaskTimeButton').checked;
+    const addTaskTime = [...Array(9)].map((_, i) =>document.getElementById('addTask-time'+(i+1)).checked);
+    const addTaskDate = [...Array(9)].map((_, i) =>document.getElementById('addTask-date'+(i+1)).checked);
     const enterAttendance = document.getElementById('enterAttendance').checked;
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
@@ -223,6 +229,9 @@ function save_options() {
         testHideDetail : testHideDetail,
         addTaskInPage : addTaskInPage,
         autoTaskInput : autoTaskInput,
+        addTaskTimeButton : addTaskTimeButton,
+        addTaskDate : addTaskDate,
+        addTaskTime : addTaskTime,
         enterAttendance : enterAttendance,
         gasURL: gasURL,
         gasCal: gasCal,
@@ -306,6 +315,9 @@ function save_options() {
         document.getElementById('popupDarkenUncountedTasks').checked = items.popupDarkenUncountedTasks;
         document.getElementById('addTaskInPage').checked = items.addTaskInPage;
         document.getElementById('autoTaskInput').checked = items.autoTaskInput;
+        document.getElementById('addTaskTimeButton').checked = items.addTaskTimeButton;
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-time'+(i+1)).checked = items.addTaskTime[i]);
+        [...Array(9)].forEach((_, i) => document.getElementById('addTask-date'+(i+1)).checked = items.addTaskDate[i]);
         document.getElementById('enterAttendance').checked = items.enterAttendance;
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
@@ -459,9 +471,13 @@ function save_options() {
             };
         });
     }
-    //エクスポート
+    
+    //
+    const IOOption = {...defaultOptions};
+    IOOption["mdNotepadData"] = [];
+    //設定エクスポート
     document.getElementById("export-json").addEventListener("click",function(){
-        chrome.storage.local.get(defaultOptions,function(items){
+        chrome.storage.local.get(IOOption,function(items){
             console.log(items);
                 //ファイル名の指定
                 const now = new Date();
@@ -482,11 +498,11 @@ function save_options() {
 
                 //クリックしたら即リンクタグを消す
                 document.body.removeChild(link);
-                delete link;
+                link = null;
 
         })
     });
-    //インポート
+    //設定インポート
     {
         let fileInput = document.getElementById('import-json');
         let fileReader = new FileReader();
@@ -503,8 +519,8 @@ function save_options() {
                     console.log(fileReader.result);
                     const readData = JSON.parse(fileReader.result);
                     console.log(readData);
-                    chrome.storage.local.get(defaultOptions,function(items){
-                        const result = {...items, ...readData};
+                    chrome.storage.local.get(IOOption,function(items){
+                        const result = merge(readData,items);
                         console.log(result);
                         chrome.storage.local.set(result,function(){
                             alert("読み込みました。");

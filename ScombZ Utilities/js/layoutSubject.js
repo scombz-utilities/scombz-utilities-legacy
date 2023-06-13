@@ -481,8 +481,7 @@ function addTaskPage() {
 //科目ページとURLを自動入力するボタンを設置
 function autoTaskInput(){
     'use strict'
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
-        setTimeout(function(){
+    setTimeout(function(){
         let buttonPositon = document.getElementById("manAddtaskSelectLayer");
         if(!buttonPositon){
             return;
@@ -495,9 +494,70 @@ function autoTaskInput(){
         let autoInputButton = document.getElementById("subAutoInput");
         autoInputButton.addEventListener("click", subAutoInput);
 
-    },1000);
-    }
+    },2000);
+    
 
+}
+
+//時間を自動入力するボタンを設置
+function addTaskButton(addTaskTimes, addTaskDates){
+    'use strict'
+    setTimeout(function(){
+
+        let addTaskPosition = document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(3)");
+        //日～土+今日+明日
+        const addTaskDateData = [...Array(7)].map((_, i) =>getNextDay(i));
+        addTaskDateData.push(new Date());
+        let now = new Date();
+        now.setDate(now.getDate()+1);
+        addTaskDateData.push(now);
+
+        const addTaskDateText = ["日曜","月曜","火曜","水曜","木曜","金曜","土曜","今日","明日"]
+
+        const addTaskTimeDataH = [9,10,13,15,17,20,22,23,0];
+        const addTaskTimeDataM = [0,50,20,10,0, 0, 0, 0, 0];
+
+        addTaskTimes.forEach((time,i) => {
+            if (time){
+                let button = document.createElement("button");
+                button.type = "button";
+                let timeData = ( '00' + addTaskTimeDataH[i] ).slice( -2 )+":"+( '00' + addTaskTimeDataM[i] ).slice( -2 );
+                button.textContent = timeData;
+
+                $(button).on("click", function(){
+                    document.getElementById("manAddtaskDeadlineTime").value = timeData;
+
+                });
+
+                addTaskPosition.appendChild(button);
+            }
+        });
+        Array.from(document.querySelectorAll("#manAddtaskSelectLayer > form > div:nth-child(3) > button")).slice(-1)[0].style = "margin-right : 30px";
+
+        addTaskDates.forEach((date,i) => {
+            if (date){
+
+                let button = document.createElement("button");
+                button.type = "button";
+                button.textContent = addTaskDateText[i];
+                
+                $(button).on("click", function(){
+                    //凄い良いアイデアだったけどUTCで取り扱われるから断念
+                    //document.getElementById("manAddtaskDeadlineDate").valueAsDate = addTaskDateData[i];
+                    
+                    document.getElementById("manAddtaskDeadlineDate").value = addTaskDateData[i].getFullYear() +"-"+( '00' + (addTaskDateData[i].getMonth()+1) ).slice( -2 ) + "-" + ( '00' + addTaskDateData[i].getDate()) .slice( -2 );
+                    
+                });
+
+                addTaskPosition.appendChild(button);
+            }
+        })
+        document.querySelector("#manAddtaskDeadlineTime").style = "margin-right : 30px";
+
+    },2000);
+
+    
+    
 }
 
 //科目ページとURLを自作課題欄に入力する関数

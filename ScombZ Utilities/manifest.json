@@ -53,7 +53,8 @@
                 "js/getnews.js",
                 "js/layoutSubject.js",
                 "js/modifyCoursePageTitle.js",
-                "js/autoEvaluation.js"
+                "js/autoEvaluation.js",
+                "js/deepmerge.min.js"
             ]
         }
     ],
