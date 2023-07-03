@@ -1,5 +1,24 @@
 [
     {
+        "version": "3.20.1",
+        "date": {
+            "firefox": "2023/6/3",
+            "chrome": "2023/6/3"
+        },
+        "contents":[
+            {
+                "genre": "else",
+                "title": "ドメインの変更",
+                "explain":"公式サイトのドメインをscombz-utilities.comに変更しました。それに伴い、拡張機能本体をアップデートしました。"
+            },
+            {
+                "genre": "optimisation",
+                "title": "3.20.0の機能の追加",
+                "explain":"3.20.0のアップデートと同日に行っているため、その他の仕様変更については更新情報をご覧ください。"
+            }
+        ]
+    },
+    {
         "version": "3.20.0",
         "date": {
             "firefox": "2023/7/3",

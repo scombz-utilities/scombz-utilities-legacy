@@ -1,4 +1,4 @@
-const agent = window.navigator.userAgent.toLowerCase();
+const agent2 = window.navigator.userAgent.toLowerCase();
 
 console.log("loaded");
 $.getJSON("updateData.json", (updateData) => {
@@ -44,7 +44,7 @@ $.getJSON("updateData.json", (updateData) => {
                         for(let j = 0; updateData[i].contents[j]; j++){
                             message += `<li>・${updateData[i].contents[j].explain}</li><br>`;
                         }
-                        if (agent.indexOf("firefox") != -1) {
+                        if (agent2.indexOf("firefox") != -1) {
                             console.log("firefox");
                             break;
                         }
