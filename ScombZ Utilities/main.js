@@ -86,7 +86,7 @@
                 //シラバスだったらsyllabus.jsに飛ばす
                 syllabusLoaded(items.year , items.fac);
             }
-            if(location.hostname == "yudai1204.github.io"){
+            if(location.hostname == "scombz-utilities.com"){
                 //公式サイトだったらhomepage.jsに飛ばす
                 homepageLoaded();
             }

@@ -11,7 +11,7 @@ function getNews(){
         chrome.runtime.sendMessage(
             {
                 action: 'getJson',
-                endpoint: 'https://yudai1204.github.io/ScombZ-Utilities/news/news.json'
+                endpoint: 'https://scombz-utilities.com/news/news.json'
             },
             (response) => {
                 if(response.error){

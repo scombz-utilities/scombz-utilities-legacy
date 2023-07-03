@@ -1,7 +1,7 @@
 {
     "manifest_version":2 ,
     "name": "ScombZ Utilities",
-    "version": "3.20.0",
+    "version": "3.20.1",
     "description": "ScombZをカスタムする拡張機能",
     "icons": {
         "48":  "icons/icon48.png",
@@ -16,7 +16,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*","https://yudai1204.github.io/ScombZ-Utilities/*"],
+            "matches": ["https://scombz.shibaura-it.ac.jp/*","https://adfs.sic.shibaura-it.ac.jp/adfs/ls/*","http://syllabus.sic.shibaura-it.ac.jp/*","https://scomb.shibaura-it.ac.jp/*","https://yudai1204.github.io/ScombZ-Utilities/*","https://scombz-utilities.com/*"],
             "all_frames": true,
             "run_at": "document_start",
             "js": [
@@ -62,7 +62,8 @@
     },
     "permissions":[
         "storage",
-        "https://yudai1204.github.io/"
+        "https://yudai1204.github.io/",
+        "https://scombz-utilities.com/"
     ],
     "web_accessible_resources": ["gcal/*","imgs/*"]
 }

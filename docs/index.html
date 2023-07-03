@@ -9,8 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="style.css">
     <style> @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap'); </style>
     <style> article, footer { font-family: 'Noto Sans JP', sans-serif; } </style>
+	<script src="js/jquery3.4.1.min.js"></script>
 </head>
 <body>
     <header class="navbar d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -30,7 +32,7 @@
                         <li><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="mdi:firefox"></iconify-icon> FireFox</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><h6 class="dropdown-header">レガシー(更新停止)</h6></li>
-                        <li><a href="https://yudai1204.github.io/ScombZ-Utilities/smartphone.html" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="material-symbols:phone-android"></iconify-icon> iPhone/iPad/Android</a></li>
+                        <li><a href="https://scombz-utilities.com/smartphone.html" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="material-symbols:phone-android"></iconify-icon> iPhone/iPad/Android</a></li>
                         <li><a href="https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="simple-icons:tampermonkey" width="16" height="16"></iconify-icon> UserScript版</a></li>
                     </ul>
                 </div>
@@ -60,15 +62,15 @@
                         <li><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="mdi:firefox"></iconify-icon> FireFox</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><h6 class="dropdown-header">レガシー(更新停止)</h6></li>
-                        <li><a href="https://yudai1204.github.io/ScombZ-Utilities/smartphone.html" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="material-symbols:phone-android"></iconify-icon> iPhone/iPad/Android</a></li>
+                        <li><a href="https://scombz-utilities.com/smartphone.html" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="material-symbols:phone-android"></iconify-icon> iPhone/iPad/Android</a></li>
                         <li><a href="https://github.com/yudai1204/ScombZ-Utilities/raw/dev/scombz-utilities.user.js" class="dropdown-item" target="_blank" rel="noopener noreferrer"><iconify-icon inline icon="simple-icons:tampermonkey" width="16" height="16"></iconify-icon> UserScript版</a></li>
                     </ul>
                 </div>
-                <a href="https://yudai1204.github.io/ScombZ-Utilities/updates.html" class="btn btn-outline-dark btn-lg mx-2">更新情報</a>
+                <a href="https://scombz-utilities.com/updates.html" class="btn btn-outline-dark btn-lg mx-2">更新情報</a>
             </div>
         </div>
         <div class="container border-top">
-            
+            <div id="additionalModeArea"></div>
         </div>
     </article>
     <footer class="footer mt-auto px-4 py-3 bg-light text-muted">
@@ -83,8 +85,8 @@
             </div>
             <div class="col-12 col-sm-6 text-center text-sm-end">
                 <a href="https://github.com/yudai1204/ScombZ-Utilities" class="text-muted">GitHub</a><br>
-                <a href="https://yudai1204.github.io/ScombZ-Utilities/" class="text-muted">プロジェクトサイト</a><br>
-                <a href="https://yudai1204.github.io/ScombZ-Utilities/updates.html" class="text-muted">更新情報</a>
+                <a href="https://scombz-utilities.com/" class="text-muted">プロジェクトサイト</a><br>
+                <a href="https://scombz-utilities.com/updates.html" class="text-muted">更新情報</a>
             </div>
         </div>
         <div class="container">
@@ -103,5 +105,6 @@
 			})
 		}
 	</script>
+	<script src="js/mode.js"></script>
 </body>
 </html>

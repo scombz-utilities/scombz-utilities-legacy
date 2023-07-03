@@ -1,5 +1,5 @@
 function homepageLoaded(){
-    if(location.href.includes("https://yudai1204.github.io/ScombZ-Utilities/updates.html")){
+    if(location.href.includes("https://yudai1204.github.io/ScombZ-Utilities/updates.html") || location.href.includes("https://scombz-utilities.com/update.html")){
         console.log("Update Release Note");
         document.querySelector("#updates .heading").insertAdjacentHTML("afterend",`
             <style type="text/css">
