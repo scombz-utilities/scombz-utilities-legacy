@@ -520,7 +520,7 @@ function save_options() {
                     const readData = JSON.parse(fileReader.result);
                     console.log(readData);
                     chrome.storage.local.get(IOOption,function(items){
-                        const result = merge(readData,items);
+                        const result = deepmerge(readData,items);
                         console.log(result);
                         chrome.storage.local.set(result,function(){
                             alert("読み込みました。");
