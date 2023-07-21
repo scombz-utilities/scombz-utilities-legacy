@@ -1060,22 +1060,25 @@ function urlToLink() {
     }
 
     if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course?")){
-        setTimeout(function () {
-            console.log("URLをハイパーリンクに変換します");
+        const urlInterval = setInterval(function () {
             const ps = document.querySelectorAll("#courseTopForm p");
-            document.head.insertAdjacentHTML("beforeEnd", `
-            <style>
-            .utilities-anchor{
-                color: #00f !important;
-                text-decoration: underline !important;
-            }
-            </style>
-            `);
-            ps.forEach(x => {
-                if (x.innerText.match(/\bhttps?:\/\/[^\s]+\b/g)) {
-                    x = linkify(x);
+            if(ps.length > 0){
+                clearInterval(urlInterval);
+                console.log("URLをハイパーリンクに変換します");
+                document.head.insertAdjacentHTML("beforeEnd", `
+                <style>
+                .utilities-anchor{
+                    color: #00f !important;
+                    text-decoration: underline !important;
                 }
-            });
+                </style>
+                `);
+                ps.forEach(x => {
+                    if (x.innerText.match(/\bhttps?:\/\/[^\s]+\b/g)) {
+                        x = linkify(x);
+                    }
+                });
+            }
         }, 1200);
     }
 }
