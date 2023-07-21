@@ -65,7 +65,8 @@
             addTaskTimeButton : false,   //自作課題に日付と時間を入力するボタン追加
             addTaskTime : [true,false,false,false,false,true,false,true,false],
             addTaskDate : [true,false,false,false,false,false,false,true,true],
-            enterAttendance : true     //エンターで出席したときのバグ修正
+            enterAttendance : true,     //エンターで出席したときのバグ修正
+            urlToLink : true           //URLをリンクに変換する
     }
     /* ローディング画面 */
     onLoading();
@@ -245,7 +246,6 @@
                 //ページタイトルに科目名を追加する
                 if(items.modifyCoursePageTitle === true){
                     modifyCoursePageTitle();
-
                 }
                 //科目ページ内に課題追加機能
                 if(items.addTaskInPage === true){
@@ -262,6 +262,10 @@
                 //エンターで出席したときのバグ修正
                 if(items.enterAttendance === true){
                     enterAttendanceDebug();
+                }
+                //URLをリンクに変換する
+                if(items.urlToLink === true){
+                    urlToLink();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

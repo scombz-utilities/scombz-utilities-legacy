@@ -1,23 +1,23 @@
 /* ScombZ Utilities */
 /* layout.js */
 //ログアウト画面変更
-function changeLogout(){
+function changeLogout() {
     'use strict';
-    if(location.href == 'https://scombz.shibaura-it.ac.jp/logout'){
+    if (location.href == 'https://scombz.shibaura-it.ac.jp/logout') {
         console.log("ログアウト画面を変更します");
-        window.addEventListener('load', function(){
+        window.addEventListener('load', function () {
             const $logoutMainContent = document.getElementById('logout');
             const $logoutButton = document.querySelector('.btn-logout');
-            if($logoutMainContent && $logoutButton){
+            if ($logoutMainContent && $logoutButton) {
                 $logoutButton.style.background = "#f43c49";
                 $logoutButton.style.border = "1px solid #ff0000";
                 $logoutButton.style.boxShadow = "none";
-                $logoutButton.style.fontWeight="bold";
-                
+                $logoutButton.style.fontWeight = "bold";
+
                 $logoutMainContent.style.width = '100%';
                 $logoutMainContent.style.margin = '0 auto';
                 $logoutMainContent.style.minWidth = '0';
-                $logoutButton.insertAdjacentHTML('afterEnd',`
+                $logoutButton.insertAdjacentHTML('afterEnd', `
                 <style>
                 .btn-back{
                     margin-top:10px;
@@ -39,22 +39,22 @@ function changeLogout(){
     return;
 }
 //ページ最大横幅
-function maxWidthOnSubjPage(){
+function maxWidthOnSubjPage() {
     'use strict';
-    if(location.href.includes("lms/course?idnumber=") && location.href.length < 80){
+    if (location.href.includes("lms/course?idnumber=") && location.href.length < 80) {
         console.log('科目ページの最大横幅を変更します');
         chrome.storage.local.get({
-            maxWidthPx:{
+            maxWidthPx: {
                 subj: 1280
             }
-        },function(items){
-            document.head.insertAdjacentHTML('beforeEnd',`
+        }, function (items) {
+            document.head.insertAdjacentHTML('beforeEnd', `
             <style type="text/css">
             #courseTopForm{
                 max-width: ${items.maxWidthPx.subj}px;
                 margin: 0 auto;
             }
-            @media(min-width:${items.maxWidthPx.subj+1}px){
+            @media(min-width:${items.maxWidthPx.subj + 1}px){
                 .course-header{
                     border-left:1px solid #ccc;
                     border-right:1px solid #ccc;
@@ -65,15 +65,15 @@ function maxWidthOnSubjPage(){
             console.log(`最大横幅は${items.maxWidthPx.subj}pxに設定されました`);
         });
     }
-    
-    else if(location.href == "https://scombz.shibaura-it.ac.jp/lms/timetable"){
+
+    else if (location.href == "https://scombz.shibaura-it.ac.jp/lms/timetable") {
         console.log('LMSの最大横幅を変更します');
         chrome.storage.local.get({
-            maxWidthPx:{
+            maxWidthPx: {
                 lms: 1280
             }
-        },function(items){
-            document.head.insertAdjacentHTML('beforeEnd',`
+        }, function (items) {
+            document.head.insertAdjacentHTML('beforeEnd', `
             <style type="text/css">
             #timetable{
                 max-width: ${items.maxWidthPx.lms}px;
@@ -84,14 +84,14 @@ function maxWidthOnSubjPage(){
             console.log(`最大横幅は${items.maxWidthPx.lms}pxに設定されました`);
         });
     }
-    else if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+    else if (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course/report/submission")) {
         console.log('課題ページの最大横幅を変更します');
         chrome.storage.local.get({
-            maxWidthPx:{
+            maxWidthPx: {
                 task: 1280
             }
-        },function(items){
-            document.head.insertAdjacentHTML('beforeEnd',`
+        }, function (items) {
+            document.head.insertAdjacentHTML('beforeEnd', `
             <style type="text/css">
             #pageContents{
                 max-width: ${items.maxWidthPx.task}px;
@@ -108,28 +108,28 @@ function maxWidthOnSubjPage(){
     return;
 }
 //ページトップボタン
-function remomvePageTop(){
+function remomvePageTop() {
     const $pagetopBtn = document.querySelector('.page-top-btn');
-    if($pagetopBtn){
+    if ($pagetopBtn) {
         $pagetopBtn.remove();
     }
     return;
 }
 //ダイレクトリンク
-function remomveDirectLink(){
+function remomveDirectLink() {
     const $directLink = document.querySelector('.page-directlink');
-    if($directLink){
+    if ($directLink) {
         $directLink.remove();
     }
     return;
 }
 //芝猫表示
-function topShibaneko(){
-    if(location.href=="https://scombz.shibaura-it.ac.jp/login"){
+function topShibaneko() {
+    if (location.href == "https://scombz.shibaura-it.ac.jp/login") {
         const $topLogo = document.querySelector(".sitelogo");
-        if($topLogo){
+        if ($topLogo) {
             console.log("にゃーん");
-            $topLogo.insertAdjacentHTML("beforeBegin",`
+            $topLogo.insertAdjacentHTML("beforeBegin", `
             <div style="text-align:center;"><img src="https://scomb.shibaura-it.ac.jp/theme1/skin/common/img/007.jpg" alt="slide1" style="width:960px;height:153px;"></div>
             `);
         }
@@ -138,20 +138,20 @@ function topShibaneko(){
 //現在時刻のコマを目立たせる
 function styleNowPeriod() {
     const $nowperiod = getNowPeriod();
-    console.log("現在のコマ: "+$nowperiod);
-    if($nowperiod == -1){
+    console.log("現在のコマ: " + $nowperiod);
+    if ($nowperiod == -1) {
         return;
     }
-    if(location.href == "https://scombz.shibaura-it.ac.jp/lms/timetable"){
+    if (location.href == "https://scombz.shibaura-it.ac.jp/lms/timetable") {
         console.log("LMSの現在のコマを目立たせます");
         const $courseList = document.querySelectorAll('.timetable-course-top-btn');
-        for(const $course of $courseList) {
-            for(let $yobicolNum = 1 ; $yobicolNum < 7 ; $yobicolNum++){
-                if( $course.parentNode.parentNode.className.indexOf($yobicolNum+'-yobicol') != -1 ){
-                    if($yobicolNum*10 + Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML)) -1 == $nowperiod){
+        for (const $course of $courseList) {
+            for (let $yobicolNum = 1; $yobicolNum < 7; $yobicolNum++) {
+                if ($course.parentNode.parentNode.className.indexOf($yobicolNum + '-yobicol') != -1) {
+                    if ($yobicolNum * 10 + Number(jigenInt($course.parentNode.parentNode.parentNode.firstElementChild.innerHTML)) - 1 == $nowperiod) {
                         $course.classList.add("now-period");
-                        $course.parentNode.parentNode.style.color ="#000";
-                        $course.innerHTML =`<style>.now-period{background:rgb(91 237 146);}</style><span id="nowPeriod" style="font-size:6px;font-weight:normal;color:#000;display:inline-block;background-color:#fff;padding:2px;border-radius:10px;transform:translate(-3px,-4px)">NOW</span>`+$course.innerHTML;
+                        $course.parentNode.parentNode.style.color = "#000";
+                        $course.innerHTML = `<style>.now-period{background:rgb(91 237 146);}</style><span id="nowPeriod" style="font-size:6px;font-weight:normal;color:#000;display:inline-block;background-color:#fff;padding:2px;border-radius:10px;transform:translate(-3px,-4px)">NOW</span>` + $course.innerHTML;
                         break;
                     }
                 }
@@ -161,11 +161,11 @@ function styleNowPeriod() {
     return;
 }
 //ホームのレイアウト
-function layoutHome(){
+function layoutHome() {
     "use strict";
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/portal/home")){
+    if (location.href.includes("https://scombz.shibaura-it.ac.jp/portal/home")) {
         console.log("homeを検知しました");
-        document.head.insertAdjacentHTML("beforeEnd",`
+        document.head.insertAdjacentHTML("beforeEnd", `
         <style>
         @media screen and (min-width: 1800px){
             .portal-link-list-li{
@@ -216,22 +216,22 @@ function layoutHome(){
         </style>
         `);
         //リンクをすべて表示する
-        const $school_link_list =  document.getElementById('school_link_list');
-        if($school_link_list){
-            setTimeout(() =>{
+        const $school_link_list = document.getElementById('school_link_list');
+        if ($school_link_list) {
+            setTimeout(() => {
                 $school_link_list.querySelector(".portal-link-bottom a").click();
-            },300);
+            }, 300);
         }
         //学年歴ボタンを作る
         const $exportGoogleBtn = document.querySelector(".portal-calendar-event-export.calendar_ics_download");
-        if($exportGoogleBtn){
-            $exportGoogleBtn.insertAdjacentHTML("afterEnd",`<a class="portal-calendar-event-add-a" href="https://www.shibaura-it.ac.jp/campus_life/school_calendar/" target="_blank" rel="noopener noreferrer" style="border-top: 1px dotted #FFF;">学年歴を見る</a>`);
+        if ($exportGoogleBtn) {
+            $exportGoogleBtn.insertAdjacentHTML("afterEnd", `<a class="portal-calendar-event-add-a" href="https://www.shibaura-it.ac.jp/campus_life/school_calendar/" target="_blank" rel="noopener noreferrer" style="border-top: 1px dotted #FFF;">学年歴を見る</a>`);
         }
         //カレンダーの下にリンク集を追加する
         const $top_attention = document.getElementById("top_attention");
-        if($top_attention){
+        if ($top_attention) {
             console.log("注目コンテンツを取得しました");
-            $top_attention.insertAdjacentHTML("beforeBegin",`
+            $top_attention.insertAdjacentHTML("beforeBegin", `
             <dl id="right-links" class="portal-subblock portal-subblock-dl-initial">
                         <dt class="portal-top-subblock-title portal-subblock-title portal-notice-title">重要リンク</dt>
                         <dd class="portal-subblock-link">
@@ -268,12 +268,12 @@ function layoutHome(){
     return;
 }
 //拡張機能設定ボタンの追加
-function addExtensionSettingsBtn(){
+function addExtensionSettingsBtn() {
     "use strict";
     console.log("拡張機能設定ボタンを追加します")
     const $headerBtnArea = document.querySelector(".page-head-navi-unordered-list");
-    if($headerBtnArea){
-        $headerBtnArea.insertAdjacentHTML("afterBegin",`
+    if ($headerBtnArea) {
+        $headerBtnArea.insertAdjacentHTML("afterBegin", `
         <style>
         @media (max-width:650px){
             #link_to_extention{
@@ -285,37 +285,37 @@ function addExtensionSettingsBtn(){
 			<a class="page-head-navi-colomn" href="javascript:void(0);" id="link_to_extention">拡張機能設定</a>
 		</li>
         `);
-        document.getElementById("link_to_extention").addEventListener("click", function(){
-            chrome.runtime.sendMessage({"action": "openOptionsPage"});
+        document.getElementById("link_to_extention").addEventListener("click", function () {
+            chrome.runtime.sendMessage({ "action": "openOptionsPage" });
         });
     }
     return;
 }
 //名前を消す
-function removeName(){
+function removeName() {
     "use strict";
     console.log("名前を変更します");
     const $loginViewName = document.querySelector(".login-view-name");
-    if($loginViewName){
+    if ($loginViewName) {
         chrome.storage.local.get({
             nickname: ""
-        },function(items){
-            console.log("名前を取得しました:"+items.nickname);
-            $loginViewName.innerHTML= items.nickname;
+        }, function (items) {
+            console.log("名前を取得しました:" + items.nickname);
+            $loginViewName.innerHTML = items.nickname;
         });
     }
 }
 //名前をクリックして表示を消す
-function clickHideName(){
+function clickHideName() {
     "use strict";
     const $loginViewName = document.getElementsByClassName("login-view-name")[0];
-    if($loginViewName){
-        $loginViewName.insertAdjacentHTML("beforeend",`<style>.name-hidden{opacity:0;}</style>`);
-        $loginViewName.addEventListener("click", function(){
-            if($loginViewName.classList.contains("name-hidden")){
+    if ($loginViewName) {
+        $loginViewName.insertAdjacentHTML("beforeend", `<style>.name-hidden{opacity:0;}</style>`);
+        $loginViewName.addEventListener("click", function () {
+            if ($loginViewName.classList.contains("name-hidden")) {
                 $loginViewName.classList.remove("name-hidden");
                 $loginViewName.style.opacity = "1";
-            }else{
+            } else {
                 $loginViewName.classList.add("name-hidden");
                 $loginViewName.style.opacity = "0";
             }
@@ -323,27 +323,27 @@ function clickHideName(){
     }
 }
 //ページ上部にある固定ヘッダのキモい影を直す
-function fixHeadShadow(){
-    const $headIdList=[
+function fixHeadShadow() {
+    const $headIdList = [
         'page_head',
         'examTimer',
         'survey_timer'
     ];
     for (const $headId of $headIdList) {
-        if(document.getElementById($headId)){
+        if (document.getElementById($headId)) {
             document.getElementById($headId).style.boxShadow = "rgb(60 64 67 / 30%) 0px 1px 2px, rgb(60 64 67 / 15%) 0px 2px 6px 2px";
         }
     }
     return;
 }
 //カスタムCSS
-function customizeCSS(){
+function customizeCSS() {
     chrome.storage.local.get({
         customcss: null
-    },function(items){
-        if(items.customcss){
-            if(document.head){
-                document.head.insertAdjacentHTML("beforeEnd",`
+    }, function (items) {
+        if (items.customcss) {
+            if (document.head) {
+                document.head.insertAdjacentHTML("beforeEnd", `
                 <style type="text/css">
                 ${items.customcss}
                 </style>
@@ -354,37 +354,37 @@ function customizeCSS(){
     return;
 }
 //課題一覧自動調整
-function adjustTasklistPos(){
+function adjustTasklistPos() {
     chrome.storage.local.get({
-        tasklistTranslate : 0,
-        maxTaskDisplay : 15
-    },function(items){
-        if(items.tasklistTranslate == 0 && items.maxTaskDisplay == 15){
+        tasklistTranslate: 0,
+        maxTaskDisplay: 15
+    }, function (items) {
+        if (items.tasklistTranslate == 0 && items.maxTaskDisplay == 15) {
             let max = 15;
-            if(screen.height < 700){
+            if (screen.height < 700) {
                 max = 3;
             }
-            else if(screen.height < 801){
+            else if (screen.height < 801) {
                 max = 6;
             }
-            else if(screen.height < 950){
+            else if (screen.height < 950) {
                 max = 10;
             }
-            if(screen.height < 950){
+            if (screen.height < 950) {
                 chrome.storage.local.set({
-                    maxTaskDisplay : max
+                    maxTaskDisplay: max
                 }
-                ,function(){
+                    , function () {
                         alert("課題表示最大数を自動調整しました。");
-                });
+                    });
             }
         }
     })
 }
 //スマホ判定
-function androidCss(){
-    if ( (/android/i.test(navigator.userAgent) || screen.width < 480)  && document.head) {
-        document.head.insertAdjacentHTML("beforeEnd",`
+function androidCss() {
+    if ((/android/i.test(navigator.userAgent) || screen.width < 480) && document.head) {
+        document.head.insertAdjacentHTML("beforeEnd", `
         <style>
         #pageMain{
             overflow-x:hidden;
@@ -451,12 +451,12 @@ function androidCss(){
 }
 
 //ダークモード
-function darkmodeLayout(mode){
-    if(mode === 'normal'){
+function darkmodeLayout(mode) {
+    if (mode === 'normal') {
         console.log("ダークモードは設定されません");
         return;
-    }else{
-        console.log("ダークモードを挿入します\nmode: ",mode);
+    } else {
+        console.log("ダークモードを挿入します\nmode: ", mode);
         let darkmode = `
         /* ScombZ Darkmode CSS v0.8 */
         /* styled by うだい */
@@ -986,25 +986,96 @@ function darkmodeLayout(mode){
             background-blend-mode:darken;
         }
             `;
-        if(mode === 'relative'){
+        if (mode === 'relative') {
             darkmode = "@media (prefers-color-scheme: dark) {\n" + darkmode + "}";
         }
-        if(document.head)
-            document.head.insertAdjacentHTML('beforeend',`<style type="text/css">`+darkmode+"</style>");
+        if (document.head)
+            document.head.insertAdjacentHTML('beforeend', `<style type="text/css">` + darkmode + "</style>");
     }
     return;
 }
 //D&Dで課題を出す
-function ddSub(){
+function ddSub() {
     "use strict";
-    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")){
+    if (location.href.includes("scombz.shibaura-it.ac.jp/lms/course/report/submission")) {
 
         console.log("ドラッグ&ドロップに変更します");
         let DragAndDrop = document.getElementById("toDragAndDrop");
-        if (DragAndDrop){
-            setTimeout(function(){
+        if (DragAndDrop) {
+            setTimeout(function () {
                 DragAndDrop.click();
-            },300)
+            }, 300)
         }
+    }
+}
+
+// URLをハイパーリンクに変換
+function urlToLink() {
+    function linkify(node) {
+        const urlPattern = /\bhttps?:\/\/[^\s]+\b/g;
+        const textNodes = [];
+
+        // テキストノードのリストを作成
+        (function getTextNodes(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                if (node.parentNode?.nodeName !== "A") {
+                    textNodes.push(node);
+                }
+            } else {
+                for (let childNode of node.childNodes) {
+                    getTextNodes(childNode);
+                }
+            }
+        })(node);
+
+        // テキストノード内のURLを<a>タグに置換
+        for (let textNode of textNodes) {
+            const parent = textNode.parentNode;
+            const text = textNode.nodeValue;
+
+            let match, remainingText = text;
+            let lastLastIndex = 0;
+            while (match = urlPattern.exec(remainingText)) {
+                // マッチしたURLの前のテキストを追加
+                parent.insertBefore(document.createTextNode(remainingText.slice(0, match.index)), textNode);
+
+                // マッチしたURLを<a>タグに置換
+                const anchor = document.createElement('a');
+                anchor.href = match[0];
+                anchor.textContent = match[0];
+                anchor.classList.add("utilities-anchor");
+                anchor.target = "_blank";
+                parent.insertBefore(anchor, textNode);
+
+                lastLastIndex = urlPattern.lastIndex;
+                remainingText = remainingText.slice(lastLastIndex);
+            }
+
+            if (lastLastIndex > 0) {
+                // マッチしたURLの後のテキストを追加
+                parent.insertBefore(document.createTextNode(remainingText), textNode);
+                parent.removeChild(textNode);
+            }
+        }
+    }
+
+    if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course?")){
+        setTimeout(function () {
+            console.log("URLをハイパーリンクに変換します");
+            const ps = document.querySelectorAll("#courseTopForm p");
+            document.head.insertAdjacentHTML("beforeEnd", `
+            <style>
+            .utilities-anchor{
+                color: #00f !important;
+                text-decoration: underline !important;
+            }
+            </style>
+            `);
+            ps.forEach(x => {
+                if (x.innerText.match(/\bhttps?:\/\/[^\s]+\b/g)) {
+                    x = linkify(x);
+                }
+            });
+        }, 1200);
     }
 }

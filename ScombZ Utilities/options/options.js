@@ -77,7 +77,8 @@ const defaultOptions = {
     enterAttendance : true,
     gasURL: "",
     gasCal: false,
-    gasTodo: true
+    gasTodo: true,
+    urlToLink: true,
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -156,6 +157,7 @@ function save_options() {
     const gasURL = document.getElementById('gasURL').value;
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
+    const urlToLink = document.getElementById('urlToLink').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -235,7 +237,8 @@ function save_options() {
         enterAttendance : enterAttendance,
         gasURL: gasURL,
         gasCal: gasCal,
-        gasTodo : gasTodo
+        gasTodo : gasTodo,
+        urlToLink : urlToLink
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -322,6 +325,7 @@ function save_options() {
         document.getElementById('gasURL').value = items.gasURL;
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
+        document.getElementById('urlToLink').checked = items.urlToLink;
         restoreSubject(items.subjectList);
     });
 
