@@ -7,42 +7,51 @@ $.getJSON("updateData.json", (updateData) => {
         let message = "";
         if(location.href.includes("mode=install")){
             message = `
-            <div>
-            <h1>インストールありがとうございます！</h1>
-            <p>このたびはScombZ Utilitiesのインストールをしただきありがとうございます!<br>個々の設定管理や、バグ報告などがございましたら<span class="extentionSettings">拡張機能設定</span>から設定してください！</p>
-            <div>ScombZ Utilitiesをほかのブラウザでも使いませんか？
-                <ul>
-                    <li><a href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja" target="_blank" rel="noopener noreferrer">Chrome / Edge</a></li>
-                    <li><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/"  target="_blank" rel="noopener noreferrer">FireFox</a></li>
-                    <li><a href="/smartphone.html"  target="_blank" rel="noopener noreferrer">iOS / iPadOS / Android</a></li>
-                    <!--li>iOS / iPadOS</li-->
-                </ul>
-            </div>
+            <div class="card-deck text-center">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                    <h2>Thanks for the installation!!</h2>
+                    </div>
+                    <div class="jumbotron p-2">
+                        <p class="lead mt-5">ScombZ Utilitiesのインストールをしただきありがとうございます!</p>
+                        <p class="lead">設定管理や、バグ報告などは拡張機能設定から設定してください！</p>
+
+                        <p class="mt-5"><a class="btn btn-lg btn-success" href="javascript:void(0);" role="button" id="utilities-incontent-open-option-btn">拡張機能機能オプション</a></p>
+                    </div>
+                    <div class="container">
+                        <h5>ScombZ Utilitiesをほかのブラウザでも使いませんか？</h5>
+                        <ul style="list-style: none;">
+                            <li><a href="https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj?hl=ja" target="_blank" rel="noopener noreferrer">Chrome / Edge</a></li>
+                            <li><a href="https://addons.mozilla.org/ja/firefox/addon/scombz-utilities/"  target="_blank" rel="noopener noreferrer">FireFox</a></li>
+                            <li><a href="/smartphone.html"  target="_blank" rel="noopener noreferrer">iOS / iPadOS / Android</a></li>
+                            <!--li>iOS / iPadOS</li-->
+                        </ul>
+                    </div>
+                </div>
             </div>
             `;
         }
         else if(location.href.includes("mode=update")){
             if(location.href.includes("version=")){
                 const version = location.href.slice(location.href.indexOf("version=")+8);
-                message = `<div>
-                <h1>アップデートされました</h1>
-                <h2 style="font-size:20px;margin-bottom:18px;">今回適用されたアップデートは以下の通りです。</h2>
-                <h2 style="font-size:20px;margin-bottom:15px;">ScombZ Utilities ver.${version}</h2>
-                <ul style="margin-bottom:10px;">
+                message = `
+                <div>
+                <h2>ScombZ Utilitiesがアップデートされました！</h2>
+
+                <div class="card-deck text-center mt-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4>ScombZ Utilities ver.${version}</h4>
+                    </div>
+                    <div class="container pt-3 text-left">
+                        <h5>アップデート内容</h5>
+                        <ul style="text-align:left;">
                 `;
                 let updateDate = "error";
                 for(let i = 0; updateData[i]; i++){
-                    if(updateDate === updateData[i].date.chrome){
-                        message += `</ul>
-                        <h2 style="font-size:20px;margin-bottom:15px;">ScombZ Utilities ver.${updateData[i].version}</h2>
-                        <ul style="margin-bottom:10px;">`;
-                        for(let j = 0; updateData[i].contents[j]; j++){
-                            message += `<li>・${updateData[i].contents[j].explain.replace("。","。<br>")}</li><br>`;
-                        }
-                    }
                     if(updateData[i].version === version){
                         for(let j = 0; updateData[i].contents[j]; j++){
-                            message += `<li>・${updateData[i].contents[j].explain}</li><br>`;
+                            message += `<li>${updateData[i].contents[j].explain}</li><br>`;
                         }
                         if (agent2.indexOf("firefox") != -1) {
                             console.log("firefox");
@@ -51,22 +60,26 @@ $.getJSON("updateData.json", (updateData) => {
                         updateDate = updateData[i].date.chrome;
                     }
                 }
-                message += `</ul><p style="font-size:16px;">アップデート情報詳細は<a href="updates.html">こちら</a></p>
+                message += `
+                        </ul>
+                        </div>
+                        
+                        <p>
+                            アップデート情報詳細は<a href="updates.html">こちら</a></p>
+                        </p>
+                        <div class="jumbotron">
+                            <p><a class="btn btn-sl btn-success" href="javascript:void(0);" role="button" id="utilities-incontent-open-option-btn">拡張機能機能オプション</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                
                 </div>`;
             }else{
                 message = `
                 <div>
                 <h1>アップデートされました</h1>
-                <p>---アップデート情報 ~v3.9.0---<br>
-                ・任意の課題を非表示にできる機能を追加しました<br>
-                ・通知一括削除ボタンを追加しました<br>
-                ・設定初期化ボタンを追加しました<br>
-                ・崩れているレイアウトを修正しました<br>
-                ・アップデート、インストール時に表示されるランディングページを追加しました<br>
-                ・公式サイトへのリンクを追加しました<br>
-                ・誤字を修正しました<br>
-                ・設定のスタイルを変更しました</p>
-                より詳細なアップデート情報は<a href="updates.html">こちら</a>
+                    <p>アップデート情報は<a href="updates.html">こちら</a>から
                 </div>
                 `;
             }

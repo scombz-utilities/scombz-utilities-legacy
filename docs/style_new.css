@@ -1,4 +1,4 @@
-#additionalModeArea > div{
+/* #additionalModeArea > div{
 	margin: 15px 0;
 	padding: 10px;
 	border: 2px solid #ccc;
@@ -22,4 +22,8 @@
 	font-size: 20px;
 	font-weight: bold;
 	padding: 10px;
+} */
+
+#additionalModeArea{
+	max-width: 780px;
 }

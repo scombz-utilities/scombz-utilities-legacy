@@ -21,4 +21,21 @@ function homepageLoaded(){
             chrome.runtime.sendMessage({"action": "openOptionsPage"});
         });
     }
+    if(true){
+        let intervalcnt = 0;
+        const interval = setInterval(function(){
+            console.log("homepageLoaded");
+            const optionBtn = document.getElementById("utilities-incontent-open-option-btn");
+            console.log(optionBtn);
+            if(optionBtn){
+                clearInterval(interval);
+                optionBtn.addEventListener("click", function(){
+                    chrome.runtime.sendMessage({"action": "openOptionsPage"});
+                });
+            }
+            if(intervalcnt++ > 10){
+                clearInterval(interval);
+            }
+        }, 500);
+    }
 }
