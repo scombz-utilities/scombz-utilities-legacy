@@ -1,6 +1,5 @@
 
-const downloadFilesMain = () => {
-    const dlLabels = [...document.querySelectorAll(".course-view-material-file-name > .fileDownload")].filter(e => e.innerText.trim().match(/\.pdf$/));
+const downloadFilesMain = (dlLabels, btn) => {
     const resultURLs = [];
     const resultNames = [];
     function downloadFileRoutine(label){
@@ -52,20 +51,20 @@ const downloadFilesMain = () => {
                 console.log(resultURL);
                 resultURLs.push(resultURL);
                 resultNames.push(data.fileName);
-                document.querySelector("#downloadFileBundle").textContent = "URL取得中...(" + resultURLs.length + "/" + dlLabels.length + ")";
+                btn.textContent = "URL取得中...(" + resultURLs.length + "/" + dlLabels.length + ")";
                 if(resultURLs.length < dlLabels.length){
                     setTimeout(function(){
                         downloadFileRoutine(dlLabels[resultURLs.length]);
                     }, 100);
                 }else{
                     console.log(resultURLs);
-                    document.querySelector("#downloadFileBundle").textContent = "ダウンロード中...(0/"+resultURLs.length+")";
+                    btn.textContent = "ダウンロード中...(0/"+resultURLs.length+")";
                     setTimeout(function(){
                         dlZip(resultURLs);
                     }, 100);
                     // setTimeout(function(){
-                    //     document.querySelector("#downloadFileBundle").textContent = "一括ダウンロード";
-                    //     document.querySelector("#downloadFileBundle").classList.remove("clicked");
+                    //     btn.textContent = "一括ダウンロード";
+                    //     btn.classList.remove("clicked");
                     // }, 100);
                 }
             }
@@ -84,7 +83,7 @@ const downloadFilesMain = () => {
                 xhr.responseType = "blob";
                 xhr.onload = function() {
                     downloadCount++;
-                    document.querySelector("#downloadFileBundle").textContent = "ダウンロード中...(" + downloadCount + "/" + urls.length + ")";
+                    btn.textContent = "ダウンロード中...(" + downloadCount + "/" + urls.length + ")";
                     // ファイル名とデータ返却
                     const fileName = resultNames[i];
                     resolve({ data: this.response, fileName: fileName });
@@ -105,7 +104,7 @@ const downloadFilesMain = () => {
 
     // zip ファイルで画像をダウンロード
     function generateZip(images) {
-        document.querySelector("#downloadFileBundle").textContent = "ZIPファイル生成中...(時間がかかります)";
+        btn.textContent = "ZIPファイル生成中...(時間がかかります)";
         let zip = new JSZip();
 
         // フォルダ作成
@@ -122,7 +121,9 @@ const downloadFilesMain = () => {
                 .replace(/\s+/g, "_");
             const t = new Date();
 
-            folderName = `${courseName}_${("00"+(t.getMonth() + 1)).slice(-2)}${("00"+t.getDate()).slice(-2)}_${("00"+t.getHours()).slice(-2)}${("00"+t.getMinutes()).slice(-2)}`;
+            folderName = `${courseName}`;
+            if(btn.getAttribute("data-title")) folderName += `_${btn.getAttribute("data-title")}`;
+            folderName += `_${("00"+(t.getMonth() + 1)).slice(-2)}${("00"+t.getDate()).slice(-2)}_${("00"+t.getHours()).slice(-2)}${("00"+t.getMinutes()).slice(-2)}`;
         }
 
 
@@ -155,8 +156,9 @@ const downloadFilesMain = () => {
             }, 1000);
             //終了処理
             setTimeout(function(){
-                document.querySelector("#downloadFileBundle").textContent = "pdf一括ダウンロード";
-                document.querySelector("#downloadFileBundle").classList.remove("clicked");
+                if(btn.getAttribute("data-title")) btn.textContent = "この回を一括DL";
+                btn.textContent = "pdf一括ダウンロード";
+                btn.classList.remove("clicked");
             }, 100);
         });
     }
@@ -166,6 +168,7 @@ const downloadFilesMain = () => {
 function downloadFileBundle(){
     if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course?")){
         setTimeout(function(){
+            // 全体のDL
             document.querySelector("#courseContent #materialTitle").style.position = "relative";
             document.querySelector("#courseContent #materialTitle").insertAdjacentHTML("afterBegin", `
                 <div style="position: absolute; left: 10px; top: 10px;">
@@ -176,6 +179,7 @@ function downloadFileBundle(){
                             border-radius: 3px;
                             padding: 3px 5px;
                             cursor: pointer;
+                            user-select: none;
                         }
                         #downloadFileBundle:hover{
                             background-color: #eee;
@@ -183,15 +187,56 @@ function downloadFileBundle(){
                         #downloadFileBundle.clicked{
                             pointer-events: none;
                         }
+                        .utilities-dl-file-button{
+                            position: absolute;
+                            right: 2px;
+                            bottom: 1px;
+                            background-color: #fff;
+                            border: 1px solid #ccc;
+                            border-radius: 3px;
+                            padding: 3px 5px;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+                        .utilities-dl-file-button:hover{
+                            background-color: #eee;
+                        }
                     </style>
                     <div id="downloadFileBundle" class="btn btn-primary btn-sm" style="margin-right: 5px;">PDF一括ダウンロード</div>
                 </div>
             `);
             document.querySelector("#downloadFileBundle").addEventListener("click", function(){
+                const dlLabels = [...document.querySelectorAll(".course-view-material-file-name > .fileDownload")].filter(e => e.innerText.trim().match(/\.pdf$/));
+                if(dlLabels.length == 0) return;
                 this.classList.add("clicked");
                 this.textContent = "URL取得中...";
-                downloadFilesMain();
+                downloadFilesMain(dlLabels, this);
+            });
+            // 回ごとのDL
+            const titles = [...document.querySelectorAll("#materialContents > #materialList > .contents-detail.clearfix > .block-title.material-sub-color.block-wide.break > label.bold-txt")].map(x => x.textContent.trim());
+            [...document.querySelectorAll("#materialContents > #materialList > .contents-list.contents-display-flex.contents-tag.contents-header-txt > .course-view-material-comment.bold-txt")].map(x => x.parentNode).forEach((x, i) => {
+                x.style.position = "relative";
+                x.insertAdjacentHTML("beforeEnd", `
+                <div class="utilities-dl-file-button" data-title="${titles[i]}">
+                    この回を一括DL
+                </div>
+                `);
+            });
+            document.querySelectorAll(".utilities-dl-file-button").forEach(x => {
+                x.addEventListener("click", function(){
+                    const dlLabels = [];
+                    let targetnode = x.parentNode.nextElementSibling;
+                    while(targetnode?.classList.contains("materialCss")){
+                        dlLabels.push(targetnode.querySelector(".fileDownload"));
+                        targetnode = targetnode.nextElementSibling;
+                    }
+                    if(dlLabels.length == 0) return;
+                    this.classList.add("clicked");
+                    this.textContent = "URL取得中...";
+                    downloadFilesMain(dlLabels, this);
+                });
             });
         },500);
     }
+
 }
