@@ -152,7 +152,7 @@ function styleExam(){
             });
         }
         //テスト提出確認画面
-        if(location.href == "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
+        if(location.href === "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
             console.log('テスト提出確認画面');
             window.onbeforeunload = function(e) {
                 e.returnValue = "ページを離れようとしています。よろしいですか？";
@@ -196,7 +196,7 @@ function styleExam(){
             if($submitBtnArea.childElementCount == 2){
                 $submitBtnArea.appendChild($submitBtnArea.children[0]);
             }
-            const $confirmBtnList = document.querySelectorAll(".block-under-area .block-under-area-btn a");
+            const $confirmBtnList = [...document.querySelectorAll(".block-under-area .block-under-area-btn a"),...document.querySelectorAll(".timer-btn-confirm-area-btn a")];
             for(const $confirmBtn of $confirmBtnList){
                 $confirmBtn.addEventListener("click", function(){
                     window.onbeforeunload = null;

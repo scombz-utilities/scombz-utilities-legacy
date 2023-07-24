@@ -1060,10 +1060,10 @@ function urlToLink() {
     }
 
     if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course?")){
-        const urlInterval = setInterval(function () {
+        let changed = false;
+        const changeURL =  () =>  {
             const ps = document.querySelectorAll("#courseTopForm p");
-            if(ps.length > 0){
-                clearInterval(urlInterval);
+            if(ps.length > 0 && !changed){
                 console.log("URLをハイパーリンクに変換します");
                 document.head.insertAdjacentHTML("beforeEnd", `
                 <style>
@@ -1076,9 +1076,16 @@ function urlToLink() {
                 ps.forEach(x => {
                     if (x.innerText.match(/\bhttps?:\/\/[^\s]+\b/g)) {
                         x = linkify(x);
+                        changed = true;
                     }
                 });
             }
-        }, 1200);
+        };
+        setTimeout(changeURL, 1200);
+        $(window).focus(function(){ // タブアクティブ
+            console.log('focus test jQuery');
+            setTimeout(changeURL, 800);
+            setTimeout(changeURL, 2500);
+        });
     }
 }

@@ -30,6 +30,7 @@ $.getJSON("updateData.json", (updateData) => {
                 </div>
             </div>
             `;
+            document.getElementById("logoarea").classList.add("small-logo");
         }
         else if(location.href.includes("mode=update")){
             if(location.href.includes("version=")){
@@ -85,5 +86,6 @@ $.getJSON("updateData.json", (updateData) => {
             }
         }
         additionalModeArea.insertAdjacentHTML("afterbegin",message);
+        document.getElementById("logoarea").classList.add("small-logo");
     }
 });

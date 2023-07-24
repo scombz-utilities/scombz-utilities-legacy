@@ -19,6 +19,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         case "postGas":
             postGas(message,sender,sendResponse);
             break;
+        //  バックグラウンドでページを開く
+        case "openNewPageBG":
+            chrome.tabs.create({url: message.url, active: false});
+            break;
         default:
             break;
     }

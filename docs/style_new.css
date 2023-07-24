@@ -34,3 +34,8 @@
 	max-height: 720px;
 	overflow-y: scroll;
 }
+
+.small-logo{
+	max-width: 700px;
+    margin: -5vh auto 0 auto;
+}
