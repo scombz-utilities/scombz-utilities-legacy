@@ -17,9 +17,11 @@ function homepageLoaded(){
             </style>
             <a href="javascript:void(0);" id="link_to_extention">Utilitiesの設定へ</a>
         `);
-        document.getElementById("link_to_extention").addEventListener("click", function(){
-            chrome.runtime.sendMessage({"action": "openOptionsPage"});
-        });
+        if(document.getElementById("link_to_extention")){
+            document.getElementById("link_to_extention").addEventListener("click", function(){
+                chrome.runtime.sendMessage({"action": "openOptionsPage"});
+            });
+        }
     }
     if(true){
         let intervalcnt = 0;
