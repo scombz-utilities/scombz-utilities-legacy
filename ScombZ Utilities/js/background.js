@@ -35,7 +35,7 @@ function openOptionsPage(){
 //インストール時
 chrome.runtime.onInstalled.addListener(({reason}) => {
     if(reason === 'install' || reason === 'update'){
-        chrome.tabs.create({url: `https://scombz-utilities.com/?mode=${reason}&version=${chrome.runtime.getManifest().version}`});
+        chrome.tabs.create({url: `https://scombz-utilities.com/?mode=${reason}&version=${chrome.runtime.getManifest().version}`, active: !!(reason === 'install')});
     }
 });
 
