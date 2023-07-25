@@ -66,7 +66,8 @@
             addTaskTime : [true,false,false,false,false,true,false,true,false],
             addTaskDate : [true,false,false,false,false,false,false,true,true],
             enterAttendance : true,     //エンターで出席したときのバグ修正
-            urlToLink : true           //URLをリンクに変換する
+            urlToLink : true,           //URLをリンクに変換する
+            downloadFileBundle : true,  //一括ダウンロード
     }
     /* ローディング画面 */
     onLoading();
@@ -266,6 +267,10 @@
                 //URLをリンクに変換する
                 if(items.urlToLink === true){
                     urlToLink();
+                }
+                //一括ダウンロード
+                if(items.downloadFileBundle === true){
+                    downloadFileBundle();
                 }
                 //ダークモードの適用
                 darkmodeLayout(items.darkmode);

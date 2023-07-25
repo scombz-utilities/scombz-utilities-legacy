@@ -57,6 +57,19 @@ function styleExam(){
             }
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
+            chrome.storage.local.get({
+                displaySubtimetableWhileExam: true
+            }, function(values) {
+                if(!values.displaySubtimetableWhileExam){
+                    document.head.insertAdjacentHTML('beforeEnd',`
+                    <style>
+                        #pageMain #subTaskList,#pageMain #subTimetable, #pagetop-head-logo, #link_to_extention{
+                            display:none !important;
+                        }
+                    </style>
+                    `);
+                }
+            });
         }
         //テスト中の画面
         if((document.querySelector(".block-under-area-btn") && document.querySelector(".block-under-area-btn").innerHTML.includes("一時保存する"))){
@@ -150,6 +163,20 @@ function styleExam(){
                     }
                 }
             });
+            // テスト中に時間割を表示するか
+            chrome.storage.local.get({
+                displaySubtimetableWhileExam: true
+            }, function(values) {
+                if(!values.displaySubtimetableWhileExam){
+                    document.head.insertAdjacentHTML('beforeEnd',`
+                    <style>
+                        #pageMain #subTaskList,#pageMain #subTimetable, #pagetop-head-logo, #link_to_extention{
+                            display:none !important;
+                        }
+                    </style>
+                    `);
+                }
+            });
         }
         //テスト提出確認画面
         if(location.href === "https://scombz.shibaura-it.ac.jp/lms/course/examination/take?confirm"){
@@ -204,6 +231,19 @@ function styleExam(){
             }
             if(document.querySelector('.page-directlink'))
                 document.querySelector('.page-directlink').remove();
+            chrome.storage.local.get({
+                displaySubtimetableWhileExam: true
+            }, function(values) {
+                if(!values.displaySubtimetableWhileExam){
+                    document.head.insertAdjacentHTML('beforeEnd',`
+                    <style>
+                        #pageMain #subTaskList,#pageMain #subTimetable, #pagetop-head-logo, #link_to_extention{
+                            display:none !important;
+                        }
+                    </style>
+                    `);
+                }
+            });
         }
         //テストを受け終わった画面
         //すでに受けたテストを参照する画面

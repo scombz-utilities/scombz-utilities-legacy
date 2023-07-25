@@ -84,8 +84,8 @@ $.getJSON("updateData.json", (updateData) => {
                 </div>
                 `;
             }
+            document.getElementById("logoarea").classList.add("small-logo");
         }
         additionalModeArea.insertAdjacentHTML("afterbegin",message);
-        document.getElementById("logoarea").classList.add("small-logo");
     }
 });

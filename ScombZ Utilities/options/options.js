@@ -79,6 +79,8 @@ const defaultOptions = {
     gasCal: false,
     gasTodo: true,
     urlToLink: true,
+    downloadFileBundle: true,
+    displaySubtimetableWhileExam: true
 };
 // Saves options to chrome.storage
 function save_options() {
@@ -158,6 +160,8 @@ function save_options() {
     const gasCal = document.getElementById('gasCal').checked;
     const gasTodo = document.getElementById('gasTodo').checked;
     const urlToLink = document.getElementById('urlToLink').checked;
+    const downloadFileBundle = document.getElementById('downloadFileBundle').checked;
+    const displaySubtimetableWhileExam = document.getElementById('displaySubtimetableWhileExam').checked;
     chrome.storage.local.set({
         year : year ,
         fac : fac ,
@@ -238,7 +242,9 @@ function save_options() {
         gasURL: gasURL,
         gasCal: gasCal,
         gasTodo : gasTodo,
-        urlToLink : urlToLink
+        urlToLink : urlToLink,
+        downloadFileBundle: downloadFileBundle,
+        displaySubtimetableWhileExam: displaySubtimetableWhileExam
     }, function() {
         // Update status to let user know options were saved.
         console.log("settings changed");
@@ -326,6 +332,8 @@ function save_options() {
         document.getElementById('gasCal').checked = items.gasCal;
         document.getElementById('gasTodo').checked = items.gasTodo;
         document.getElementById('urlToLink').checked = items.urlToLink;
+        document.getElementById('downloadFileBundle').checked = items.downloadFileBundle;
+        document.getElementById('displaySubtimetableWhileExam').checked = items.displaySubtimetableWhileExam;
         restoreSubject(items.subjectList);
     });
 
