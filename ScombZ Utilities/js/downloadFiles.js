@@ -29,7 +29,7 @@ const downloadFilesMain = (dlLabels, btn) => {
             }
             return params.toString();
         };
-
+        console.log({param});
         const tempUrl = "/lms/course/make/tempfile";
         $.ajax({
             type: "GET",
@@ -167,6 +167,8 @@ const downloadFilesMain = (dlLabels, btn) => {
 
 function downloadFileBundle(){
     if(location.href.startsWith("https://scombz.shibaura-it.ac.jp/lms/course?")){
+        //firefoxでは動作しないためreturn
+        if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1) return;
         setTimeout(function(){
             // 全体のDL
             document.querySelector("#courseContent #materialTitle").style.position = "relative";
