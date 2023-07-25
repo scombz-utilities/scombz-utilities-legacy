@@ -228,7 +228,7 @@ function downloadFileBundle(){
                 x.addEventListener("click", function(){
                     const dlLabels = [];
                     let targetnode = x.parentNode.nextElementSibling;
-                    while(targetnode?.classList.contains("materialCss")){
+                    while(targetnode?.classList.contains("materialCss") && targetnode.querySelector(".fileDownload")){
                         dlLabels.push(targetnode.querySelector(".fileDownload"));
                         targetnode = targetnode.nextElementSibling;
                     }
