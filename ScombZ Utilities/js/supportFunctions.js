@@ -26,11 +26,7 @@ function getNowPeriod(){
 }
 //課題一覧のアンケートからリンクしたときにアンケートまでスクロールしてくれるようにする関数
 function surveyLinkScroll() {
-<<<<<<< HEAD
     if (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?") && location.href.includes("questionnaire")){
-=======
-    if (location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course") && location.href.includes("questionnaire")){
->>>>>>> f00f4c07465ca913f4c1a9b9b8ee2d47c8ed2cc7
         setTimeout(function(){
             window.location.href = ("#questionnaire");
         },300);
