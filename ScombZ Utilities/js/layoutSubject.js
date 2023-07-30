@@ -582,31 +582,41 @@ function enterAttendanceDebug(){
     //form内にinput[type="text"]が1個しかないのが原因なため、見えないinputを追加する
     //ただ、元々エンターで送信していたことを潰したくないため、ボタンを押したときと同じ処理を行う
 
-    //変更を検知
-    $("#attendances_send_set").on('DOMSubtreeModified propertychange',function(){
-        
-        //変更検知してもまだ処理が行われていない可能性があるため
-        if (document.querySelector("#attendancesSendForm") != null){
-            //ボタンがなかったら
-            if (!document.querySelector("#attendancesSendFakeButton")){
-                    let fakeButton = document.createElement("input");
-                    fakeButton.type = "text";
-                    fakeButton.id = "attendancesSendFakeButton";
-                    document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
-                    //ここで追加
 
-            }
-            //エンターで送信する
-            $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
-                if (e.code == "Enter"){
-                    //送信ボタンをクリックさせる
-                    let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
-                    attendanceSubmitButton[1].click();
+    const callback = (mutations) => {
+        mutations.forEach((mutation) => {
+
+            //変更検知してもまだ処理が行われていない可能性があるため
+            if (document.querySelector("#attendancesSendForm") != null){
+                //ボタンがなかったら
+                if (!document.querySelector("#attendancesSendFakeButton")){
+                        let fakeButton = document.createElement("input");
+                        fakeButton.type = "text";
+                        fakeButton.id = "attendancesSendFakeButton";
+                        document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
+                        //ここで追加
+
                 }
+                //エンターで送信する
+                $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
+                    if (e.code == "Enter"){
+                        //送信ボタンをクリックさせる
+                        let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
+                        attendanceSubmitButton[1].click();
+                    }
 
-            });
-        }
-
-        
-    })
+                });
+            }
+        })
+    }
+    const observer = new MutationObserver(callback);
+    const target = document.querySelector("#attendances_send_set");
+    const config = {
+        childList: true, 
+        attributes: true,  
+        characterData: true,
+        subtree: true, 
+    };
+    
+    observer.observe(target, config);
 }
