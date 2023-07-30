@@ -135,7 +135,12 @@ const downloadFilesMain = (dlLabels, btn) => {
         });
 
         // zip を生成
-        zip.generateAsync({ type: "blob" }).then(blob => {
+        zip.generateAsync({ type: "blob" ,
+            compression: "DEFLATE",
+            compressionOptions: {
+                level: 3
+            }
+        }).then(blob => {
 
             // ダウンロードリンクを 生成
             let dlLink = document.createElement("a");
