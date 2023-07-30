@@ -129,7 +129,7 @@ function getTasksByAdjax($$reacquisitionMin){
 
 //アンケートを取得するかどうかの設定を科目別ページに挿入
 function insertSurveyBtnOnSubj(){
-    if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course?idnumber=')){
+    if (location.href.includes('scombz.shibaura-it.ac.jp/lms/course')){
         const $courseTitle = document.querySelector('.course-title-txt');
         if($courseTitle && !document.getElementById("noticeSurvey")){
             console.log('授業別ページを検出しました\nアンケート取得是非を挿入します');

@@ -13,7 +13,7 @@
 //要素並び替え
 function subjectListOrder(items) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
         console.log("科目ページの要素並び替え");
         let subjectdivs = [];
         subjectdivs.push(document.getElementById("message"));
@@ -42,7 +42,7 @@ function subjectListOrder(items) {
 //教材の順番統一
 function materialTopSet(items) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
 
         let materialList = document.querySelectorAll("#materialList > div");
         const firstmaterial = materialList[0];
@@ -70,7 +70,7 @@ function materialTopSet(items) {
 //教材を一部非表示化
 function hideMaterial(items,materialTop) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
@@ -159,7 +159,7 @@ function sortMaterials(item){
 //課題を一部非表示化
 function hideReport(items){
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
 
         let cssPosition = document.getElementById("reportList");
         if (!(cssPosition)){
@@ -201,7 +201,7 @@ function hideReport(items){
 //テストを一部非表示化
 function hideTest(items){
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
         let cssPosition = document.getElementById("examination");
         if (!(cssPosition)){
             return;
@@ -453,7 +453,7 @@ function createButton(className,materials,mode){
 //課題手動追加を科目ページから呼び出す
 function addTaskPage() {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
         if (!document.getElementById("report")){
             return;
         }

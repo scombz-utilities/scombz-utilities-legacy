@@ -41,7 +41,7 @@ function changeLogout() {
 //ページ最大横幅
 function maxWidthOnSubjPage() {
     'use strict';
-    if (location.href.includes("lms/course?idnumber=") && location.href.length < 80) {
+    if (location.href.includes("lms/course") && location.href.length < 80) {
         console.log('科目ページの最大横幅を変更します');
         chrome.storage.local.get({
             maxWidthPx: {

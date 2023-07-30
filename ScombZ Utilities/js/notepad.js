@@ -328,7 +328,7 @@ function displayNotepad(){
     return;
 }
 function addMarkdownToSubj(){
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course")){
         // URLを取得
         const pageurl = new URL(window.location.href);
         const idnum = pageurl.searchParams.get('idnumber');
