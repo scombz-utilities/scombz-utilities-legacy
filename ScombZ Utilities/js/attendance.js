@@ -4,7 +4,7 @@
 //3つのモード
 function attendanceRemove(item){
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
         if (item === 'only'){
             console.log("※表示の場合出席を削除");
             let attendanceKome = document.querySelector("#attendance > div.block-contents > div > div:nth-child(3) > div:nth-child(1) > div.course-view-attendance-status > label");
