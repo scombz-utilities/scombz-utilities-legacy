@@ -505,6 +505,11 @@ function addTaskButton(addTaskTimes, addTaskDates){
     setTimeout(function(){
 
         let addTaskPosition = document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(3)");
+
+        if (!addTaskPosition){
+            return;
+        }
+
         //日～土+今日+明日
         const addTaskDateData = [...Array(7)].map((_, i) =>getNextDay(i));
         addTaskDateData.push(new Date());
