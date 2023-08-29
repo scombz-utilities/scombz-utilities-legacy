@@ -483,7 +483,7 @@ function save_options() {
             };
         });
     }
-    
+
     //
     const IOOption = {...defaultOptions};
     IOOption["mdNotepadData"] = [];
@@ -532,7 +532,7 @@ function save_options() {
                     const readData = JSON.parse(fileReader.result);
                     console.log(readData);
                     chrome.storage.local.get(IOOption,function(items){
-                        const result = deepmerge(readData,items);
+                        const result = deepmerge(items,readData);
                         console.log(result);
                         chrome.storage.local.set(result,function(){
                             alert("読み込みました。");
