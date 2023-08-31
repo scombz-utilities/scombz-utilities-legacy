@@ -618,7 +618,7 @@ function enterAttendanceDebug(){
             subtree: true,
         };
 
-        if (target){
+        if (!target){
             return;
         }
 
