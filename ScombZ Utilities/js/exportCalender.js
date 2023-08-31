@@ -28,7 +28,11 @@ function exportCalender() {
             <a href="javascript:void(0);" class="utilities-calender-export-btn" id="utlCalExportBtn">カレンダー形式にエクスポート</a>
             `);
             document.getElementById("utlCalExportBtn").addEventListener("click",function(){
-                exportLMStoCalender();
+                try{
+                    exportLMStoCalender();
+                }catch(e){
+                    alert("エクスポートに失敗しました。");
+                }
             });
         }
     }else if(location.href.includes("https://scombz.shibaura-it.ac.jp/portal/home")){
@@ -116,7 +120,11 @@ function exportCalender() {
                         `);
                     }
                     document.getElementById("lmsCalExport").addEventListener("click",function(){
-                        exportLMStoCalender();
+                        try{
+                            exportLMStoCalender();
+                        }catch(e){
+                            alert("エクスポートに失敗しました。");
+                        }
                     });
                     document.getElementById("calSelectSubmit").addEventListener("click",function(){
                         const gyear = Number(document.getElementById("calSelectYear").value);
