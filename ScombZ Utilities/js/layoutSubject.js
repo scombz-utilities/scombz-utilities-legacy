@@ -13,7 +13,7 @@
 //要素並び替え
 function subjectListOrder(items) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
         console.log("科目ページの要素並び替え");
         let subjectdivs = [];
         subjectdivs.push(document.getElementById("message"));
@@ -42,7 +42,7 @@ function subjectListOrder(items) {
 //教材の順番統一
 function materialTopSet(items) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
 
         let materialList = document.querySelectorAll("#materialList > div");
         const firstmaterial = materialList[0];
@@ -70,7 +70,7 @@ function materialTopSet(items) {
 //教材を一部非表示化
 function hideMaterial(items,materialTop) {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
         console.log("教材を一部非表示");
         let [materialOrder,materialListBlock] = materialBlockCreate();
         let cssPosition = document.getElementById("materialList");
@@ -79,7 +79,7 @@ function hideMaterial(items,materialTop) {
         }
 
         setcss(cssPosition);
-        
+
         if (materialTop != 'none'){
             materialOrder = materialTop;
         }
@@ -159,7 +159,7 @@ function sortMaterials(item){
 //課題を一部非表示化
 function hideReport(items){
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
 
         let cssPosition = document.getElementById("reportList");
         if (!(cssPosition)){
@@ -181,7 +181,7 @@ function hideReport(items){
         }
 
         sortMaterials(materials[0].parentNode);
-        
+
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             let buttonDiv = document.querySelector("#reportList > div")
@@ -201,7 +201,7 @@ function hideReport(items){
 //テストを一部非表示化
 function hideTest(items){
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
         let cssPosition = document.getElementById("examination");
         if (!(cssPosition)){
             return;
@@ -224,7 +224,7 @@ function hideTest(items){
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
 
         sortMaterials(materials[0].parentNode);
-        
+
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             let buttonDiv = document.querySelector("#examination > div.block-contents > div > div")
@@ -453,7 +453,7 @@ function createButton(className,materials,mode){
 //課題手動追加を科目ページから呼び出す
 function addTaskPage() {
     'use strict';
-    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?idnumber=")){
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
         if (!document.getElementById("report")){
             return;
         }
@@ -486,7 +486,7 @@ function autoTaskInput(){
         if(!buttonPositon){
             return;
         }
-        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin", 
+        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin",
         `
         <button type="button" id="subAutoInput">自動入力</button>
         `
@@ -495,7 +495,7 @@ function autoTaskInput(){
         autoInputButton.addEventListener("click", subAutoInput);
 
     },2000);
-    
+
 
 }
 
@@ -505,6 +505,11 @@ function addTaskButton(addTaskTimes, addTaskDates){
     setTimeout(function(){
 
         let addTaskPosition = document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(3)");
+
+        if (!addTaskPosition){
+            return;
+        }
+
         //日～土+今日+明日
         const addTaskDateData = [...Array(7)].map((_, i) =>getNextDay(i));
         addTaskDateData.push(new Date());
@@ -540,13 +545,13 @@ function addTaskButton(addTaskTimes, addTaskDates){
                 let button = document.createElement("button");
                 button.type = "button";
                 button.textContent = addTaskDateText[i];
-                
+
                 $(button).on("click", function(){
                     //凄い良いアイデアだったけどUTCで取り扱われるから断念
                     //document.getElementById("manAddtaskDeadlineDate").valueAsDate = addTaskDateData[i];
-                    
+
                     document.getElementById("manAddtaskDeadlineDate").value = addTaskDateData[i].getFullYear() +"-"+( '00' + (addTaskDateData[i].getMonth()+1) ).slice( -2 ) + "-" + ( '00' + addTaskDateData[i].getDate()) .slice( -2 );
-                    
+
                 });
 
                 addTaskPosition.appendChild(button);
@@ -556,8 +561,8 @@ function addTaskButton(addTaskTimes, addTaskDates){
 
     },2000);
 
-    
-    
+
+
 }
 
 //科目ページとURLを自作課題欄に入力する関数
@@ -577,31 +582,47 @@ function enterAttendanceDebug(){
     //form内にinput[type="text"]が1個しかないのが原因なため、見えないinputを追加する
     //ただ、元々エンターで送信していたことを潰したくないため、ボタンを押したときと同じ処理を行う
 
-    //変更を検知
-    $("#attendances_send_set").on('DOMSubtreeModified propertychange',function(){
-        
-        //変更検知してもまだ処理が行われていない可能性があるため
-        if (document.querySelector("#attendancesSendForm") != null){
-            //ボタンがなかったら
-            if (!document.querySelector("#attendancesSendFakeButton")){
-                    let fakeButton = document.createElement("input");
-                    fakeButton.type = "text";
-                    fakeButton.id = "attendancesSendFakeButton";
-                    document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
-                    //ここで追加
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
+        const callback = (mutations) => {
+            mutations.forEach((mutation) => {
 
-            }
-            //エンターで送信する
-            $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
-                if (e.code == "Enter"){
-                    //送信ボタンをクリックさせる
-                    let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
-                    attendanceSubmitButton[1].click();
+                //変更検知してもまだ処理が行われていない可能性があるため
+                if (document.querySelector("#attendancesSendForm") != null){
+                    //ボタンがなかったら
+                    if (!document.querySelector("#attendancesSendFakeButton")){
+                            let fakeButton = document.createElement("input");
+                            fakeButton.type = "text";
+                            fakeButton.id = "attendancesSendFakeButton";
+                            document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
+                            //ここで追加
+
+                    }
+                    //エンターで送信する
+                    $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
+                        if (e.code == "Enter"){
+                            //送信ボタンをクリックさせる
+                            let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
+                            attendanceSubmitButton[1].click();
+                        }
+
+                    });
                 }
+            })
+        }
+        const observer = new MutationObserver(callback);
+        const target = document.querySelector("#attendances_send_set");
+        const config = {
+            childList: true,
+            attributes: true,
+            characterData: true,
+            subtree: true,
+        };
 
-            });
+        if (!target){
+            return;
         }
 
-        
-    })
+        observer.observe(target, config);
+
+    }
 }
