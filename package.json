@@ -26,7 +26,7 @@
   "dependencies": {
     "encoding-japanese": "2.0.0",
     "rollup": "2.71.1",
-    "rollup-plugin-chrome-extension": "3.6.8"
+    "rollup-plugin-chrome-extension": "^3.6.12"
   },
   "volta": {
     "node": "16.15.0",
