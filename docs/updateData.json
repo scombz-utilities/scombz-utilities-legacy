@@ -1,5 +1,19 @@
 [
     {
+        "version": "3.23.3",
+        "date": {
+            "firefox": "2023/9/21",
+            "chrome": "2023/9/21"
+        },
+        "contents": [
+            {
+                "genre": "newfunc",
+                "title": "変更されたログイン形式に対応",
+                "description": "変更されたログイン形式に対応しました。"
+            }
+        ]
+    },
+    {
         "version": "3.23.2",
         "date": {
             "firefox": "2023/9/2",
