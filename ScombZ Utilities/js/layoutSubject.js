@@ -79,7 +79,7 @@ function hideMaterial(items,materialTop) {
         }
 
         setcss(cssPosition);
-        
+
         if (materialTop != 'none'){
             materialOrder = materialTop;
         }
@@ -181,7 +181,7 @@ function hideReport(items){
         }
 
         sortMaterials(materials[0].parentNode);
-        
+
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             let buttonDiv = document.querySelector("#reportList > div")
@@ -224,7 +224,7 @@ function hideTest(items){
         let reportList = document.querySelector("#examination > div.block-contents > div > div:nth-child(2)");
 
         sortMaterials(materials[0].parentNode);
-        
+
         const hides = cssPosition.getElementsByClassName("hide-material");
         if(hides[0]){
             let buttonDiv = document.querySelector("#examination > div.block-contents > div > div")
@@ -481,21 +481,23 @@ function addTaskPage() {
 //科目ページとURLを自動入力するボタンを設置
 function autoTaskInput(){
     'use strict'
-    setTimeout(function(){
-        let buttonPositon = document.getElementById("manAddtaskSelectLayer");
-        if(!buttonPositon){
-            return;
-        }
-        document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin", 
-        `
-        <button type="button" id="subAutoInput">自動入力</button>
-        `
-        );
-        let autoInputButton = document.getElementById("subAutoInput");
-        autoInputButton.addEventListener("click", subAutoInput);
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
+        setTimeout(function(){
+            let buttonPositon = document.getElementById("manAddtaskSelectLayer");
+            if(!buttonPositon){
+                return;
+            }
+            document.querySelector("#manAddtaskSelectLayer > form > div:nth-child(4) > button:nth-child(2)").insertAdjacentHTML("beforebegin",
+            `
+            <button type="button" id="subAutoInput">自動入力</button>
+            `
+            );
+            let autoInputButton = document.getElementById("subAutoInput");
+            autoInputButton.addEventListener("click", subAutoInput);
 
-    },2000);
-    
+        },2000);
+    }
+
 
 }
 
@@ -545,13 +547,13 @@ function addTaskButton(addTaskTimes, addTaskDates){
                 let button = document.createElement("button");
                 button.type = "button";
                 button.textContent = addTaskDateText[i];
-                
+
                 $(button).on("click", function(){
                     //凄い良いアイデアだったけどUTCで取り扱われるから断念
                     //document.getElementById("manAddtaskDeadlineDate").valueAsDate = addTaskDateData[i];
-                    
+
                     document.getElementById("manAddtaskDeadlineDate").value = addTaskDateData[i].getFullYear() +"-"+( '00' + (addTaskDateData[i].getMonth()+1) ).slice( -2 ) + "-" + ( '00' + addTaskDateData[i].getDate()) .slice( -2 );
-                    
+
                 });
 
                 addTaskPosition.appendChild(button);
@@ -561,8 +563,8 @@ function addTaskButton(addTaskTimes, addTaskDates){
 
     },2000);
 
-    
-    
+
+
 }
 
 //科目ページとURLを自作課題欄に入力する関数
@@ -582,41 +584,47 @@ function enterAttendanceDebug(){
     //form内にinput[type="text"]が1個しかないのが原因なため、見えないinputを追加する
     //ただ、元々エンターで送信していたことを潰したくないため、ボタンを押したときと同じ処理を行う
 
+    if(location.href.includes("https://scombz.shibaura-it.ac.jp/lms/course?")){
+        const callback = (mutations) => {
+            mutations.forEach((mutation) => {
 
-    const callback = (mutations) => {
-        mutations.forEach((mutation) => {
+                //変更検知してもまだ処理が行われていない可能性があるため
+                if (document.querySelector("#attendancesSendForm") != null){
+                    //ボタンがなかったら
+                    if (!document.querySelector("#attendancesSendFakeButton")){
+                            let fakeButton = document.createElement("input");
+                            fakeButton.type = "text";
+                            fakeButton.id = "attendancesSendFakeButton";
+                            document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
+                            //ここで追加
 
-            //変更検知してもまだ処理が行われていない可能性があるため
-            if (document.querySelector("#attendancesSendForm") != null){
-                //ボタンがなかったら
-                if (!document.querySelector("#attendancesSendFakeButton")){
-                        let fakeButton = document.createElement("input");
-                        fakeButton.type = "text";
-                        fakeButton.id = "attendancesSendFakeButton";
-                        document.querySelector("#attendancesSendForm > div.contents-hidden").appendChild(fakeButton);
-                        //ここで追加
-
-                }
-                //エンターで送信する
-                $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
-                    if (e.code == "Enter"){
-                        //送信ボタンをクリックさせる
-                        let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
-                        attendanceSubmitButton[1].click();
                     }
+                    //エンターで送信する
+                    $("#attendancesSendForm > div.contents-list > div:nth-child(4) > div.contents-input-area > input").keydown(function(e) {
+                        if (e.code == "Enter"){
+                            //送信ボタンをクリックさせる
+                            let attendanceSubmitButton = document.querySelectorAll("body > div > div > div > button");
+                            attendanceSubmitButton[1].click();
+                        }
 
-                });
-            }
-        })
+                    });
+                }
+            })
+        }
+        const observer = new MutationObserver(callback);
+        const target = document.querySelector("#attendances_send_set");
+        const config = {
+            childList: true,
+            attributes: true,
+            characterData: true,
+            subtree: true,
+        };
+
+        if (!target){
+            return;
+        }
+
+        observer.observe(target, config);
+
     }
-    const observer = new MutationObserver(callback);
-    const target = document.querySelector("#attendances_send_set");
-    const config = {
-        childList: true, 
-        attributes: true,  
-        characterData: true,
-        subtree: true, 
-    };
-    
-    observer.observe(target, config);
 }

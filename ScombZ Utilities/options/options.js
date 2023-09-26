@@ -532,7 +532,23 @@ function save_options() {
                     const readData = JSON.parse(fileReader.result);
                     console.log(readData);
                     chrome.storage.local.get(IOOption,function(items){
-                        const result = deepmerge(readData,items);
+                        let resultDup = deepmerge(items,readData);
+                        let memoDup = resultDup.mdNotepadData;
+
+                        //重複したメモを削除している
+                        const resultMemo =  memoDup.filter(function (x, i, self) {
+                            return (self.findIndex(function (y) {
+                                return (x.id === y.id);
+                            }) === i);
+                        });
+                        resultDup.mdNotepadData = resultMemo;
+
+                        //ディープマージの仕様上、addTaskTimeとaddTaskDateは結合になる
+                        resultDup.addTaskTime = readData.addTaskTime;
+                        resultDup.addTaskDate = readData.addTaskDate;
+
+                        const result = resultDup;
+
                         console.log(result);
                         chrome.storage.local.set(result,function(){
                             alert("読み込みました。");

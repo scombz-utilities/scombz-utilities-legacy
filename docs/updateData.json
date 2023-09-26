@@ -1,5 +1,38 @@
 [
     {
+        "version": "3.23.3",
+        "date": {
+            "firefox": "2023/9/21",
+            "chrome": "2023/9/21"
+        },
+        "contents": [
+            {
+                "genre": "newfunc",
+                "title": "変更されたログイン形式に対応",
+                "explain": "変更されたログイン形式に対応しました。"
+            }
+        ]
+    },
+    {
+        "version": "3.23.2",
+        "date": {
+            "firefox": "2023/9/2",
+            "chrome": "2023/9/2"
+        },
+        "contents": [
+            {
+                "genre": "optimisation",
+                "title": "一部機能の修正",
+                "explain": "一部の非推奨関数の最適化を行いました。"
+            },
+            {
+                "genre": "bugfix",
+                "title": "科目ページにおける問題の修正",
+                "explain": "特定の状況において科目ページ内の機能が上手く働かない問題を修正しました。"
+            }
+        ]
+    },
+    {
         "version": "3.23.1",
         "date": {
             "firefox": "2023/7/25",
