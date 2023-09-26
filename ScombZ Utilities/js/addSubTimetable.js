@@ -395,6 +395,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         continue;
                     }
                     if($tasklistObj[i].data === null && !$tasklistObj[i+1]){
+                        taskCount = -1;
                         kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
                         break;
                     }
