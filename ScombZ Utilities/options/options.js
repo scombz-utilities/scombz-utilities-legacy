@@ -582,6 +582,7 @@ function save_options() {
             if(!$tasklistObj[0]){
                 kadaiListHTML +=`<div class="subk-line">非表示にした自作課題は存在しないか、取得できません。</div>`;
             }else{
+                let taskCount = 0;
                 for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay +j; i++){
                     //非表示ではないものをスキップ
                     if(!items.hiddenTasks.includes($tasklistObj[i].id)){
@@ -595,6 +596,10 @@ function save_options() {
                         <div class="subk-column"><div class="subk-link"><a class="subk-link"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time"></div><a class="subk-complete-remove-btn subk-remove-btn" data-value="${$tasklistObj[i].id}"></a></div>
                     </div>`;
+                    taskCount++;
+                }
+                if (taskCount === 0){
+                    kadaiListHTML +=`<div class="subk-line">非表示にした自作課題は存在しません。</div>`;
                 }
             }
 

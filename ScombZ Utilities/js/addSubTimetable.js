@@ -383,6 +383,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                 kadaiListHTML +=`<div class="subk-line">未提出課題は存在しないか、取得できません。</div>`;
             }else{
                 const nowUnix = Date.now();
+                let taskCount = 0;
                 for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay +j; i++){
                     //先の課題は表示しない
                     if((Number(Date.parse($tasklistObj[i].deadline)) - Number(nowUnix))/60000 > 60*24*(1+Number(items.undisplayFutureTaskDays))){
@@ -468,7 +469,12 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         <div class="subk-column"><div class="subk-link"><a class="subk-link" href="${tasklink}"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
                         <div class="subk-deadline"><div class="subk-deadline-time">${deadline}</div><a class="subk-remove-btn" data-value="${$tasklistObj[i].id}" href="javascript:void(0);"></a></div>
                     </div>`;
+                    taskCount++;
                 }
+                if (taskCount === 0){
+                    kadaiListHTML+=`<div class="subk-line">未提出課題は存在しません。</div>`;
+                }
+
             }
             const lastgettime =  `${new Date(items.TaskGetTime).toLocaleDateString('ja-JP')} ${new Date(items.TaskGetTime).toLocaleTimeString('ja-JP').slice(0,-3)}`;
             //合体させてHTMLをつくる
