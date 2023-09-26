@@ -87,7 +87,7 @@ function getSubTimetable(){
             }
             $timetableClassData.teacher= $courseTeachers;
             $timetableData.push($timetableClassData);
-        } 
+        }
         $timetableData.push({
             day:-2,
             time:-2,
@@ -199,7 +199,7 @@ function displaySubTimetable($$version){
                             $subjData = `<a href="https://scombz.shibaura-it.ac.jp/lms/course?idnumber=${$timetableData[num].id}" class="SubTimetable" style="color:#000000;text-decoration:none;"><span class="subTimetable">${$timetableData[num].name}</span></a>`;
                         }
                         num++;
-                    }            
+                    }
                     $subTimetable+=`<td class="SubTimetable">${$subjData}</td>`;
                 }
                 $subTimetable+='</tr>';
@@ -233,7 +233,7 @@ function displaySubTimetable($$version){
             <div id="graylayer" onclick="document.getElementById('sidemenuClose').click();"></div>
             <p class="usFooter">ScombZ Utilities ver.${$$version}<br><a style="color:#000000;" href="https://github.com/yudai1204/ScombZ-Utilities" target="_blank" rel="noopener noreferrer">GitHub</a></p>
             `+$subTimetable);
-            
+
             if (item.styleNowPeriod === true){
                 //目立たせる
                 let nowPeriod = getNowPeriod();
@@ -323,7 +323,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         break;
                     }
                 }
-                
+
             }
             //自作課題一覧を統合する
             for(const $manTask of items.manualTasklist){
@@ -532,8 +532,8 @@ function displayTaskListsOnGrayLayer(gasOutput){
                     font-size:12px;
                     padding:2px;
                     width:100%;
-                    white-space: nowrap; 
-                    overflow: hidden; 
+                    white-space: nowrap;
+                    overflow: hidden;
                     text-overflow: ellipsis;
                 }
                 div.subk-link{
@@ -541,9 +541,9 @@ function displayTaskListsOnGrayLayer(gasOutput){
                     font-size:14px;
                     margin-left:10px;
                     max-width:100%;
-                    white-space: nowrap; 
+                    white-space: nowrap;
                     overflow: hidden;
-                    text-overflow: ellipsis; 
+                    text-overflow: ellipsis;
                 }
                 a.subk-link{
                     display: inline-block;
@@ -696,7 +696,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                     display:inline-block;
                     width:120px;
                 }
-                
+
             </style>
             <div id="manAddtaskSelectBackground"></div>
             <div id="manAddtaskSelectLayer">
@@ -759,7 +759,7 @@ function displayTaskListsOnGrayLayer(gasOutput){
                         chrome.storage.local.set({
                             manualTasklist: manualTasklist
                         },function(){
-                            window.confirm("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
+                            window.alert("保存成功しました。\n更新結果を表示するにはページをリロードしてください。");
                             document.getElementById('manAddtaskSelectBackground').click();
                             //入力欄初期化
                             document.getElementById("manAddtaskSubjname").value
