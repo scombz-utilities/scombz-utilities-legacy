@@ -600,6 +600,9 @@ function save_options() {
 
             let kadaiHTML =`
             <style>
+                #delete-Task *{
+                    box-sizing: border-box;
+                }
                 #subTaskList{
                     top: max(${timetableHeight}vh,${timetableminHeight}px);
                     transform: translateY(${items.tasklistTranslate}px);
