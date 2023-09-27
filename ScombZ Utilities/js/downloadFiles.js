@@ -176,6 +176,9 @@ function downloadFileBundle(){
         if(navigator.userAgent.toLowerCase().indexOf('firefox') != -1) return;
         setTimeout(function(){
             // 全体のDL
+            //ない場合はreturn
+            let check = document.querySelector("#courseContent #materialTitle");
+            if (check == null) return;
             document.querySelector("#courseContent #materialTitle").style.position = "relative";
             document.querySelector("#courseContent #materialTitle").insertAdjacentHTML("afterBegin", `
                 <div style="position: absolute; left: 10px; top: 10px;">
