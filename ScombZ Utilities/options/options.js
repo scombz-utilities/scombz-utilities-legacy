@@ -59,7 +59,7 @@ const defaultOptions = {
         lms: 1280,
         task: 1280
     },
-    subjectList : "12345678",
+    subjectList : "123456789",
     materialTop : false,
     materialHide : true,
     reportHide : false,
@@ -431,12 +431,19 @@ function save_options() {
         `<li id="subjectElement5" draggable="true"><div class="list-radius">5.テスト</div></li>`,
         `<li id="subjectElement6" draggable="true"><div class="list-radius">6.アンケート</div></li>`,
         `<li id="subjectElement7" draggable="true"><div class="list-radius">7.ディスカッション</div></li>`,
-        `<li id="subjectElement8" draggable="true"><div class="list-radius">8.出席</div></li>`
+        `<li id="subjectElement8" draggable="true"><div class="list-radius">8.出席</div></li>`,
+        `<li id="subjectElement9" draggable="true"><div class="list-radius">9.外部連携</div></li>`
         ];
         let subjectsEnd = `<li style="display: none;"></li>`;
         let numbers = [...items];
+        let nokori = [...Array(9)].map((_, i) => i+1);
         let targetul = document.getElementById("subjectList");
         for (const number of numbers){
+            targetul.insertAdjacentHTML('beforeend',subjects[Number(number)-1]);
+            nokori.splice(nokori.indexOf(Number(number)),1);
+        }
+        //要素が増えたとき用の処理
+        for (const number of nokori){
             targetul.insertAdjacentHTML('beforeend',subjects[Number(number)-1]);
         }
         targetul.insertAdjacentHTML('beforeend',subjectsEnd);

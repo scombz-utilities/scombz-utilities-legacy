@@ -24,6 +24,7 @@ function subjectListOrder(items) {
         subjectdivs.push(document.getElementById("questionnaire"));
         subjectdivs.push(document.getElementById("discussion"));
         subjectdivs.push(document.getElementById("attendance"));
+        subjectdivs.push(document.getElementById("ltiExternalToolLink"));
         let subjectheader = document.querySelector("#courseTopForm > div.course-header");
         let numbers = [...items];
         for (const subjectdiv of subjectdivs){
