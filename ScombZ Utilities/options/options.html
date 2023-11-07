@@ -38,7 +38,7 @@
             <h1 class="subtitle">設定ファイル入出力</h1>
             <hr>
             <div class="explains">JSON形式で、設定やメモを一括で書き出したり、外部から読み込むことができます。</div>
-            
+
                 <div class="input-box">
                     <h3>エクスポート</h3>
                     <button id="export-json">基本設定とメモを一括出力する</button>
@@ -378,20 +378,6 @@
                 </div>
             </div>
             <div class="setting-column">
-                <h3>出欠表示削除</h3><span class="id-explain">attendance</span>
-                <div class="explains">
-                    科目ページの最下部にある出欠表示を削除します。<br>※表示のみを削除することも可能です。
-                </div>
-                <div class="input-box">
-                    <span class="switch-explain">削除対象<br></span>
-                    <select id="attendance">
-                        <option value="all">全て削除する</option>
-                        <option value="only">出席表示が※の科目のみ</option>
-                        <option value="none">削除しない</option>
-                        </select>
-                </div>
-            </div>
-            <div class="setting-column">
                 <h3>ホーム画面のスタイル変更</h3><span class="id-explain">layoutHome</span>
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="layoutHome"><label class="ItemBox-CheckBox-Label" for="layoutHome"></label>
                 <div class="explains">
@@ -570,7 +556,7 @@
             <div class="setting-column">
                 <h3>科目ページ要素入れ替え</h3>
                 <div class="explains">
-                    科目ページに存在する「担当教員へのメッセージ」「お知らせ」「課題」「教材」「テスト」「アンケート」「ディスカッション」「出席」の各要素を自由に入れ替えします。<br>
+                    科目ページに存在する「担当教員へのメッセージ」「お知らせ」「課題」「教材」「テスト」「アンケート」「ディスカッション」「出席」「外部連携」の各要素を自由に入れ替えします。<br>
                     存在しない要素がある場合はその要素を抜いた状態での並び替えが行われます。
                 </div>
                 <ul id="subjectList">
@@ -714,7 +700,7 @@
                         </div>
                     </fieldset>
                 </div>
-                    
+
                 <div class="addTask-Container">
                     <fieldset class="addTask-field">
                         <legend class="addTask-legend">日付:</legend>
@@ -750,6 +736,20 @@
                 <input  class="ItemBox-CheckBox-Input"  type="checkbox" id="enterAttendance"><label class="ItemBox-CheckBox-Label" for="enterAttendance"></label>
                 <div class="explains">
                     エンターキーで出席コードを送信したときに、正しく動かないバグを修正します。<br>
+                </div>
+            </div>
+            <div class="setting-column">
+                <h3>出欠表示削除</h3><span class="id-explain">attendance</span>
+                <div class="explains">
+                    科目ページの最下部にある出欠表示を削除します。<br>※表示のみを削除することも可能です。
+                </div>
+                <div class="input-box">
+                    <span class="switch-explain">削除対象<br></span>
+                    <select id="attendance">
+                        <option value="all">全て削除する</option>
+                        <option value="only">出席表示が※の科目のみ</option>
+                        <option value="none">削除しない</option>
+                        </select>
                 </div>
             </div>
 
@@ -967,6 +967,16 @@
                     メニュー横課題一覧の中から、非表示にした課題のデータを初期化し、すべて再表示します。
                 </div>
                 <button type="button" id="resetHiddenTasks" class="inputbox">再表示</button>
+            </div>
+            <div class="setting-column">
+                <h3>非表示にした自作課題の完全削除</h3>
+                <div class="explains">
+                    追加した自作課題のうち、非表示にしたものを選択して完全に削除します。
+                </div>
+                <div id="delete-Task">
+
+                </div>
+
             </div>
             <div class="setting-column" id="syncSettings">
                 <hr>

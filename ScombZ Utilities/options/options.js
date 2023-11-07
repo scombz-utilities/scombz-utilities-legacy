@@ -59,7 +59,7 @@ const defaultOptions = {
         lms: 1280,
         task: 1280
     },
-    subjectList : "12345678",
+    subjectList : "123456789",
     materialTop : false,
     materialHide : true,
     reportHide : false,
@@ -431,12 +431,19 @@ function save_options() {
         `<li id="subjectElement5" draggable="true"><div class="list-radius">5.テスト</div></li>`,
         `<li id="subjectElement6" draggable="true"><div class="list-radius">6.アンケート</div></li>`,
         `<li id="subjectElement7" draggable="true"><div class="list-radius">7.ディスカッション</div></li>`,
-        `<li id="subjectElement8" draggable="true"><div class="list-radius">8.出席</div></li>`
+        `<li id="subjectElement8" draggable="true"><div class="list-radius">8.出席</div></li>`,
+        `<li id="subjectElement9" draggable="true"><div class="list-radius">9.外部連携</div></li>`
         ];
         let subjectsEnd = `<li style="display: none;"></li>`;
         let numbers = [...items];
+        let nokori = [...Array(9)].map((_, i) => i+1);
         let targetul = document.getElementById("subjectList");
         for (const number of numbers){
+            targetul.insertAdjacentHTML('beforeend',subjects[Number(number)-1]);
+            nokori.splice(nokori.indexOf(Number(number)),1);
+        }
+        //要素が増えたとき用の処理
+        for (const number of nokori){
             targetul.insertAdjacentHTML('beforeend',subjects[Number(number)-1]);
         }
         targetul.insertAdjacentHTML('beforeend',subjectsEnd);
@@ -561,4 +568,274 @@ function save_options() {
             }
             return true;
         }
+    }
+
+    //自作課題の非表示を削除する
+    //addSubTimetable.jsの処理をパクってます
+    {
+        chrome.storage.local.get({
+            hiddenTasks:[],             //非表示の課題
+            manualTasklist:[],      //自作課題
+            maxTaskDisplay:15,          //課題の最大表示数
+            specialSubj:0,
+            quarterCount:0,
+            deadlinemode:"absolute-relative",
+
+        },function(items){
+            const $tasklistObj = items.manualTasklist;
+
+            //JSONから表示高さ生成
+            const $subTimetable = document.getElementsByClassName("subtimetableBody");
+            let timetableHeight = 5;
+            let timetableminHeight = 0;
+            if($subTimetable[0]){
+                timetableHeight = 40;
+                timetableminHeight = 350;
+                if(Number(items.specialSubj) > 0){
+                    timetableHeight += 10*Number(items.specialSubj);
+                    timetableminHeight += 60*Number(items.specialSubj);
+                }
+                if(items.quarterCount > 0){
+                    timetableHeight += 2*items.quarterCount;
+                    timetableminHeight += 30*items.quarterCount;
+                }
+            }
+
+            let kadaiListHTML = "";
+            if(!$tasklistObj[0]){
+                kadaiListHTML +=`<div class="subk-line">非表示にした自作課題は存在しないか、取得できません。</div>`;
+            }else{
+                let taskCount = 0;
+                for(let i=0,j=0; $tasklistObj[i] && i<items.maxTaskDisplay +j; i++){
+                    //非表示ではないものをスキップ
+                    if(!items.hiddenTasks.includes($tasklistObj[i].id)){
+                        j++;
+                        continue;
+                    }
+
+                    kadaiListHTML += `
+                    <div class="subk-line" title="${$tasklistObj[i].title}">
+                        <div class="subk-column"><div class="subk-subjname"><a class="subk-subjname-link">${$tasklistObj[i].course}</a></div></div>
+                        <div class="subk-column"><div class="subk-link"><a class="subk-link"><span class="subk-link">${$tasklistObj[i].title}</span></a></div></div>
+                        <div class="subk-deadline"><div class="subk-deadline-time"></div><a class="subk-complete-remove-btn subk-remove-btn" data-value="${$tasklistObj[i].id}"></a></div>
+                    </div>`;
+                    taskCount++;
+                }
+                if (taskCount === 0){
+                    kadaiListHTML +=`<div class="subk-line">非表示にした自作課題は存在しません。</div>`;
+                }
+            }
+
+            let kadaiHTML =`
+            <style>
+                #delete-Task *{
+                    box-sizing: border-box;
+                }
+                #subTaskList{
+                    top: max(${timetableHeight}vh,${timetableminHeight}px);
+                    transform: translateY(${items.tasklistTranslate}px);
+                    background: rgba(255,255,255,0.5);
+                    width: 60vw;
+                    min-width: 550px;
+                    padding: 2px;
+                }
+                #add-task-manual{
+                    display:inline-block;
+                    font-weight: bold;
+                    font-size:90%;
+                    text-decoration:underline;
+                    color:#222;
+                    margin-left:10px;
+                }
+                #add-task-manual:hover{
+                    background-color:#7773;
+                }
+                .task-get-time{
+                    display:inline-block;
+                    font-weight: normal;
+                    font-size: 80%;
+                    text-decoration:none;
+                    color:#222;
+                }
+                .subk-head-right-contents{
+                    display: inline-block;
+                    float:right;
+                    margin-top:-2px;
+                }
+                .subk-box{
+                    margin:0;
+                }
+                .subk-head{
+                    margin:0;
+                    padding:4px;
+                    background:#fff;
+                    border-bottom:2px solid #ccc;
+                    font-size:15px;
+                    padding-left:10px;
+                    font-weight:bold;
+                    height:23px;
+                }
+                .subk-line{
+                    height:25px;
+                    padding:2px;
+                    margin:0;
+                    background:#fff;
+                    border-bottom:1px solid #ccc;
+                }
+                .subk-line:nth-child(2n){
+                    background:#FFFAF0;
+                }
+                .subk-subjname{
+                    font-size:12px;
+                    padding:2px;
+                    width:100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                div.subk-link{
+                    padding:2px 2px 0px 2px;
+                    font-size:14px;
+                    margin-left:10px;
+                    max-width:100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                a.subk-link{
+                    display: inline-block;
+                    min-width:80%;
+                    height:100%;
+                    color: #111;
+                }
+                a.subk-link:hover span.subk-link{
+                    background:rgba(0,0,100,0.1);
+                }
+                .subk-deadline{
+                    margin-top:2px;
+                    margin-right:4px;
+                    font-size:14px;
+                    float:right;
+                }
+                .subk-column{
+                    margin:0;
+                    padding:0;
+                    float:left
+                }
+                .subk-column:nth-child(3n+1){
+                    width:30%;
+                    float:left;
+                }
+                .subk-column:nth-child(3n+2){
+                    min-width:160px;
+                    width:calc(70% - 270px);
+                }
+                .relative-deadline-time{
+                    font-size:80%;
+                    margin-right:20px;
+                    color:#f00;
+                }
+                .highlightMark .relative-deadline-time{
+                    color:#999;
+                }
+                .today.highlightMark .relative-deadline-time,.today.highlightMark .subk-deadline-time{
+                    color:#f00;
+                    font-weight:bold;
+                    font-size: 91%;
+                }
+                .shorttime.highlightMark,.shorttime.highlightMark .subk-deadline-time{
+                    background-color:#faa;
+                }
+                .a-few-days.highlightMark .relative-deadline-time,.a-few-days.highlightMark .subk-deadline-time{
+                    color:#f22;
+                }
+                .a-week.highlightMark .relative-deadline-time{
+                    color:#333;
+                }
+                .subk-subjname-link{
+                    color: #000;
+                    text-decoration: none;
+                }
+                .subk-subjname-link:hover{
+                    color: #222;
+                    text-decoration: underline;
+                }
+                .subk-remove-btn{
+                    display: inline-block;
+                    float:right;
+                    width:15px;
+                    height:15px;
+                    margin-left:5px;
+                    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20version%3D%221.1%22%20id%3D%22_x32_%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20512%20512%22%20style%3D%22width%3A%2032px%3B%20height%3A%2032px%3B%20opacity%3A%201%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%09.st0%7Bfill%3A%234B4B4B%3B%7D%0A%3C%2Fstyle%3E%0A%3Cg%3E%0A%09%3Cpolygon%20class%3D%22st0%22%20points%3D%22512%2C52.535%20459.467%2C0.002%20256.002%2C203.462%2052.538%2C0.002%200%2C52.535%20203.47%2C256.005%200%2C459.465%20%0A%09%0952.533%2C511.998%20256.002%2C308.527%20459.467%2C511.998%20512%2C459.475%20308.536%2C256.005%20%09%22%20style%3D%22fill%3A%20rgb(24%2C%2024%2C%2024)%3B%22%3E%3C%2Fpolygon%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A');
+                    background-size:8px;
+                    background-repeat:no-repeat;
+                    background-position: center center;
+                    background-color:#faa6;
+                    background-blend-mode:lighten;
+                    visibility: hidden;
+                    border-radius:100px;
+                }
+                div.subk-line:hover .subk-remove-btn{
+                    visibility:visible;
+                }
+                .subk-remove-btn:hover{
+                    background-color:#f776;
+                }
+                .subk-deadline-time{
+                    display: inline-block;
+                }
+                @media(max-width:1080px){
+                    .relative-deadline-time{
+                        display:none;
+                    }
+                    .subk-column:nth-child(3n+2){
+                        width:calc(70% - 160px);
+                    }
+                    .subk-remove-btn{
+                        display:none;
+                    }
+                }
+            </style>
+            <div class="subtimetableBody" id="subTaskList">
+            <div class="subk-box">
+                <div class="subk-head">
+                非表示にした自作課題一覧
+                </div>
+                ${kadaiListHTML}
+            </div>
+            </div>
+            `;
+
+            if(document.getElementById('delete-Task')){
+                document.getElementById('delete-Task').insertAdjacentHTML('beforeend',kadaiHTML);
+            }
+
+            //削除ボタン
+            const rmBtns = document.getElementsByClassName("subk-complete-remove-btn");
+            console.log(rmBtns.length);
+            for(const rmBtn of rmBtns){
+                rmBtn.addEventListener("click",function(){
+                    console.log("clicked");
+                    if(window.confirm("この項目を完全に削除しますか？")){
+                        chrome.storage.local.get({
+                            hiddenTasks: [],
+                            manualTasklist: []
+                        },function(rmitem){
+                            const hiddenTasks = rmitem.hiddenTasks;
+                            const manualTasklist = rmitem.manualTasklist;
+                            const newhiddenTasks = hiddenTasks.filter(n => n !== rmBtn.getAttribute("data-value"));
+                            const newmanualTasklist = manualTasklist.filter(n => n.id !== rmBtn.getAttribute("data-value"));
+                            chrome.storage.local.set({
+                                hiddenTasks: newhiddenTasks,
+                                manualTasklist: newmanualTasklist
+                            },
+                                function(){
+                                    rmBtn.parentNode.parentNode.remove();
+                            });
+                        });
+                    }
+                });
+            }
+
+        });
     }
