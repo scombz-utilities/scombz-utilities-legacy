@@ -7,7 +7,11 @@
 
 # ScombZ Utilities
 
-使いにくい ScombZ のサイドメニューやテストを修正したり、ADFS ボタンの自動スキップができます。よりユーザビリティに優れた ScombZ を提供します。
+使いにくい ScombZ のサイドメニューやテストを修正したり、ADFS ボタンの自動スキップができます。よりユーザビリティに優れた ScombZ を提供します。    
+
+[公式サイト](https://scombz-utilities.com)    
+
+**現在React環境への移行作業中です。該当レポジトリは[こちら](https://github.com/yudai1204/scombz-utilities-react)**
 
 [![Chrome 版のリンク](./chrome.png)](https://chrome.google.com/webstore/detail/scombz-utilities/iejnanaabfgocfjbnmhkfheghbkanibj)
 
