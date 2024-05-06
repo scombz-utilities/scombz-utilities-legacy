@@ -16,7 +16,6 @@ $.getJSON("updateData.json", (updateData) => {
                         <p class="lead mt-5">ScombZ Utilitiesのインストールをしただきありがとうございます!</p>
                         <p class="lead">設定管理や、バグ報告などは拡張機能設定から設定してください！</p>
 
-                        <p class="mt-5"><a class="btn btn-lg btn-success" href="javascript:void(0);" role="button" id="utilities-incontent-open-option-btn">拡張機能機能オプション</a></p>
                     </div>
                     <div class="container">
                         <h5>ScombZ Utilitiesをほかのブラウザでも使いませんか？</h5>
@@ -69,7 +68,7 @@ $.getJSON("updateData.json", (updateData) => {
                             アップデート情報詳細は<a href="updates.html">こちら</a></p>
                         </p>
                         <div class="jumbotron">
-                            <p><a class="btn btn-sl btn-success" href="javascript:void(0);" role="button" id="utilities-incontent-open-option-btn">拡張機能機能オプション</a></p>
+
                         </div>
                     </div>
                 </div>
