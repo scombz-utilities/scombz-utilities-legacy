@@ -1,6 +1,6 @@
 {
     "manifest_version":3 ,
-    "name": "ScombZ Utilities",
+    "name": "ScombZ Utilities (legacy)",
     "version": "3.23.3",
     "description": "ScombZをカスタムする拡張機能",
     "icons": {
